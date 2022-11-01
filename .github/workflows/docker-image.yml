@@ -28,6 +28,6 @@ jobs:
         working-directory: client
         run: docker build . --file Dockerfile --tag vitalyevich/cashmanagement:$(date +%s)
         
-      - name: Docker Push
-        working-directory: client
-        run: docker push vitalyevich/cashmanagement:latest
+      #- name: Docker Push
+      #  working-directory: client
+      #  run: docker push vitalyevich/cashmanagement:latest
