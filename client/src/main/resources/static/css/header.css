@@ -24,7 +24,7 @@
     position: absolute;
     width: 24px;
     height: 24px;
-    left: 1153px;
+    right: 0px;
     top: 25px;
 }
 .v1_47 {
@@ -33,11 +33,11 @@
     position: absolute;
     width: 24px;
     height: 24px;
-    left: 1122px;
+    right: 30px;
     top: 25px;
 }
 .v1_52 {
-    width: 142px;
+    width: 330px;
     color: rgba(255,255,255,1);
     position: absolute;
     top: 20px;
@@ -64,21 +64,42 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     overflow: hidden;
-    width: 81px;
+    width: 100px;
     height: 34px;
-    top: 20px;
-    left: 1400px;
     cursor: pointer;
+    padding-left: 31px;
 }
 .v173_385 {
-    width: 167px;
     color: rgba(255,255,255,1);
     position: absolute;
     top: 29px;
-    left: 1199px;
+    right: 230px;
     font-family: Montserrat;
     font-weight: 500;
     font-size: 14px;
     opacity: 1;
-    text-align: left;
+    text-align: right;
+}
+
+a {
+    text-decoration: none;
+}
+.v2_109:hover {
+    background: #45A73E;
+}
+
+.v1_17 {
+    background: transparent;
+    overflow: hidden;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 10px;
+    top: 5px;
+}
+.v1_18 {
+    top: 20px;
+    right: 135px;
+    opacity: 1;
+    position: absolute;
 }

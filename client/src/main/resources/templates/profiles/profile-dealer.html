@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Профиль</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/menu-dealer.css">
+  <link rel="stylesheet" href="/css/profile-header.css">
+</head>
+<body>
+<div class="v1_2">
+  <div th:insert="blocks/menu-dealer :: menu-dealer"></div>
+  <div th:insert="blocks/header :: header"></div>
+  <div th:insert="blocks/profile-header :: profile-header"></div>
+  <div class="v4_121">
+    <span class="v4_122">В случае возникновения вопросов обратитесь к специалистам вашего контакт центра по одному из телефонов:</span>
+    <span class="v4_123">+375 (29) 000-01-10</span>
+    <span class="v4_123" style="top:136px;">+375 (29) 000-02-10</span>
+    <span class="v4_123" style="top:162px;">+375 (29) 000-03-10</span>
+  </div>
+  <div class="v105_1522">
+    <div class="v105_1584">
+      <div class="v105_1520">
+        <span class="v6_161">Аналитика</span>
+        <div class="v1_01">
+          <img src="../../static/images/graph.svg" th:src="@{images/graph.svg}">
+        </div>
+        <div class="v1_02">
+          <img src="../../static/images/angle-right.svg" th:src="@{images/angle-right.svg}">
+        </div>
+      </div>
+      <span class="v6_184">Аналитика  данных, конфигурация и связанная с ней информация</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+<style>
+
+  input {
+    outline: none;
+    border: none;
+  }
+  .v1_2 {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+  }
+  .v1_01 {
+    background: transparent;
+    position: absolute;
+    overflow: hidden;
+    width: 24px;
+    height: 24px;
+    left: 0px;
+    top: 0px;
+  }
+  .v1_02 {
+    background: transparent;
+    position: absolute;
+    overflow: hidden;
+    width: 24px;
+    height: 24px;
+    left: 258px;
+    top: 0px;
+  }
+  .v4_121 {
+    width: 379px;
+    height: 212px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 180px;
+    left: 300px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v105_1522 {
+    width: 320px;
+    height: 130px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 180px;
+    left: 716px;
+    overflow: hidden;
+    background: rgba(247,247,247,1);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+  .v105_1584 {
+    width: 275px;
+    height: 78px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 24px;
+    left: 20px;
+    overflow: hidden;
+  }
+  .v105_1520 {
+    width: 275px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+  }
+  .v6_161 {
+    width: 94px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 2px;
+    left: 37px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v6_184 {
+    width: 255px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 44px;
+    left: 0px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v4_122 {
+    width: 321px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v4_123 {
+    width: 163px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 110px;
+    left: 30px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v105_1522:hover {
+    background: rgba(69,167,62,1);
+    cursor:pointer;
+    transition-duration: 1s;
+  }
+  .v105_1522:hover .v1_01 img{
+    content:url(images/graph-white.svg);
+  }
+  .v105_1522:hover .v1_02 img{
+    content:url(images/angle-right-white.svg);
+  }
+  .v105_1522:hover .v105_1584 span{
+    color: white;
+  }
+</style>

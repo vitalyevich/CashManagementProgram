@@ -1,0 +1,36 @@
+.v1_50 {
+    width: 245px;
+    height: 100vh;
+    background: rgba(20,126,75,1);
+    opacity: 1;
+    position: absolute;
+    top: 75px;
+    left: 0px;
+    overflow: hidden;
+}
+.v78_324 {
+    width: 147px;
+    height: 27px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 30px;
+    left: 11px;
+    overflow: hidden;
+}
+.v2_76 {
+    width: 120px;
+    color: rgba(255,255,255,1);
+    position: absolute;
+    top: 2px;
+    left: 22px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+    cursor: pointer;
+    background: transparent;
+}

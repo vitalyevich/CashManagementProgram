@@ -1,0 +1,10 @@
+.v1_50 {
+    width: 245px;
+    height: 100vh;
+    background: rgba(20,126,75,1);
+    opacity: 1;
+    position: absolute;
+    top: 75px;
+    left: 0px;
+    overflow: hidden;
+}

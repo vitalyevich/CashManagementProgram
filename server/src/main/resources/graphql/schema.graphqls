@@ -1,0 +1,27 @@
+type Query {
+    users: [User!]!
+    user: User!
+    accesses: [Access!]!
+}
+
+type Role {
+    id: ID!,
+    roleName: String!
+}
+
+type Access {
+    id: ID!,
+    user: User!, #test
+    login: String!,
+    userPassword: String!,
+    active: Boolean
+}
+
+type User {
+    id: ID!,
+    firstName: String!,
+    lastName: String!,
+    phone: String!,
+    email: String!,
+    roles: [Role]!
+}

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<head>
+  <title>Пользователи</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/menu.css">
+</head>
+  <body>
+    <div class="v1_2">
+      <div th:insert="blocks/menu :: menu"></div>
+      <div th:insert="blocks/header :: header"></div>
+      <div class="v18_235">
+        <span class="v18_247">Пользователи</span>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Код пользователя</th>
+            <th>Имя пользователя</th>
+            <th>Фамилия</th>
+            <th>Роль пользователя</th>
+            <th>Логин запрещен</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="lst : ${users}">
+            <td th:utext="${lst.id}">Код пользователя</td>
+            <td th:utext="${lst.firstName}">Имя пользователя</td>
+            <td th:utext="${lst.lastName}">Фамилия</td>
+            <td th:utext="${lst.phone}">Роль пользователя</td>
+            <td th:utext="${lst.email}">Логин запрещен</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+        <span class="v28_658" th:text="'Всего пользователей в системе: ' + ${size}"/>
+        <div class="v0">
+          <a href="/users">
+          <img src="../static/images/refresh.svg" th:src="@{images/refresh.svg}">
+          </a>
+        </div>
+        <input class="v18_248" type="submit" value="Новый (-ая)"/>
+        <input class="v18_249" type="submit" value="Изменить"/>
+        <input class="v18_282" type="submit" value="Удалить"/>
+      </div>
+  </body>
+</html>
+
+<style>
+
+input {
+  outline: none;
+  border: none;
+}
+.v1_2 {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+.v0 {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 1440px;
+  top: 157px;
+  cursor: pointer;
+}
+.table {
+  border: none;
+  top: 55px;
+  left: 20px;
+  position: absolute;
+}
+.table thead th {
+  text-align: left;
+  border: none;
+  padding: 10px 15px;
+  background: #d8d8d8;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+}
+.table thead tr th:first-child {
+  border-radius: 8px 0 0 8px;
+}
+.table thead tr th:last-child {
+  border-radius: 0 8px 8px 0;
+}
+.table tbody td {
+  text-align: left;
+  border: none;
+  padding: 10px 15px;
+  vertical-align: top;
+  font-family: Montserrat;
+  font-weight: 400;
+  flex-wrap: nowrap;
+  font-size: 13px;
+  width: 13vw;
+}
+.table tbody tr{
+  background: #ffffff;
+}
+.table tbody tr td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+.table tbody tr td:last-child {
+  border-radius: 0 8px 8px 0;
+}
+.v28_658 {
+  width: 265px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 109px;
+  left: 287px;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v18_235 {
+  width: 79vw;
+  height: 354px;
+  background: rgba(247,247,247,1);
+  opacity: 1;
+  position: absolute;
+  top: 139px;
+  left: 287px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  overflow: auto;
+}
+.v18_248 {
+  top: 506px;
+  left: 1057px;
+  width: 103px;
+  height: 27px;
+  color: rgba(255,255,255,1);
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+  background: rgba(0,148,63,1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.v18_247 {
+  width: 107px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 17px;
+  left: 23px;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+
+.v18_249 {
+  width: 95px;
+  height: 27px;
+  top: 506px;
+  left: 1180px;
+  color: rgba(255,255,255,1);
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+  background: rgba(0,148,63,1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.v18_282 {
+  width: 95px;
+  height: 27px;
+  top: 506px;
+  left: 1294px;
+  color: rgba(255,255,255,1);
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+  background: rgba(0,148,63,1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+</style>

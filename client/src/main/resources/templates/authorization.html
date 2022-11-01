@@ -1,0 +1,132 @@
+<!DOCTYPE html><html>
+<head>
+    <title>Авторизация</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <script src="https://unpkg.com/imask"></script>
+</head>
+<body>
+<div class="v9_170">
+    <div class="v1_01">
+        <input required type="text"  name="login" class="v9_312" placeholder="Логин">
+        <div class="v1_6">
+            <input required type="password" id="password-input" name="password" maxlength="20" class="v9_314" placeholder="Пароль">
+            <a href="#" class="password-control"></a>
+
+            <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $('body').on('click', '.password-control', function(){
+                    if ($('#password-input').attr('type') == 'password'){
+                        $(this).addClass('view');
+                        $('#password-input').attr('type', 'text');
+                    } else {
+                        $(this).removeClass('view');
+                        $('#password-input').attr('type', 'password');
+                    }
+                    return false;
+                });
+            </script>
+        </div>
+        <a href="/profile">
+            <div class="v1_05"></div>
+        </a>
+    </div>
+</div>
+</body>
+</html>
+
+<style>
+    .v1_05 {
+        position: absolute;
+        width: 54px;
+        height: 53px;
+        right: 1px;
+        top: 455px;
+        background: transparent;
+    }
+    .v1_6 {
+        width: 384px;
+        height: 40px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        opacity: 1;
+        position: absolute;
+        top: 324px;
+        left: 180px;
+        overflow: hidden;
+    }
+    .password-control {
+        position: absolute;
+        top: 5px;
+        right: 6px;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url("../images/password-lock.svg") 0 0 no-repeat;
+    }
+    .password-control.view {
+        background: url("../images/password-unlock.svg") 0 0 no-repeat;
+    }
+input {
+    outline: none;
+    border: none;
+    background: transparent;
+    /*border: 1px solid white;*/
+}
+::placeholder {
+    color: white;
+}
+.v9_170 {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    opacity: 1;
+    background: url("../images/atm.svg");
+    background-size: cover;
+    background-position-y: -20px;
+    overflow: hidden;
+    position: fixed;
+}
+.v1_01 {
+    width: 796px;
+    height: 544px;
+    top: 126px;
+    left: 217px;
+    background: transparent;
+    min-width: 796px;
+    min-height: 544px;
+    position: relative;
+    display: block;
+}
+.v9_312 {
+    width: 380px;
+    color: rgba(255,255,255,1);
+    position: absolute;
+    top: 241px;
+    left: 180px;
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 21px;
+    opacity: 1;
+    text-align: left;
+    overflow: hidden;
+    border-bottom: 1px solid white;
+    padding-bottom: 8px;
+}
+.v9_314 {
+    width: 380px;
+    color: rgba(255,255,255,1);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 21px;
+    opacity: 1;
+    text-align: left;
+    overflow: hidden;
+    border-bottom: 1px solid white;
+    padding-bottom: 8px;
+}
+</style>

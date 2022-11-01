@@ -1,0 +1,47 @@
+.v4_118 {
+    width: 1000px;
+    position: absolute;
+    top: 78px;
+    left: 300px;
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 22px;
+    opacity: 1;
+    text-align: left;
+}
+.v80_298 {
+    width: 430px;
+    height: 27px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 136px;
+    left: 300px;
+    overflow: hidden;
+}
+.v4_119 {
+    width: 108px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 0px;
+    left: 322px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+}
+.v4_120 {
+    width: 304px;
+    color: rgba(0,0,0,1);
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+}

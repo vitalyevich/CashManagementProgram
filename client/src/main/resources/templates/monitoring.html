@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<head>
+  <title>Мониторинг</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/menu-country.css">
+  <link rel="stylesheet" href="/css/filter.css">
+  <link rel="stylesheet" href="/css/search.css">
+</head>
+<body>
+<div class="v1_2">
+  <div th:insert="blocks/menu-country :: menu-country"></div>
+  <div th:insert="blocks/header :: header"></div>
+  <div th:insert="blocks/filter :: filter"></div>
+
+  <div class="v1_532">
+    <img style="position: absolute;width: 24px;height: 24px;left: 15px;top: 12px;"
+         src="../static/images/angle-up-black.svg" th:src="@{images/angle-up-black.svg}">
+    <span class="v1_550">Фильтр</span>
+    <span class="v1_565">Скрыть</span>
+    <div style="left: -134px;position: absolute;">
+      <select class="v1_558">
+        <option value="BYN">BYN</option>
+        <option value="RUB">RUB</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+      </select>
+      <select class="v1_560"></select>
+      <select class="v1_561"></select>
+      <input class="v1_564">
+      <span class="v1_555">Валюта</span>
+      <span class="v1_559">Состояние наличных</span>
+      <span class="v1_563">До опустошения (дн.)</span>
+      <span class="v1_566">Статус сервиса</span>
+    </div>
+  </div>
+  <div th:insert="blocks/search :: search"></div>
+  <div class="v18_235">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Тип объекта</th>
+          <th>ID объекта</th>
+          <th>До опустошения</th>
+          <th>Остаток</th>
+          <th>Кассеты</th>
+          <th>Валюта</th>
+          <th>Дата последней инкассации</th>
+          <th>Дата инкассации</th>
+          <th>Состояние наличных</th>
+          <th>Состояние банкомата</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="lst : ${users}">
+          <td th:utext="${lst.id}">Тип объекта</td>
+          <td th:utext="${lst.firstName}">ID объекта</td>
+          <td th:utext="${lst.lastName}">До опустошения</td>
+          <td th:utext="${lst.phone}">Остаток</td>
+          <td th:utext="${lst.email}">Кассеты</td>
+          <td th:utext="${lst.email}">Валюта</td>
+          <td th:utext="${lst.email}">Дата последней инкассации</td>
+          <td th:utext="${lst.email}">Дата инкассации</td>
+          <td th:utext="${lst.email}">Состояние наличных</td>
+          <td th:utext="${lst.email}">Состояние банкомата</td>
+        </tr>
+        </tbody>
+      </table>
+  </div>
+  <script src="https://www.google.com/jsapi"></script>
+  <script>
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Год', 'Банкомат'],
+        ['1860', 1.3],
+        ['1885', 2000],
+        ['1901', 12170],
+        ['1928', 2000],
+        ['1932', 6000],
+        ['1947', 8000],
+        ['1958', 10000],
+        ['1962', 12000],
+        ['1979', 14000],
+        ['1982', 16000],
+        ['1998', 18000]
+      ]);
+      var options = {
+        title: 'Остатки наличных',
+        hAxis: {title: 'Год'},
+        vAxis: {title: 'Остатки: BYN'}
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById('cash'));
+      chart.draw(data, options);
+    }
+  </script>
+  <span class="v1_300">A0100133, Остатки наличных, с, 25.10.2022 до 30.10.2022</span>
+  <input class="v18_248" type="submit" value="Применить"/>
+  <span class="v18_251">с</span>
+  <span class="v18_252">до</span>
+  <input type="date" class="v18_249">
+  <input type="date" class="v18_250">
+  <div class="v18_235" style="top:1100px">
+    <table style="left:1000px;" class="table">
+      <thead>
+      <tr>
+        <th>Дата</th>
+        <th>Валюта</th>
+        <th>Остаток</th>
+        <th>Прогноз. остаток</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="lst : ${users}">
+        <td th:utext="${lst.id}">Дата</td>
+        <td th:utext="${lst.firstName}">Валюта</td>
+        <td th:utext="${lst.lastName}">Остаток</td>
+        <td th:utext="${lst.phone}">Прогноз. остаток</td>
+      </tr>
+      </tbody>
+    </table>
+    <div id="cash" class="v1_10"></div>
+  </div>
+</div>
+</body>
+</html>
+
+<style>
+/*  rect {
+    width: 1000px;
+    height: 300px;
+  }*/
+.v18_251 {
+  top: 1049px;
+  left: 287px;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: left;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+}
+.v18_252 {
+  top: 1049px;
+  left: 430px;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: left;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+}
+.v18_250 {
+  top: 1045px;
+  left: 465px;
+  height: 25px;
+  width: 100px;
+  color: black;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: left;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: transparent;
+}
+.v18_249 {
+  top: 1045px;
+  left: 310px;
+  width: 100px;
+  height: 25px;
+  color: black;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: left;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: transparent;
+}
+.v18_248 {
+  top: 1045px;
+  left: 605px;
+  width: 103px;
+  height: 27px;
+  color: white;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+  background: rgba(0,148,63,1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.v1_300 {
+  width: 550px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 1020px;
+  left: 287px;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 16px;
+  opacity: 1;
+  text-align: left;
+  }
+  .v1_10 {
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: transparent;
+  }
+  .v1_532 {
+    width: 79vw;
+    height: 106px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 255px;
+    left: 290px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v1_558 {
+    top: 40px;
+    height: 28px;
+    left: 270px;
+    width: 112px;
+    opacity: 1;
+    position: absolute;
+    border: 1px solid rgba(0,0,0,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    padding-left: 7px;
+  }
+  .v1_560 {
+    width: 145px;
+    top: 40px;
+    height: 28px;
+    left: 800px;
+    opacity: 1;
+    position: absolute;
+    border: 1px solid rgba(0,0,0,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    padding-left: 7px;
+  }
+  .v1_561 {
+    width: 145px;
+    top: 40px;
+    height: 28px;
+    left: 1165px;
+    opacity: 1;
+    position: absolute;
+    border: 1px solid rgba(0,0,0,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    padding-left: 7px;
+  }
+  .v1_564 {
+    width: 35px;
+    top: 40px;
+    height: 25px;
+    left: 545px;
+    opacity: 1;
+    position: absolute;
+    border: 1px solid rgba(0,0,0,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    padding-left: 7px;
+    background: transparent;
+  }
+  .v1_550 {
+    width: 130px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 15px;
+    left: 45px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v1_565 {
+    width: 64px;
+    color: rgba(0,148,63,1);
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+    cursor: pointer;
+  }
+  .v1_555 {
+    width: 89px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 44px;
+    left: 190px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v1_559 {
+    width: 165px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 44px;
+    left: 620px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v1_566 {
+    width: 112px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 44px;
+    left: 410px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v1_563 {
+    width: 160px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 44px;
+    left: 980px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  input {
+    outline: none;
+    border: none;
+  }
+  .v18_235 {
+    width: 79vw;
+    height: 560px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 425px;
+    left: 287px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: auto;
+  }
+  .v1_2 {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .table {
+      border: none;
+      top: 20px;
+      left: 25px;
+      position: absolute;
+  }
+  .table thead th {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    background: #d8d8d8;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .table thead tr th:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+  .table thead tr th:last-child {
+    border-radius: 0 8px 8px 0;
+  }
+  .table tbody td {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    vertical-align: top;
+    font-family: Montserrat;
+    font-weight: 400;
+    flex-wrap: nowrap;
+    font-size: 13px;
+    width: 13vw;
+  }
+  .table tbody tr{
+    background: #ffffff;
+  }
+  .table tbody tr td:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+  .table tbody tr td:last-child {
+    border-radius: 0 8px 8px 0;
+  }
+  
+</style>

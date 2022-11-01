@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<head>
+  <title>Аналитика</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/menu-country.css">
+  <link rel="stylesheet" href="/css/filter.css">
+</head>
+<body>
+<div class="v1_2">
+  <div th:insert="blocks/menu-country :: menu-country"></div>
+  <div th:insert="blocks/header :: header"></div>
+  <div th:insert="blocks/filter :: filter"></div>
+  <div class="v326_736">
+    <div class="v326_732"></div>
+    <span class="v326_728">Текущие остатки: USD</span>
+    <span class="v326_783">Всего: 45 454</span>
+  </div>
+  <div class="v326_768">
+    <div class="v326_769"></div>
+    <span class="v326_770">Выданные наличные (Всего): BYN</span>
+    <div class="v326_767">
+      <span class="v326_763">Сумма</span>
+      <span class="v326_764">Количество банкнот</span>
+      <input type="radio">
+      <input type="radio">
+    </div>
+  </div>
+  <div class="v326_771">
+    <div class="v326_772"></div>
+    <span class="v326_773">Выданные наличные (Всего): USD</span>
+    <div class="v326_774">
+      <span class="v326_775">Сумма</span>
+      <span class="v326_777">Количество банкнот</span>
+      <input type="radio">
+      <input type="radio">
+    </div>
+  </div>
+  <span class="v326_750">Показатели</span>
+  <div class="v326_743">
+    <div class="v326_746"></div>
+    <span class="v326_745">Статус сервиса: BYN</span>
+    <span class="v326_784">Всего: 45 454</span>
+  </div>
+  <div class="v326_747">
+    <div class="v326_748"></div>
+    <span class="v326_749">Статус сервиса: USD</span>
+    <span class="v326_785">Всего: 45 454</span>
+  </div><div class="v326_740">
+  <div class="v326_741"></div>
+  <span class="v326_742">Текущие остатки: BYN</span>
+  <span class="v326_781">Всего: 45 454</span>
+</div>
+  <input type="date" class="v326_722">
+  <span class="v326_725">Банкоматы</span>
+  <span class="v326_797">Банкоматы</span>
+  <span class="v326_751">с</span>
+  <input type="date" class="v326_752">
+  <span class="v326_754">до</span>
+  <input type="submit" class="v326_756" value="Применить">
+</div>
+</body>
+</html>
+
+<style>
+  input {
+    outline: none;
+    border: none;
+    background: transparent;
+    /*border: 1px solid white;*/
+  }
+  .v1_2 {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .v326_736 {
+    width: 542px;
+    height: 222px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 527px;
+    left: 287px;
+    overflow: hidden;
+  }
+  .v326_732 {
+    width: 542px;
+    height: 222px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v326_728 {
+    width: 191px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_783 {
+    width: 114px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 185px;
+    left: 403px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_768 {
+    width: 100%;
+    height: 222px;
+    background: url("../images/v326_768.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 815px;
+    left: 287px;
+    overflow: hidden;
+  }
+  .v326_769 {
+    width: 100%;
+    height: 222px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v326_770 {
+    width: 592px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 18px;
+    left: 37px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_767 {
+    width: 280px;
+    height: 24px;
+    background: url("../images/v326_767.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 16px;
+    left: 798px;
+    overflow: hidden;
+  }
+  .v326_763 {
+    width: 49px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 3px;
+    left: 30px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_764 {
+    width: 149px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 3px;
+    left: 131px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_771 {
+    width: 100%;
+    height: 222px;
+    background: url("../images/v326_771.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 1067px;
+    left: 287px;
+    overflow: hidden;
+  }
+  .v326_772 {
+    width: 100%;
+    height: 222px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v326_773 {
+    width: 592px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 18px;
+    left: 37px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_774 {
+    width: 280px;
+    height: 24px;
+    background: url("../images/v326_774.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 16px;
+    left: 798px;
+    overflow: hidden;
+  }
+  .v326_775 {
+    width: 49px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 3px;
+    left: 30px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_777 {
+    width: 149px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 3px;
+    left: 131px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_750 {
+    width: 101px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 765px;
+    left: 287px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_743 {
+    width: 542px;
+    height: 222px;
+    background: url("../images/v326_743.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 278px;
+    left: 848px;
+    overflow: hidden;
+  }
+  .v326_746 {
+    width: 542px;
+    height: 222px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v326_745 {
+    width: 175px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_784 {
+    width: 114px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 185px;
+    left: 403px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_747 {
+    width: 542px;
+    height: 222px;
+    background: url("../images/v326_747.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 522px;
+    left: 848px;
+    overflow: hidden;
+  }
+  .v326_748 {
+    width: 542px;
+    height: 222px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v326_749 {
+    width: 175px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_785 {
+    width: 114px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 185px;
+    left: 403px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_740 {
+    width: 542px;
+    height: 222px;
+    background: url("../images/v326_740.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 276px;
+    left: 288px;
+    overflow: hidden;
+  }
+  .v326_741 {
+    width: 542px;
+    height: 222px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v326_742 {
+    width: 190px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_781 {
+    width: 114px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 185px;
+    left: 403px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_722 {
+    width: 144px;
+    height: 27px;
+    opacity: 1;
+    position: absolute;
+    top: 762px;
+    left: 435px;
+    border: 1px solid rgba(0,0,0,1);
+    border-radius: 10px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+    padding-left: 7px;
+  }
+  .v326_725 {
+    width: 97px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 237px;
+    left: 305px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_797 {
+    width: 97px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 237px;
+    left: 866px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_751 {
+    width: 8px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 766px;
+    left: 417px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_752 {
+    width: 144px;
+    height: 27px;
+    opacity: 1;
+    position: absolute;
+    top: 762px;
+    left: 646px;
+    border: 1px solid rgba(0,0,0,1);
+    border: 1px solid rgba(0,0,0,1);
+    border-radius: 10px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+    padding-left: 7px;
+  }
+  .v326_754 {
+    width: 19px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 766px;
+    left: 620px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v326_756 {
+    width: 103px;
+    height: 27px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 763px;
+    left: 836px;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 1;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+</style>

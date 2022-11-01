@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Профиль</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/menu-cashier-storage.css">
+  <link rel="stylesheet" href="/css/profile-header.css">
+</head>
+<body>
+<div class="v1_2">
+  <div th:insert="blocks/menu-cashier-storage :: menu-cashier-storage"></div>
+  <div th:insert="blocks/header :: header"></div>
+  <div th:insert="blocks/profile-header :: profile-header"></div>
+  <div class="v4_121">
+    <span class="v4_122">В случае возникновения вопросов обратитесь к специалистам вашего контакт центра по одному из телефонов:</span>
+    <span class="v4_123">+375 (29) 000-01-10</span>
+    <span class="v4_123" style="top:136px;">+375 (29) 000-02-10</span>
+    <span class="v4_123" style="top:162px;">+375 (29) 000-03-10</span>
+  </div>
+  <a href="/monitoring-storage">
+  <div class="v105_1505">
+    <div class="v105_1582">
+      <div class="v105_1501">
+        <span class="v6_169">Хранилище</span>
+        <div class="v1_01">
+          <img src="../../static/images/storage.svg" th:src="@{images/storage.svg}">
+        </div>
+        <div class="v1_02">
+          <img src="../../static/images/angle-right.svg" th:src="@{images/angle-right.svg}">
+        </div>
+      </div>
+      <span class="v6_229">Управление хранилищами, конфигурация, а так же связанная с ними информация</span>
+    </div>
+    <div class="v105_1581">
+      <span class="v6_227">Встроенные модули</span>
+      <span class="v78_327">Мониторинг Заказ инкассации Журнал</span>
+    </div>
+  </div>
+  </a>
+</div>
+</body>
+</html>
+
+<style>
+  input {
+    outline: none;
+    border: none;
+  }
+  .v1_2 {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+  }
+  .v1_01 {
+    background: transparent;
+    position: absolute;
+    overflow: hidden;
+    width: 24px;
+    height: 24px;
+    left: 0px;
+    top: 0px;
+  }
+  .v1_02 {
+    background: transparent;
+    position: absolute;
+    overflow: hidden;
+    width: 24px;
+    height: 24px;
+    left: 258px;
+    top: 0px;
+  }
+  .v4_121 {
+    width: 379px;
+    height: 212px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 180px;
+    left: 300px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v4_122 {
+    width: 321px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v4_123 {
+    width: 163px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 110px;
+    left: 30px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v105_1505 {
+    width: 320px;
+    height: 250px;
+    background: rgba(247,247,247,1);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 180px;
+    left: 716px;
+    overflow: hidden;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+  .v105_1582 {
+    width: 275px;
+    height: 91px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    overflow: hidden;
+  }
+
+  .v105_1505:hover {
+    background: rgba(69,167,62,1);
+    cursor:pointer;
+    transition-duration: 1s;
+  }
+  .v105_1505:hover .v1_01 img{
+    content:url(images/storage-white.svg);
+  }
+  .v105_1505:hover .v1_02 img{
+    content:url(images/angle-right-white.svg);
+  }
+  .v105_1505:hover .v105_1582 span{
+    color: white;
+  }
+  .v105_1505:hover .v105_1581 span{
+    color: transparent;
+  }
+
+  .v105_1501 {
+    width: 275px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+  }
+  .v6_169 {
+    width: 101px;
+    color: rgba(31,31,31,1);
+    position: absolute;
+    top: 2px;
+    left: 37px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v6_229 {
+    width: 243px;
+    color: rgba(8,8,8,1);
+    position: absolute;
+    top: 40px;
+    left: 4px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v105_1581 {
+    width: 150px;
+    height: 77px;
+    background: url("../images/v105_1581.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 150px;
+    left: 26px;
+    overflow: hidden;
+  }
+  .v6_227 {
+    width: 150px;
+    color: rgba(21,19,19,1);
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v78_327 {
+    width: 133px;
+    color: rgba(0,148,63,1);
+    position: absolute;
+    top: 26px;
+    left: 0px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
+</style>

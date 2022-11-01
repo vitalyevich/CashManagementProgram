@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<head>
+  <title>Планирование</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/search.css">
+  <link rel="stylesheet" href="/css/menu-country.css">
+  <link rel="stylesheet" href="/css/filter.css">
+</head>
+<body>
+<div class="v1_2">
+  <div th:insert="blocks/menu-country :: menu-country"></div>
+  <div th:insert="blocks/header :: header"></div>
+  <div th:insert="blocks/filter :: filter"></div>
+  <div th:insert="blocks/search :: search"></div>
+  <div class="v18_235">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Тип объекта</th>
+        <th>ID объекта</th>
+        <th>Статус</th>
+        <th>Период</th>
+        <th>Дата инкассации</th>
+        <th>Тип инкассации</th>
+        <th>Загружаемые наличные</th>
+        <th>Кассеты</th>
+        <th>Валюта</th>
+        <th>Рассчитал(-а)</th>
+        <th>Принял(-а)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="lst : ${users}">
+        <td th:utext="${lst.id}">Тип объекта</td>
+        <td th:utext="${lst.firstName}">ID объекта</td>
+        <td th:utext="${lst.lastName}">Статус</td>
+        <td th:utext="${lst.phone}">Период</td>
+        <td th:utext="${lst.email}">Дата инкассации</td>
+        <td th:utext="${lst.email}">Тип инкассации</td>
+        <td th:utext="${lst.email}">Загружаемые наличные</td>
+        <td th:utext="${lst.email}">Кассеты</td>
+        <td th:utext="${lst.email}">Валюта</td>
+        <td th:utext="${lst.email}">Рассчитал(-а)</td>
+        <td th:utext="${lst.email}">Принял(-а)</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <input class="v18_2" type="submit" value="Рассчитать"/>
+  <input class="v18_3" type="submit" value="Принять"/>
+  <input class="v18_4" type="submit" value="Передать на исполнение"/>
+  <input class="v18_5" type="submit" value="Изменить"/>
+  <span class="v1_300">A0100133, План. инкассация 20.10.2022</span>
+  <div class="v18_235" style="top: 765px;">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Параметр</th>
+        <th>Значение</th>
+        <th>Номинал</th>
+        <th>Количество</th>
+        <th>Сумма</th>
+        <th>Кассета</th>
+        <th>Статус</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="lst : ${users}">
+        <td th:utext="${lst.id}">Параметр</td>
+        <td th:utext="${lst.firstName}">Значение</td>
+        <td th:utext="${lst.lastName}">Номинал</td>
+        <td th:utext="${lst.phone}">Количество</td>
+        <td th:utext="${lst.email}">Сумма</td>
+        <td th:utext="${lst.email}">Кассета</td>
+        <td th:utext="${lst.email}">Статус</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
+
+<style>
+  input {
+    outline: none;
+    border: none;
+  }
+  .v1_3 {
+      top:255px;
+    }
+  .v1_300 {
+    width: 550px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 725px;
+    left: 287px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v18_2 {
+    width: 110px;
+    height: 27px;
+    top: 680px;
+    left: 300px;
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .v18_3 {
+    width: 95px;
+    height: 27px;
+    top: 680px;
+    left: 440px;
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .v18_4 {
+    width: 215px;
+    height: 27px;
+    top: 680px;
+    left: 570px;
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .v18_5 {
+    width: 100px;
+    height: 27px;
+    top: 680px;
+    left: 810px;
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .v18_235 {
+    width: 79vw;
+    height: 354px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 300px;
+    left: 287px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v1_2 {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .table {
+    border: none;
+    top: 20px;
+    left: 25px;
+    position: absolute;
+  }
+  .table thead th {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    background: #d8d8d8;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .table thead tr th:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+  .table thead tr th:last-child {
+    border-radius: 0 8px 8px 0;
+  }
+  .table tbody td {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    vertical-align: top;
+    font-family: Montserrat;
+    font-weight: 400;
+    flex-wrap: nowrap;
+    font-size: 13px;
+    width: 13vw;
+  }
+  .table tbody tr{
+    background: #ffffff;
+  }
+  .table tbody tr td:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+  .table tbody tr td:last-child {
+    border-radius: 0 8px 8px 0;
+  }
+
+</style>
