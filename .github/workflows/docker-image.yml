@@ -32,7 +32,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          working-directory: client
-          file: ./Dockerfile
+          file: ./client/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/cashmanagement:latest
