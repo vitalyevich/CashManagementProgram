@@ -21,7 +21,7 @@ jobs:
         env:
           DOCKER_USER: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
-        run: docker login --username=$DOCKER_USER --password=$DOCKER_PASSWORD
+        run: docker login --username=$DOCKER_USER --password-stdin=$DOCKER_PASSWORD
           
       - name: Build the Docker image
         working-directory: client
@@ -29,4 +29,4 @@ jobs:
         
       - name: Docker Push
         working-directory: client
-        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/cashmanagement
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/cashmanagement:latest
