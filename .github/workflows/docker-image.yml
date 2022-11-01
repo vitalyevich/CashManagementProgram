@@ -25,12 +25,8 @@ jobs:
           
       - name: Build the Docker image
         working-directory: client
-        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-        
-      - name: Docker Run
-        working-directory: client
-        run: docker run --rm -p 8787:8787 ${{ secrets.DOCKER_HUB_USERNAME }}/cashmanagement:latest
+        run: docker build . --file Dockerfile --tag vitalyevich/cashmanagement:$(date +%s)
         
       - name: Docker Push
         working-directory: client
-        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/cashmanagement:latest
+        run: docker push vitalyevich/cashmanagement
