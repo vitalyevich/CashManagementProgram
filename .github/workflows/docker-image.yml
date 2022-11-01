@@ -20,10 +20,15 @@ jobs:
       working-directory: client
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       
-    - name: Build and Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v4
+    - uses: actions/checkout@v2
+      name: Check out code
+   
+    - uses: mr-smithers-excellent/docker-build-push@v5
+      name: Build and Push Docker Image
       with:
         image: vitalyevich/cashmanagement
-        registry: docker.io
+        tags: v1, latest
+        registry: registry-url.io
+        dockerfile: Dockerfile.ci
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
