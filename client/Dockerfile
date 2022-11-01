@@ -1,4 +1,4 @@
-FROM openjdk:17
-WORKDIR /workspace/app
-ADD target/client.jar client.jar
-ENTRYPOINT ["java","-jar","/client.jar"]
+FROM  openjdk:17
+VOLUME /tmp
+COPY target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
