@@ -32,6 +32,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./client/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/cashmanagement:latest
