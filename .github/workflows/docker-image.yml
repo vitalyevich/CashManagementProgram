@@ -29,4 +29,4 @@ jobs:
         
       - name: Docker Push
         working-directory: client
-        run: docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/cashmanagement:latest
+        run: docker push registry-host:5000/${{ secrets.DOCKER_HUB_USERNAME }}/cashmanagement:latest
