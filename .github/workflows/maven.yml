@@ -28,4 +28,5 @@ jobs:
         distribution: 'adopt'
         cache: maven
     - name: Build with Maven
+      working-directory: client
       run: mvn clean install
