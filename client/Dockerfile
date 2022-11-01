@@ -1,24 +1,13 @@
-# syntax=docker/dockerfile:experimental
-FROM eclipse-temurin:17-jdk-alpine as build
-WORKDIR /workspace/app
+FROM maven:3.8.5-openjdk-17 AS maven_build
+COPY pom.xml /tmp/
+COPY src /tmp/src/
+WORKDIR /tmp/
+RUN mvn package
 
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
-COPY src src
+#pull base image
 
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} target/application.jar
-RUN java -Djarmode=layertools -jar target/application.jar extract --destination target/extracted
-
-FROM eclipse-temurin:17-jdk-alpine
-RUN addgroup -S demo && adduser -S demo -G demo
-VOLUME /tmp
-USER demo
-ARG EXTRACTED=/workspace/app/target/extracted
-WORKDIR application
-COPY --from=build ${EXTRACTED}/dependencies/ ./
-COPY --from=build ${EXTRACTED}/spring-boot-loader/ ./
-COPY --from=build ${EXTRACTED}/snapshot-dependencies/ ./
-COPY --from=build ${EXTRACTED}/application/ ./
-ENTRYPOINT ["java","-noverify","-XX:TieredStopAtLevel=1","-Dspring.main.lazy-initialization=true","org.springframework.boot.loader.JarLauncher"]
+FROM openjdk
+MAINTAINER maksim_2411@mail.ru
+EXPOSE 8080
+CMD java -jar /data/client.jar
+COPY --from=maven_build /tmp/target/client.jar /data/client.jar
