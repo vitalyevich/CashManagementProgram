@@ -29,5 +29,6 @@ jobs:
       with:
         context: .
         working-directory: client
+        file: ./Dockerfile
         push: true
         tags: vitalyevich/cashmanagement:latest
