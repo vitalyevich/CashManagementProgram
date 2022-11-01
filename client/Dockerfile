@@ -1,4 +1,4 @@
 FROM openjdk:17
-EXPOSE 8080
-ADD target/client.jar client.jar
+MAINTAINER baeldung.com
+COPY target/client.jar client.jar
 ENTRYPOINT ["java","-jar","/client.jar"]
