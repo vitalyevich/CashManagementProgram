@@ -5,12 +5,14 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/menu-country.css">
   <link rel="stylesheet" href="/css/filter.css">
+  <link rel="stylesheet" href="/css/search.css">
 </head>
 <body>
 <div class="v1_2">
   <div th:insert="blocks/menu-country :: menu-country"></div>
   <div th:insert="blocks/header :: header"></div>
   <div th:insert="blocks/filter :: filter"></div>
+  <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
     <table class="table">
       <thead>
@@ -37,6 +39,49 @@
       </tbody>
     </table>
   </div>
+  <input class="v18_2" type="submit" value="Начало дня"/>
+  <input class="v18_3" type="submit" value="Коррекция"/>
+  <input class="v18_4" type="submit" value="Учет возврата"/>
+
+  <div class="v18_235">
+    <table style="top:900px" class="table">
+      <thead>
+      <tr>
+        <th>Дата заказа</th>
+        <th>Отправитель</th>
+        <th>Получатель</th>
+        <th>Общая сумма</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="lst : ${users}">
+        <td th:utext="${lst.id}">Дата заказа</td>
+        <td th:utext="${lst.firstName}">Отправитель</td>
+        <td th:utext="${lst.lastName}">Получатель</td>
+        <td th:utext="${lst.phone}">Общая сумма</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <table style="top:900px; left:500px" class="table">
+      <thead>
+      <tr>
+        <th>Номинал</th>
+        <th>Количество</th>
+        <th>Сумма</th>
+        <th>Общая сумма</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="lst : ${users}">
+        <td th:utext="${lst.id}">Номинал</td>
+        <td th:utext="${lst.firstName}">Количество</td>
+        <td th:utext="${lst.lastName}">Сумма</td>
+        <td th:utext="${lst.phone}">Общая сумма</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 </body>
 </html>
@@ -45,6 +90,75 @@
   input {
     outline: none;
     border: none;
+  }
+  .v18_2 {
+    width: 110px;
+    height: 27px;
+    top: 680px;
+    left: 300px;
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .v18_3 {
+    width: 95px;
+    height: 27px;
+    top: 680px;
+    left: 440px;
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .v18_4 {
+    width: 215px;
+    height: 27px;
+    top: 680px;
+    left: 570px;
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
   .v18_235 {
     width: 79vw;

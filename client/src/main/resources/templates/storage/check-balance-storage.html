@@ -1,0 +1,538 @@
+<!DOCTYPE html><html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet"></head>
+</head>
+<body>
+<div class="v25_1171">
+  <div class="v366_444">
+    <div class="v25_1174">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Валюта</th>
+          <th>Количество</th>
+          <th>Сумма</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="lst : ${users}">
+          <td th:utext="${lst.firstName}">Номинал</td>
+          <td th:utext="${lst.lastName}">Количество</td>
+          <td th:utext="${lst.phone}">Сумма</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="v25_1324"></div>
+      <span class="v25_1323">Общая сумма: 40</span>
+      <div class="v25_1338"></div>
+      <span class="v25_1341">Общая сумма: 40</span>
+      <div class="v25_1354"></div>
+      <span class="v25_1357">Общая сумма: 40</span>
+      <div class="v25_1370"></div>
+      <span class="v25_1373">Общая сумма: 40</span>
+      <div class="v25_1386"></div>
+      <span class="v25_1389">Общая сумма: 40</span>
+      <div class="v25_1402"></div>
+      <span class="v25_1405">Общая сумма: 40</span>
+      <span class="v25_1186">КВ 1: Остатки в хранилище</span>
+      <div class="v25_1325"></div>
+      <span class="v25_1316">AZN</span>
+      <div class="v25_1339"></div>
+      <span class="v25_1340">AZN</span>
+      <div class="v25_1355"></div>
+      <span class="v25_1356">CHF</span>
+      <div class="v25_1371"></div>
+      <span class="v25_1372">EUR</span>
+      <div class="v25_1387"></div>
+      <span class="v25_1388">RUB</span>
+      <div class="v25_1403"></div>
+      <span class="v25_1404">USD</span>
+    </div>
+  </div>
+  <div class="v366_447">
+    <div class="v366_445">
+      <div class="v25_1182"></div>
+      <span class="v25_1187">Применить</span>
+    </div>
+    <div class="v366_446">
+      <div class="v25_1184"></div>
+      <span class="v25_1188">Закрыть</span>
+    </div>
+  </div>
+  <div class="v366_448">
+    <div class="v25_1172"></div>
+    <span class="v25_1173">Остатки</span>
+  </div>
+</div>
+</body>
+</html>
+
+<style>
+input {
+  outline: none;
+  border: none;
+  background: transparent;
+  /*border: 1px solid white;*/
+}
+.table {
+  border: none;
+  top: 50px;
+  left: 138px;
+  position: absolute;
+}
+.table thead th {
+  text-align: left;
+  border: none;
+  padding: 10px 15px;
+  background: #d8d8d8;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+}
+.table thead tr th:first-child {
+  border-radius: 8px 0 0 8px;
+}
+.table thead tr th:last-child {
+  border-radius: 0 8px 8px 0;
+}
+.table tbody td {
+  text-align: left;
+  border: none;
+  padding: 10px 15px;
+  vertical-align: top;
+  font-family: Montserrat;
+  font-weight: 400;
+  flex-wrap: nowrap;
+  font-size: 13px;
+  width: 13vw;
+}
+.table tbody tr{
+  background: #ffffff;
+}
+.table tbody tr td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+.table tbody tr td:last-child {
+  border-radius: 0 8px 8px 0;
+}
+.v25_1171 {
+  width: 100%;
+  height: 357px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+.v366_444 {
+  width: 100%;
+  height: 239px;
+  background: url("../images/v366_444.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 63px;
+  left: 24px;
+  overflow: hidden;
+}
+.v25_1174 {
+  width: 100%;
+  height: 239px;
+  background: rgba(247,247,247,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  overflow: hidden;
+}
+.v25_1324 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 192px;
+  left: 43px;
+}
+.v25_1323 {
+  width: 179px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 197px;
+  left: 57px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1338 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 191px;
+  left: 375px;
+}
+.v25_1341 {
+  width: 179px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 196px;
+  left: 388px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1354 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 192px;
+  left: 706px;
+}
+.v25_1357 {
+  width: 179px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 197px;
+  left: 718px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1370 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 192px;
+  left: 1036px;
+}
+.v25_1373 {
+  width: 179px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 197px;
+  left: 1050px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1386 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 192px;
+  left: 1368px;
+}
+.v25_1389 {
+  width: 179px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 197px;
+  left: 1380px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1402 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 192px;
+  left: 1699px;
+}
+.v25_1405 {
+  width: 179px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 197px;
+  left: 1711px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1186 {
+  width: 201px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 7px;
+  left: 43px;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1325 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 32px;
+  left: 43px;
+}
+.v25_1316 {
+  width: 36px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 38px;
+  left: 181px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1339 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 31px;
+  left: 375px;
+}
+.v25_1340 {
+  width: 36px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 37px;
+  left: 513px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1355 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 32px;
+  left: 706px;
+}
+.v25_1356 {
+  width: 36px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 38px;
+  left: 843px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1371 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 32px;
+  left: 1036px;
+}
+.v25_1372 {
+  width: 36px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 38px;
+  left: 1174px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1387 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 32px;
+  left: 1368px;
+}
+.v25_1388 {
+  width: 36px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 38px;
+  left: 1506px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v25_1403 {
+  width: 312px;
+  height: 27px;
+  background: rgba(69,167,62,1);
+  opacity: 1;
+  position: absolute;
+  top: 32px;
+  left: 1699px;
+}
+.v25_1404 {
+  width: 36px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 38px;
+  left: 1836px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v366_447 {
+  width: 206px;
+  height: 27px;
+  background: url("../images/v366_447.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 313px;
+  left: 1863px;
+  overflow: hidden;
+}
+.v366_445 {
+  width: 103px;
+  height: 27px;
+  background: url("../images/v366_445.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+.v25_1182 {
+  width: 103px;
+  height: 27px;
+  background: rgba(0,148,63,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.v25_1187 {
+  width: 87px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v366_446 {
+  width: 95px;
+  height: 27px;
+  background: url("../images/v366_446.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 111px;
+  overflow: hidden;
+}
+.v25_1184 {
+  width: 95px;
+  height: 27px;
+  background: rgba(0,148,63,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.v25_1188 {
+  width: 63px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 5px;
+  left: 16px;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v366_448 {
+  width: 100%;
+  height: 38px;
+  background: url("../images/v366_448.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 1px;
+  left: 0px;
+  overflow: hidden;
+}
+.v25_1172 {
+  width: 100%;
+  height: 38px;
+  background: rgba(20,126,75,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 1px;
+  overflow: hidden;
+}
+.v25_1173 {
+  width: 70px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 9px;
+  left: 17px;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 16px;
+  opacity: 1;
+  text-align: left;
+}
+.name {
+  color: #fff;
+}
+</style>
