@@ -2,6 +2,8 @@ type Query {
     users: [User!]!
     user: User!
     accesses: [Access!]!
+    roles: [Role!]!
+    companies: [Company!]!
 }
 
 type Role {
@@ -23,5 +25,11 @@ type User {
     lastName: String!,
     phone: String!,
     email: String!,
-    roles: [Role]!
+    roles: [Role]
+    companies: [Company]
+}
+
+type Company {
+    id: ID!,
+    companyName: String!
 }

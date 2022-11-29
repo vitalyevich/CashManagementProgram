@@ -1,6 +1,8 @@
 package com.cashmanagement.vitalyevich.client.service;
 
 import com.cashmanagement.vitalyevich.client.graphql.GraphClient;
+import com.cashmanagement.vitalyevich.client.model.Company;
+import com.cashmanagement.vitalyevich.client.model.Role;
 import com.cashmanagement.vitalyevich.client.model.User;
 import graphql.GraphqlErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,10 @@ public class UserServiceImpl implements UserService{
                              lastName
                              phone
                              email
+                             roles {
+                             id,
+                             roleName
+                             }
                              }
                          }
                 """;
@@ -35,6 +41,50 @@ public class UserServiceImpl implements UserService{
                     .retrieve("users")
                     .toEntity(User[].class).block()));
             return users;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public Iterable<Role> getRoles() {
+        String document = """
+                     query {
+                             roles {
+                             id
+                             roleName
+                             }
+                         }
+                """;
+
+        try {
+            Iterable<Role> roles = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("roles")
+                    .toEntity(Role[].class).block()));
+            return roles;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public Iterable<Company> getCompany() {
+        String document = """
+                     query {
+                             companies {
+                             id
+                             companyName
+                             }
+                         }
+                """;
+
+        try {
+            Iterable<Company> companies = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("companies")
+                    .toEntity(Company[].class).block()));
+            return companies;
         } catch (GraphQlTransportException ex) {
             System.out.println("Ошибка соединения!"); // test
         }

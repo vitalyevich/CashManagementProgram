@@ -3,14 +3,23 @@
   <title>Пользователи</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="/css/header.css">
-  <link rel="stylesheet" href="/css/menu.css">
+  <link rel="stylesheet" href="/css/menu-admin.css">
+  <link rel="stylesheet" href="/css/users/registration-user.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/imask"></script>
 </head>
   <body>
     <div class="v1_2">
-      <div th:insert="blocks/menu :: menu"></div>
+      <div th:insert="blocks/menu-admin :: menu-admin"></div>
       <div th:insert="blocks/header :: header"></div>
       <div class="v18_235">
         <span class="v18_247">Пользователи</span>
+        <div class="v0">
+          <a href="/users">
+            <img src="../static/images/refresh.svg" th:src="@{images/refresh.svg}">
+          </a>
+        </div>
+        <div class="v18_231">
         <table class="table">
           <thead>
           <tr>
@@ -21,32 +30,47 @@
             <th>Логин запрещен</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody id="data">
           <tr th:each="lst : ${users}">
-            <td th:utext="${lst.id}">Код пользователя</td>
+            <td data-field="id" th:utext="${lst.id}">Код пользователя</td>
             <td th:utext="${lst.firstName}">Имя пользователя</td>
             <td th:utext="${lst.lastName}">Фамилия</td>
-            <td th:utext="${lst.phone}">Роль пользователя</td>
+            <td th:utext="${lst.roles}">Роль пользователя</td>
             <td th:utext="${lst.email}">Логин запрещен</td>
           </tr>
           </tbody>
         </table>
+        </div>
       </div>
         <span class="v28_658" th:text="'Всего пользователей в системе: ' + ${size}"/>
-        <div class="v0">
-          <a href="/users">
-          <img src="../static/images/refresh.svg" th:src="@{images/refresh.svg}">
-          </a>
-        </div>
-        <input class="v18_248" type="submit" value="Новый (-ая)"/>
+        <a href="/registration">
+          <input class="v18_248" type="submit" value="Новый (-ая)"/>
+        </a>a
+
+      <a href="/edit">
         <input class="v18_249" type="submit" value="Изменить"/>
+      </a>
+
+      <a href="/delete">
         <input class="v18_282" type="submit" value="Удалить"/>
+      </a>
+
+      <div th:insert="users/registration-user :: blackout-registration"></div>
+
       </div>
   </body>
 </html>
 
-<style>
+<script>
+  $(document).ready(function(){
+    $('table tr').on('click', function(e) {
+      $('table tr').removeClass('marked');
+      $(this).addClass('marked');
+    });
+  });
+</script>
 
+<style>
 input {
   outline: none;
   border: none;
@@ -66,13 +90,13 @@ input {
   position: absolute;
   width: 24px;
   height: 24px;
-  left: 1440px;
-  top: 157px;
+  right: 37px;
+  top: 15px;
   cursor: pointer;
 }
 .table {
   border: none;
-  top: 55px;
+  top: 0px;
   left: 20px;
   position: absolute;
 }
@@ -111,6 +135,12 @@ input {
 .table tbody tr td:last-child {
   border-radius: 0 8px 8px 0;
 }
+
+table tr.marked{
+   background-color: #45A73E; /* Цвет фона при наведении */
+   color: #fff; /* Цвет текста при наведении */
+ }
+
 .v28_658 {
   width: 265px;
   color: rgba(0,0,0,1);
@@ -123,9 +153,19 @@ input {
   opacity: 1;
   text-align: left;
 }
+.v18_231 {
+  width: 79vw;
+  height: 476px;
+  background: transparent;
+  opacity: 1;
+  position: absolute;
+  top: 47px;
+  left: 0px;
+  overflow: auto;
+}
 .v18_235 {
   width: 79vw;
-  height: 354px;
+  height: 570px;
   background: rgba(247,247,247,1);
   opacity: 1;
   position: absolute;
@@ -135,10 +175,10 @@ input {
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
-  overflow: auto;
+  overflow: hidden;
 }
 .v18_248 {
-  top: 506px;
+  top: 730px;
   left: 1057px;
   width: 103px;
   height: 27px;
@@ -176,7 +216,7 @@ input {
 .v18_249 {
   width: 95px;
   height: 27px;
-  top: 506px;
+  top: 730px;
   left: 1180px;
   color: rgba(255,255,255,1);
   font-family: Montserrat;
@@ -199,7 +239,7 @@ input {
 .v18_282 {
   width: 95px;
   height: 27px;
-  top: 506px;
+  top: 730px;
   left: 1294px;
   color: rgba(255,255,255,1);
   font-family: Montserrat;

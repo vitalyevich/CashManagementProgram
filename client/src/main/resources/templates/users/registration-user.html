@@ -1,487 +1,72 @@
-<!DOCTYPE html><html>
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-</head>
-<body>
-<div class="v17_358">
-  <div class="v17_415"></div>
-  <div class="v306_440">
-    <div class="v17_417"></div>
-    <span class="v17_416">Регистрация пользователя</span>
-    <img style="position: absolute;width: 24px;height: 24px;right: 5px;top: -1px;"
-         src="../static/images/close.svg" th:src="@{images/close.svg}">
-    <input required class="v17_437">
-    <input required class="v17_438">
-    <input required class="v17_439">
-    <img style="position: absolute;width: 24px;height: 24px;right: 9px;top: 184px;"
-         src="../static/images/help.svg" th:src="@{images/help.svg}">
-    <input required class="v17_440">
-    <input required class="v17_441">
-    <input required class="v17_442">
-    <input required class="v17_443">
-    <select required class="v17_444"></select>
-    <select required class="v17_445"></select>
-    <input class="v17_446" type="checkbox">
-    <input type="submit" class="v17_430" value="Новая компания">
-    <input type="submit" class="v17_433" value="Применить">
-    <input type="submit" class="v17_435" value="Отменить">
-    <span class="v17_418">Пожалуйста, заполните все поля</span>
-    <span class="v17_419">Имя пользователя</span>
-    <span class="v17_421">Электронная почта</span>
-    <span class="v17_422">Пароль</span>
-    <span class="v17_423">Подтвердить пароль</span>
-    <span class="v17_424">Имя</span>
-    <span class="v17_425">Фамилия</span>
-    <span class="v17_426">Номер телефона</span>
-    <span class="v17_427">Роль пользователя</span>
-    <span class="v17_428">Компания</span>
-    <span class="v17_429">Логин запрещён</span>
+<div th:fragment="registration" class="window">
+  <div class="v17_358">
+    <div class="v17_415"></div>
+    <div class="v306_440">
+      <div class="v17_417"></div>
+      <span class="v17_416" th:text="${name}"></span>
+      <a href="/users">
+        <img style="position: absolute;width: 24px;height: 24px;right: 5px;top: -1px;"
+           src="../static/images/close.svg" th:src="@{images/close.svg}">
+      </a>
+      <form th:action="@{/registration}" method="post">
+        <input name="login" type="text" required class="v17_437">
+        <input name="email" type="email" required class="v17_438">
+
+        <!--<div class="v1_6">-->
+          <input type="password" id="password-input" name="password" maxlength="20" required class="v17_439">
+          <a href="#" class="password-control"></a>
+        <!--</div>-->
+       <!-- <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+          $('body').on('click', '.password-control', function(){
+            if ($('#password-input').attr('type') == 'password'){
+              $(this).addClass('view');
+              $('#password-input').attr('type', 'text');
+            } else {
+              $(this).removeClass('view');
+              $('#password-input').attr('type', 'password');
+            }
+            return false;
+          });
+        </script>-->
+
+        <input type="password" required class="v17_440">
+
+        <input name="firstName" type="text" required class="v17_441">
+        <input name="lastName" type="text" required class="v17_442">
+        <input name="phone" required class="v17_443">
+        <select name="role" required class="v17_444">
+          <option th:each="el, iterStat : ${roles}" th:value="${iterStat.index + 1}" th:text="${el.roleName}">
+          </option>
+        </select>
+        <select name="company" required class="v17_445">
+          <option th:each="el, iterStat : ${companies}" th:value="${iterStat.index + 1}" th:text="${el.companyName}">
+          </option>
+        </select>
+        <input class="v17_446" type="checkbox">
+      </form>
+      <input type="submit" class="v17_430" value="Новая компания">
+      <input type="submit" class="v17_433" value="Применить">
+      <input type="submit" class="v17_435" value="Отменить">
+      <span class="v17_418">Пожалуйста, заполните все поля</span>
+      <span class="v17_419">Имя пользователя</span>
+      <span class="v17_421">Электронная почта</span>
+      <span class="v17_422">Пароль</span>
+      <span class="v17_423">Подтвердить пароль</span>
+      <span class="v17_424">Имя</span>
+      <span class="v17_425">Фамилия</span>
+      <span class="v17_426">Номер телефона</span>
+      <span class="v17_427">Роль пользователя</span>
+      <span class="v17_428">Компания</span>
+      <span class="v17_429">Логин запрещён</span>
+    </div>
   </div>
 </div>
-</body>
-</html> 
 
-<style>
-input {
-  outline: none;
-  border: none;
-  background: transparent;
-  /*border: 1px solid white;*/
-}
-select {
-  appearance: none;
-  background: url("../../images/angle-down.svg") no-repeat right;
-  background-position-x: calc(100% - 3px);
-}
-.v17_358 {
-  width: 575px;
-  height: 565px;
-  background: rgba(255,255,255,1);
-  opacity: 1;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.v17_415 {
-  width: 575px;
-  height: 38px;
-  background: rgba(20,126,75,1);
-  opacity: 1;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.v306_440 {
-  width: 550px;
-  height: 543px;
-  background: url("../images/v306_440.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 9px;
-  left: 16px;
-  overflow: hidden;
-}
-.v17_417 {
-  width: 543px;
-  height: 453px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 54px;
-  left: 7px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  overflow: hidden;
-}
-.v17_416 {
-  width: 234px;
-  color: rgba(255,255,255,1);
-  position: relative;
-  top: 0px;
-  left: 0px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 16px;
-  opacity: 1;
-  text-align: left;
-}
-.v17_437 {
-  width: 309px;
-  height: 31px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 96px;
-  left: 197px;
-  border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  overflow: hidden;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: left;
-}
-.v17_438 {
-  width: 309px;
-  height: 31px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 137px;
-  left: 197px;
-  border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  overflow: hidden;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: left;
-}
-.v17_439 {
-  width: 309px;
-  height: 31px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 178px;
-  left: 197px;
-  border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  overflow: hidden;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: left;
-}
-.v17_440 {
-  width: 309px;
-  height: 31px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 219px;
-  left: 197px;
-  border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  overflow: hidden;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: left;
-}
-.v17_441 {
-  width: 309px;
-  height: 31px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 260px;
-  left: 197px;
-  border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  overflow: hidden;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: left;
-}
-.v17_442 {
-  width: 309px;
-  height: 31px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 300px;
-  left: 197px;
-  border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  overflow: hidden;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: left;
-}
-.v17_443 {
-  width: 309px;
-  height: 31px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 341px;
-  left: 197px;
-  border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  overflow: hidden;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: left;
-}
-.v17_444 {
-  width: 315px;
-  height: 35px;
-  opacity: 1;
-  position: absolute;
-  top: 382px;
-  left: 197px;
-  border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  overflow: hidden;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: left;
-  padding-left: 7px;
-}
-.v17_445 {
-  width: 315px;
-  height: 35px;
-  opacity: 1;
-  position: absolute;
-  top: 423px;
-  left: 197px;
-  border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  overflow: hidden;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: left;
-  padding-left: 7px;
-}
-.v17_446 {
-  width: 24px;
-  height: 24px;
-  opacity: 1;
-  position: absolute;
-  top: 465px;
-  left: 194px;
-  border-radius: 30%;
-  border: 1px solid black;
-  appearance: none;
-  outline: none;
-  cursor: pointer;
-  vertical-align: middle;
-  -webkit-appearance: none;
-}
-.v17_446:checked {
-  appearance: auto; /**/
-  border: none;
-  background-color: #00943F;
-  opacity: 1;
-}
-.v17_430 {
-  width: 145px;
-  height: 27px;
-  background: rgba(0,148,63,1);
-  opacity: 1;
-  position: absolute;
-  top: 516px;
-  left: 95px;
-  color: rgba(255,255,255,1);
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.v17_433 {
-  width: 103px;
-  height: 27px;
-  background: rgba(0,148,63,1);
-  opacity: 1;
-  position: absolute;
-  top: 516px;
-  left: 283px;
-  color: rgba(255,255,255,1);
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.v17_435 {
-  width: 95px;
-  height: 27px;
-  background: rgba(0,148,63,1);
-  opacity: 1;
-  position: absolute;
-  top: 516px;
-  left: 390px;
-  color: rgba(255,255,255,1);
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.v17_418 {
-  width: 248px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 63px;
-  left: 31px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: left;
-  opacity: 1;
-}
-.v17_419 {
-  width: 139px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 103px;
-  left: 49px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v17_421 {
-  width: 146px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 144px;
-  left: 43px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v17_422 {
-  width: 56px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 185px;
-  left: 131px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v17_423 {
-  width: 157px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 226px;
-  left: 31px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v17_424 {
-  width: 32px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 267px;
-  left: 155px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v17_425 {
-  width: 71px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 307px;
-  left: 117px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v17_426 {
-  width: 127px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 348px;
-  left: 63px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v17_427 {
-  width: 144px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 389px;
-  left: 46px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v17_428 {
-  width: 77px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 430px;
-  left: 112px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v17_429 {
-  width: 127px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 470px;
-  left: 63px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-</style>
+<div th:fragment="blackout-registration" id="blackout-registration">
+  <a href="#" class="close"></a>
+  <div id="window-black">
+    <div th:insert="users/registration-user :: registration"></div>
+  </div>
+</div>
+

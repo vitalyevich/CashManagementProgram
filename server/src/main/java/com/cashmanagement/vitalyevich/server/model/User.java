@@ -21,8 +21,14 @@ public class User {
     @Column(name = "phone", nullable = false, length = 19)
     private String phone;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, length = 50)
     private String email;
+
+    @ManyToMany
+    @JoinTable(name = "company_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_id"))
+    private Set<Company> companies = new LinkedHashSet<>();
 
     @ManyToMany
     @JoinTable(name = "user_roles",
@@ -36,6 +42,14 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Company> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
     }
 
     public String getEmail() {
