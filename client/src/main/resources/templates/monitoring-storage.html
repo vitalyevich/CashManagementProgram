@@ -3,13 +3,11 @@
   <title>Мониторинг</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="/css/header.css">
-  <link rel="stylesheet" href="/css/menu-country.css">
   <link rel="stylesheet" href="/css/filter.css">
   <link rel="stylesheet" href="/css/search.css">
 </head>
 <body>
 <div class="v1_2">
-  <div th:insert="blocks/menu-country :: menu-country"></div>
   <div th:insert="blocks/header :: header"></div>
   <div th:insert="blocks/filter :: filter"></div>
   <div th:insert="blocks/search :: search"></div>
@@ -27,14 +25,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${users}">
+      <tr th:each="lst : ${storages}">
         <td th:utext="${lst.id}">Компания</td>
-        <td th:utext="${lst.firstName}">Валюта</td>
-        <td th:utext="${lst.lastName}">Остаток в хранилище</td>
-        <td th:utext="${lst.phone}">Денежный поток (пополнение)</td>
+        <td th:utext="${lst.currency}">Валюта</td>
+        <td th:utext="${lst.amount}">Остаток в хранилище</td>
+<!--        <td th:utext="${lst.phone}">Денежный поток (пополнение)</td>
         <td th:utext="${lst.email}">Денежный поток (пополнение) План*</td>
         <td th:utext="${lst.email}">Денежный поток (Вывоз)</td>
-        <td th:utext="${lst.email}">Остаток в сети</td>
+        <td th:utext="${lst.email}">Остаток в сети</td-->>
       </tr>
       </tbody>
     </table>
@@ -43,8 +41,8 @@
   <input class="v18_3" type="submit" value="Коррекция"/>
   <input class="v18_4" type="submit" value="Учет возврата"/>
 
-  <div class="v18_235">
-    <table style="top:900px" class="table">
+  <div class="v18_235" style="top:900px" >
+    <table class="table">
       <thead>
       <tr>
         <th>Дата заказа</th>
@@ -63,7 +61,7 @@
       </tbody>
     </table>
 
-    <table style="top:900px; left:500px" class="table">
+    <table style="left:700px" class="table">
       <thead>
       <tr>
         <th>Номинал</th>
@@ -183,7 +181,8 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   .table {
     border: none;

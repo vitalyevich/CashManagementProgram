@@ -4,7 +4,22 @@ type Query {
     accesses: [Access!]!
     roles: [Role!]!
     companies: [Company!]!
+    atms: [Atm!]!
+    plans: [PlanAtm!]!
+    storages: [Storage!]!
+    operations: [StorageOperation!]!
+    orders: [Order!]!
+    brigades: [Brigade!]!
+    cities: [City!]!
+    countries: [Country!]!
+    cityCompanies: [CityCompany!]!
+    brigadeOrders: [BrigadeOrder!]!
+    storageOrders: [StorageOrder!]!
+    withdrawalCashes: [WithdrawalCash!]!
 }
+
+#type Mutation {
+#}
 
 type Role {
     id: ID!,
@@ -13,7 +28,7 @@ type Role {
 
 type Access {
     id: ID!,
-    user: User!, #test
+    user: User!,
     login: String!,
     userPassword: String!,
     active: Boolean
@@ -32,4 +47,115 @@ type User {
 type Company {
     id: ID!,
     companyName: String!
+}
+
+type Atm {
+    id: ID!,
+    atmUid: String!,
+    cashState: String!,
+    atmState: String!
+}
+
+type Cassette {
+    id: ID!,
+    cassetteNum: Int!,
+    banknote: Float,
+    currency: String!,
+    amount: Int!
+}
+
+type PlanAtm {
+    id: ID!,
+    atm: Atm!,
+    planMethod: String!,
+    status: String!,
+    planPeriod: Int!
+}
+
+type Storage {
+    id: ID!,
+    currency: String!,
+    amount: Float!
+    companies: [Company]!
+    storageOperations: [StorageOperation]
+}
+
+type StorageOperation {
+    id: ID!,
+    storage: Storage!,
+    updateDate: String!,
+    amountOperation: Float!
+}
+
+type Order {
+    id: ID!,
+    atm: Atm!,
+    plan: PlanAtm!,
+    stage: String!,
+    collectionDate: String!,
+    user: User!,
+    orderStages: [OrderStage]
+}
+
+type OrderStage {
+    id: OrderStageId!,
+    order: Order!,
+    stageDate: String!
+}
+
+type OrderStageId {
+    orderId: ID!,
+    stageId: ID!
+}
+
+type Brigade {
+    id: ID!,
+    company: Company!,
+    brigadeName: String!,
+    active: Boolean!
+    users: [User]!
+}
+
+type City {
+    id: ID!,
+    cityName: String!
+}
+
+type Country {
+    id: ID!,
+    countryName: String!,
+    cities: [City]!
+}
+
+type CityCompany {
+    id: ID!,
+    companies: Company!,
+    city:City!,
+    address: String!,
+    homeNum: Int!
+}
+
+type BrigadeOrder {
+    id: ID!,
+    order: Order!,
+    orderDate: String!,
+    brigade: Brigade!,
+    orderComment: String,
+    status: String!
+}
+
+type StorageOrder {
+    id: ID!,
+    order: Order!,
+    orderDate: String!,
+    user: User!,
+    status: String!
+}
+
+type WithdrawalCash {
+    id: ID!,
+    withdrawalDate: String!,
+    atm: Atm!,
+    cassette: Cassette,
+    amount: Float!
 }

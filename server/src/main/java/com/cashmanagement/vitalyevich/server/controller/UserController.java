@@ -1,9 +1,7 @@
-package com.cashmanagement.vitalyevich.server.repository;
+package com.cashmanagement.vitalyevich.server.controller;
 
-import com.cashmanagement.vitalyevich.server.model.Access;
-import com.cashmanagement.vitalyevich.server.model.Company;
-import com.cashmanagement.vitalyevich.server.model.Role;
-import com.cashmanagement.vitalyevich.server.model.User;
+import com.cashmanagement.vitalyevich.server.model.*;
+import com.cashmanagement.vitalyevich.server.repository.*;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -20,11 +18,14 @@ public class UserController {
 
     private final CompanyRepository companyRepository;
 
-    public UserController(UserRepository userRepository, AccessRepository accessRepository, RoleRepository roleRepository, CompanyRepository companyRepository) {
+    private final BrigadeRepository brigadeRepository;
+
+    public UserController(UserRepository userRepository, AccessRepository accessRepository, RoleRepository roleRepository, CompanyRepository companyRepository, BrigadeRepository brigadeRepository) {
         this.userRepository = userRepository;
         this.accessRepository = accessRepository;
         this.roleRepository = roleRepository;
         this.companyRepository = companyRepository;
+        this.brigadeRepository = brigadeRepository;
     }
 
     @QueryMapping
@@ -50,5 +51,10 @@ public class UserController {
     @QueryMapping
     Iterable<Company> companies () {
         return  companyRepository.findAll();
+    }
+
+    @QueryMapping
+    Iterable<Brigade> brigades () {
+        return  brigadeRepository.findAll();
     }
 }

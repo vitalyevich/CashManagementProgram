@@ -24,15 +24,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${users}">
-        <td th:utext="${lst.id}">Дата</td>
-        <td th:utext="${lst.firstName}">Валюта</td>
-        <td th:utext="${lst.lastName}">Остаток на утро</td>
+      <tr th:each="lst : ${operations}">
+        <td th:utext="${lst.updateDate}">Дата</td>
+        <!--<td th:utext="${lst.firstName}">Валюта</td>-->
+<!--        <td th:utext="${lst.lastName}">Остаток на утро</td>
         <td th:utext="${lst.phone}">Текущий остаток</td>
         <td th:utext="${lst.email}">Остаток на вечер</td>
         <td th:utext="${lst.email}">Вечерняя касса</td>
-        <td th:utext="${lst.email}">Вывоз</td>
-        <td th:utext="${lst.email}">Пополнение</td>
+        <td th:utext="${lst.email}">Вывоз</td>-->
+        <td th:utext="${lst.amountOperation}">Пополнение</td>
       </tr>
       </tbody>
     </table>

@@ -1,26 +1,16 @@
-package com.cashmanagement.vitalyevich.server.model;
+package com.cashmanagement.vitalyevich.client.model;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "access")
 public class Access {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "access_id", nullable = false)
+
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "login", nullable = false, length = 20)
     private String login;
 
-    @Column(name = "user_password", nullable = false)
     private String userPassword;
 
-    @Column(name = "active", nullable = false)
     private Boolean active = false;
 
     public Boolean getActive() {

@@ -52,17 +52,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="lst : ${users}">
+        <tr th:each="lst : ${atms}">
           <td th:utext="${lst.id}">Тип объекта</td>
-          <td th:utext="${lst.firstName}">ID объекта</td>
-          <td th:utext="${lst.lastName}">До опустошения</td>
-          <td th:utext="${lst.phone}">Остаток</td>
-          <td th:utext="${lst.email}">Кассеты</td>
-          <td th:utext="${lst.email}">Валюта</td>
-          <td th:utext="${lst.email}">Дата последней инкассации</td>
-          <td th:utext="${lst.email}">Дата инкассации</td>
-          <td th:utext="${lst.email}">Состояние наличных</td>
-          <td th:utext="${lst.email}">Состояние банкомата</td>
+          <td th:utext="${lst.atmUid}">ID объекта</td>
+<!--          <td th:utext="${lst.}">До опустошения</td>
+          <td th:utext="${lst.}">Остаток</td>
+          <td th:utext="${lst.}">Кассеты</td>
+          <td th:utext="${lst.}">Валюта</td>
+          <td th:utext="${lst.}">Дата последней инкассации</td>
+          <td th:utext="${lst.}">Дата инкассации</td>-->
+          <td th:utext="${lst.cashState}">Состояние наличных</td>
+          <td th:utext="${lst.atmState}">Состояние банкомата</td>
         </tr>
         </tbody>
       </table>
