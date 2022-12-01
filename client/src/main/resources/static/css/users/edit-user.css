@@ -36,7 +36,7 @@
     position: relative;
     overflow: hidden;
 }
-#blackout-registration {
+#blackout-edit {
     background: rgba(40, 40, 40, 0.7);
     width: 100%;
     height: 100%;
@@ -60,7 +60,7 @@
     height: 100%;
     cursor:pointer;
 }
-#blackout-registration:target {display: block;}
+#blackout-edit:target {display: block;}
 
 input {
     outline: none;

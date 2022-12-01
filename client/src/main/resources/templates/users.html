@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/menu-admin.css">
   <link rel="stylesheet" href="/css/users/registration-user.css">
+  <link rel="stylesheet" href="/css/users/edit-user.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://unpkg.com/imask"></script>
 </head>
@@ -31,31 +32,36 @@
           </tr>
           </thead>
           <tbody id="data">
-          <tr th:each="lst : ${users}">
-            <td data-field="id" th:utext="${lst.id}">Код пользователя</td>
-            <td th:utext="${lst.firstName}">Имя пользователя</td>
-            <td th:utext="${lst.lastName}">Фамилия</td>
-            <td th:utext="${lst.roles}">Роль пользователя</td>
-            <td th:utext="${lst.email}">Логин запрещен</td>
+          <tr class="v1" th:each="lst : ${accesses}" th:id="${lst.user.id}" onclick="document.getElementById('rowIdDelete').value = this.getAttribute('id');
+document.getElementById('rowIdEdit').value = this.getAttribute('id')">
+            <td data-field="id" name="id" th:utext="${lst.user.id}">Код пользователя</td>
+            <td th:utext="${lst.user.firstName}">Имя пользователя</td>
+            <td th:utext="${lst.user.lastName}">Фамилия</td>
+            <td th:utext="${lst.user.roles}">Роль пользователя</td>
+            <td th:utext="${lst.active}">Логин запрещен</td>
+            <input name="id" th:text>
           </tr>
           </tbody>
         </table>
         </div>
       </div>
         <span class="v28_658" th:text="'Всего пользователей в системе: ' + ${size}"/>
-        <a href="/registration">
+        <a href="/users/registration">
           <input class="v18_248" type="submit" value="Новый (-ая)"/>
         </a>a
 
-      <a href="/edit">
-        <input class="v18_249" type="submit" value="Изменить"/>
-      </a>
+      <form th:action="@{/users/edit}" method="get">
+        <input type="hidden" name="rowId" value="" id="rowIdEdit" />
+        <input name="edit" class="v18_249" type="submit" value="Изменить"/>
+      </form>
 
-      <a href="/delete">
-        <input class="v18_282" type="submit" value="Удалить"/>
-      </a>
-
+      <form th:action="@{/users/delete}" method="post">
+        <input type="hidden" name="rowId" value="" id="rowIdDelete" />
+        <input name="delete" class="v18_282" type="submit" value="Удалить"/>
+      </form>
       <div th:insert="users/registration-user :: blackout-registration"></div>
+
+      <div th:insert="users/edit-user :: blackout-edit"></div>
 
       </div>
   </body>
@@ -63,9 +69,17 @@
 
 <script>
   $(document).ready(function(){
-    $('table tr').on('click', function(e) {
-      $('table tr').removeClass('marked');
+    $('.v1').on('click', function(e) {
+
+      $('.v1').removeClass('marked');
       $(this).addClass('marked');
+
+      $('.v18_249').removeClass('marked');
+      $('.v18_249').addClass('marked');
+
+      $('.v18_282').removeClass('marked');
+      $('.v18_282').addClass('marked');
+
     });
   });
 </script>
@@ -140,6 +154,13 @@ table tr.marked{
    background-color: #45A73E; /* Цвет фона при наведении */
    color: #fff; /* Цвет текста при наведении */
  }
+
+.v18_249.marked{
+  opacity: 1;
+}
+.v18_282.marked{
+  opacity: 1;
+}
 
 .v28_658 {
   width: 265px;
@@ -227,7 +248,7 @@ table tr.marked{
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  opacity: 1;
+  opacity: 0.4;
   position: absolute;
   overflow: hidden;
   background: rgba(0,148,63,1);
@@ -250,7 +271,7 @@ table tr.marked{
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  opacity: 1;
+  opacity: 0.4;
   position: absolute;
   overflow: hidden;
   background: rgba(0,148,63,1);

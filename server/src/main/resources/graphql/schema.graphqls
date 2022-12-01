@@ -1,6 +1,7 @@
 type Query {
     users: [User!]!
-    user: User!
+    user(id: ID): User
+    access(id: ID): Access
     accesses: [Access!]!
     roles: [Role!]!
     companies: [Company!]!
@@ -18,8 +19,64 @@ type Query {
     withdrawalCashes: [WithdrawalCash!]!
 }
 
-#type Mutation {
-#}
+type Mutation {
+    createWork(work: CreateWorkInput!): String
+    createUser(user: CreateUserInput!, role: UpdateRoleInput!): User!
+    updateUser(user: UpdateUserInput!, role: UpdateRoleInput!): User!
+    deleteUser(id: ID!): Int
+
+    updateAccess(access: UpdateAccessInput!, user: UpdateIdInput!): Access!
+    createAccess(access: CreateAccessInput!, user: UpdateIdInput!): Access!
+}
+
+type WorkTime {
+    dateTime: String!,
+    firstName: String!,
+    lastName: String!,
+    description: String!
+}
+
+input UpdateRoleInput {
+    id: ID!
+}
+
+input UpdateAccessInput {
+    id: ID!,
+    login: String!,
+    userPassword: String!,
+    active: Boolean
+}
+
+input CreateAccessInput {
+    login: String!,
+    userPassword: String!,
+    active: Boolean
+}
+
+input CreateWorkInput {
+    firstName: String!,
+    lastName: String!,
+    description: String!
+}
+
+input CreateUserInput {
+    firstName: String!,
+    lastName: String!,
+    phone: String!,
+    email: String!
+}
+
+input UpdateUserInput {
+    id: ID!,
+    firstName: String!,
+    lastName: String!,
+    phone: String!,
+    email: String!
+}
+
+input UpdateIdInput {
+    id: ID!,
+}
 
 type Role {
     id: ID!,
@@ -40,7 +97,7 @@ type User {
     lastName: String!,
     phone: String!,
     email: String!,
-    roles: [Role]
+    roles: [Role],
     companies: [Company]
 }
 
@@ -83,7 +140,7 @@ type Storage {
 type StorageOperation {
     id: ID!,
     storage: Storage!,
-    updateDate: String!,
+        updateDate: String!,
     amountOperation: Float!
 }
 

@@ -21,8 +21,8 @@ public class User {
     private Set<Role> roles = new LinkedHashSet<>();
 
     // roles.iterator().next()
-    public Set<Role> getRoles() {
-        return roles;
+    public String getRoles() {
+        return roles.iterator().next().getRoleName();
     }
 
     public void setRoles(Set<Role> roles) {

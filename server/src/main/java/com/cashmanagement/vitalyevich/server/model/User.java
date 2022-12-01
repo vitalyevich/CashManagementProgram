@@ -91,4 +91,14 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String phone, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+    }
 }

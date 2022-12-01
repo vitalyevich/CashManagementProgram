@@ -1,3 +1,4 @@
+/*
 package com.cashmanagement.vitalyevich.client.controller;
 
 import com.cashmanagement.vitalyevich.client.service.UserServiceImpl;
@@ -23,9 +24,11 @@ class UserControllerTest {
     @MockBean
     private UserServiceImpl userServiceImpl;
 
-    /**
+    */
+/**
      * Method under test: {@link UserController#edit(org.springframework.ui.Model)}
-     */
+     *//*
+
     @Test
     void testEdit() throws Exception {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/edit");
@@ -38,9 +41,11 @@ class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.forwardedUrl("users/edit-user"));
     }
 
-    /**
+    */
+/**
      * Method under test: {@link UserController#users(org.springframework.ui.Model)}
-     */
+     *//*
+
     @Test
     @Disabled("TODO: Complete this test")
     void testUsers() {
@@ -60,9 +65,11 @@ class UserControllerTest {
         userController.users(new ConcurrentModel());
     }
 
-    /**
+    */
+/**
      * Method under test: {@link UserController#edit(org.springframework.ui.Model)}
-     */
+     *//*
+
     @Test
     void testEdit2() throws Exception {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/edit", "Uri Variables");
@@ -75,9 +82,11 @@ class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.forwardedUrl("users/edit-user"));
     }
 
-    /**
+    */
+/**
      * Method under test: {@link UserController#registration(org.springframework.ui.Model)}
-     */
+     *//*
+
     @Test
     void testRegistration() throws Exception {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/registration");
@@ -90,9 +99,11 @@ class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.forwardedUrl("users/registration-user"));
     }
 
-    /**
+    */
+/**
      * Method under test: {@link UserController#registration(org.springframework.ui.Model)}
-     */
+     *//*
+
     @Test
     void testRegistration2() throws Exception {
         MockHttpServletRequestBuilder getResult = MockMvcRequestBuilders.get("/registration");
@@ -107,3 +118,4 @@ class UserControllerTest {
     }
 }
 
+*/

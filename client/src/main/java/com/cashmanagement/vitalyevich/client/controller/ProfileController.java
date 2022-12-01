@@ -1,5 +1,9 @@
 package com.cashmanagement.vitalyevich.client.controller;
 
+import com.cashmanagement.vitalyevich.client.config.Seance;
+import com.cashmanagement.vitalyevich.client.firebase.model.WorkTime;
+import com.cashmanagement.vitalyevich.client.service.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +13,11 @@ import java.time.format.DateTimeFormatter;
 @Controller
 public class ProfileController {
 
+    private Seance seance = Seance.getInstance();
+
+    @Autowired
+    private UserServiceImpl userService;
+
     @GetMapping("/profile-admin")
     public String profileAdmin(Model model) {
         model.addAttribute("headerText", "Профиль");
@@ -16,6 +25,9 @@ public class ProfileController {
         model.addAttribute("post", "Руководитель");
         model.addAttribute("name", "Максим Витальевич");
         model.addAttribute("date", LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+
+        userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "вход на страницу профиля"));
+
         return "/profiles/profile-admin";
     }
 

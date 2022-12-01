@@ -1,11 +1,19 @@
 package com.cashmanagement.vitalyevich.server.controller;
 
+import com.cashmanagement.vitalyevich.server.firebase.model.WorkTime;
 import com.cashmanagement.vitalyevich.server.model.*;
 import com.cashmanagement.vitalyevich.server.repository.*;
+import com.cashmanagement.vitalyevich.server.service.FBService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import java.util.LinkedHashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 @Controller
 public class UserController {
@@ -30,7 +38,28 @@ public class UserController {
 
     @QueryMapping
     Iterable<User> users () {
-        return  userRepository.findAll();
+        return userRepository.findByOrderByIdAsc();
+    }
+
+    @MutationMapping
+    User createUser(@Argument User user, @Argument Role role) {
+        Set<Role> roles = new LinkedHashSet<>();
+        roles.add(role);
+        user.setRoles(roles);
+        return userRepository.save(user);
+    }
+
+    @MutationMapping
+    User updateUser(@Argument User user, @Argument Role role) {
+        Set<Role> roles = new LinkedHashSet<>();
+        roles.add(role);
+        user.setRoles(roles);
+        return userRepository.save(user);
+    }
+
+    @MutationMapping
+    void deleteUser(@Argument Integer id) {
+        userRepository.deleteById(id);
     }
 
     @QueryMapping
@@ -39,13 +68,30 @@ public class UserController {
     }
 
     @QueryMapping
-    Optional<User> user (Integer id) {
+    Optional<User> user (@Argument Integer id) {
         return userRepository.findUserById(id);
     }
 
     @QueryMapping
+    Optional<Access> access (@Argument Integer id) {
+        return accessRepository.findAccessById(id);
+    }
+
+    @MutationMapping
+    Access updateAccess(@Argument Access access, @Argument User user) {
+        access.setUser(user);
+        return accessRepository.save(access);
+    }
+
+    @MutationMapping
+    Access createAccess(@Argument Access access, @Argument User user) {
+        access.setUser(user);
+        return accessRepository.save(access);
+    }
+
+    @QueryMapping
     Iterable<Access> accesses () {
-        return  accessRepository.findAll();
+        return accessRepository.findByOrderByIdAsc();
     }
 
     @QueryMapping
@@ -56,5 +102,13 @@ public class UserController {
     @QueryMapping
     Iterable<Brigade> brigades () {
         return  brigadeRepository.findAll();
+    }
+
+    @Autowired
+    FBService fbService;
+
+    @MutationMapping
+    void createWork(@Argument WorkTime work) throws ExecutionException, InterruptedException {
+        fbService.saveWork(work);
     }
 }

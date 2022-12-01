@@ -3,20 +3,20 @@
     <div class="v17_415"></div>
     <div class="v306_440">
       <div class="v17_417"></div>
-      <span class="v17_416" th:text="${name}"></span>
+      <span class="v17_416">Регистрация пользователя</span>
       <a href="/users">
         <img style="position: absolute;width: 24px;height: 24px;right: 5px;top: -1px;"
            src="../static/images/close.svg" th:src="@{images/close.svg}">
       </a>
-      <form th:action="@{/registration}" method="post">
-        <input name="login" type="text" required class="v17_437">
+      <form th:action="@{/users/registration}" method="post">
+        <input name="login" type="text" class="v17_437">
         <input name="email" type="email" required class="v17_438">
 
-        <!--<div class="v1_6">-->
-          <input type="password" id="password-input" name="password" maxlength="20" required class="v17_439">
+        <div class="v1_6">
+          <input type="password" id="password-input" name="password" maxlength="20" class="v17_439">
           <a href="#" class="password-control"></a>
-        <!--</div>-->
-       <!-- <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+      </div>
+       <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
         <script>
           $('body').on('click', '.password-control', function(){
             if ($('#password-input').attr('type') == 'password'){
@@ -28,26 +28,41 @@
             }
             return false;
           });
-        </script>-->
+        </script>
 
-        <input type="password" required class="v17_440">
+        <input type="password" name="confirmPassword" class="v17_440">
 
         <input name="firstName" type="text" required class="v17_441">
         <input name="lastName" type="text" required class="v17_442">
-        <input name="phone" required class="v17_443">
-        <select name="role" required class="v17_444">
+
+        <input required id="phone" type="tel" name="phone" maxlength="19" pattern="^\+375(\s+)?\(?(17|25|29|33|44)\)?(\s+)?[0-9]{3}-?[0-9]{2}-?[0-9]{2}$" class="v17_443">
+
+        <script src="https://unpkg.com/imask"></script>
+        <script>
+          var element = document.getElementById('phone');
+          var maskOptions = {
+            mask: '+{375} (00) 000-00-00'
+          };
+          var mask = IMask(element, maskOptions);
+        </script>
+
+        <select name="role" class="v17_444">
           <option th:each="el, iterStat : ${roles}" th:value="${iterStat.index + 1}" th:text="${el.roleName}">
           </option>
         </select>
-        <select name="company" required class="v17_445">
+        <select name="company" class="v17_445">
           <option th:each="el, iterStat : ${companies}" th:value="${iterStat.index + 1}" th:text="${el.companyName}">
           </option>
         </select>
+
         <input class="v17_446" type="checkbox">
-      </form>
-      <input type="submit" class="v17_430" value="Новая компания">
+
+      <input class="v17_430" value="Новая компания">
       <input type="submit" class="v17_433" value="Применить">
-      <input type="submit" class="v17_435" value="Отменить">
+      </form>
+        <a href="/users">
+          <input class="v17_435" value="Отменить">
+        </a>
       <span class="v17_418">Пожалуйста, заполните все поля</span>
       <span class="v17_419">Имя пользователя</span>
       <span class="v17_421">Электронная почта</span>
