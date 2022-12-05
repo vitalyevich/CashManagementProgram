@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@RequestMapping("/users")
 @Controller
 public class UserController {
 
@@ -23,18 +24,10 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-/*
-    private Integer count = 0;
-*/
-
-    @GetMapping("/users")
+    @GetMapping("")
     public String users(Model model) {
         model.addAttribute("headerText", "Пользователи");
-
-        userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "вход на страницу с вкладкой пользователи"));
-
-
-        //Iterable<User> users = userService.getUsers();
+        //userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "вход на страницу с вкладкой пользователи"));
 
         Iterable<Access> accesses = userService.getAccesses();
 
@@ -51,7 +44,6 @@ public class UserController {
 
         int size = IterableUtils.size(accesses);
         model.addAttribute("accesses", accesses);
-        //model.addAttribute("users", users);
         model.addAttribute("roles",roles);
         model.addAttribute("companies",companies);
         model.addAttribute("size", size);
@@ -59,13 +51,13 @@ public class UserController {
         return "users"; //error/502
     }
 
-    @GetMapping("/users/registration")
+    @GetMapping("/registration")
     public String registration(Model model) {
 
         return "redirect:/users#blackout-registration"; //error/502
     }
 
-    @PostMapping("/users/registration")
+    @PostMapping("/registration")
     public String addUser(User userForm,Access accessForm, Model model, @RequestParam(name = "role") int roleId) { //Access accessForm
     //      Access userFromDb = accessRepository.findByPhone(accessForm.getPhone());
 
@@ -104,7 +96,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/users/edit")
+    @GetMapping("/edit")
     public String edit(@RequestParam Integer rowId, Model model, RedirectAttributes rm) {
 
 
@@ -128,7 +120,7 @@ public class UserController {
         return "redirect:/users#blackout-edit"; //error/502
     }
 
-    @PostMapping("/users/edit")
+    @PostMapping("/edit")
     public String edit(User userForm,Access accessForm, Model model, @RequestParam(name = "role") int roleId) {
 
         accessForm.setUser(userForm);
@@ -142,7 +134,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @PostMapping("/users/delete")
+    @PostMapping("/delete")
     public String delete(@RequestParam Integer rowId, Model model) {
         userService.deleteUser(rowId);
 

@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.graphql.client.HttpGraphQlClient;
 
+import javax.annotation.PostConstruct;
+
 @Configuration
 public class GraphClient {
 

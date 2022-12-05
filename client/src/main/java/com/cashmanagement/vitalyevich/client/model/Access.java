@@ -1,7 +1,7 @@
 package com.cashmanagement.vitalyevich.client.model;
 
 
-public class Access {
+public class Access extends ColorTable {
 
     private Integer id;
 
@@ -13,8 +13,13 @@ public class Access {
 
     private Boolean active = false;
 
-    public Boolean getActive() {
-        return active;
+    @Override
+    public String getColor() {
+        return active.equals(false) ? "#45A73E" : "#FF3F3F";
+    }
+
+    public String getActive() {
+        return active.equals(false) ? "разрешен" : "запрещен";
     }
 
     public void setActive(Boolean active) {

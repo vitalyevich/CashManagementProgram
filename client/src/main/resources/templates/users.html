@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
   <title>Пользователи</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/menu-admin.css">
@@ -24,7 +25,7 @@
         <table class="table">
           <thead>
           <tr>
-            <th>Код пользователя</th>
+            <th>Код</th>
             <th>Имя пользователя</th>
             <th>Фамилия</th>
             <th>Роль пользователя</th>
@@ -32,20 +33,20 @@
           </tr>
           </thead>
           <tbody id="data">
-          <tr class="v1" th:each="lst : ${accesses}" th:id="${lst.user.id}" onclick="document.getElementById('rowIdDelete').value = this.getAttribute('id');
+          <tr class="v1" data-th-each="lst,iter : *{accesses}" data-th-id="*{lst.user.id}" onclick="document.getElementById('rowIdDelete').value = this.getAttribute('id');
 document.getElementById('rowIdEdit').value = this.getAttribute('id')">
-            <td data-field="id" name="id" th:utext="${lst.user.id}">Код пользователя</td>
-            <td th:utext="${lst.user.firstName}">Имя пользователя</td>
-            <td th:utext="${lst.user.lastName}">Фамилия</td>
-            <td th:utext="${lst.user.roles}">Роль пользователя</td>
-            <td th:utext="${lst.active}">Логин запрещен</td>
+            <td style="width: 2vw; text-align: center;" data-th-text="*{iter.count}">Код</td>
+            <td data-th-text="*{lst.user.firstName}">Имя пользователя</td>
+            <td data-th-text="*{lst.user.lastName}">Фамилия</td>
+            <td data-th-text="*{lst.user.roles}">Роль пользователя</td>
+            <td style="width: 10vw; text-align: center; color: white;" data-th-bgcolor="*{lst.color}" data-th-text="*{lst.active}">Логин запрещен</td>
             <input name="id" th:text>
           </tr>
           </tbody>
         </table>
         </div>
       </div>
-        <span class="v28_658" th:text="'Всего пользователей в системе: ' + ${size}"/>
+        <span class="v28_658" data-th-text="'Всего пользователей в системе: ' + ${size}"/>
         <a href="/users/registration">
           <input class="v18_248" type="submit" value="Новый (-ая)"/>
         </a>a
@@ -138,7 +139,7 @@ input {
   font-weight: 400;
   flex-wrap: nowrap;
   font-size: 13px;
-  width: 13vw;
+  width: 17.7vw;
 }
 .table tbody tr{
   background: #ffffff;
@@ -151,8 +152,9 @@ input {
 }
 
 table tr.marked{
-   background-color: #45A73E; /* Цвет фона при наведении */
-   color: #fff; /* Цвет текста при наведении */
+
+  background-color: #E0E0E0;
+
  }
 
 .v18_249.marked{
