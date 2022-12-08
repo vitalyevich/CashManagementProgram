@@ -46,7 +46,7 @@ public class MonitoringStorageController {
     @GetMapping("/balance-storage")
     public String balanceStorage(Model model) {
 
-        return "/storage/balance-storage";
+        return "redirect:monitoring-storage#blackout-balance";
     }
 
     @GetMapping("/check-balance-storage")

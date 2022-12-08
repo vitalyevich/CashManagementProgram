@@ -71,15 +71,9 @@ public class ProfileController {
         return "/profiles/profile-dealer";
     }
 
-    @GetMapping("/password")
+    @GetMapping("/edit-password")
     public String password(Model model) {
 
-        return "/profiles/edit-password";
-    }
-
-    @GetMapping("/exit")
-    public String exit(Model model) {
-
-        return "/confirmations/confirmation-exit";
+        return "redirect:/profile-admin#blackout-password"; //error/502
     }
 }

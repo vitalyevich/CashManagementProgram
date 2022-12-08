@@ -1,379 +1,52 @@
-<!DOCTYPE html><html>
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-</head>
-<body>
-<div class="v23_864">
-  <div class="v336_489">
-    <div class="v23_867"></div>
-    <input type="submit" value="Удалить инкассатора" class="v336_487">
-    <span class="v23_878">Члены бригады</span>
-    <table class="table">
-      <thead>
-      <tr>
-        <th>№</th>
-        <th>Роль</th>
-        <th>Пользователь</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="lst : ${users}">
-        <td th:utext="${lst.id}">№</td>
-        <td th:utext="${lst.firstName}">Роль</td>
-        <td th:utext="${lst.lastName}">Пользователь</td>
-      </tr>
-      </tbody>
-    </table>
+<div th:fragment="create-brigade" class="windowBrigade">
+  <div class="v23_864">
+    <div class="v336_489">
+      <div class="v23_867"></div>
+      <input type="submit" value="Удалить инкассатора" class="v336_487">
+      <span class="v23_878">Члены бригады</span>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>№</th>
+          <th>Роль</th>
+          <th>Пользователь</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="lst : ${users}">
+          <td th:text="${lst.id}">№</td>
+          <td th:text="${lst.firstName}">Роль</td>
+          <td th:text="${lst.lastName}">Пользователь</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="v23_865"></div>
+    <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
+         src="../static/images/close.svg" th:src="@{images/close.svg}">
+    <span class="v23_866">Бригада</span>
+    <div class="v23_941">
+      <span class="v23_878">Роли</span>
+      <span style="left:300px" class="v23_878">Пользователи</span>
+      <input type="submit" value="Добавить инкассатора" class="v336_485">
+    </div>
+    <div class="v336_490">
+      <div class="v23_868"></div>
+      <span class="v23_885">Бригада</span>
+      <span class="v23_937">Действующий</span>
+      <input class="v17_446" type="checkbox">
+      <span class="v23_882">Компания</span>
+      <select class="v23_870"></select>
+      <input type="text" class="v23_871">
+    </div>
+    <input type="submit" value="Применить" class="v336_486">
+    <input type="submit" value="Закрыть" class="v336_488">
   </div>
-  <div class="v23_865"></div>
-  <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
-       src="../static/images/close.svg" th:src="@{images/close.svg}">
-  <span class="v23_866">Бригада</span>
-  <div class="v23_941">
-    <span class="v23_878">Роли</span>
-    <span style="left:300px" class="v23_878">Пользователи</span>
-    <input type="submit" value="Добавить инкассатора" class="v336_485">
-  </div>
-  <div class="v336_490">
-    <div class="v23_868"></div>
-    <span class="v23_885">Бригада</span>
-    <span class="v23_937">Действующий</span>
-    <input class="v17_446" type="checkbox">
-    <span class="v23_882">Компания</span>
-    <select class="v23_870"></select>
-    <input type="text" class="v23_871">
-  </div>
-  <input type="submit" value="Применить" class="v336_486">
-  <input type="submit" value="Закрыть" class="v336_488">
 </div>
-</body>
-</html>
 
-<style>
-  input {
-    outline: none;
-    border: none;
-    background: transparent;
-    /*border: 1px solid white;*/
-  }
-  select {
-    appearance: none;
-    background: url("../../images/angle-down.svg") no-repeat right;
-    background-position-x: calc(100% - 3px);
-  }
-  .v17_446 {
-    width: 24px;
-    height: 24px;
-    opacity: 1;
-    position: absolute;
-    top: 80px;
-    left: 110px;
-    border-radius: 30%;
-    border: 1px solid black;
-    appearance: none;
-    outline: none;
-    cursor: pointer;
-    vertical-align: middle;
-    -webkit-appearance: none;
-  }
-  .v17_446:checked {
-    appearance: auto; /**/
-    border: none;
-    background-color: #00943F;
-    opacity: 1;
-  }
-  .table {
-    border: none;
-    top: 50px;
-    left: 138px;
-    position: absolute;
-  }
-  .table thead th {
-    text-align: left;
-    border: none;
-    padding: 10px 15px;
-    background: #d8d8d8;
-    font-family: Montserrat;
-    font-weight: 600;
-    font-size: 14px;
-  }
-  .table thead tr th:first-child {
-    border-radius: 8px 0 0 8px;
-  }
-  .table thead tr th:last-child {
-    border-radius: 0 8px 8px 0;
-  }
-  .table tbody td {
-    text-align: left;
-    border: none;
-    padding: 10px 15px;
-    vertical-align: top;
-    font-family: Montserrat;
-    font-weight: 400;
-    flex-wrap: nowrap;
-    font-size: 13px;
-    width: 13vw;
-  }
-  .table tbody tr{
-    background: #ffffff;
-  }
-  .table tbody tr td:first-child {
-    border-radius: 8px 0 0 8px;
-  }
-  .table tbody tr td:last-child {
-    border-radius: 0 8px 8px 0;
-  }
-.v23_864 {
-  width: 684px;
-  height: 797px;
-  background: rgba(255,255,255,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.v336_489 {
-  width: 635px;
-  height: 262px;
-  background: url("../images/v336_489.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 202px;
-  left: 24px;
-  overflow: hidden;
-}
-.v23_867 {
-  width: 635px;
-  height: 262px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  overflow: hidden;
-}
-.v336_487 {
-  width: 178px;
-  height: 27px;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 215px;
-  left: 425px;
-  overflow: hidden;
-  background: rgba(0,148,63,1);
-  color: rgba(255,255,255,1);
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 10px;
-}
-.v23_878 {
-  width: 119px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 13px;
-  left: 24px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_865 {
-  width: 684px;
-  height: 38px;
-  background: rgba(20,126,75,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.v23_866 {
-  width: 73px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 9px;
-  left: 16px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 16px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_941 {
-  width: 635px;
-  height: 262px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 479px;
-  left: 24px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  overflow: hidden;
-}
-.v336_490 {
-  width: 635px;
-  height: 122px;
-  background: url("../images/v336_490.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 67px;
-  left: 24px;
-  overflow: hidden;
-}
-.v23_868 {
-  width: 635px;
-  height: 122px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  overflow: hidden;
-}
-.v23_885 {
-  width: 64px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 51px;
-  left: 38px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_937 {
-  width: 108px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 86px;
-  left: 148px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_882 {
-  width: 77px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 14px;
-  left: 24px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_870 {
-  width: 429px;
-  height: 30px;
-  opacity: 1;
-  position: absolute;
-  top: 10px;
-  left: 114px;
-  border: 1px solid rgba(0,0,0,1);
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-  padding-left: 7px;
-  border-radius: 10px;
-  appearance: none;
-}
-.v23_871 {
-  width: 423px;
-  height: 25px;
-  opacity: 1;
-  position: absolute;
-  top: 47px;
-  left: 114px;
-  border: 1px solid rgba(0,0,0,1);
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-  border-radius: 10px;
-}
-.v336_486 {
-  width: 103px;
-  height: 27px;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 753px;
-  left: 429px;
-  overflow: hidden;
-  background: rgba(0,148,63,1);
-  color: rgba(255,255,255,1);
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 10px;
-}
-.v336_485 {
-  width: 192px;
-  height: 27px;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 215px;
-  left: 410px;
-  overflow: hidden;
-  background: rgba(0,148,63,1);
-  color: rgba(255,255,255,1);
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 10px;
-}
-.v336_488 {
-  width: 95px;
-  height: 27px;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 753px;
-  left: 549px;
-  overflow: hidden;
-  background: rgba(0,148,63,1);
-  color: rgba(255,255,255,1);
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-</style>
+<div th:fragment="blackout-brigade" id="blackout-brigade">
+  <a href="#" class="close"></a>
+  <div id="window-black">
+    <div th:insert="planning/create-brigade :: create-brigade"></div>
+  </div>
+</div>

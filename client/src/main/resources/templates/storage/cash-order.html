@@ -1,646 +1,76 @@
-<!DOCTYPE html><html>
-<head>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet"></head>
-<body>
-<div class="v23_948">
-    <div class="v363_433">
-        <div class="v363_432">
-            <div class="v23_1028"></div>
-            <span class="v23_1026">Наличные</span>
+<div th:fragment="cash-order" class="cash">
+    <div class="v23_948">
+        <div class="v363_433">
+            <div class="v363_432">
+                <div class="v23_1028"></div>
+                <span class="v23_1026">Наличные</span>
+            </div>
+            <div class="v363_431">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Валюта</th>
+                            <th>Номинал</th>
+                            <th>Количество</th>
+                            <th>Сумма</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="lst : ${users}">
+                            <td th:utext="${lst.id}">Валюта</td>
+                            <td th:utext="${lst.firstName}">Номинал</td>
+                            <td th:utext="${lst.lastName}">Количество</td>
+                            <td th:utext="${lst.phone}">Сумма</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                <span class="v23_962">Номиналы</span>
+                <span class="v23_1036">Общая сумма: 0,00 EUR</span>
+                <span class="v23_1030">Валюта</span>
+            </div>
         </div>
-        <div class="v363_431">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Валюта</th>
-                        <th>Номинал</th>
-                        <th>Количество</th>
-                        <th>Сумма</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="lst : ${users}">
-                        <td th:utext="${lst.id}">Валюта</td>
-                        <td th:utext="${lst.firstName}">Номинал</td>
-                        <td th:utext="${lst.lastName}">Количество</td>
-                        <td th:utext="${lst.phone}">Сумма</td>
-                    </tr>
-                    </tbody>
-                </table>
-            <span class="v23_962">Номиналы</span>
-            <span class="v23_1036">Общая сумма: 0,00 EUR</span>
-            <span class="v23_1030">Валюта</span>
+        <div class="v363_435">
+            <div class="v23_952"></div>
+            <span class="v23_966">Получатель</span>
+            <span class="v23_967">Отправитель</span>
+            <span class="v23_969">Дата заказа</span>
+            <span class="v23_972">Время заказа</span>
+            <div class="v23_954"></div>
+            <div class="v23_1018"></div>
+            <div class="v23_956"></div>
+            <div class="v23_1021"></div>
+        </div>
+        <div class="v363_436">
+            <div class="v23_949"></div>
+            <span th:text="${window}" class="v23_950"></span>
+        </div>
+        <span class="v23_961">А0100089, Заказ, План. инкассация 07.08.2022</span>
+        <div class="v363_434">
+            <div class="v23_1031"></div>
+            <span class="v23_1034">EUR</span>
+        </div>
+        <div class="v363_429">
+            <div class="v363_427">
+                <div class="v23_959"></div>
+                <span class="v23_973">Применить</span>
+            </div>
+            <div class="v363_428">
+                <div class="v23_960"></div>
+                <span class="v23_974">Закрыть</span>
+            </div>
+        </div>
+        <div class="v363_438">
+            <span class="v23_1044">КВ1</span>
+            <span class="v23_1047">25.11.2022</span>
+            <span class="v23_1045">VВ1</span>
+            <span class="v23_1046">10:27</span>
         </div>
     </div>
-    <div class="v363_435">
-        <div class="v23_952"></div>
-        <span class="v23_966">Получатель</span>
-        <span class="v23_967">Отправитель</span>
-        <span class="v23_969">Дата заказа</span>
-        <span class="v23_972">Время заказа</span>
-        <div class="v23_954"></div>
-        <div class="v23_1018"></div>
-        <div class="v23_956"></div>
-        <div class="v23_1021"></div>
-    </div>
-    <div class="v363_436">
-        <div class="v23_949"></div>
-        <span class="v23_950">Заказ наличных</span>
-    </div>
-    <div class="v363_430">
-        <div class="v23_1038"></div>
-        <span class="v23_1037">Комментарий</span>
-        <div class="v23_1039"></div>
-    </div>
-    <span class="v23_961">А0100089, Заказ, План. инкассация 07.08.2022</span>
-    <div class="v363_434">
-        <div class="v23_1031"></div>
-        <span class="v23_1034">EUR</span>
-    </div>
-    <div class="v363_429">
-        <div class="v363_427">
-            <div class="v23_959"></div>
-            <span class="v23_973">Применить</span>
-        </div>
-        <div class="v363_428">
-            <div class="v23_960"></div>
-            <span class="v23_974">Закрыть</span>
-        </div>
-    </div>
-    <div class="v363_438">
-        <span class="v23_1044">КВ1</span>
-        <span class="v23_1047">25.11.2022</span>
-        <span class="v23_1045">VВ1</span>
-        <span class="v23_1046">10:27</span>
-    </div>
-    </div>
-</body>
-</html>
+</div>
 
-<style>
-input {
-    outline: none;
-    border: none;
-    background: transparent;
-    /*border: 1px solid white;*/
-}
-select {
-    appearance: none;
-    background: url("../images/angle-down.svg") no-repeat right;
-    background-position-x: calc(100% - 3px);
-}
-.table {
-    border: none;
-    top: 50px;
-    left: 138px;
-    position: absolute;
-}
-.table thead th {
-    text-align: left;
-    border: none;
-    padding: 10px 15px;
-    background: #d8d8d8;
-    font-family: Montserrat;
-    font-weight: 600;
-    font-size: 14px;
-}
-.table thead tr th:first-child {
-    border-radius: 8px 0 0 8px;
-}
-.table thead tr th:last-child {
-    border-radius: 0 8px 8px 0;
-}
-.table tbody td {
-    text-align: left;
-    border: none;
-    padding: 10px 15px;
-    vertical-align: top;
-    font-family: Montserrat;
-    font-weight: 400;
-    flex-wrap: nowrap;
-    font-size: 13px;
-    width: 13vw;
-}
-.table tbody tr{
-    background: #ffffff;
-}
-.table tbody tr td:first-child {
-    border-radius: 8px 0 0 8px;
-}
-.table tbody tr td:last-child {
-    border-radius: 0 8px 8px 0;
-}
-.v23_948 {
-  width: 672px;
-  height: 736px;
-  background: rgba(255,255,255,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.v363_433 {
-  width: 623px;
-  height: 298px;
-  background: url("../images/v363_433.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 236px;
-  left: 23px;
-  overflow: hidden;
-}
-.v363_432 {
-  width: 120px;
-  height: 84px;
-  background: url("../images/v363_432.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.v23_1028 {
-  width: 120px;
-  height: 84px;
-  background: rgba(0,148,63,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  overflow: hidden;
-}
-.v23_1026 {
-  width: 78px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v363_431 {
-  width: 623px;
-  height: 260px;
-  background: url("../images/v363_431.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 38px;
-  left: 0px;
-  overflow: hidden;
-}
-.v23_951 {
-  width: 623px;
-  height: 260px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  overflow: hidden;
-}
-.v23_962 {
-  width: 81px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 12px;
-  left: 24px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_1036 {
-  width: 176px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 207px;
-  left: 24px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_1030 {
-  width: 56px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 12px;
-  left: 463px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v363_435 {
-  width: 623px;
-  height: 129px;
-  background: url("../images/v363_435.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 86px;
-  left: 24px;
-  overflow: hidden;
-}
-.v23_952 {
-  width: 623px;
-  height: 129px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  overflow: hidden;
-}
-.v23_966 {
-  width: 88px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 14px;
-  left: 24px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_967 {
-  width: 98px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 14px;
-  left: 298px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_969 {
-  width: 89px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 51px;
-  left: 32px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_972 {
-  width: 102px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 54px;
-  left: 294px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_954 {
-  width: 144px;
-  height: 25px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 10px;
-  left: 132px;
-  border: 1px solid rgba(0,0,0,1);
-}
-.v23_1018 {
-  width: 144px;
-  height: 25px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 10px;
-  left: 416px;
-  border: 1px solid rgba(0,0,0,1);
-}
-.v23_956 {
-  width: 115px;
-  height: 25px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 47px;
-  left: 132px;
-  border: 1px solid rgba(0,0,0,1);
-}
-.v23_1021 {
-  width: 115px;
-  height: 25px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 50px;
-  left: 416px;
-  border: 1px solid rgba(0,0,0,1);
-}
-.v363_436 {
-  width: 672px;
-  height: 38px;
-  background: url("../images/v363_436.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.v23_949 {
-  width: 672px;
-  height: 38px;
-  background: rgba(20,126,75,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.v23_950 {
-  width: 138px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 9px;
-  left: 16px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 16px;
-  opacity: 1;
-  text-align: left;
-}
-.v363_430 {
-  width: 623px;
-  height: 127px;
-  background: url("../images/v363_430.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 554px;
-  left: 24px;
-  overflow: hidden;
-}
-.v23_1038 {
-  width: 623px;
-  height: 127px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  overflow: hidden;
-}
-.v23_1037 {
-  width: 105px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 16px;
-  left: 24px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_1039 {
-  width: 576px;
-  height: 74px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 40px;
-  left: 24px;
-  border: 1px solid rgba(0,0,0,1);
-}
-.v23_961 {
-  width: 344px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 56px;
-  left: 23px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v363_434 {
-  width: 72px;
-  height: 25px;
-  background: url("../images/v363_434.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 286px;
-  left: 552px;
-  overflow: hidden;
-}
-.v23_1031 {
-  width: 72px;
-  height: 25px;
-  background: rgba(247,247,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border: 1px solid rgba(0,0,0,1);
-}
-.v23_1034 {
-  width: 38px;
-  color: rgba(8,8,8,1);
-  position: absolute;
-  top: 4px;
-  left: 10px;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v363_429 {
-  width: 204px;
-  height: 27px;
-  background: url("../images/v363_429.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 697px;
-  left: 425px;
-  overflow: hidden;
-}
-.v363_427 {
-  width: 103px;
-  height: 27px;
-  background: url("../images/v363_427.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.v23_959 {
-  width: 103px;
-  height: 27px;
-  background: rgba(0,148,63,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
-.v23_973 {
-  width: 87px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 5px;
-  left: 8px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v363_428 {
-  width: 95px;
-  height: 27px;
-  background: url("../images/v363_428.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 109px;
-  overflow: hidden;
-}
-.v23_960 {
-  width: 95px;
-  height: 27px;
-  background: rgba(0,148,63,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
-.v23_974 {
-  width: 63px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 5px;
-  left: 16px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v363_438 {
-  width: 380px;
-  height: 57px;
-  background: url("../images/v363_438.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 100px;
-  left: 167px;
-  overflow: hidden;
-}
-.v23_1044 {
-  width: 38px;
-  color: rgba(8,8,8,1);
-  position: absolute;
-  top: 0px;
-  left: 5px;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_1047 {
-  width: 92px;
-  color: rgba(8,8,8,1);
-  position: absolute;
-  top: 37px;
-  left: 0px;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_1045 {
-  width: 38px;
-  color: rgba(8,8,8,1);
-  position: absolute;
-  top: 0px;
-  left: 285px;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-.v23_1046 {
-  width: 38px;
-  color: rgba(8,8,8,1);
-  position: absolute;
-  top: 40px;
-  left: 342px;
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
-}
-</style>
+<div th:fragment="blackout-cash" id="blackout-cash">
+    <a href="#" class="close"></a>
+    <div id="window-black">
+        <div th:insert="storage/cash-order :: cash-order"></div>
+    </div>
+</div>

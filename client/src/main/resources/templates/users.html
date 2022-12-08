@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/css/users/edit-user.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://unpkg.com/imask"></script>
+  <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
 </head>
   <body>
     <div class="v1_2">
@@ -63,6 +64,7 @@ document.getElementById('rowIdEdit').value = this.getAttribute('id')">
       <div th:insert="users/registration-user :: blackout-registration"></div>
 
       <div th:insert="users/edit-user :: blackout-edit"></div>
+      <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
 
       </div>
   </body>

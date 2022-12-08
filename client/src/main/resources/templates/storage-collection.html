@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="/css/menu-country.css">
   <link rel="stylesheet" href="/css/filter.css">
   <link rel="stylesheet" href="/css/search.css">
+  <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
+  <link rel="stylesheet" href="/css/storage/cash-order.css">
 </head>
 <body>
 <div class="v1_2">
@@ -41,8 +43,12 @@
       </tbody>
     </table>
   </div>
-  <input type="submit" value="Заказ на доставку" class="v335_451">
-  <input type="submit" value="Редактировать" class="v105_1493">
+  <a href="/cash-order">
+    <input type="submit" value="Заказ на доставку" class="v335_451">
+  </a>
+  <a href="/edit-cash-order">
+    <input type="submit" value="Редактировать" class="v105_1493">
+  </a>
   <input type="submit" value="Отклонить" class="v335_453">
   <input type="submit" value="Подтвердить заказ" class="v335_454">
   <input type="submit" value="Заказ выполнен" class="v335_455">
@@ -72,7 +78,8 @@
       </tbody>
     </table>
   </div>
-
+  <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
+  <div th:insert="storage/cash-order :: blackout-cash"></div>
 </div>
 </body>
 </html>

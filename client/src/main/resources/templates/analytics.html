@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/menu-country.css">
   <link rel="stylesheet" href="/css/filter.css">
+  <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
 </head>
 <body>
 <div class="v1_2">
@@ -60,6 +61,8 @@
   <input type="date" class="v326_752">
   <span class="v326_754">до</span>
   <input type="submit" class="v326_756" value="Применить">
+
+  <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
 </div>
 </body>
 </html>

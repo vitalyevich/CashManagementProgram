@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/filter.css">
   <link rel="stylesheet" href="/css/search.css">
+  <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
+  <link rel="stylesheet" href="/css/storage/balance-storage.css">
 </head>
 <body>
 <div class="v1_2">
@@ -37,8 +39,12 @@
       </table>
       </div>
   </div>
+  <a href="/balance-storage">
   <input class="v18_3" type="submit" value="Коррекция"/>
+  </a>
+  <a href="/monitoring-storages">
   <input class="v18_4" type="submit" value="Учет возврата"/>
+  </a>
 
   <div class="v18_235" style="top:930px; width: 37vw;" >
     <table style="top: 25px" class="table">
@@ -60,6 +66,8 @@
       </tbody>
     </table>
   </div>
+  <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
+  <div th:insert="storage/balance-storage :: blackout-balance"></div>
 </div>
 </body>
 </html>

@@ -6,17 +6,21 @@
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/menu-admin.css">
         <link rel="stylesheet" href="/css/profile-header.css">
+        <link rel="stylesheet" href="/css/profiles/edit-password.css">
+        <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
     </head>
 <body>
     <div class="v1_2">
         <div th:insert="blocks/menu-admin :: menu-admin"></div>
         <div th:insert="blocks/header :: header"></div>
-        <div class="v1_148">
+        <a href="/edit-password">
+            <div class="v1_148">
             <input class="v6_148" type="submit" value="Сменить пароль">
             <div class="v6_147">
                 <img src="../../static/images/change-password.svg" th:src="@{images/change-password.svg}">
             </div>
         </div>
+        </a>
         <div th:insert="blocks/profile-header :: profile-header"></div>
         <div class="v4_121">
             <span class="v4_122">В случае возникновения вопросов обратитесь к специалистам вашего контакт центра по одному из телефонов:</span>
@@ -116,6 +120,10 @@
             </div>
         </div>
         </a>
+
+        <div th:insert="profiles/edit-password :: blackout-password"></div>
+        <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
+
     </div>
 </body>
 </html>
