@@ -1,6 +1,6 @@
 package com.cashmanagement.vitalyevich.client.model;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
 public class OrderStage {
 
@@ -8,13 +8,23 @@ public class OrderStage {
 
     private Order order;
 
-    private LocalDate stageDate;
+    private Instant stageDate;
 
-    public LocalDate getStageDate() {
+    private String stageName;
+
+    public String getStageName() {
+        return stageName;
+    }
+
+    public void setStageName(String stageName) {
+        this.stageName = stageName;
+    }
+
+    public Instant getStageDate() {
         return stageDate;
     }
 
-    public void setStageDate(LocalDate stageDate) {
+    public void setStageDate(Instant stageDate) {
         this.stageDate = stageDate;
     }
 

@@ -22,26 +22,16 @@ public class BrigadeOrder {
     @JoinColumn(name = "brigade_id", nullable = false)
     private Brigade brigade;
 
-    @Column(name = "order_comment", nullable = false)
-    private String orderComment;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "status", nullable = false)
-    private String status;
-
-    public String getStatus() {
-        return status;
+    public User getUser() {
+        return user;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getOrderComment() {
-        return orderComment;
-    }
-
-    public void setOrderComment(String orderComment) {
-        this.orderComment = orderComment;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Brigade getBrigade() {

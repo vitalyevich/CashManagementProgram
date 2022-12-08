@@ -19,10 +19,10 @@ public class MonitoringStorageController {
     public String monitoring(Model model) {
 
         Iterable<Storage> storages = storageService.getStorages();
-        if (storages == null) {
-            return "error/502";
-        }
 
+        Iterable<StorageOperation> operations = storageService.getStorageOperations();
+
+        model.addAttribute("operations", operations);
         model.addAttribute("storages", storages);
 
         model.addAttribute("headerText", "Мониторинг");

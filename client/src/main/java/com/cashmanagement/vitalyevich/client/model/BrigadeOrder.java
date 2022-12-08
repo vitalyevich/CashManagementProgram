@@ -12,24 +12,14 @@ public class BrigadeOrder {
 
     private Brigade brigade;
 
-    private String orderComment;
+    private User user;
 
-    private String status;
-
-    public String getStatus() {
-        return status;
+    public User getUser() {
+        return user;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getOrderComment() {
-        return orderComment;
-    }
-
-    public void setOrderComment(String orderComment) {
-        this.orderComment = orderComment;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Brigade getBrigade() {

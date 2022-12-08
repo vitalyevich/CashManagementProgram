@@ -11,6 +11,8 @@ public class StorageOperation {
 
     private LocalDate updateDate;
 
+    private Double banknote;
+
     private Double amountOperation;
 
     public Double getAmountOperation() {
@@ -19,6 +21,14 @@ public class StorageOperation {
 
     public void setAmountOperation(Double amountOperation) {
         this.amountOperation = amountOperation;
+    }
+
+    public Double getBanknote() {
+        return banknote;
+    }
+
+    public void setBanknote(Double banknote) {
+        this.banknote = banknote;
     }
 
     public LocalDate getUpdateDate() {

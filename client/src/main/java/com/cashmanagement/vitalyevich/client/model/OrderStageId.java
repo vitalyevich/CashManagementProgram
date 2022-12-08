@@ -1,10 +1,8 @@
 package com.cashmanagement.vitalyevich.client.model;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 public class OrderStageId implements Serializable {
-
     private static final long serialVersionUID = 1943068406543052554L;
 
     private Integer orderId;

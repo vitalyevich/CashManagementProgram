@@ -14,10 +14,6 @@ public class Order {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "atm_id", nullable = false)
-    private Atm atm;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "plan_id", nullable = false)
     private PlanAtm plan;
 
@@ -72,14 +68,6 @@ public class Order {
 
     public void setPlan(PlanAtm plan) {
         this.plan = plan;
-    }
-
-    public Atm getAtm() {
-        return atm;
-    }
-
-    public void setAtm(Atm atm) {
-        this.atm = atm;
     }
 
     public Integer getId() {

@@ -13,6 +13,16 @@ public class Brigade {
 
     private Boolean active = false;
 
+    private String brigadeUsers;
+
+    public String getBrigadeUsers() {
+        return brigadeUsers;
+    }
+
+    public void setBrigadeUsers(String brigadeUsers) {
+        this.brigadeUsers = brigadeUsers;
+    }
+
     private Set<User> users = new LinkedHashSet<>();
 
     public Set<User> getUsers() {
@@ -23,8 +33,8 @@ public class Brigade {
         this.users = users;
     }
 
-    public Boolean getActive() {
-        return active;
+    public String getActive() {
+        return active.equals(false) ? "разрешен" : "запрещен";
     }
 
     public void setActive(Boolean active) {

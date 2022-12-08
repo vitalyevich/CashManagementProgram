@@ -1,10 +1,7 @@
 package com.cashmanagement.vitalyevich.client.service;
 
 import com.cashmanagement.vitalyevich.client.firebase.model.WorkTime;
-import com.cashmanagement.vitalyevich.client.model.Access;
-import com.cashmanagement.vitalyevich.client.model.Company;
-import com.cashmanagement.vitalyevich.client.model.Role;
-import com.cashmanagement.vitalyevich.client.model.User;
+import com.cashmanagement.vitalyevich.client.model.*;
 
 public interface UserService {
 
@@ -31,4 +28,6 @@ public interface UserService {
     Access updateAccess(Access access, Integer userId);
 
     Access saveAccess(Access access, Integer userId);
+
+    Iterable<Brigade> getBrigades();
 }

@@ -5,7 +5,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "atms")
+@Table(name = "atms", indexes = {
+        @Index(name = "atms_atm_uid_key", columnList = "atm_uid", unique = true)
+})
 public class Atm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +28,20 @@ public class Atm {
             joinColumns = @JoinColumn(name = "atm_id"),
             inverseJoinColumns = @JoinColumn(name = "cassette_id"))
     private Set<Cassette> cassettes = new LinkedHashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "company_atms",
+            joinColumns = @JoinColumn(name = "atm_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_id"))
+    private Set<Company> companies = new LinkedHashSet<>();
+
+    public Set<Company> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
+    }
 
     public Set<Cassette> getCassettes() {
         return cassettes;

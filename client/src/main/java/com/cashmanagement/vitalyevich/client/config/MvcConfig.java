@@ -8,5 +8,6 @@ public class MvcConfig implements WebMvcConfigurer {
 
     public void addViewControllers(ViewControllerRegistry registry) {
         /*registry.addViewController("/menu/rolls#blackout-authorization").setViewName("blocks/authorization");*/
+        registry.addViewController("/users").setViewName("users");
     }
 }

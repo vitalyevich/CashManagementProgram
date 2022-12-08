@@ -14,8 +14,8 @@ public class Access extends ColorTable {
     private Boolean active = false;
 
     @Override
-    public String getColor() {
-        return active.equals(false) ? "#45A73E" : "#FF3F3F";
+    public String getColorFirst() {
+        return active.equals(false) ? "#57DB4E" : "#FF3F3F";
     }
 
     public String getActive() {

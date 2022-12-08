@@ -18,6 +18,9 @@ public class StorageOperation {
     @Column(name = "update_date", nullable = false)
     private LocalDate updateDate;
 
+    @Column(name = "banknote", nullable = false)
+    private Double banknote;
+
     @Column(name = "amount_operation", nullable = false)
     private Double amountOperation;
 
@@ -27,6 +30,14 @@ public class StorageOperation {
 
     public void setAmountOperation(Double amountOperation) {
         this.amountOperation = amountOperation;
+    }
+
+    public Double getBanknote() {
+        return banknote;
+    }
+
+    public void setBanknote(Double banknote) {
+        this.banknote = banknote;
     }
 
     public LocalDate getUpdateDate() {

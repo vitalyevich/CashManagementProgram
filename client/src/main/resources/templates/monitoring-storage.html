@@ -12,56 +12,36 @@
   <div th:insert="blocks/filter :: filter"></div>
   <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Компания</th>
-        <th>Валюта</th>
-        <th>Остаток в хранилище</th>
-        <th>Денежный поток (пополнение)</th>
-        <th>Денежный поток (пополнение) План*</th>
-        <th>Денежный поток (Вывоз)</th>
-        <th>Остаток в сети</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="lst : ${storages}">
-        <td th:utext="${lst.id}">Компания</td>
-        <td th:utext="${lst.currency}">Валюта</td>
-        <td th:utext="${lst.amount}">Остаток в хранилище</td>
-<!--        <td th:utext="${lst.phone}">Денежный поток (пополнение)</td>
-        <td th:utext="${lst.email}">Денежный поток (пополнение) План*</td>
-        <td th:utext="${lst.email}">Денежный поток (Вывоз)</td>
-        <td th:utext="${lst.email}">Остаток в сети</td-->>
-      </tr>
-      </tbody>
-    </table>
+    <div class="v18_231">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Компания</th>
+          <th>Валюта</th>
+          <th>Остаток в хранилище</th>
+          <th>Денежный поток (Пополнение)</th>
+          <th>Денежный поток (Вывоз)</th>
+          <th>Остаток в сети</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="lst : ${storages}">
+          <td th:text="${lst.companies}">Компания</td>
+          <td style="vertical-align: inherit; width: 3vw; text-align: center;" th:text="${lst.currency}">Валюта</td>
+          <td style="vertical-align: inherit; width: 6vw;" th:text="${lst.banknote} * ${lst.amount}">Остаток в хранилище</td>
+          <td>10000</td>
+          <td>0</td>
+          <td style="vertical-align: inherit; width: 6vw;" >15000</td>
+        </tr>
+        </tbody>
+      </table>
+      </div>
   </div>
-  <input class="v18_2" type="submit" value="Начало дня"/>
   <input class="v18_3" type="submit" value="Коррекция"/>
   <input class="v18_4" type="submit" value="Учет возврата"/>
 
-  <div class="v18_235" style="top:900px" >
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Дата заказа</th>
-        <th>Отправитель</th>
-        <th>Получатель</th>
-        <th>Общая сумма</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="lst : ${users}">
-        <td th:utext="${lst.id}">Дата заказа</td>
-        <td th:utext="${lst.firstName}">Отправитель</td>
-        <td th:utext="${lst.lastName}">Получатель</td>
-        <td th:utext="${lst.phone}">Общая сумма</td>
-      </tr>
-      </tbody>
-    </table>
-
-    <table style="left:700px" class="table">
+  <div class="v18_235" style="top:930px; width: 37vw;" >
+    <table style="top: 25px" class="table">
       <thead>
       <tr>
         <th>Номинал</th>
@@ -71,11 +51,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${users}">
-        <td th:utext="${lst.id}">Номинал</td>
-        <td th:utext="${lst.firstName}">Количество</td>
-        <td th:utext="${lst.lastName}">Сумма</td>
-        <td th:utext="${lst.phone}">Общая сумма</td>
+      <tr th:each="lst : ${storages}">
+        <td style="width: 4vw; text-align: center;" th:utext="${lst.banknote}">Номинал</td>
+        <td style="width: 7vw;" th:utext="${lst.amount}">Количество</td>
+        <td style="width: 7vw;" th:utext="${lst.banknote} * ${lst.amount}">Сумма</td>
+        <td style="width: 7vw;" > </td>
       </tr>
       </tbody>
     </table>
@@ -89,11 +69,26 @@
     outline: none;
     border: none;
   }
+  .v1_3 {
+    top: 250px;
+    left: 55px;
+    width: 93vw;
+  }
+  .v18_231 {
+    width: 119vw;
+    height: 496px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    overflow-y: auto;
+  }
   .v18_2 {
     width: 110px;
     height: 27px;
-    top: 680px;
-    left: 300px;
+    top: 880px;
+    left: 50px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -113,10 +108,10 @@
     border-bottom-right-radius: 10px;
   }
   .v18_3 {
-    width: 95px;
+    width: 100px;
     height: 27px;
-    top: 680px;
-    left: 440px;
+    top: 880px;
+    left: 55px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -135,11 +130,15 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
+  .v14_532 {
+    width: 95vw;
+    left: 30px;
+  }
   .v18_4 {
-    width: 215px;
+    width: 140px;
     height: 27px;
-    top: 680px;
-    left: 570px;
+    top: 880px;
+    left: 195px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -159,13 +158,13 @@
     border-bottom-right-radius: 10px;
   }
   .v18_235 {
-    width: 79vw;
-    height: 354px;
+    width: 95vw;
+    height: 560px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 250px;
-    left: 287px;
+    top: 300px;
+    left: 30px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -174,9 +173,8 @@
   }
   .v1_2 {
     width: 100vw;
-    height: 100vh;
+    height: 192vh;
     max-width: 100%;
-    max-height: 100%;
     opacity: 1;
     position: absolute;
     top: 0px;
@@ -186,7 +184,7 @@
   }
   .table {
     border: none;
-    top: 20px;
+    top: 0px;
     left: 25px;
     position: absolute;
   }
@@ -214,7 +212,7 @@
     font-weight: 400;
     flex-wrap: nowrap;
     font-size: 13px;
-    width: 13vw;
+    width: 21.2vw;
   }
   .table tbody tr{
     background: #ffffff;

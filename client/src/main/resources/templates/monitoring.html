@@ -36,36 +36,38 @@
   </div>
   <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Тип объекта</th>
-          <th>ID объекта</th>
-          <th>До опустошения</th>
-          <th>Остаток</th>
-          <th>Кассеты</th>
-          <th>Валюта</th>
-          <th>Дата последней инкассации</th>
-          <th>Дата инкассации</th>
-          <th>Состояние наличных</th>
-          <th>Состояние банкомата</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="lst : ${atms}">
-          <td th:utext="${lst.id}">Тип объекта</td>
-          <td th:utext="${lst.atmUid}">ID объекта</td>
-<!--          <td th:utext="${lst.}">До опустошения</td>
-          <td th:utext="${lst.}">Остаток</td>
-          <td th:utext="${lst.}">Кассеты</td>
-          <td th:utext="${lst.}">Валюта</td>
-          <td th:utext="${lst.}">Дата последней инкассации</td>
-          <td th:utext="${lst.}">Дата инкассации</td>-->
-          <td th:utext="${lst.cashState}">Состояние наличных</td>
-          <td th:utext="${lst.atmState}">Состояние банкомата</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="v18_231">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Тип</th>
+              <th>ID объекта</th>
+              <th>До опустошения</th>
+              <th>Остаток</th>
+              <th>Кассеты</th>
+              <th>Валюта</th>
+              <th>Дата последней инкассации</th>
+              <th>Дата инкассации</th>
+              <th>Состояние наличных</th>
+              <th>Состояние банкомата</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="lst,iter : *{atms}">
+              <td style="vertical-align: inherit; width: 6vw; text-align: center;">Банкомат</td>
+              <td style="vertical-align: inherit; width: 6vw; text-align: center;" data-th-text="*{lst.atmUid}">ID объекта</td>
+              <td style="vertical-align: inherit; width: 6vw; text-align: center; color: white;" data-th-bgcolor="'#FF3F3F'">0 д.</td>
+              <td style="vertical-align: inherit; width: 5vw;">49538</td>
+              <td style="width: 16vw;">15 500 (100); 27 454 (30); 5 020 (5); 5 020 (5);</td>
+              <td style="vertical-align: inherit; width: 3vw; text-align: center;">BYN</td>
+              <td style="vertical-align: inherit; width: 9vw;">30.07.2015 12.50 (171)</td>
+              <td style="vertical-align: inherit; width: 9vw;">30.07.2015 12.50 (171)</td>
+              <td style="vertical-align: inherit; width: 11vw; color: white; text-align: center;" data-th-text="*{lst.cashState}" data-th-bgcolor="*{lst.colorFirst}" >Состояние наличных</td>
+              <td style="vertical-align: inherit; width: 11vw; color: white; text-align: center;" data-th-text="*{lst.atmState}" data-th-bgcolor="*{lst.colorSecond}" >Состояние банкомата</td>
+            </tr>
+            </tbody>
+          </table>
+      </div>
   </div>
   <script src="https://www.google.com/jsapi"></script>
   <script>
@@ -101,8 +103,8 @@
   <span class="v18_252">до</span>
   <input type="date" class="v18_249">
   <input type="date" class="v18_250">
-  <div class="v18_235" style="top:1100px">
-    <table style="left:1000px;" class="table">
+  <div class="v18_235" style="top:1100px; height:460px;">
+    <table style="left:800px; top: 30px" class="table">
       <thead>
       <tr>
         <th>Дата</th>
@@ -112,11 +114,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${users}">
-        <td th:utext="${lst.id}">Дата</td>
-        <td th:utext="${lst.firstName}">Валюта</td>
-        <td th:utext="${lst.lastName}">Остаток</td>
-        <td th:utext="${lst.phone}">Прогноз. остаток</td>
+      <tr>
+        <td style="width: 4vw;">29.07.2022</td>
+        <td style="width: 4vw; text-align: center;">BYN</td>
+        <td style="width: 4vw;">56 780</td>
+        <td style="width: 4vw;" >57 878</td>
       </tr>
       </tbody>
     </table>
@@ -131,6 +133,16 @@
     width: 1000px;
     height: 300px;
   }*/
+  .v18_231 {
+    width: 109vw;
+    height: 496px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 27px;
+    left: 0px;
+    overflow: auto;
+  }
 .v18_251 {
   top: 1049px;
   left: 287px;
@@ -220,7 +232,7 @@
   width: 550px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 1020px;
+  top: 1010px;
   left: 287px;
   font-family: Montserrat;
   font-weight: 600;
@@ -235,6 +247,9 @@
     top: 30px;
     left: 30px;
     background: transparent;
+  }
+  .v1_50 {
+    height: 191vh;
   }
   .v1_532 {
     width: 79vw;
@@ -424,8 +439,8 @@
   }
   .table {
       border: none;
-      top: 20px;
-      left: 25px;
+      top: 0px;
+      left: 20px;
       position: absolute;
   }
   .table thead th {
@@ -446,7 +461,7 @@
   .table tbody td {
     text-align: left;
     border: none;
-    padding: 10px 15px;
+    padding: 5px 15px;
     vertical-align: top;
     font-family: Montserrat;
     font-weight: 400;

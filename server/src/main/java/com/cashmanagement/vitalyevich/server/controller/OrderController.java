@@ -2,9 +2,11 @@ package com.cashmanagement.vitalyevich.server.controller;
 
 import com.cashmanagement.vitalyevich.server.model.BrigadeOrder;
 import com.cashmanagement.vitalyevich.server.model.Order;
+import com.cashmanagement.vitalyevich.server.model.OrderStage;
 import com.cashmanagement.vitalyevich.server.model.StorageOrder;
 import com.cashmanagement.vitalyevich.server.repository.BrigadeOrderRepository;
 import com.cashmanagement.vitalyevich.server.repository.OrderRepository;
+import com.cashmanagement.vitalyevich.server.repository.OrderStageRepository;
 import com.cashmanagement.vitalyevich.server.repository.StorageOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -22,10 +24,14 @@ public class OrderController {
     @Autowired
     private final StorageOrderRepository storageOrderRepository;
 
-    public OrderController(OrderRepository orderRepository, BrigadeOrderRepository brigadeOrderRepository, StorageOrderRepository storageOrderRepository) {
+    @Autowired
+    private final OrderStageRepository orderStageRepository;
+
+    public OrderController(OrderRepository orderRepository, BrigadeOrderRepository brigadeOrderRepository, StorageOrderRepository storageOrderRepository, OrderStageRepository orderStageRepository) {
         this.orderRepository = orderRepository;
         this.brigadeOrderRepository = brigadeOrderRepository;
         this.storageOrderRepository = storageOrderRepository;
+        this.orderStageRepository = orderStageRepository;
     }
 
     @QueryMapping
@@ -41,5 +47,10 @@ public class OrderController {
     @QueryMapping
     Iterable<StorageOrder> storageOrders () {
         return storageOrderRepository.findAll();
+    }
+
+    @QueryMapping
+    Iterable<OrderStage> orderStages () {
+        return orderStageRepository.findAll();
     }
 }

@@ -8,8 +8,6 @@ public class Order {
 
     private Integer id;
 
-    private Atm atm;
-
     private PlanAtm plan;
 
     private String stage;
@@ -58,14 +56,6 @@ public class Order {
 
     public void setPlan(PlanAtm plan) {
         this.plan = plan;
-    }
-
-    public Atm getAtm() {
-        return atm;
-    }
-
-    public void setAtm(Atm atm) {
-        this.atm = atm;
     }
 
     public Integer getId() {

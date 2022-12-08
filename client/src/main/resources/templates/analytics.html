@@ -20,20 +20,22 @@
     <div class="v326_769"></div>
     <span class="v326_770">Выданные наличные (Всего): BYN</span>
     <div class="v326_767">
-      <span class="v326_763">Сумма</span>
-      <span class="v326_764">Количество банкнот</span>
-      <input type="radio">
-      <input type="radio">
+      <input type="radio" id="cashChoice1" name="cash" value="sum">
+      <label class="v326_763" for="cashChoice1">Сумма</label>
+
+      <input type="radio" id="cashChoice2" name="cash" value="amount" style="left: 100px;position: absolute;">
+      <label class="v326_764" for="cashChoice2">Количество банкнот</label>
     </div>
   </div>
   <div class="v326_771">
     <div class="v326_772"></div>
     <span class="v326_773">Выданные наличные (Всего): USD</span>
     <div class="v326_774">
-      <span class="v326_775">Сумма</span>
-      <span class="v326_777">Количество банкнот</span>
-      <input type="radio">
-      <input type="radio">
+      <input type="radio" id="cashValue1" name="cash" value="sum">
+      <label class="v326_775" for="cashValue1">Сумма</label>
+
+      <input type="radio" id="cashValue2" name="cash" value="amount" style="left: 100px;position: absolute;">
+      <label class="v326_777" for="cashValue2">Количество банкнот</label>
     </div>
   </div>
   <span class="v326_750">Показатели</span>
@@ -145,7 +147,7 @@
     overflow: hidden;
   }
   .v326_769 {
-    width: 100%;
+    width: 79vw;
     height: 222px;
     background: rgba(247,247,247,1);
     opacity: 1;
@@ -187,7 +189,7 @@
     width: 49px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 3px;
+    top: 1px;
     left: 30px;
     font-family: Montserrat;
     font-weight: 400;
@@ -199,7 +201,7 @@
     width: 149px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 3px;
+    top: 1px;
     left: 131px;
     font-family: Montserrat;
     font-weight: 400;
@@ -221,7 +223,7 @@
     overflow: hidden;
   }
   .v326_772 {
-    width: 100%;
+    width: 79vw;
     height: 222px;
     background: rgba(247,247,247,1);
     opacity: 1;
@@ -263,7 +265,7 @@
     width: 49px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 3px;
+    top: 1px;
     left: 30px;
     font-family: Montserrat;
     font-weight: 400;
@@ -275,13 +277,16 @@
     width: 149px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 3px;
+    top: 1px;
     left: 131px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
     opacity: 1;
     text-align: left;
+  }
+  .v1_50 {
+    height: 157vh;
   }
   .v326_750 {
     width: 101px;
@@ -520,7 +525,7 @@
     color: rgba(0,0,0,1);
     position: absolute;
     top: 766px;
-    left: 620px;
+    left: 610px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;

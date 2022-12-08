@@ -3,7 +3,7 @@ package com.cashmanagement.vitalyevich.client.model;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class PlanAtm {
+public class PlanAtm extends ColorTable {
 
     private Integer id;
 
@@ -14,6 +14,18 @@ public class PlanAtm {
     private String status;
 
     private Integer planPeriod;
+
+    @Override
+    public String getColorFirst() {
+
+        if (status.equals("Рассчитан")) {
+            return "#3AACED";
+        } else if (status.equals("Изменен")) {
+            return "#F1CB00";
+        } else {
+            return "#FF3F3F";
+        }
+    }
 
     private Set<Cassette> cassettes = new LinkedHashSet<>();
 

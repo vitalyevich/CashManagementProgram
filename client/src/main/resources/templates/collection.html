@@ -22,147 +22,70 @@
         <th>Стадия</th>
         <th>Дата инкассации</th>
         <th>Исполнитель</th>
-        <th>Инкассатор</th>
-        <th>Тип инкассации</th>
+        <th>Бригада</th>
         <th>Компания</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${users}">
-        <td th:utext="${lst.id}">Тип объекта</td>
-        <td th:utext="${lst.firstName}">ID объекта</td>
-        <td th:utext="${lst.lastName}">Стадия</td>
-        <td th:utext="${lst.phone}">Дата инкассации</td>
-        <td th:utext="${lst.email}">Исполнитель</td>
-        <td th:utext="${lst.email}">Инкассатор</td>
-        <td th:utext="${lst.email}">Тип инкассации</td>
-        <td th:utext="${lst.email}">Компания</td>
+      <tr th:each="lst : ${storageOrders}">
+        <td>Банкомат</td>
+        <td th:text="${lst.order.plan.atm.atmUid}">ID объекта</td>
+        <td th:text="${lst.order.stage}">Стадия</td>
+        <td th:text="${lst.orderDate}">Дата инкассации</td>
+        <td> </td>
+        <td> </td>
+        <td th:text="${lst.order.plan.atm.companies}">Компания</td>
       </tr>
       </tbody>
     </table>
   </div>
   <div class="v334_407">
     <div class="v334_405">
-      <div class="v329_868">
-        <div class="v329_865"></div>
-      </div>
-      <span class="v329_864">Выберите инкассатора</span>
-      <div class="v329_861">
-        <div class="v329_862"></div>
-        <span class="v329_863">Отклонить заказ(ы)</span>
-      </div>
-      <div class="v329_869">
-        <div class="v329_870"></div>
-        <span class="v329_871">Применить</span>
-      </div>
+      <input type="submit" class="v329_861" value="Отклонить заказ">
+      <input type="submit" class="v329_869" value="Подтвердить">
       <span class="v329_872">А0100075, Заказ 1, План. инкассация 01.11.2022</span>
     </div>
     <div class="v334_406">
       <div class="v334_403">
-        <div class="v334_400"></div>
-        <div class="v334_402"></div>
-        <div class="v334_401"></div>
-        <div class="v331_953"></div>
-        <div class="v334_399"></div>
-        <div class="v331_951"></div>
-        <div class="v329_905">
-          <div class="v329_899"></div>
-          <div class="v331_990">
-            <div class="v331_991"></div>
-            <span class="v331_992">1</span>
-          </div>
-        </div>
-        <div class="v329_906">
-          <div class="v329_907"></div>
-          <div class="v331_996">
-            <div class="v331_997"></div>
-            <span class="v331_998">2</span>
-          </div>
-          <div class="v331_999">
-            <div class="v331_1000"></div>
-            <span class="v331_1001">7</span>
-          </div>
-        </div>
-        <div class="v330_918">
-          <div class="v330_919"></div>
-          <div class="v331_1008">
-            <div class="v331_1009"></div>
-            <span class="v331_1010">4</span>
-          </div>
-        </div>
-        <div class="v330_930">
-          <div class="v330_931"></div>
-          <div class="v331_1005">
-            <div class="v331_1006"></div>
-            <span class="v331_1007">3</span>
-          </div>
-        </div>
-        <div class="v330_934">
-          <div class="v330_935"></div>
-          <div class="v331_1002">
-            <div class="v331_1003"></div>
-            <span class="v331_1004">6</span>
-          </div>
-        </div>
-        <div class="v331_942">
-          <div class="v331_943"></div>
-          <div class="v331_1011">
-            <div class="v331_1012"></div>
-            <span class="v331_1013">5</span>
-          </div>
-        </div>
+        <img class="v334_400" src="../static/images/arrow3.svg" th:src="@{images/arrow3.svg}" id="arrow3">
+        <img class="v334_402" src="../static/images/arrow5.svg" th:src="@{images/arrow5.svg}" id="arrow5">
+        <img class="v334_401" src="../static/images/arrow4.svg" th:src="@{images/arrow4.svg}" id="arrow4">
+        <img class="v331_953" src="../static/images/arrow2.svg" th:src="@{images/arrow2.svg}" id="arrow2">
+        <img class="v334_399" src="../static/images/arrow6.svg" th:src="@{images/arrow6.svg}" id="arrow6">
+        <img class="v331_951" src="../static/images/arrow1.svg" th:src="@{images/arrow1.svg}" id="arrow1">
+        <img class="v329_905" src="../static/images/stage1.svg" th:src="@{images/stage1.svg}" id="stage1">
+        <img class="v329_906" src="../static/images/stage2.svg" th:src="@{images/stage2.svg}" id="stage2">
+        <img class="v330_930" src="../static/images/stage3.svg" th:src="@{images/stage3.svg}" id="stage3">
+        <img class="v330_918" src="../static/images/stage4.svg" th:src="@{images/stage4.svg}" id="stage4">
+        <img class="v331_942" src="../static/images/stage5.svg" th:src="@{images/stage5.svg}" id="stage5">
+        <img class="v330_934" src="../static/images/stage6.svg" th:src="@{images/stage6.svg}" id="stage6">
       </div>
       <div class="v334_404">
-        <div class="v331_957">
-          <div class="v331_958"></div>
-          <span class="v331_959">Шаг назад</span>
-        </div>
-        <div class="v331_960">
-          <div class="v331_961"></div>
-          <span class="v331_962">1</span>
-        </div>
-        <div class="v331_978">
-          <div class="v331_979"></div>
-          <span class="v331_980">7</span>
-        </div>
-        <div class="v331_975">
-          <div class="v331_976"></div>
-          <span class="v331_977">6</span>
-        </div>
-        <div class="v331_972">
-          <div class="v331_973"></div>
-          <span class="v331_974">5</span>
-        </div>
-        <div class="v331_969">
-          <div class="v331_970"></div>
-          <span class="v331_971">4</span>
-        </div>
-        <div class="v331_966">
-          <div class="v331_967"></div>
-          <span class="v331_968">3</span>
-        </div>
-        <div class="v331_963">
-          <div class="v331_964"></div>
-          <span class="v331_965">2</span>
-        </div>
+        <input type="submit" class="v331_957" value="Шаг назад">
+        <input type="submit" class="v331_960" value="1">
+        <input type="submit" class="v331_978" value="7">
+        <input type="submit" class="v331_975" value="6">
+        <input type="submit" class="v331_972" value="5">
+        <input type="submit" class="v331_969" value="4">
+        <input type="submit" class="v331_966" value="3">
+        <input type="submit" class="v331_963" value="2">
+        <input type="submit" class="v331_958" value="Применить">
       </div>
     </div>
   </div>
-  <table style="top: 697px;left: 1256px;" class="table">
+  <table style="top: 755px;left: 968px;" class="table">
     <thead>
     <tr>
       <th>Стадия</th>
       <th>Название стадии</th>
       <th>Дата</th>
-      <th>Исполнитель</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="lst : ${users}">
-      <td th:utext="${lst.id}">Стадия</td>
-      <td th:utext="${lst.firstName}">Название стадии</td>
-      <td th:utext="${lst.lastName}">Дата</td>
-      <td th:utext="${lst.phone}">Исполнитель</td>
+    <tr th:each="lst : ${orderStages}">
+      <td style="width: 1vw; text-align: center;" th:text="${lst.id.stageId}">Стадия</td>
+      <td style="width: 16vw;" th:text="${lst.stageName}">Название стадии</td>
+      <td style="width: 9vw;" th:text="${lst.stageDate}">Дата</td>
     </tr>
     </tbody>
   </table>
@@ -187,7 +110,7 @@
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 635px;
+    top: 660px;
     left: 293px;
     overflow: hidden;
   }
@@ -232,9 +155,6 @@
     border-bottom-right-radius: 30px;
     overflow: hidden;
   }
-  .name {
-    color: #fff;
-  }
   .v329_864 {
     width: 170px;
     color: rgba(0,0,0,1);
@@ -250,70 +170,43 @@
   .v329_861 {
     width: 161px;
     height: 27px;
-    background: url("../images/v329_861.png");
+    background: rgba(0,148,63,1);
+    color: rgba(255,255,255,1);
     background-repeat: no-repeat;
     background-position: center center;
+    border-radius: 10px;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 1px;
     left: 0px;
     overflow: hidden;
-  }
-  .v329_862 {
-    width: 161px;
-    height: 27px;
-    background: rgba(0,148,63,1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  .v329_863 {
-    width: 147px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 7px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
   }
+
   .v329_869 {
-    width: 102px;
+    width: 125px;
     height: 27px;
-    background: url("../images/v329_869.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
-    left: 427px;
+    left: 195px;
     overflow: hidden;
-  }
-  .v329_870 {
-    width: 102px;
-    height: 27px;
     background: rgba(0,148,63,1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  .v329_871 {
-    width: 87px;
     color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 7px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
   }
   .v329_872 {
     width: 390px;
@@ -330,14 +223,11 @@
   .v334_406 {
     width: 598px;
     height: 349px;
-    background: url("../images/v334_406.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 109px;
-    left: 43px;
+    top: 90px;
+    left: 0px;
     overflow: hidden;
   }
   .v334_403 {
@@ -354,85 +244,61 @@
     overflow: hidden;
   }
   .v334_400 {
-    width: 100px;
-    background: url("../images/v334_400.png");
     opacity: 1;
     position: absolute;
     top: 46px;
     left: 416px;
-    border: 4px solid rgba(71,69,69,0.5);
   }
   .v334_402 {
-    width: 100px;
-    background: url("../images/v334_402.png");
     opacity: 1;
     position: absolute;
     top: 223px;
     left: 415px;
-    border: 4px solid rgba(71,69,69,0.5);
   }
   .v334_401 {
-    width: 100px;
-    background: url("../images/v334_401.png");
     opacity: 1;
     position: absolute;
-    top: 187px;
+    top: 86px;
     left: 554px;
-    border: 4px solid rgba(71,69,69,0.5);
-    transform: rotate(-90deg);
   }
   .v331_953 {
-    width: 100px;
-    background: url("../images/v331_953.png");
     opacity: 1;
     position: absolute;
-    top: 119px;
+    top: 55px;
     left: 262px;
-    border: 4px solid rgba(71,69,69,0.5);
-    transform: rotate(-39deg);
   }
+  .v1_50 {
+    height: 133vh;
+    }
   .v334_399 {
-    width: 100px;
-    background: url("../images/v334_399.png");
     opacity: 1;
     position: absolute;
     top: 151px;
     left: 262px;
-    border: 4px solid rgba(71,69,69,0.5);
   }
   .v331_951 {
-    width: 100px;
-    background: url("../images/v331_951.png");
     opacity: 1;
     position: absolute;
-    top: 138px;
-    left: 84px;
-    border: 4px solid rgba(71,69,69,0.5);
+    top: 125px;
+    left: 87px;
   }
   .v329_905 {
     width: 84px;
     height: 85px;
-    background: url("../images/v329_905.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 92px;
-    left: 0px;
+    left: 3px;
     overflow: hidden;
   }
   .v329_899 {
     width: 80px;
     height: 80px;
-    background: rgba(0,148,63,1);
+    background: url("../images/v331_990.png");
     opacity: 1;
     position: absolute;
     top: 5px;
     left: 4px;
-  }
-  .name {
-    color: #fff;
   }
   .v331_990 {
     width: 17px;
@@ -471,14 +337,10 @@
   .v329_906 {
     width: 86px;
     height: 90px;
-    background: url("../images/v329_906.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 93px;
-    left: 181px;
+    left: 184px;
     overflow: hidden;
   }
   .v329_907 {
@@ -489,9 +351,6 @@
     position: absolute;
     top: 5px;
     left: 2px;
-  }
-  .name {
-    color: #fff;
   }
   .v331_996 {
     width: 17px;
@@ -798,289 +657,175 @@
     text-align: left;
   }
   .v334_404 {
-    width: 402px;
+    width: 540px;
     height: 27px;
-    background: url("../images/v334_404.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 322px;
-    left: 114px;
+    left: 50px;
     overflow: hidden;
   }
   .v331_957 {
     width: 101px;
     height: 27px;
-    background: url("../images/v331_957.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 0px;
     overflow: hidden;
+    background: rgba(0,148,63,1);
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
   }
   .v331_958 {
     width: 101px;
     height: 27px;
-    background: rgba(0,148,63,0.5);
+    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
-    left: 0px;
-  }
-  .v331_959 {
-    width: 78px;
+    left: 413px;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 11px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
   }
   .v331_960 {
     width: 32px;
     height: 27px;
-    background: url("../images/v331_960.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 112px;
     overflow: hidden;
-  }
-  .v331_961 {
-    width: 32px;
-    height: 27px;
     background: rgba(0,148,63,1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  .v331_962 {
-    width: 15px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 14px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: rgba(255,255,255,1);
   }
   .v331_978 {
     width: 32px;
     height: 27px;
-    background: url("../images/v331_978.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 370px;
     overflow: hidden;
-  }
-  .v331_979 {
-    width: 32px;
-    height: 27px;
-    background: rgba(0,148,63,0.5);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  .v331_980 {
-    width: 15px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 12px;
+    background: rgba(0,148,63,1);
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: rgba(255,255,255,1);
   }
   .v331_975 {
     width: 32px;
     height: 27px;
-    background: url("../images/v331_975.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 327px;
     overflow: hidden;
-  }
-  .v331_976 {
-    width: 32px;
-    height: 27px;
-    background: rgba(0,148,63,0.5);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  .v331_977 {
-    width: 15px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 11px;
+    background: rgba(0,148,63,1);
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: rgba(255,255,255,1);
   }
   .v331_972 {
     width: 32px;
     height: 27px;
-    background: url("../images/v331_972.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 284px;
     overflow: hidden;
-  }
-  .v331_973 {
-    width: 32px;
-    height: 27px;
-    background: rgba(0,148,63,0.5);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  .v331_974 {
-    width: 15px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 12px;
+    background: rgba(0,148,63,1);
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: rgba(255,255,255,1);
   }
   .v331_969 {
     width: 32px;
     height: 27px;
-    background: url("../images/v331_969.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 241px;
     overflow: hidden;
-  }
-  .v331_970 {
-    width: 32px;
-    height: 27px;
-    background: rgba(0,148,63,0.5);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  .v331_971 {
-    width: 15px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 11px;
+    background: rgba(0,148,63,1);
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: rgba(255,255,255,1);
   }
   .v331_966 {
     width: 32px;
     height: 27px;
-    background: url("../images/v331_966.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 198px;
     overflow: hidden;
-  }
-  .v331_967 {
-    width: 32px;
-    height: 27px;
-    background: rgba(0,148,63,0.5);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  .v331_968 {
-    width: 15px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 12px;
+    background: rgba(0,148,63,1);
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: rgba(255,255,255,1);
   }
   .v331_963 {
     width: 32px;
     height: 27px;
-    background: url("../images/v331_963.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 155px;
     overflow: hidden;
-  }
-  .v331_964 {
-    width: 32px;
-    height: 27px;
-    background: rgba(0,148,63,0.5);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  .v331_965 {
-    width: 15px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 12px;
+    background: rgba(0,148,63,1);
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: rgba(255,255,255,1);
   }
   .v18_235 {
     width: 79vw;

@@ -20,7 +20,6 @@ public class User {
 
     private Set<Role> roles = new LinkedHashSet<>();
 
-    // roles.iterator().next()
     public String getRoles() {
         return roles.iterator().next().getRoleName();
     }
@@ -29,8 +28,8 @@ public class User {
         this.roles = roles;
     }
 
-    public Set<Company> getCompanies() {
-        return companies;
+    public String getCompanies() {
+        return companies.iterator().next().getCompanyName();
     }
 
     public void setCompanies(Set<Company> companies) {

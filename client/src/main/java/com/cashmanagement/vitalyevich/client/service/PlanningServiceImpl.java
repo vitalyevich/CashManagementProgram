@@ -23,7 +23,10 @@ public class PlanningServiceImpl implements PlanningService {
                           plans {
                               id,
                               atm {
-                              id
+                              id,
+                              atmUid,
+                              cashState,
+                              atmState
                               },
                               planMethod,
                               status,

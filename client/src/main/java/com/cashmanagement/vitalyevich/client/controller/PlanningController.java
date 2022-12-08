@@ -39,13 +39,6 @@ public class PlanningController {
         return "/planning/plan-cash";
     }
 
-    @GetMapping("/planning-collection")
-    public String planningCollection(Model model) {
-
-        model.addAttribute("headerText", "Планирование (CIT)");
-        return "planning-collection";
-    }
-
     @GetMapping("/create-brigade")
     public String createBrigade(Model model) {
 

@@ -17,6 +17,7 @@ type Query {
     brigadeOrders: [BrigadeOrder!]!
     storageOrders: [StorageOrder!]!
     withdrawalCashes: [WithdrawalCash!]!
+    orderStages: [OrderStage!]!
 }
 
 type Mutation {
@@ -111,6 +112,8 @@ type Atm {
     atmUid: String!,
     cashState: String!,
     atmState: String!
+    cassettes: [Cassette]!,
+    companies: [Company]!
 }
 
 type Cassette {
@@ -131,22 +134,23 @@ type PlanAtm {
 
 type Storage {
     id: ID!,
+    banknote: Float!,
     currency: String!,
-    amount: Float!
-    companies: [Company]!
+    amount: Float!,
+    companies: [Company]!,
     storageOperations: [StorageOperation]
 }
 
 type StorageOperation {
     id: ID!,
     storage: Storage!,
-        updateDate: String!,
+    updateDate: String!,
+    banknote: Float!,
     amountOperation: Float!
 }
 
 type Order {
     id: ID!,
-    atm: Atm!,
     plan: PlanAtm!,
     stage: String!,
     collectionDate: String!,
@@ -197,16 +201,14 @@ type BrigadeOrder {
     order: Order!,
     orderDate: String!,
     brigade: Brigade!,
-    orderComment: String,
-    status: String!
+    user: User!
 }
 
 type StorageOrder {
     id: ID!,
     order: Order!,
     orderDate: String!,
-    user: User!,
-    status: String!
+    user: User!
 }
 
 type WithdrawalCash {

@@ -2,10 +2,7 @@ package com.cashmanagement.vitalyevich.client.service;
 
 import com.cashmanagement.vitalyevich.client.firebase.model.WorkTime;
 import com.cashmanagement.vitalyevich.client.graphql.GraphClient;
-import com.cashmanagement.vitalyevich.client.model.Access;
-import com.cashmanagement.vitalyevich.client.model.Company;
-import com.cashmanagement.vitalyevich.client.model.Role;
-import com.cashmanagement.vitalyevich.client.model.User;
+import com.cashmanagement.vitalyevich.client.model.*;
 import graphql.GraphqlErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.client.GraphQlTransportException;
@@ -314,6 +311,34 @@ public class UserServiceImpl implements UserService{
                     .retrieve("createAccess")
                     .toEntity(Access.class).block());
             return access1;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public Iterable<Brigade> getBrigades() {
+        String document = """
+                     query {
+                         brigades {
+                         id,
+                         brigadeName,
+                         active,
+                             users {
+                             id,
+                             firstName,
+                             lastName
+                             }
+                         }
+                     }
+                """;
+
+        try {
+            Iterable<Brigade> brigades = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("brigades")
+                    .toEntity(Brigade[].class).block()));
+            return brigades;
         } catch (GraphQlTransportException ex) {
             System.out.println("Ошибка соединения!"); // test
         }

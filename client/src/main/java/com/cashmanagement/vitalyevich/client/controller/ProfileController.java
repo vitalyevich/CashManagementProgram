@@ -26,7 +26,7 @@ public class ProfileController {
         model.addAttribute("name", "Максим Витальевич");
         model.addAttribute("date", LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
 
-        userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "вход на страницу профиля"));
+        //userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "вход на страницу профиля"));
 
         return "/profiles/profile-admin";
     }

@@ -22,9 +22,14 @@ public class StorageServiceImpl implements StorageService {
         String document = """
                      query {
                              storages {
-                             id
-                             currency
+                             id,
+                             banknote,
+                             currency,
                              amount
+                                 companies {
+                                 id,
+                                 companyName
+                                 }
                              }
                          }
                 """;
@@ -47,6 +52,7 @@ public class StorageServiceImpl implements StorageService {
                              operations {
                                id,
                                updateDate,
+                               banknote,
                                amountOperation
                              }
                          }

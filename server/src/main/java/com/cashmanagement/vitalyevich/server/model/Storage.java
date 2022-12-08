@@ -12,6 +12,9 @@ public class Storage {
     @Column(name = "storage_id", nullable = false)
     private Integer id;
 
+    @Column(name = "banknote", nullable = false)
+    private Double banknote;
+
     @Column(name = "currency", nullable = false, length = 3)
     private String currency;
 
@@ -57,6 +60,14 @@ public class Storage {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public Double getBanknote() {
+        return banknote;
+    }
+
+    public void setBanknote(Double banknote) {
+        this.banknote = banknote;
     }
 
     public Integer getId() {

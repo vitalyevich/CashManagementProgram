@@ -7,6 +7,8 @@ public class Storage {
 
     private Integer id;
 
+    private Double banknote;
+
     private String currency;
 
     private Double amount;
@@ -23,8 +25,8 @@ public class Storage {
         this.storageOperations = storageOperations;
     }
 
-    public Set<Company> getCompanies() {
-        return companies;
+    public String getCompanies() {
+        return companies.iterator().next().getCompanyName();
     }
 
     public void setCompanies(Set<Company> companies) {
@@ -45,6 +47,14 @@ public class Storage {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public Double getBanknote() {
+        return banknote;
+    }
+
+    public void setBanknote(Double banknote) {
+        this.banknote = banknote;
     }
 
     public Integer getId() {

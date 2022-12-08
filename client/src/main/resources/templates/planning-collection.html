@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>Планирование (CIT)</title>
+  <title>Планирование</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/menu-country.css">
@@ -19,8 +19,6 @@
       <tr>
         <th>ID объекта</th>
         <th>Бригада</th>
-        <th>Набор кассет</th>
-        <th>Комментарий</th>
         <th>Статус</th>
         <th>Дата инкассации</th>
         <th>Валюта</th>
@@ -29,16 +27,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${users}">
-        <td th:utext="${lst.id}">ID объекта</td>
-        <td th:utext="${lst.firstName}">Бригада</td>
-        <td th:utext="${lst.lastName}">Набор кассет</td>
-        <td th:utext="${lst.phone}">Комментарий</td>
-        <td th:utext="${lst.email}">Статус</td>
-        <td th:utext="${lst.email}">Дата инкассации</td>
-        <td th:utext="${lst.email}">Валюта</td>
-        <td th:utext="${lst.email}">Загружаемые наличные</td>
-        <td th:utext="${lst.email}">Кассеты</td>
+      <tr th:each="lst : ${brigadeOrders}">
+        <td th:text="${lst.order.plan.atm.atmUid}">ID объекта</td>
+        <td th:text="${lst.brigade.brigadeName}">Бригада</td>
+        <td th:text="${lst.order.stage}">Статус</td>
+        <td th:text="${lst.orderDate}">Дата инкассации</td>
+        <td> </td>
+        <td>25 452</td>
+        <td style="width: 16vw;">15 500 (100); 27 454 (30); 5 020 (5); 5 020 (5);</td>
       </tr>
       </tbody>
     </table>
@@ -47,23 +43,21 @@
   <input type="submit" value="Сформировать поручение" class="v105_1493">
   <input type="submit" value="Расформировать поручение" class="v335_453">
   <input type="submit" value="Одобрить поручение" class="v335_454">
-  <input type="submit" value="Отклонить заказ(ы)" class="v335_455">
-  <div style="top:920px" class="v18_235">
+  <input type="submit" value="Отклонить заказ" class="v335_455">
+  <div style="top:920px; width: 28vw; height: 400px;" class="v18_235">
     <table class="table">
       <thead>
       <tr>
-        <th>А</th>
+        <th>Статус</th>
         <th>Бригада</th>
-        <th>Роль</th>
         <th>Член бригады</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${users}">
-        <td th:utext="${lst.id}">А</td>
-        <td th:utext="${lst.firstName}">Бригада</td>
-        <td th:utext="${lst.lastName}">Роль</td>
-        <td th:utext="${lst.phone}">Член бригады</td>
+      <tr th:each="lst : ${brigades}">
+        <td style="vertical-align: inherit; width: 2vw; text-align: center" th:text="${lst.active}"></td>
+        <td style="vertical-align: inherit; width: 2vw; text-align: center" th:text="${lst.brigadeName}">Бригада</td>
+        <td style="vertical-align: inherit; width: 10vw;" th:text="${lst.brigadeUsers}">Член бригады</td>
       </tr>
       </tbody>
     </table>
@@ -79,6 +73,9 @@
   }
   .v1_3 {
     top: 248px;
+  }
+  .v1_50 {
+    height: 161vh;
   }
   .v335_451 {
     width: 103px;

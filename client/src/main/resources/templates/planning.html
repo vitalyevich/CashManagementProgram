@@ -14,10 +14,11 @@
   <div th:insert="blocks/filter :: filter"></div>
   <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
+    <div class="v18_231">
     <table class="table">
       <thead>
       <tr>
-        <th>Тип объекта</th>
+        <th>Тип</th>
         <th>ID объекта</th>
         <th>Статус</th>
         <th>Период</th>
@@ -28,32 +29,37 @@
         <th>Валюта</th>
         <th>Рассчитал(-а)</th>
         <th>Принял(-а)</th>
+        <th>Компания</th>
+        <th>Адрес</th>
       </tr>
       </thead>
       <tbody>
       <tr th:each="lst : ${plans}">
-        <td th:utext="${lst.id}">Тип объекта</td>
-<!--        <td th:utext="${lst.firstName}">ID объекта</td>
-        <td th:utext="${lst.lastName}">Статус</td>
-        <td th:utext="${lst.phone}">Период</td>
-        <td th:utext="${lst.email}">Дата инкассации</td>
-        <td th:utext="${lst.email}">Тип инкассации</td>
-        <td th:utext="${lst.email}">Загружаемые наличные</td>
-        <td th:utext="${lst.email}">Кассеты</td>
-        <td th:utext="${lst.email}">Валюта</td>
-        <td th:utext="${lst.email}">Рассчитал(-а)</td>
-        <td th:utext="${lst.email}">Принял(-а)</td>-->
+        <td style="text-align: center;">Банкомат</td>
+        <td style="text-align: center;" th:text="${lst.atm.atmUid}">ID объекта</td>
+        <td style="text-align: center; color: white;" th:text="${lst.status}" th:bgcolor="${lst.colorFirst}">Статус</td>
+        <td style="text-align: center; width: 3vw; " th:text="${lst.planPeriod}">Период</td>
+        <td style="width: 5vw; ">07.08.2022</td>
+        <td style="text-align: center; width: 5vw; ">План</td>
+        <td>200 000</td>
+        <td style=" width: 265vw; ">15 500 (100); 27 454 (30); 5 020 (5); 5 020 (5);</td>
+        <td style="vertical-align: inherit; width: 3vw; text-align: center;">BYN</td>
+        <td style="width: 30vw; ">Максим Садовский</td>
+        <td style="width: 25vw; ">Павел Анищенко</td>
+        <td style="width: 100vw; ">ОАО ”АСБ Беларусбанк“</td>
+        <td style="width: 50vw; ">Центральная 12, 5</td>
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
   <input class="v18_2" type="submit" value="Рассчитать"/>
   <input class="v18_3" type="submit" value="Принять"/>
   <input class="v18_4" type="submit" value="Передать на исполнение"/>
   <input class="v18_5" type="submit" value="Изменить"/>
   <span class="v1_300">A0100133, План. инкассация 20.10.2022</span>
-  <div class="v18_235" style="top: 765px;">
-    <table class="table">
+  <div class="v18_235" style="top: 965px; height: 400px">
+    <table class="table" style="top:20px">
       <thead>
       <tr>
         <th>Параметр</th>
@@ -83,6 +89,16 @@
 </html>
 
 <style>
+  .v18_231 {
+    width: 119vw;
+    height: 496px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    overflow: auto;
+  }
   input {
     outline: none;
     border: none;
@@ -90,11 +106,14 @@
   .v1_3 {
       top:255px;
     }
+  .v1_50 {
+    height: 166vh;
+  }
   .v1_300 {
     width: 550px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 725px;
+    top: 880px;
     left: 287px;
     font-family: Montserrat;
     font-weight: 600;
@@ -105,8 +124,8 @@
   .v18_2 {
     width: 110px;
     height: 27px;
-    top: 680px;
-    left: 300px;
+    top: 915px;
+    left: 287px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -128,8 +147,8 @@
   .v18_3 {
     width: 95px;
     height: 27px;
-    top: 680px;
-    left: 440px;
+    top: 915px;
+    left: 435px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -151,7 +170,7 @@
   .v18_4 {
     width: 215px;
     height: 27px;
-    top: 680px;
+    top: 915px;
     left: 570px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
@@ -174,7 +193,7 @@
   .v18_5 {
     width: 100px;
     height: 27px;
-    top: 680px;
+    top: 915px;
     left: 810px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
@@ -196,7 +215,7 @@
   }
   .v18_235 {
     width: 79vw;
-    height: 354px;
+    height: 560px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
@@ -206,7 +225,7 @@
     border-top-right-radius: 30px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    overflow: hidden;
+    overflow: auto;
   }
   .v1_2 {
     width: 100vw;
@@ -222,8 +241,8 @@
   }
   .table {
     border: none;
-    top: 20px;
-    left: 25px;
+    top: 0px;
+    left: 20px;
     position: absolute;
   }
   .table thead th {
@@ -244,13 +263,14 @@
   .table tbody td {
     text-align: left;
     border: none;
-    padding: 10px 15px;
+    padding: 5px 15px;
     vertical-align: top;
     font-family: Montserrat;
     font-weight: 400;
     flex-wrap: nowrap;
     font-size: 13px;
-    width: 13vw;
+    width: 8vw;
+    vertical-align: inherit;
   }
   .table tbody tr{
     background: #ffffff;

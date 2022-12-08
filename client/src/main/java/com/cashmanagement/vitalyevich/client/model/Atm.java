@@ -3,7 +3,7 @@ package com.cashmanagement.vitalyevich.client.model;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Atm {
+public class Atm extends ColorTable {
 
     private Integer id;
 
@@ -14,6 +14,33 @@ public class Atm {
     private String atmState;
 
     private Set<Cassette> cassettes = new LinkedHashSet<>();
+
+    private Set<Company> companies = new LinkedHashSet<>();
+
+    @Override
+    public String getColorFirst() {
+        return cashState.equals("Нормальное") ? "#57DB4E" : "#FF3F3F";
+    }
+
+    @Override
+    public String getColorSecond() {
+
+        if (atmState.equals("Нормальный")) {
+            return "#57DB4E";
+        } else if (atmState.equals("Неопределённый")) {
+            return "#F1CB00";
+        } else {
+            return "#FF3F3F";
+        }
+    }
+
+    public String getCompanies() {
+        return companies.iterator().next().getCompanyName();
+    }
+
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
+    }
 
     public Set<Cassette> getCassettes() {
         return cassettes;

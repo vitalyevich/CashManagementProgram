@@ -1,7 +1,7 @@
 package com.cashmanagement.vitalyevich.server.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.Instant;
 
 @Entity
 @Table(name = "order_stages")
@@ -15,13 +15,13 @@ public class OrderStage {
     private Order order;
 
     @Column(name = "stage_date", nullable = false)
-    private LocalDate stageDate;
+    private Instant stageDate;
 
-    public LocalDate getStageDate() {
+    public Instant getStageDate() {
         return stageDate;
     }
 
-    public void setStageDate(LocalDate stageDate) {
+    public void setStageDate(Instant stageDate) {
         this.stageDate = stageDate;
     }
 
