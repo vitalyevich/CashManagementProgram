@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/css/menu-admin.css">
   <link rel="stylesheet" href="/css/users/registration-user.css">
   <link rel="stylesheet" href="/css/users/edit-user.css">
+  <link rel="stylesheet" href="/css/users/registration-company.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://unpkg.com/imask"></script>
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
@@ -62,6 +63,7 @@ document.getElementById('rowIdEdit').value = this.getAttribute('id')">
         <input name="delete" class="v18_282" type="submit" value="Удалить">
       </form>
       <div th:insert="users/registration-user :: blackout-registration"></div>
+      <div th:insert="users/registration-company :: blackout-company"></div>
 
       <div th:insert="users/edit-user :: blackout-edit"></div>
       <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>

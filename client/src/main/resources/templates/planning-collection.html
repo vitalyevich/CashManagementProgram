@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/css/filter.css">
   <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
+  <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
   <link rel="stylesheet" href="/css/planning/create-brigade.css">
 </head>
 <body>
@@ -41,13 +42,21 @@
       </tbody>
     </table>
   </div>
+  <a href="/planning-collection/calculate">
   <input type="submit" value="Рассчитать" class="v335_451">
-  <a href="#blackout-brigade">
+  </a>
+  <a href="/planning-collection/create-brigade">
     <input type="submit" value="Сформировать поручение" class="v105_1493">
   </a>
-  <input type="submit" value="Расформировать поручение" class="v335_453">
-  <input type="submit" value="Одобрить поручение" class="v335_454">
-  <input type="submit" value="Отклонить заказ" class="v335_455">
+  <a href="/planning-collection/disband">
+    <input type="submit" value="Расформировать поручение" class="v335_453">
+  </a>
+  <a href="/planning-collection/approve">
+    <input type="submit" value="Одобрить поручение" class="v335_454">
+  </a>
+  <a href="/planning-collection/cancel-order">
+    <input type="submit" value="Отклонить заказ" class="v335_455">
+  </a>
   <div style="top:920px; width: 28vw; height: 400px;" class="v18_235">
     <table class="table">
       <thead>
@@ -67,6 +76,7 @@
     </table>
   </div>
   <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
+  <div th:insert="confirmations/confirmation-window :: blackout-confirm"></div>
   <div th:insert="planning/create-brigade :: blackout-brigade"></div>
 </div>
 </body>

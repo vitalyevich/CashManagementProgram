@@ -1,0 +1,122 @@
+input {
+    outline: none;
+    border: none;
+    background: transparent;
+    /*border: 1px solid white;*/
+}
+.v249_738 {
+    width: 440px;
+    height: 195px;
+    background: rgba(255,255,255,1);
+    opacity: 1;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+}
+.v249_740 {
+    width: 440px;
+    height: 45px;
+    background: rgba(20,126,75,1);
+    opacity: 1;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+}
+.v249_741 {
+    width: 202px;
+    color: rgba(255,255,255,1);
+    position: absolute;
+    top: 10px;
+    left: 21px;
+    font-family: Montserrat;
+    font-weight: 800;
+    font-size: 20px;
+    opacity: 1;
+    text-align: left;
+}
+.v254_829 {
+    width: 270px;
+    color: rgba(8,8,8,1);
+    position: absolute;
+    top: 85px;
+    left: 92px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+}
+.v254_831 {
+    width: 103px;
+    height: 27px;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 136px;
+    left: 109px;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 1;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.v254_834 {
+    width: 103px;
+    height: 27px;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 136px;
+    left: 235px;
+    overflow: hidden;
+    background: rgba(0,148,63,1);
+    color: rgba(255,255,255,1);
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 1;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.confirm {
+    width: 440px;
+    height: 195px;
+    background: rgba(255,255,255,1);
+    opacity: 1;
+    position: relative;
+    overflow: hidden;
+}
+#blackout-confirm {
+    background: rgba(40, 40, 40, 0.7);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+#window-black {
+    display: flex;
+    justify-content: center;
+    padding: 100px 0;
+    margin: auto;
+}
+.close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor:pointer;
+}
+#blackout-confirm:target {display: block;}

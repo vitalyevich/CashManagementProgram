@@ -7,16 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+@RequestMapping("/collection")
 @Controller
 public class CollectionController {
 
     @Autowired
     private OrderServiceImpl orderService;
 
-    @GetMapping("/collection")
+    @GetMapping("")
     public String collection(Model model) {
 
         Iterable<StorageOrder> storageOrders = orderService.getStorageOrders();
@@ -36,5 +41,20 @@ public class CollectionController {
 
         model.addAttribute("headerText", "Инкассации");
         return "collection";
+    }
+
+    @GetMapping("/cancel-order")
+    public String cancelOrder(Model model, RedirectAttributes rm) {
+        return "redirect:/collection#blackout-confirm";
+    }
+
+    @GetMapping("/confirm-order")
+    public String confirmOrder(Model model) {
+        return null;
+    }
+
+    @GetMapping("/stage/{id}")
+    public String stageOrder(Model model, @PathVariable String id) {
+        return null;
     }
 }

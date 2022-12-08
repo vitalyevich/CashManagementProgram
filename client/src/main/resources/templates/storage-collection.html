@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
   <link rel="stylesheet" href="/css/storage/cash-order.css">
+  <link rel="stylesheet" href="/css/storage/edit-cash-order.css">
+  <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
 </head>
 <body>
 <div class="v1_2">
@@ -43,17 +45,24 @@
       </tbody>
     </table>
   </div>
-  <a href="/cash-order">
+  <a href="/storage-collection/cash-order">
     <input type="submit" value="Заказ на доставку" class="v335_451">
   </a>
-  <a href="/edit-cash-order">
+  <a href="/storage-collection/edit-cash-order">
     <input type="submit" value="Редактировать" class="v105_1493">
   </a>
-  <input type="submit" value="Отклонить" class="v335_453">
-  <input type="submit" value="Подтвердить заказ" class="v335_454">
-  <input type="submit" value="Заказ выполнен" class="v335_455">
-  <input type="submit" value="Передать на исполнение" class="v335_456">
-
+  <a href="/storage-collection/cancel">
+    <input type="submit" value="Отклонить" class="v335_453">
+  </a>
+  <a href="/storage-collection/confirm">
+    <input type="submit" value="Подтвердить заказ" class="v335_454">
+  </a>
+  <a href="/storage-collection/execute">
+    <input type="submit" value="Заказ выполнен" class="v335_455">
+  </a>
+  <a href="/storage-collection/transfer">
+    <input type="submit" value="Передать на исполнение" class="v335_456">
+  </a>
   <span class="v1_301">Детализация заказа</span>
   <span class="v1_300">VB1, Заказ наличных</span>
 
@@ -80,6 +89,8 @@
   </div>
   <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
   <div th:insert="storage/cash-order :: blackout-cash"></div>
+  <div th:insert="storage/edit-cash-order :: blackout-edit"></div>
+  <div th:insert="confirmations/confirmation-window :: blackout-confirm"></div>
 </div>
 </body>
 </html>

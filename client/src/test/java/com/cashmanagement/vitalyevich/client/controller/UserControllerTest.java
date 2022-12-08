@@ -54,7 +54,7 @@ class UserControllerTest {
         //   Diffblue Cover tried to run the arrange/act section, but the method under
         //   test threw
         //   java.lang.NullPointerException: Cannot invoke "com.cashmanagement.vitalyevich.client.service.UserServiceImpl.getUsers()" because "this.userService" is null
-        //       at com.cashmanagement.vitalyevich.client.controller.UserController.users(UserController.java:24)
+        //       at com.cashmanagement.vitalyevich.client.controller.profile.UserController.users(UserController.java:24)
         //   In order to prevent users(Model)
         //   from throwing NullPointerException, add constructors or factory
         //   methods that make it easier to construct fully initialized objects used in

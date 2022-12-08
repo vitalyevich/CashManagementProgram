@@ -1,0 +1,76 @@
+<div th:fragment="edit-cash-order" class="cash">
+  <div class="v23_948">
+    <div class="v363_433">
+      <div class="v363_432">
+        <div class="v23_1028"></div>
+        <span class="v23_1026">Наличные</span>
+      </div>
+      <div class="v363_431">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Валюта</th>
+            <th>Номинал</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="lst : ${users}">
+            <td th:utext="${lst.id}">Валюта</td>
+            <td th:utext="${lst.firstName}">Номинал</td>
+            <td th:utext="${lst.lastName}">Количество</td>
+            <td th:utext="${lst.phone}">Сумма</td>
+          </tr>
+          </tbody>
+        </table>
+        <span class="v23_962">Номиналы</span>
+        <span class="v23_1036">Общая сумма: 0,00 EUR</span>
+        <span class="v23_1030">Валюта</span>
+      </div>
+    </div>
+    <div class="v363_435">
+      <div class="v23_952"></div>
+      <span class="v23_966">Получатель</span>
+      <span class="v23_967">Отправитель</span>
+      <span class="v23_969">Дата заказа</span>
+      <span class="v23_972">Время заказа</span>
+      <div class="v23_954"></div>
+      <div class="v23_1018"></div>
+      <div class="v23_956"></div>
+      <div class="v23_1021"></div>
+    </div>
+    <div class="v363_436">
+      <div class="v23_949"></div>
+      <span class="v23_950">Редактирование заказа наличных</span>
+    </div>
+    <span class="v23_961">А0100089, Заказ, План. инкассация 07.08.2022</span>
+    <div class="v363_434">
+      <div class="v23_1031"></div>
+      <span class="v23_1034">EUR</span>
+    </div>
+    <div class="v363_429">
+      <div class="v363_427">
+        <div class="v23_959"></div>
+        <span class="v23_973">Применить</span>
+      </div>
+      <div class="v363_428">
+        <div class="v23_960"></div>
+        <span class="v23_974">Закрыть</span>
+      </div>
+    </div>
+    <div class="v363_438">
+      <span class="v23_1044">КВ1</span>
+      <span class="v23_1047">25.11.2022</span>
+      <span class="v23_1045">VВ1</span>
+      <span class="v23_1046">10:27</span>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="blackout-edit" id="blackout-edit">
+  <a href="#" class="close"></a>
+  <div id="window-black">
+    <div th:insert="storage/edit-cash-order :: edit-cash-order"></div>
+  </div>
+</div>

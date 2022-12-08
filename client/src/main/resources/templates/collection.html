@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/css/filter.css">
   <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
+  <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
 </head>
 <body>
 <div class="v1_2">
@@ -42,8 +43,12 @@
   </div>
   <div class="v334_407">
     <div class="v334_405">
-      <input type="submit" class="v329_861" value="Отклонить заказ">
-      <input type="submit" class="v329_869" value="Подтвердить">
+      <a href="/collection/cancel-order">
+        <input type="submit" class="v329_861" value="Отклонить заказ">
+      </a>
+      <a href="/collection/confirm-order">
+        <input type="submit" class="v329_869" value="Подтвердить">
+      </a>
       <span class="v329_872">А0100075, Заказ 1, План. инкассация 01.11.2022</span>
     </div>
     <div class="v334_406">
@@ -91,6 +96,7 @@
     </tbody>
   </table>
   <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
+  <div th:insert="confirmations/confirmation-window :: blackout-confirm"></div>
 </div>
 </body>
 </html>

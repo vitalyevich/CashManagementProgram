@@ -1,4 +1,4 @@
-package com.cashmanagement.vitalyevich.client.controller;
+package com.cashmanagement.vitalyevich.client.controller.users;
 
 import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.model.User;

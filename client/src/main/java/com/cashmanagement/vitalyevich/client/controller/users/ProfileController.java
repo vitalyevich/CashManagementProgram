@@ -1,7 +1,6 @@
-package com.cashmanagement.vitalyevich.client.controller;
+package com.cashmanagement.vitalyevich.client.controller.users;
 
 import com.cashmanagement.vitalyevich.client.config.Seance;
-import com.cashmanagement.vitalyevich.client.firebase.model.WorkTime;
 import com.cashmanagement.vitalyevich.client.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

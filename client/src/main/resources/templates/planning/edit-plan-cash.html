@@ -1,4 +1,4 @@
-<div th:fragment="plan-cash" class="planCash">
+<div th:fragment="edit-plan-cash" class="edit">
   <div class="v22_754">
     <div class="v321_697">
       <span class="v22_770">Количество - единственное редактируемое поле</span>
@@ -33,7 +33,7 @@
     <div class="v22_755"></div>
     <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
          src="../static/images/close.svg" th:src="@{images/close.svg}">
-    <span class="v22_756">План наличных</span>
+    <span class="v22_756">Редактирование плана наличных</span>
     <div class="v22_811"></div>
     <input type="number" class="v22_816">
     <input type="date" class="v22_831">
@@ -57,9 +57,9 @@
   </div>
 </div>
 
-<div th:fragment="blackout-plan" id="blackout-plan">
+<div th:fragment="blackout-edit" id="blackout-edit">
   <a href="#" class="close"></a>
   <div id="window-black">
-    <div th:insert="planning/plan-cash :: plan-cash"></div>
+    <div th:insert="planning/edit-plan-cash :: edit-plan-cash"></div>
   </div>
 </div>

@@ -7,7 +7,9 @@
   <link rel="stylesheet" href="/css/menu-country.css">
   <link rel="stylesheet" href="/css/filter.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
+  <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
   <link rel="stylesheet" href="/css/planning/plan-cash.css">
+  <link rel="stylesheet" href="/css/planning/edit-plan-cash.css">
 </head>
 <body>
 <div class="v1_2">
@@ -55,12 +57,17 @@
     </table>
     </div>
   </div>
-  <a href="/plan-cash">
+  <a href="/planning/plan-cash">
   <input class="v18_2" type="submit" value="Рассчитать"/>
   </a>
-  <input class="v18_3" type="submit" value="Принять"/>
-  <input class="v18_4" type="submit" value="Передать на исполнение"/>
-  <a href="/edit-plan-cash">
+  <a href="/planning/accept">
+    <input class="v18_3" type="submit" value="Принять"/>
+  </a>
+  <a href="/planning/create-order">
+    <input class="v18_4" type="submit" value="Передать на исполнение"/>
+  </a>
+
+  <a href="/planning/edit-plan-cash">
   <input class="v18_5" type="submit" value="Изменить"/>
   </a>
   <span class="v1_300">A0100133, План. инкассация 20.10.2022</span>
@@ -91,7 +98,9 @@
     </table>
   </div>
   <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
+  <div th:insert="confirmations/confirmation-window :: blackout-confirm"></div>
   <div th:insert="planning/plan-cash :: blackout-plan"></div>
+  <div th:insert="planning/edit-plan-cash :: blackout-edit"></div>
 </div>
 </body>
 </html>

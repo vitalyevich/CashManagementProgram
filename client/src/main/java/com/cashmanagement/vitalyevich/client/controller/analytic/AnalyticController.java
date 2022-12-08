@@ -1,4 +1,4 @@
-package com.cashmanagement.vitalyevich.client.controller;
+package com.cashmanagement.vitalyevich.client.controller.analytic;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

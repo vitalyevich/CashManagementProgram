@@ -1,4 +1,4 @@
-<div th:fragment="registration" class="window">
+<div th:fragment="registration" class="registration">
   <div class="v17_358">
     <div class="v17_415"></div>
     <div class="v306_440">
@@ -57,11 +57,15 @@
 
         <input class="v17_446" type="checkbox">
 
-      <input class="v17_430" value="Новая компания">
       <input type="submit" class="v17_433" value="Применить">
       </form>
+
+        <a href="/users/registration-company">
+            <input type="button" class="v17_430" value="Новая компания">
+        </a>
+
         <a href="/users">
-          <input class="v17_435" value="Отменить">
+          <input type="button" class="v17_435" value="Отменить">
         </a>
       <span class="v17_418">Пожалуйста, заполните все поля</span>
       <span class="v17_419">Имя пользователя</span>

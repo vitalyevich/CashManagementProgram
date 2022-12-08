@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+@RequestMapping("/planning-collection")
 @Controller
 public class PlanningCollectionController {
 
@@ -22,7 +24,7 @@ public class PlanningCollectionController {
     @Autowired
     private UserServiceImpl userService;
 
-    @GetMapping("/planning-collection")
+    @GetMapping("")
     public String planningCollection(Model model) {
 
         Iterable<BrigadeOrder> brigadeOrders = orderService.getBrigadeOrders();
@@ -44,5 +46,31 @@ public class PlanningCollectionController {
 
         model.addAttribute("headerText", "Планирование");
         return "planning-collection";
+    }
+
+
+    @GetMapping("/calculate")
+    public String calculate(Model model) {
+        return null;
+    }
+
+    @GetMapping("/cancel-order")
+    public String cancelOrder(Model model) {
+        return "redirect:/planning-collection#blackout-confirm";
+    }
+
+    @GetMapping("/create-brigade")
+    public String createBrigade(Model model) {
+        return "redirect:/planning-collection#blackout-brigade";
+    }
+
+    @GetMapping("/disband")
+    public String disband(Model model) {
+        return null;
+    }
+
+    @GetMapping("/approve")
+    public String approve(Model model) {
+        return null;
     }
 }

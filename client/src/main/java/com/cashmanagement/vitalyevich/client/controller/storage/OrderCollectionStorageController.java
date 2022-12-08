@@ -8,15 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@RequestMapping("/storage-collection")
 @Controller
 public class OrderCollectionStorageController {
 
     @Autowired
     private OrderServiceImpl orderService;
 
-    @GetMapping("/storage-collection")
+    @GetMapping("")
     public String collection(Model model) {
 
         Iterable<Order> orders = orderService.getOrders();
@@ -29,13 +31,31 @@ public class OrderCollectionStorageController {
 
     @GetMapping("/cash-order")
     public String cashOrder(Model model, RedirectAttributes rm) {
-        rm.addFlashAttribute("window","Заказ наличных");
         return "redirect:/storage-collection#blackout-cash";
     }
 
     @GetMapping("/edit-cash-order")
     public String editCashOrder(Model model, RedirectAttributes rm) {
-        rm.addFlashAttribute("window","Редактирование заказа наличных");
-        return "redirect:/storage-collection#blackout-cash";
+        return "redirect:/storage-collection#blackout-edit";
+    }
+
+    @GetMapping("/cancel")
+    public String cancel(Model model, RedirectAttributes rm) {
+        return "redirect:/storage-collection#blackout-confirm";
+    }
+
+    @GetMapping("/confirm")
+    public String confirm(Model model, RedirectAttributes rm) {
+        return null;
+    }
+
+    @GetMapping("/transfer")
+    public String transfer(Model model, RedirectAttributes rm) {
+        return null;
+    }
+
+    @GetMapping("/execute")
+    public String execute(Model model, RedirectAttributes rm) {
+        return null;
     }
 }

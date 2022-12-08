@@ -1,0 +1,40 @@
+<div th:fragment="company" class="company">
+  <div class="v414_277">
+    <div class="v414_278"></div>
+    <span class="v414_279">Регистрация компании</span>
+    <a href="/users/registration">
+      <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
+           src="../static/images/close.svg" th:src="@{images/close.svg}">
+    </a>
+    <div class="v414_281">
+      <div class="v414_282"></div>
+      <div class="v414_283"></div>
+      <div class="v414_284"></div>
+      <div class="v414_285"></div>
+      <div class="v414_286"></div>
+      <div class="v414_287"></div>
+      <span class="v414_294">Пожалуйста, заполните все поля</span>
+      <span class="v414_295">Название компании</span>
+      <span class="v414_296">Страна</span>
+      <span class="v414_297">Город</span>
+      <span class="v414_298">Улица</span>
+      <span class="v414_299">Дом</span>
+      <div class="v601_278">
+        <div class="v414_292"></div>
+        <span class="v414_305">Применить</span>
+      </div>
+      <div class="v601_277">
+        <div class="v414_293"></div>
+        <span class="v414_306">Отменить</span>
+      </div>
+      </div>
+  </div>
+</div>
+
+<div th:fragment="blackout-company" id="blackout-company">
+  <a href="#" class="close"></a>
+  <div id="window-black">
+    <div th:insert="users/registration-company :: company"></div>
+  </div>
+</div>
+
