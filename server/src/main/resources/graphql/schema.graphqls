@@ -1,6 +1,7 @@
 type Query {
     users: [User!]!
     user(id: ID): User
+    atm(id: ID): Atm
     access(id: ID): Access
     accesses: [Access!]!
     roles: [Role!]!
@@ -13,7 +14,6 @@ type Query {
     brigades: [Brigade!]!
     cities: [City!]!
     countries: [Country!]!
-    cityCompanies: [CityCompany!]!
     brigadeOrders: [BrigadeOrder!]!
     storageOrders: [StorageOrder!]!
     withdrawalCashes: [WithdrawalCash!]!
@@ -22,12 +22,14 @@ type Query {
 
 type Mutation {
     createWork(work: CreateWorkInput!): String
-    createUser(user: CreateUserInput!, role: UpdateRoleInput!): User!
-    updateUser(user: UpdateUserInput!, role: UpdateRoleInput!): User!
+    createUser(user: CreateUserInput!, role: UpdateRoleInput!, company: UpdateCompanyInput!): User!
+    updateUser(user: UpdateUserInput!, role: UpdateRoleInput!, company: UpdateCompanyInput!): User!
     deleteUser(id: ID!): Int
 
     updateAccess(access: UpdateAccessInput!, user: UpdateIdInput!): Access!
     createAccess(access: CreateAccessInput!, user: UpdateIdInput!): Access!
+
+    createCompany(company: CreateCompanyInput!, city: UpdateIdInput!): Company!
 }
 
 type WorkTime {
@@ -35,6 +37,21 @@ type WorkTime {
     firstName: String!,
     lastName: String!,
     description: String!
+}
+
+input CreateCompanyInput {
+    companyName: String!
+    address: String!,
+    homeNum: Int!
+}
+
+input CreateCityCompanyInput {
+    address: String!,
+    homeNum: Int!
+}
+
+input UpdateCompanyInput {
+    id: ID!
 }
 
 input UpdateRoleInput {
@@ -105,6 +122,8 @@ type User {
 type Company {
     id: ID!,
     companyName: String!
+    address: String!,
+    homeNum: Int!
 }
 
 type Atm {
@@ -186,14 +205,6 @@ type Country {
     id: ID!,
     countryName: String!,
     cities: [City]!
-}
-
-type CityCompany {
-    id: ID!,
-    companies: Company!,
-    city:City!,
-    address: String!,
-    homeNum: Int!
 }
 
 type BrigadeOrder {

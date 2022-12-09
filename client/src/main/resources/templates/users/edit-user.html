@@ -9,13 +9,14 @@
                      src="../static/images/close.svg" th:src="@{images/close.svg}">
             </a>
             <form th:action="@{/users/edit}" method="post">
-                <input type="hidden" name="id" th:value="${id}"/>
+                <input type="hidden" name="userId" th:value="${userId}"/>
+                <input type="hidden" name="accessId" th:value="${accessId}"/>
 
-                <input th:value="${login}" name="login" type="text" class="v17_437">
+                <input th:value="${login}" name="login" type="text" required class="v17_437">
                 <input th:value="${email}" name="email" type="email" required class="v17_438">
 
                 <div class="v1_6">
-                    <input th:value="${password}" type="password" id="password-input" name="password" maxlength="20" class="v17_439">
+                    <input th:value="${userPassword}" type="password" id="password-input" name="userPassword" maxlength="20" class="v17_439">
                     <a href="#" class="password-control"></a>
                 </div>
                 <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
@@ -32,7 +33,7 @@
                     });
                 </script>
 
-                <input th:value="${password}" type="password" name="confirmPassword" class="v17_440">
+                <input required th:value="${confirmPassword}" type="password" name="confirmPassword" class="v17_440">
 
                 <input th:value="${firstName}" name="firstName" type="text" required class="v17_441">
                 <input th:value="${lastName}" name="lastName" type="text" required class="v17_442">
@@ -48,16 +49,25 @@
                     var mask = IMask(element, maskOptions);
                 </script>
 
-                <select name="role" class="v17_444">
+                <select id="selectRole" name="role" class="v17_444">
                     <option th:each="el, iterStat : ${roles}" th:value="${iterStat.index + 1}" th:text="${el.roleName}">
                     </option>
                 </select>
-                <select name="company" class="v17_445">
+
+                <script type="text/javascript">
+                    document.getElementById('selectRole').value= [[${role}]];
+                </script>
+
+                <select id="selectCompany" name="company" class="v17_445">
                     <option th:each="el, iterStat : ${companies}" th:value="${iterStat.index + 1}" th:text="${el.companyName}">
                     </option>
                 </select>
 
-                <input th:value="${active}" class="v17_446" type="checkbox">
+                <script type="text/javascript">
+                    document.getElementById('selectCompany').value= [[${company}]];
+                </script>
+
+                <input name="active" th:checked="${active}" class="v17_446" type="checkbox">
 
                 <input type="submit" class="v17_433" value="Применить">
             </form>

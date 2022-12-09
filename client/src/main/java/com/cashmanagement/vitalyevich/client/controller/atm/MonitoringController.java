@@ -22,9 +22,17 @@ public class MonitoringController {
     public String monitoring(Model model) {
 
         Iterable<Atm> atms = atmService.getAtms();
-        if (atms == null) {
-            return "error/502";
-        }
+
+       /* for (Atm atm : atms) {
+            if (atm.getCassettes().iterator().next() == null) {
+                atm.setListCassettes("NOT");
+                continue;
+            }
+            while (atm.getCassettes().iterator().hasNext()) {
+                    atm.setListCassettes(atm.getListCassettes() +
+                            atm.getCassettes().iterator().next().getAmount() + "("+atm.getCassettes().iterator().next().getBanknote()+")" + " ");
+                }
+            }*/
 
         model.addAttribute("atms", atms);
         model.addAttribute("headerText", "Мониторинг");

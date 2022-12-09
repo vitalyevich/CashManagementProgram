@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User saveUser(User user, Integer roleId) {
+    public User saveUser(User user, Integer roleId, Integer companyId) {
 
         String document = "mutation {\n" +
                 "                          createUser(user: {\n" +
@@ -80,7 +80,9 @@ public class UserServiceImpl implements UserService{
                 "                                  email: \""+user.getEmail()+"\"" +
                 "                          }, role: {\n" +
                 "                         id: " +roleId+ "\n" +
-                "                     })  {\n" +
+                "                     }, company: {\n" +
+                "                       id: " + companyId + "\n" +
+                                       "}) {" +
                 "                              id\n" +
                 "                          }\n" +
                 "                      }";
@@ -97,7 +99,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User updateUser(User user, Integer roleId) {
+    public User updateUser(User user, Integer roleId, Integer companyId) {
         String document = "mutation {\n" +
                 "                          updateUser(user: {\n" +
                 "                                  id:"+user.getId()+"," +
@@ -107,7 +109,9 @@ public class UserServiceImpl implements UserService{
                 "                                  email: \""+user.getEmail()+"\"" +
                 "                          }, role: {\n" +
                 "         id: " +roleId+ "\n" +
-                "     })  {\n" +
+                "     }, company: {\n" +
+                "                       id: " + companyId + "\n" +
+                "}) {" +
                 "                              id\n" +
                 "                          }\n" +
                 "                      }";
@@ -153,28 +157,6 @@ public class UserServiceImpl implements UserService{
                     .retrieve("roles")
                     .toEntity(Role[].class).block()));
             return roles;
-        } catch (GraphQlTransportException ex) {
-            System.out.println("Ошибка соединения!"); // test
-        }
-        return null;
-    }
-
-    @Override
-    public Iterable<Company> getCompany() {
-        String document = """
-                     query {
-                             companies {
-                             id
-                             companyName
-                             }
-                         }
-                """;
-
-        try {
-            Iterable<Company> companies = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
-                    .retrieve("companies")
-                    .toEntity(Company[].class).block()));
-            return companies;
         } catch (GraphQlTransportException ex) {
             System.out.println("Ошибка соединения!"); // test
         }
@@ -249,7 +231,12 @@ public class UserServiceImpl implements UserService{
                 "            phone,\n" +
                 "            email,\n" +
                 "                roles {\n" +
+                "                id,\n" +
                 "                roleName\n" +
+                "                }\n" +
+                "                companies {\n" +
+                "                id,\n" +
+                "                companyName\n" +
                 "                }\n" +
                 "            }\n" +
                 "}\n" +

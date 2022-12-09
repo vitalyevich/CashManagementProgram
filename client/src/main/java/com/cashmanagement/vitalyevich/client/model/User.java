@@ -16,11 +16,19 @@ public class User {
 
     private String email;
 
+    private String roleName;
+
+    private String companyName;
+
     private Set<Company> companies = new LinkedHashSet<>();
 
     private Set<Role> roles = new LinkedHashSet<>();
 
-    public String getRoles() {
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public String getRoleName() {
         return roles.iterator().next().getRoleName();
     }
 
@@ -28,7 +36,11 @@ public class User {
         this.roles = roles;
     }
 
-    public String getCompanies() {
+    public Set<Company> getCompanies() {
+        return companies;
+    }
+
+    public String getCompanyName() {
         return companies.iterator().next().getCompanyName();
     }
 

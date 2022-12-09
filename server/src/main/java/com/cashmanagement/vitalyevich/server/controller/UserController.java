@@ -24,15 +24,12 @@ public class UserController {
 
     private final AccessRepository accessRepository;
 
-    private final CompanyRepository companyRepository;
-
     private final BrigadeRepository brigadeRepository;
 
-    public UserController(UserRepository userRepository, AccessRepository accessRepository, RoleRepository roleRepository, CompanyRepository companyRepository, BrigadeRepository brigadeRepository) {
+    public UserController(UserRepository userRepository, AccessRepository accessRepository, RoleRepository roleRepository, BrigadeRepository brigadeRepository) {
         this.userRepository = userRepository;
         this.accessRepository = accessRepository;
         this.roleRepository = roleRepository;
-        this.companyRepository = companyRepository;
         this.brigadeRepository = brigadeRepository;
     }
 
@@ -42,18 +39,28 @@ public class UserController {
     }
 
     @MutationMapping
-    User createUser(@Argument User user, @Argument Role role) {
+    User createUser(@Argument User user, @Argument Role role, @Argument Company company) {
         Set<Role> roles = new LinkedHashSet<>();
         roles.add(role);
         user.setRoles(roles);
+
+        Set<Company> companies = new LinkedHashSet<>();
+        companies.add(company);
+        user.setCompanies(companies);
+
         return userRepository.save(user);
     }
 
     @MutationMapping
-    User updateUser(@Argument User user, @Argument Role role) {
+    User updateUser(@Argument User user, @Argument Role role, @Argument Company company) {
         Set<Role> roles = new LinkedHashSet<>();
         roles.add(role);
         user.setRoles(roles);
+
+        Set<Company> companies = new LinkedHashSet<>();
+        companies.add(company);
+        user.setCompanies(companies);
+
         return userRepository.save(user);
     }
 
@@ -74,7 +81,7 @@ public class UserController {
 
     @QueryMapping
     Optional<Access> access (@Argument Integer id) {
-        return accessRepository.findAccessById(id);
+        return accessRepository.findAccessByUserId(id);
     }
 
     @MutationMapping
@@ -92,11 +99,6 @@ public class UserController {
     @QueryMapping
     Iterable<Access> accesses () {
         return accessRepository.findByOrderByIdAsc();
-    }
-
-    @QueryMapping
-    Iterable<Company> companies () {
-        return  companyRepository.findAll();
     }
 
     @QueryMapping

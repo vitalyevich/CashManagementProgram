@@ -28,4 +28,11 @@ public class City {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public City() {
+    }
+
+    public City(Integer id) {
+        this.id = id;
+    }
 }

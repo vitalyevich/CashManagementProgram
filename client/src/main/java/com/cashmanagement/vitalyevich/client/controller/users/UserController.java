@@ -2,10 +2,8 @@ package com.cashmanagement.vitalyevich.client.controller.users;
 
 import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.firebase.model.WorkTime;
-import com.cashmanagement.vitalyevich.client.model.Access;
-import com.cashmanagement.vitalyevich.client.model.Company;
-import com.cashmanagement.vitalyevich.client.model.Role;
-import com.cashmanagement.vitalyevich.client.model.User;
+import com.cashmanagement.vitalyevich.client.model.*;
+import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
 import com.cashmanagement.vitalyevich.client.service.UserServiceImpl;
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,25 +21,24 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private CompanyServiceImpl companyService;
+
     @GetMapping("")
     public String users(Model model) {
         model.addAttribute("headerText", "Пользователи");
         //userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "вход на страницу с вкладкой пользователи"));
 
         Iterable<Access> accesses = userService.getAccesses();
-
-/*        for (Access a : accesses) {
-            count++;
-        }*/
-
         Iterable<Role> roles = userService.getRoles();
-        Iterable<Company> companies = userService.getCompany();
+        Iterable<Company> companies = companyService.getCompany();
 
-/*        if (users == null || roles == null) {
-            return "error/502";
-        }*/
+        Iterable<Country> countries = companyService.getCountries();
+        Iterable<City> cities = companyService.getCities();
 
         int size = IterableUtils.size(accesses);
+        model.addAttribute("countries", countries);
+        model.addAttribute("cities", cities);
         model.addAttribute("accesses", accesses);
         model.addAttribute("roles",roles);
         model.addAttribute("companies",companies);
@@ -53,71 +50,67 @@ public class UserController {
     @GetMapping("/registration")
     public String registration(Model model) {
 
-        return "redirect:/users#blackout-registration"; //error/502
+        return "redirect:/users#blackout-registration";
     }
 
     @GetMapping("/registration-company")
-    public String registrationCompany(Model model) {
+    public String company(Model model) {
 
-        return "redirect:/users#blackout-company"; //error/502
+        return "redirect:/users#blackout-company";
+    }
+
+    @PostMapping("/registration-company")
+    public String registrationCompany(Company company, Model model,
+                                      @RequestParam(name = "cityId") int cityId) {
+
+        companyService.saveCompany(company, cityId);
+        return "/users";
     }
 
     @PostMapping("/registration")
-    public String addUser(User userForm,Access accessForm, Model model, @RequestParam(name = "role") int roleId) { //Access accessForm
-    //      Access userFromDb = accessRepository.findByPhone(accessForm.getPhone());
+    public String addUser(User userForm,Access accessForm, Model model, @RequestParam(name = "role") int roleId,
+                          @RequestParam(name = "company") int companyId) {
+    //  Access userFromDb = accessRepository.findByPhone(accessForm.getPhone());
 
        /* if (userFromDb != null) {
             rm.addFlashAttribute("message", "Данный номер телефона уже используется!");
-
             return "redirect:/menu/rolls#blackout-registration";
         }
-
         if (!accessForm.getPassword().equals(accessForm.getConfirmPassword())) {
             return "redirect:/menu/rolls#blackout-registration";
         }*/
 
-/*
-        accessForm.setActive(true);
-        Set<Role> roles = new HashSet<>();
-        roles.add(new Role(1));
-        accessForm.setRoles(roles);
-*/
 
-        User user = userService.saveUser(userForm, roleId);
+        User user = userService.saveUser(userForm, roleId, companyId);
 
         accessForm.setUser(user);
-        accessForm.setActive(false);
 
-        userService.saveAccess(accessForm, user.getId()); // count++ user.getId()
+        userService.saveAccess(accessForm, user.getId());
 
-        //
-      /*  accessForm.setId(userForm.getId());
-        accessForm.setUser(new User(userForm.getId()));
-        accessRepository.save(accessForm);
-
-        userPointRepository.save(new UserPoint(userForm.getId(),0));*/
-//
-        userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "добавление нового пользователя №" + userForm.getId() +""));
+        //userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "добавление нового пользователя №" + userForm.getId() +""));
         return "redirect:/users";
     }
 
     @GetMapping("/edit")
     public String edit(@RequestParam Integer rowId, Model model, RedirectAttributes rm) {
 
-
-        //User user = userService.getUser(rowId);
-
         Access access = userService.getAccess(rowId);
 
-
-        rm.addFlashAttribute("id", access.getUser().getId());
+        rm.addFlashAttribute("userId", access.getUser().getId());
+        rm.addFlashAttribute("accessId", access.getId());
         rm.addFlashAttribute("login", access.getLogin());
-        rm.addFlashAttribute("password", access.getUserPassword());
+        rm.addFlashAttribute("userPassword", access.getUserPassword());
         rm.addFlashAttribute("confirmPassword", access.getUserPassword());
         rm.addFlashAttribute("email", access.getUser().getEmail());
-        rm.addFlashAttribute("role", access.getUser().getRoles());
-        rm.addFlashAttribute("active", access.getActive());
-        /*rm.addFlashAttribute("company", access.getUser().getRoles());*/
+
+        rm.addFlashAttribute("role", access.getUser().getRoles().iterator().next().getId());
+        rm.addFlashAttribute("company", access.getUser().getCompanies().iterator().next().getId());
+
+
+        if (access.getActive().equals(true)) {
+            rm.addFlashAttribute("active", "checked");
+        }
+
         rm.addFlashAttribute("firstName", access.getUser().getFirstName());
         rm.addFlashAttribute("lastName", access.getUser().getLastName());
         rm.addFlashAttribute("phone", access.getUser().getPhone());
@@ -126,16 +119,16 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public String edit(User userForm,Access accessForm, Model model, @RequestParam(name = "role") int roleId) {
+    public String edit(User userForm,Access accessForm, Model model, @RequestParam(name = "role") int roleId, @RequestParam(name = "company") int companyId,
+                       @RequestParam(name = "userId") int userId, @RequestParam(name = "accessId") int accessId) {
 
+        userForm.setId(userId);
         accessForm.setUser(userForm);
-        accessForm.setActive(false);
-
-        userService.updateUser(userForm, roleId);
+        accessForm.setId(accessId);
+        userService.updateUser(userForm, roleId, companyId);
         userService.updateAccess(accessForm, userForm.getId());
 
-        userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "редактирование пользователя №" + userForm.getId()));
-
+        //userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "редактирование пользователя №" + userForm.getId()));
         return "redirect:/users";
     }
 
@@ -143,8 +136,7 @@ public class UserController {
     public String delete(@RequestParam Integer rowId, Model model) {
         userService.deleteUser(rowId);
 
-        userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "удаление пользователя №" + rowId +""));
-
+        //userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "удаление пользователя №" + rowId +""));
         return "redirect:/users";
     }
 }

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface AccessRepository extends JpaRepository<Access, Integer> {
-    Optional<Access> findAccessById(Integer id);
+    Optional<Access> findAccessByUserId(Integer id);
     Iterable<Access> findByOrderByIdAsc();
 }

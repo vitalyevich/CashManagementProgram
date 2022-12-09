@@ -13,6 +13,16 @@ public class Atm extends ColorTable {
 
     private String atmState;
 
+    private String listCassettes;
+
+    public String getListCassettes() {
+        return listCassettes;
+    }
+
+    public void setListCassettes(String listCassettes) {
+        this.listCassettes = listCassettes;
+    }
+
     private Set<Cassette> cassettes = new LinkedHashSet<>();
 
     private Set<Company> companies = new LinkedHashSet<>();

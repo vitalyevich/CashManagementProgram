@@ -13,12 +13,18 @@ public class Access extends ColorTable {
 
     private Boolean active = false;
 
+    private String stage;
+
     @Override
     public String getColorFirst() {
         return active.equals(false) ? "#57DB4E" : "#FF3F3F";
     }
 
-    public String getActive() {
+    public Boolean getActive() {
+        return active;
+    }
+
+    public String getStage() {
         return active.equals(false) ? "разрешен" : "запрещен";
     }
 

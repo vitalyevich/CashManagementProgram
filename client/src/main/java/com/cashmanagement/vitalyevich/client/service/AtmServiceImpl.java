@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class AtmServiceImpl implements AtmService{
@@ -24,7 +25,14 @@ public class AtmServiceImpl implements AtmService{
                               id,
                               atmUid,
                               cashState,
-                              atmState
+                              atmState,
+                              cassettes {
+                                  id,
+                                  cassetteNum,
+                                  banknote,
+                                  currency,
+                                  amount
+                              }
                           }
                       }
                 """;
@@ -34,6 +42,28 @@ public class AtmServiceImpl implements AtmService{
                     .retrieve("atms")
                     .toEntity(Atm[].class).block()));
             return atms;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public Atm getAtm(Integer id) {
+        String document = "query {\n" +
+                "                          atm(id :"+id+") {\n" +
+                "                              id,\n" +
+                "                              atmUid,\n" +
+                "                              cashState,\n" +
+                "                              atmState\n" +
+                "                          }\n" +
+                "                      }";
+
+        try {
+            Atm atm = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("atm")
+                    .toEntity(Atm.class).block());
+            return atm;
         } catch (GraphQlTransportException ex) {
             System.out.println("Ошибка соединения!"); // test
         }

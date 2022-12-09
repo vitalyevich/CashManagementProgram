@@ -6,28 +6,34 @@
       <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
            src="../static/images/close.svg" th:src="@{images/close.svg}">
     </a>
-    <div class="v414_281">
-      <div class="v414_282"></div>
-      <div class="v414_283"></div>
-      <div class="v414_284"></div>
-      <div class="v414_285"></div>
-      <div class="v414_286"></div>
-      <div class="v414_287"></div>
-      <span class="v414_294">Пожалуйста, заполните все поля</span>
-      <span class="v414_295">Название компании</span>
-      <span class="v414_296">Страна</span>
-      <span class="v414_297">Город</span>
-      <span class="v414_298">Улица</span>
-      <span class="v414_299">Дом</span>
-      <div class="v601_278">
-        <div class="v414_292"></div>
-        <span class="v414_305">Применить</span>
+    <form th:action="@{/users/registration-company}" method="post">
+      <div class="v414_281">
+        <div class="v414_282"></div>
+
+        <input name="companyName" required type="text" class="v414_283">
+
+        <select name="countryId" class="v414_284">
+          <option th:each="el, iterStat : ${countries}" th:value="${iterStat.index + 1}" th:text="${el.countryName}">
+        </select>
+        <select name="cityId" class="v414_285">
+          <option th:each="el, iterStat : ${cities}" th:value="${iterStat.index + 1}" th:text="${el.cityName}">
+        </select>
+        <input name="address" required type="text" class="v414_286">
+        <input name="homeNum" required type="number" class="v414_287">
+        <span class="v414_294">Пожалуйста, заполните все поля</span>
+        <span class="v414_295">Название компании</span>
+        <span class="v414_296">Страна</span>
+        <span class="v414_297">Город</span>
+        <span class="v414_298">Улица</span>
+        <span class="v414_299">Дом</span>
+
+        <input type="submit" class="v601_278" value="Применить">
+
+      <a href="/users/registration">
+        <input type="button" class="v601_277" value="Отменить">
+      </a>
       </div>
-      <div class="v601_277">
-        <div class="v414_293"></div>
-        <span class="v414_306">Отменить</span>
-      </div>
-      </div>
+    </form>
   </div>
 </div>
 

@@ -9,11 +9,11 @@
            src="../static/images/close.svg" th:src="@{images/close.svg}">
       </a>
       <form th:action="@{/users/registration}" method="post">
-        <input name="login" type="text" class="v17_437">
+        <input required name="login" type="text" class="v17_437">
         <input name="email" type="email" required class="v17_438">
 
         <div class="v1_6">
-          <input type="password" id="password-input" name="password" maxlength="20" class="v17_439">
+          <input required type="password" id="password-input" name="userPassword" maxlength="20" class="v17_439">
           <a href="#" class="password-control"></a>
       </div>
        <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
@@ -30,10 +30,10 @@
           });
         </script>
 
-        <input type="password" name="confirmPassword" class="v17_440">
+        <input required type="password" name="confirmPassword" class="v17_440">
 
-        <input name="firstName" type="text" required class="v17_441">
-        <input name="lastName" type="text" required class="v17_442">
+        <input  name="firstName" type="text" required class="v17_441">
+        <input  name="lastName" type="text" required class="v17_442">
 
         <input required id="phone" type="tel" name="phone" maxlength="19" pattern="^\+375(\s+)?\(?(17|25|29|33|44)\)?(\s+)?[0-9]{3}-?[0-9]{2}-?[0-9]{2}$" class="v17_443">
 
@@ -55,7 +55,7 @@
           </option>
         </select>
 
-        <input class="v17_446" type="checkbox">
+        <input name="active" class="v17_446" type="checkbox">
 
       <input type="submit" class="v17_433" value="Применить">
       </form>

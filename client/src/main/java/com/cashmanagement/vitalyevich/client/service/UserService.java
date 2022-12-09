@@ -9,15 +9,13 @@ public interface UserService {
 
     User getUser(Integer id);
 
-    User saveUser(User user, Integer roleId);
+    User saveUser(User user, Integer roleId, Integer companyId);
 
-    User updateUser(User user, Integer roleId);
+    User updateUser(User user, Integer roleId, Integer companyId);
 
     void deleteUser(Integer id);
 
     Iterable<Role> getRoles();
-
-    Iterable<Company> getCompany();
 
     void saveWork(WorkTime workTime);
 
