@@ -87,4 +87,18 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public User() {
+    }
+
+    public User(Integer id) {
+        this.id = id;
+    }
+
+    public User(Integer id, String firstName, String lastName, Set<Role> roles) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles = roles;
+    }
 }

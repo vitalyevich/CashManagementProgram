@@ -17,11 +17,14 @@ public class Order {
     @JoinColumn(name = "plan_id", nullable = false)
     private PlanAtm plan;
 
-    @Column(name = "stage", nullable = false, length = 50)
+    @Column(name = "status", nullable = false, length = 50)
+    private String status;
+
+    @Column(name = "stage", length = 50)
     private String stage;
 
-    @Column(name = "collection_date", nullable = false)
-    private LocalDate collectionDate;
+    @Column(name = "order_date", nullable = false)
+    private LocalDate orderDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
@@ -46,12 +49,12 @@ public class Order {
         this.user = user;
     }
 
-    public LocalDate getCollectionDate() {
-        return collectionDate;
+    public LocalDate getOrderDate() {
+        return orderDate;
     }
 
-    public void setCollectionDate(LocalDate collectionDate) {
-        this.collectionDate = collectionDate;
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
     }
 
     public String getStage() {
@@ -60,6 +63,14 @@ public class Order {
 
     public void setStage(String stage) {
         this.stage = stage;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public PlanAtm getPlan() {
@@ -75,6 +86,13 @@ public class Order {
     }
 
     public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Order() {
+    }
+
+    public Order(Integer id) {
         this.id = id;
     }
 }

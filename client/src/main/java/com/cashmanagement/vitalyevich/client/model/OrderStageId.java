@@ -37,4 +37,12 @@ public class OrderStageId implements Serializable {
         OrderStageId that = (OrderStageId) o;
         return orderId.equals(that.orderId) && stageId.equals(that.stageId);
     }
+
+    public OrderStageId() {
+    }
+
+    public OrderStageId(Integer orderId, Integer stageId) {
+        this.orderId = orderId;
+        this.stageId = stageId;
+    }
 }

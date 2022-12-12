@@ -26,11 +26,29 @@ public class PlanningServiceImpl implements PlanningService {
                               id,
                               atmUid,
                               cashState,
-                              atmState
+                              atmState,
+                              address,
+                              homeNum,
+                                companies {
+                                    id,
+                                    companyName
+                                }
                               },
                               planMethod,
                               status,
-                              planPeriod
+                              planPeriod,
+                              cassettes {
+                                  id,
+                                  cassetteNum,
+                                  banknote,
+                                  currency,
+                                  amount
+                              },
+                              user {
+                              id,
+                              firstName,
+                              lastName
+                              }
                           }
                       }
                 """;

@@ -3,7 +3,7 @@ package com.cashmanagement.vitalyevich.client.model;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Brigade {
+public class Brigade extends ColorTable {
 
     private Integer id;
 
@@ -12,6 +12,21 @@ public class Brigade {
     private String brigadeName;
 
     private Boolean active = false;
+
+    private String brigadeActive;
+
+    public String getBrigadeActive() {
+        return active.equals(false) ? "разрешен" : "запрещен";
+    }
+
+    @Override
+    public String getColorFirst() {
+        return active.equals(false) ? "#57DB4E" : "#FF3F3F";
+    }
+
+    public void setBrigadeActive(String brigadeActive) {
+        this.brigadeActive = brigadeActive;
+    }
 
     private String brigadeUsers;
 
@@ -33,8 +48,8 @@ public class Brigade {
         this.users = users;
     }
 
-    public String getActive() {
-        return active.equals(false) ? "разрешен" : "запрещен";
+    public Boolean getActive() {
+        return active;
     }
 
     public void setActive(Boolean active) {
@@ -63,5 +78,18 @@ public class Brigade {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Brigade() {
+    }
+
+    public Brigade(Set<User> users) {
+        this.users = users;
+    }
+
+    public Brigade(String brigadeName, Boolean active, Set<User> users) {
+        this.brigadeName = brigadeName;
+        this.active = active;
+        this.users = users;
     }
 }

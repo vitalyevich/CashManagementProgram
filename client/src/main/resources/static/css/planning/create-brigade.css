@@ -1,3 +1,6 @@
+input {
+    padding-left: 10px;
+}
 .windowBrigade {
     width: 684px;
     height: 797px;
@@ -141,11 +144,20 @@ select {
     border-bottom-right-radius: 30px;
     overflow: hidden;
 }
+.table tr.marked{
+    background-color: #E0E0E0;
+}
+.v336_487.marked{
+    opacity: 1;
+}
+.v336_485.marked{
+    opacity: 1;
+}
 .v336_487 {
     width: 178px;
     height: 27px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     top: 215px;
     left: 425px;
@@ -164,7 +176,7 @@ select {
     color: rgba(0,0,0,1);
     position: absolute;
     top: 13px;
-    left: 24px;
+    left: 25px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
@@ -192,6 +204,16 @@ select {
     font-size: 16px;
     opacity: 1;
     text-align: left;
+}
+.v18_232 {
+    width: 33vw;
+    height: 152px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 37px;
+    left: 0px;
+    overflow: auto;
 }
 .v23_941 {
     width: 635px;
@@ -288,7 +310,7 @@ select {
     appearance: none;
 }
 .v23_871 {
-    width: 423px;
+    width: 416px;
     height: 25px;
     opacity: 1;
     position: absolute;
@@ -324,7 +346,7 @@ select {
     width: 192px;
     height: 27px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     top: 215px;
     left: 410px;

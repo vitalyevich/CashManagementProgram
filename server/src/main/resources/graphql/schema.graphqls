@@ -1,26 +1,33 @@
 type Query {
     users: [User!]!
-    user(id: ID): User
-    atm(id: ID): Atm
-    access(id: ID): Access
+    user(id: ID): User!
+    atm(id: ID): Atm!
+    access(id: ID): Access!
     accesses: [Access!]!
     roles: [Role!]!
     companies: [Company!]!
     atms: [Atm!]!
     plans: [PlanAtm!]!
+    plan(id: ID): PlanAtm!
     storages: [Storage!]!
     operations: [StorageOperation!]!
     orders: [Order!]!
-    brigades: [Brigade!]!
+    brigades: [Brigade]
     cities: [City!]!
     countries: [Country!]!
     brigadeOrders: [BrigadeOrder!]!
     storageOrders: [StorageOrder!]!
     withdrawalCashes: [WithdrawalCash!]!
     orderStages: [OrderStage!]!
+    orderStage(id: ID): OrderStage!
+    order(id: ID): Order!
+    brigadeOrder(id: ID): BrigadeOrder!
+    storageOrder(id: ID): StorageOrder!
 }
 
 type Mutation {
+    createStage(stageDate: String!, orderId: ID!, stageId: ID!): OrderStage!
+
     createWork(work: CreateWorkInput!): String
     createUser(user: CreateUserInput!, role: UpdateRoleInput!, company: UpdateCompanyInput!): User!
     updateUser(user: UpdateUserInput!, role: UpdateRoleInput!, company: UpdateCompanyInput!): User!
@@ -30,6 +37,20 @@ type Mutation {
     createAccess(access: CreateAccessInput!, user: UpdateIdInput!): Access!
 
     createCompany(company: CreateCompanyInput!, city: UpdateIdInput!): Company!
+    updateOrder(order: UpdateOrderInput!, plan: UpdateIdInput!, user: UpdateIdInput!): Order!
+
+    deleteOrder(id: ID!): Int
+
+    updateBrigadeOrder(brigadeOrder: UpdateBrigadeOrderInput!, orderId: ID!, brigadeId: ID, userId: ID!): BrigadeOrder!
+
+    createBrigade(brigade: CreateBrigadeInput!, company: UpdateIdInput!, users: [UpdateIdInput]!): Brigade!
+    deleteBrigade(id: ID!): Int
+
+}
+
+input UpdateBrigadeOrderInput {
+    id: ID!,
+    orderDate: String!,
 }
 
 type WorkTime {
@@ -37,6 +58,22 @@ type WorkTime {
     firstName: String!,
     lastName: String!,
     description: String!
+}
+
+input CreateBrigadeInput {
+    brigadeName: String!,
+    active: Boolean!
+}
+
+input CreateOrderInput {
+    stageDate: String!
+}
+
+input UpdateOrderInput {
+    id: ID!,
+    stage: String!,
+    status: String!,
+    orderDate: String!,
 }
 
 input CreateCompanyInput {
@@ -133,6 +170,9 @@ type Atm {
     atmState: String!
     cassettes: [Cassette]!,
     companies: [Company]!
+    address: String!,
+    homeNum: Int!
+    cities: [City]!
 }
 
 type Cassette {
@@ -149,6 +189,8 @@ type PlanAtm {
     planMethod: String!,
     status: String!,
     planPeriod: Int!
+    cassettes: [Cassette]!
+    user: User!
 }
 
 type Storage {
@@ -172,7 +214,8 @@ type Order {
     id: ID!,
     plan: PlanAtm!,
     stage: String!,
-    collectionDate: String!,
+    status: String!,
+    orderDate: String!,
     user: User!,
     orderStages: [OrderStage]
 }
@@ -211,7 +254,7 @@ type BrigadeOrder {
     id: ID!,
     order: Order!,
     orderDate: String!,
-    brigade: Brigade!,
+    brigade: Brigade,
     user: User!
 }
 

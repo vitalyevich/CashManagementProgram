@@ -15,6 +15,49 @@ public class PlanAtm extends ColorTable {
 
     private Integer planPeriod;
 
+    private User user;
+
+    private String listCassettes;
+
+    private String currency;
+
+    private Integer amount;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getListCassettes() {
+        return listCassettes;
+    }
+
+    public void setListCassettes(String listCassettes) {
+        this.listCassettes = listCassettes;
+    }
+
+    public String getCurrency() {
+        if (!cassettes.iterator().hasNext()) {
+            return " ";
+        }
+        return cassettes.iterator().next().getCurrency();
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
     @Override
     public String getColorFirst() {
 

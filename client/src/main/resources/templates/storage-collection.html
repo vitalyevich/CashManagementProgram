@@ -33,7 +33,7 @@
       </thead>
       <tbody>
       <tr th:each="lst : ${orders}">
-        <td th:text="${lst.collectionDate}">Дата заказа</td>
+        <td th:text="${lst.orderDate}">Дата заказа</td>
         <td>Заказ наличных</td>
         <td th:text="${lst.user.lastName} + ' ' + ${lst.user.firstName}">Заказал</td>
         <td th:text="${lst.stage}">Статус заказа</td>

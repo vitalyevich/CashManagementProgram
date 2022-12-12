@@ -23,6 +23,18 @@ public class Atm {
     @Column(name = "atm_state", nullable = false)
     private String atmState;
 
+    @Column(name = "address", nullable = false)
+    private String address;
+
+    @Column(name = "home_num", nullable = false)
+    private Integer homeNum;
+
+    @ManyToMany
+    @JoinTable(name = "city_atms",
+            joinColumns = @JoinColumn(name = "atm_id"),
+            inverseJoinColumns = @JoinColumn(name = "city_id"))
+    private Set<City> cities = new LinkedHashSet<>();
+
     @ManyToMany
     @JoinTable(name = "atm_cassettes",
             joinColumns = @JoinColumn(name = "atm_id"),
@@ -49,6 +61,30 @@ public class Atm {
 
     public void setCassettes(Set<Cassette> cassettes) {
         this.cassettes = cassettes;
+    }
+
+    public Set<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(Set<City> cities) {
+        this.cities = cities;
+    }
+
+    public Integer getHomeNum() {
+        return homeNum;
+    }
+
+    public void setHomeNum(Integer homeNum) {
+        this.homeNum = homeNum;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getAtmState() {

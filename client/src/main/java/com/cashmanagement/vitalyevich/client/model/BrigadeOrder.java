@@ -12,6 +12,19 @@ public class BrigadeOrder {
 
     private Brigade brigade;
 
+    private String brigadeName;
+
+    public String getBrigadeName() {
+        if (brigade == null) {
+            return " ";
+        }
+        return brigade.getBrigadeName();
+    }
+
+    public void setBrigadeName(String brigadeName) {
+        this.brigadeName = brigadeName;
+    }
+
     private User user;
 
     public User getUser() {
@@ -51,6 +64,13 @@ public class BrigadeOrder {
     }
 
     public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public BrigadeOrder() {
+    }
+
+    public BrigadeOrder(Integer id) {
         this.id = id;
     }
 }

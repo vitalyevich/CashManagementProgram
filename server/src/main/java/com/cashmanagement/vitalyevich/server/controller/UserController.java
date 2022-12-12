@@ -106,11 +106,26 @@ public class UserController {
         return  brigadeRepository.findAll();
     }
 
+    @MutationMapping
+    Brigade createBrigade(@Argument Brigade brigade, @Argument Company company, @Argument Set<User> users) {
+
+        brigade.setCompany(company);
+
+        brigade.setUsers(users);
+
+        return brigadeRepository.save(brigade);
+    }
+
     @Autowired
     FBService fbService;
 
     @MutationMapping
     void createWork(@Argument WorkTime work) throws ExecutionException, InterruptedException {
         fbService.saveWork(work);
+    }
+
+    @MutationMapping
+    void deleteBrigade(@Argument Integer id) {
+        brigadeRepository.deleteById(id);
     }
 }

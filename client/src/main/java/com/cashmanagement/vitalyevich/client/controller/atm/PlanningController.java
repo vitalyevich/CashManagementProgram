@@ -1,6 +1,7 @@
 package com.cashmanagement.vitalyevich.client.controller.atm;
 
 import com.cashmanagement.vitalyevich.client.model.Atm;
+import com.cashmanagement.vitalyevich.client.model.Cassette;
 import com.cashmanagement.vitalyevich.client.model.PlanAtm;
 import com.cashmanagement.vitalyevich.client.service.PlanningServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,19 @@ public class PlanningController {
     public String planning(Model model) {
 
         Iterable<PlanAtm> planAtms = planningService.getPlans();
-        if (planAtms == null) {
-            return "error/502";
+
+        for (PlanAtm planAtm : planAtms) {
+            planAtm.setListCassettes("");
+            planAtm.setAmount(0);
+            if (!planAtm.getCassettes().iterator().hasNext()) {
+                planAtm.setListCassettes(" ");
+            }
+            for (Cassette cassette: planAtm.getCassettes())
+            {
+                planAtm.setListCassettes(planAtm.getListCassettes() +
+                        cassette.getAmount() + " ("+cassette.getBanknote()+")" + ", ");
+                planAtm.setAmount(planAtm.getAmount() + cassette.getAmount());
+            }
         }
 
         model.addAttribute("plans", planAtms);

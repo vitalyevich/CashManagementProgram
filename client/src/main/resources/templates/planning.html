@@ -32,7 +32,6 @@
         <th>Кассеты</th>
         <th>Валюта</th>
         <th>Рассчитал(-а)</th>
-        <th>Принял(-а)</th>
         <th>Компания</th>
         <th>Адрес</th>
       </tr>
@@ -43,15 +42,14 @@
         <td style="text-align: center;" th:text="${lst.atm.atmUid}">ID объекта</td>
         <td style="text-align: center; color: white;" th:text="${lst.status}" th:bgcolor="${lst.colorFirst}">Статус</td>
         <td style="text-align: center; width: 3vw; " th:text="${lst.planPeriod}">Период</td>
-        <td style="width: 5vw; ">07.08.2022</td>
+        <td style="width: 5vw; "></td> <!--07.08.2022-->
         <td style="text-align: center; width: 5vw; ">План</td>
-        <td>200 000</td>
-        <td style=" width: 265vw; ">15 500 (100); 27 454 (30); 5 020 (5); 5 020 (5);</td>
-        <td style="vertical-align: inherit; width: 3vw; text-align: center;">BYN</td>
-        <td style="width: 30vw; ">Максим Садовский</td>
-        <td style="width: 25vw; ">Павел Анищенко</td>
-        <td style="width: 100vw; ">ОАО ”АСБ Беларусбанк“</td>
-        <td style="width: 50vw; ">Центральная 12, 5</td>
+        <td th:text="${lst.amount}"></td>
+        <td style=" width: 265vw; " th:text="${lst.listCassettes}"></td>
+        <td style="vertical-align: inherit; width: 3vw; text-align: center;" th:text="${lst.currency}"></td>
+        <td style="width: 30vw; " th:text="${lst.user.lastName} + ' ' + ${lst.user.firstName}"></td>
+        <td style="width: 100vw; " th:text="${lst.atm.company}"></td>
+        <td style="width: 50vw; " th:text="${lst.atm.address} + ', ' + ${lst.atm.homeNum}">Центральная 12, 5</td>
       </tr>
       </tbody>
     </table>

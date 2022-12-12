@@ -32,7 +32,7 @@ public class AtmServiceImpl implements AtmService{
                                   banknote,
                                   currency,
                                   amount
-                              }
+                              },
                           }
                       }
                 """;

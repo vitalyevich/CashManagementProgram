@@ -28,4 +28,8 @@ public interface UserService {
     Access saveAccess(Access access, Integer userId);
 
     Iterable<Brigade> getBrigades();
+
+    Brigade saveBrigade(Brigade brigade, Integer companyId);
+
+    void deleteBrigade(Integer id);
 }

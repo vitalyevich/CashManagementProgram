@@ -55,6 +55,10 @@ public class UserServiceImpl implements UserService{
                 "                                  lastName,\n" +
                 "                                  phone,\n" +
                 "                                  email\n" +
+                "                                  roles {\n" +
+                "                                  id,\n" +
+                "                                  roleName\n" +
+                "                                  }\n" +
                 "                              }\n" +
                 "                          }";
 
@@ -322,13 +326,65 @@ public class UserServiceImpl implements UserService{
                 """;
 
         try {
-            Iterable<Brigade> brigades = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+            Iterable<Brigade> brigades = List.of(graphClient.httpGraphQlClient().document(document)
                     .retrieve("brigades")
-                    .toEntity(Brigade[].class).block()));
+                    .toEntity(Brigade[].class).block());
             return brigades;
         } catch (GraphQlTransportException ex) {
             System.out.println("Ошибка соединения!"); // test
         }
         return null;
+    }
+
+    @Override
+    public Brigade saveBrigade(Brigade brigade, Integer companyId) {
+
+        String document = "mutation {\n" +
+                "    createBrigade(\n" +
+                "        brigade: {\n" +
+                "            brigadeName: \""+brigade.getBrigadeName()+"\",\n" +
+                "            active: "+brigade.getActive()+"\n" +
+                "        },\n" +
+                "        company: {\n" +
+                "            id: "+companyId+"\n" +
+                "        },\n" +
+                "        users: [";
+
+        for (User user: brigade.getUsers()) {
+            document+= "{\n" +
+                    "    id: "+user.getId()+"\n" +
+                    "},";
+        }
+
+        document += "]\n" +
+                "    ) {\n" +
+                "        brigadeName,\n" +
+                "        id\n" +
+                "    }\n" +
+                "}";
+
+        try {
+            Brigade brigade1 = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("createBrigade")
+                    .toEntity(Brigade.class).block());
+            return brigade1;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteBrigade(Integer id) {
+        String document = "mutation {\n" +
+                "        deleteBrigade(id: "+id+")\n" +
+                "    }";
+
+        try {
+            graphClient.httpGraphQlClient().document(document)
+                    .retrieve("deleteBrigade").toEntity(Brigade.class).block();
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
     }
 }

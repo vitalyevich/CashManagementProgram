@@ -28,8 +28,12 @@ public class Cassette {
         this.currency = currency;
     }
 
-    public Double getBanknote() {
-        return banknote;
+    public String getBanknote() {
+        if(banknote % 1 == 0) {
+            return String.valueOf(Math.round(banknote));
+        } else {
+            return String.valueOf(banknote);
+        }
     }
 
     public void setBanknote(Double banknote) {

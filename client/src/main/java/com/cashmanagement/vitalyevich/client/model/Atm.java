@@ -15,6 +15,33 @@ public class Atm extends ColorTable {
 
     private String listCassettes;
 
+    private String currency;
+
+    private Integer amount;
+
+    private String address;
+
+    private Integer homeNum;
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public String getCurrency() {
+        if (!cassettes.iterator().hasNext()) {
+            return " ";
+        }
+        return cassettes.iterator().next().getCurrency();
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public String getListCassettes() {
         return listCassettes;
     }
@@ -23,9 +50,48 @@ public class Atm extends ColorTable {
         this.listCassettes = listCassettes;
     }
 
+    private String company;
+
+    public String getCompany() {
+        if (!companies.iterator().hasNext()) {
+            return " ";
+        }
+        return companies.iterator().next().getCompanyName();
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getHomeNum() {
+        return homeNum;
+    }
+
+    public void setHomeNum(Integer homeNum) {
+        this.homeNum = homeNum;
+    }
+
     private Set<Cassette> cassettes = new LinkedHashSet<>();
 
     private Set<Company> companies = new LinkedHashSet<>();
+
+    private Set<City> cities = new LinkedHashSet<>();
+
+    public Set<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(Set<City> cities) {
+        this.cities = cities;
+    }
 
     @Override
     public String getColorFirst() {

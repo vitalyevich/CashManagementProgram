@@ -7,19 +7,19 @@ import java.time.LocalDate;
 @Table(name = "brigade_orders")
 public class BrigadeOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "order_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     @Column(name = "order_date", nullable = false)
     private LocalDate orderDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "brigade_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "brigade_id")
     private Brigade brigade;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

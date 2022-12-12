@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
   <link rel="stylesheet" href="/css/planning/create-brigade.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="v1_2">
@@ -17,63 +18,78 @@
   <div th:insert="blocks/filter :: filter"></div>
   <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>ID объекта</th>
-        <th>Бригада</th>
-        <th>Статус</th>
-        <th>Дата инкассации</th>
-        <th>Валюта</th>
-        <th>Загружаемые наличные</th>
-        <th>Кассеты</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="lst : ${brigadeOrders}">
-        <td th:text="${lst.order.plan.atm.atmUid}">ID объекта</td>
-        <td th:text="${lst.brigade.brigadeName}">Бригада</td>
-        <td th:text="${lst.order.stage}">Статус</td>
-        <td th:text="${lst.orderDate}">Дата инкассации</td>
-        <td> </td>
-        <td>25 452</td>
-        <td style="width: 16vw;">15 500 (100); 27 454 (30); 5 020 (5); 5 020 (5);</td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="v18_231">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Код</th>
+          <th>Бригада</th>
+          <th>Статус</th>
+          <th>Дата инкассации</th>
+          <th>Валюта</th>
+          <th>Загружаемые наличные</th>
+          <th>Кассеты</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="v1" th:each="lst : ${brigadeOrders}" th:id="${lst.id}" onclick="document.getElementById('rowIdCalc').value = this.getAttribute('id');
+document.getElementById('rowIdCreate').value = this.getAttribute('id'); document.getElementById('rowIdDisband').value = this.getAttribute('id');
+document.getElementById('rowIdApprove').value = this.getAttribute('id'); document.getElementById('rowIdCancel').value = this.getAttribute('id');
+document.getElementById('calc').disabled = false; document.getElementById('create').disabled = false;
+document.getElementById('disband').disabled = false; document.getElementById('approve').disabled = false;
+document.getElementById('cancel').disabled = false;">
+          <td style="vertical-align: inherit; width: 4vw;" th:text="${lst.order.plan.atm.atmUid}"></td>
+          <td style="vertical-align: inherit; width: 6vw; text-align: center;" th:text="${lst.brigadeName}">Бригада</td>
+          <td style="vertical-align: inherit; width: 16vw; color: white;" th:text="${lst.order.status}" th:bgcolor="${lst.order.colorFirst}">Статус</td>
+          <td style="vertical-align: inherit; width: 7vw;" th:text="${lst.orderDate}">Дата инкассации</td>
+          <td style="vertical-align: inherit; width: 3vw; text-align: center;" th:text="${lst.order.plan.currency}"></td>
+          <td style="vertical-align: inherit; width: 7vw;" th:text="${lst.order.plan.amount}"></td>
+          <td style=" width: 18vw; " th:text="${lst.order.plan.listCassettes}"></td>
+          <input name="id">
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <a href="/planning-collection/calculate">
-  <input type="submit" value="Рассчитать" class="v335_451">
-  </a>
-  <a href="/planning-collection/create-brigade">
-    <input type="submit" value="Сформировать поручение" class="v105_1493">
-  </a>
-  <a href="/planning-collection/disband">
-    <input type="submit" value="Расформировать поручение" class="v335_453">
-  </a>
-  <a href="/planning-collection/approve">
-    <input type="submit" value="Одобрить поручение" class="v335_454">
-  </a>
-  <a href="/planning-collection/cancel-order">
-    <input type="submit" value="Отклонить заказ" class="v335_455">
-  </a>
+  <form action="/planning-collection/count" method="post">
+    <input id="calc" type="submit" value="Рассчитать" class="v335_451" disabled>
+    <input type="hidden" name="rowId" id="rowIdCalc">
+  </form>
+  <form action="/planning-collection/create-brigade" method="post">
+    <input id="create" type="submit" value="Сформировать поручение" class="v105_1493" disabled>
+    <input type="hidden" name="rowId" id="rowIdCreate">
+  </form>
+  <form action="/planning-collection/disband" method="post">
+    <input id="disband" type="submit" value="Расформировать поручение" class="v335_453" disabled>
+    <input type="hidden" name="rowId" id="rowIdDisband">
+  </form>
+  <form action="/planning-collection/approve" method="post">
+    <input id="approve" type="submit" value="Одобрить поручение" class="v335_454" disabled>
+    <input type="hidden" name="rowId" id="rowIdApprove">
+  </form>
+  <form action="/planning-collection/cancel-order" method="post">
+    <input id="cancel" type="submit" value="Отклонить заказ" class="v335_455" disabled>
+    <input type="hidden" name="rowId" id="rowIdCancel">
+  </form>
   <div style="top:920px; width: 28vw; height: 400px;" class="v18_235">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Статус</th>
-        <th>Бригада</th>
-        <th>Член бригады</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="lst : ${brigades}">
-        <td style="vertical-align: inherit; width: 2vw; text-align: center" th:text="${lst.active}"></td>
-        <td style="vertical-align: inherit; width: 2vw; text-align: center" th:text="${lst.brigadeName}">Бригада</td>
-        <td style="vertical-align: inherit; width: 10vw;" th:text="${lst.brigadeUsers}">Член бригады</td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="v18_231" style="height: 346px">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Статус</th>
+            <th>Бригада</th>
+            <th>Член бригады</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="lst : ${brigades}">
+            <td th:bgcolor="${lst.colorFirst}" style="vertical-align: inherit; width: 2vw; text-align: center" th:text="${lst.brigadeActive}"></td>
+            <td style="vertical-align: inherit; width: 2vw; text-align: center" th:text="${lst.brigadeName}">Бригада</td>
+            <td style="vertical-align: inherit; width: 10vw;" th:text="${lst.brigadeUsers}">Член бригады</td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
   </div>
   <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
   <div th:insert="confirmations/confirmation-window :: blackout-confirm"></div>
@@ -82,7 +98,71 @@
 </body>
 </html>
 
+<script>
+  $(document).ready(function(){
+    $('.v1').on('click', function(e) {
+
+      $('.v1').removeClass('marked');
+      $(this).addClass('marked');
+
+      $('.v335_451').removeClass('marked');
+      $('.v335_451').addClass('marked');
+
+      $('.v105_1493').removeClass('marked');
+      $('.v105_1493').addClass('marked');
+
+      $('.v335_453').removeClass('marked');
+      $('.v335_453').addClass('marked');
+
+      $('.v335_454').removeClass('marked');
+      $('.v335_454').addClass('marked');
+
+      $('.v335_455').removeClass('marked');
+      $('.v335_455').addClass('marked');
+
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function(){
+    $('.v3').on('click', function(e) {
+
+      $('.v3').removeClass('marked');
+      $(this).addClass('marked');
+
+      $('.v336_485').removeClass('marked');
+      $('.v336_485').addClass('marked');
+
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function(){
+    $('.v4').on('click', function(e) {
+
+      $('.v4').removeClass('marked');
+      $(this).addClass('marked');
+
+      $('.v336_487').removeClass('marked');
+      $('.v336_487').addClass('marked');
+
+    });
+  });
+</script>
+
 <style>
+  .v18_231 {
+    width: 109vw;
+    height: 496px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 27px;
+    left: 0px;
+    overflow: auto;
+  }
   input {
     outline: none;
     border: none;
@@ -97,7 +177,7 @@
     width: 103px;
     height: 27px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     top: 870px;
     left: 342px;
@@ -116,7 +196,7 @@
     width: 217px;
     height: 27px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     top: 870px;
     left: 470px;
@@ -134,7 +214,7 @@
     width: 230px;
     height: 27px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     top: 870px;
     left: 704px;
@@ -152,7 +232,7 @@
     width: 178px;
     height: 27px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     top: 870px;
     left: 953px;
@@ -170,7 +250,7 @@
     width: 178px;
     height: 27px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     top: 870px;
     left: 1148px;
@@ -196,7 +276,7 @@
     border-top-right-radius: 30px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    overflow: auto;
+    overflow: hidden;
   }
   .v1_2 {
     width: 100vw;
@@ -212,7 +292,7 @@
   }
   .table {
     border: none;
-    top: 20px;
+    top: 0px;
     left: 25px;
     position: absolute;
   }
@@ -250,6 +330,25 @@
   }
   .table tbody tr td:last-child {
     border-radius: 0 8px 8px 0;
+  }
+
+  .table tr.marked{
+    background-color: #E0E0E0;
+  }
+  .v335_451.marked{
+    opacity: 1;
+  }
+  .v335_453.marked{
+    opacity: 1;
+  }
+  .v335_454.marked{
+    opacity: 1;
+  }
+  .v335_455.marked{
+    opacity: 1;
+  }
+  .v105_1493.marked{
+    opacity: 1;
   }
 
 </style>

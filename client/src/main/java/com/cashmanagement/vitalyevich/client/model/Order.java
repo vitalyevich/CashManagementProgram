@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Order {
+public class Order extends ColorTable {
 
     private Integer id;
 
@@ -12,11 +12,46 @@ public class Order {
 
     private String stage;
 
-    private LocalDate collectionDate;
+    private String status;
+
+    private LocalDate orderDate;
 
     private User user;
 
     private Set<OrderStage> orderStages = new LinkedHashSet<>();
+
+    @Override
+    public String getColorFirst() {
+        if (status.equals("Рассчитан")) {
+            return "#3AACED";
+        } else if (status.equals("Передан на исполнение")) {
+            return "#57DB4E";
+        }
+        else {
+            return "#FF3F3F";
+        }
+    }
+
+    @Override
+    public String getColorSecond() {
+        if (stage.equals("Генерация заказа наличных денег")) {
+            return "#3AACED";
+        }
+        else if (stage.equals("Принятие заказа наличных денег")) {
+            return "#57DB4E";
+        }
+        else {
+            return "#FF3F3F";
+        }
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Set<OrderStage> getOrderStages() {
         return orderStages;
@@ -34,12 +69,12 @@ public class Order {
         this.user = user;
     }
 
-    public LocalDate getCollectionDate() {
-        return collectionDate;
+    public LocalDate getOrderDate() {
+        return orderDate;
     }
 
-    public void setCollectionDate(LocalDate collectionDate) {
-        this.collectionDate = collectionDate;
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
     }
 
     public String getStage() {

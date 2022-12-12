@@ -1,46 +1,85 @@
 <div th:fragment="create-brigade" class="windowBrigade">
   <div class="v23_864">
     <div class="v336_489">
-      <div class="v23_867"></div>
-      <input type="submit" value="Удалить инкассатора" class="v336_487">
-      <span class="v23_878">Члены бригады</span>
-      <table class="table">
-        <thead>
-        <tr>
-          <th>№</th>
-          <th>Роль</th>
-          <th>Пользователь</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="lst : ${users}">
-          <td th:text="${lst.id}">№</td>
-          <td th:text="${lst.firstName}">Роль</td>
-          <td th:text="${lst.lastName}">Пользователь</td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="v23_867">
+        <span class="v23_878">Члены бригады</span>
+        <form action="/planning-collection/create-brigade/del" method="post">
+        <input id="del" type="submit" value="Удалить инкассатора" class="v336_487" disabled>
+        <input type="hidden" name="rowId" id="rowIdDel">
+        </form>
+        <div class="v18_232">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>№</th>
+              <th>Роль</th>
+              <th>Пользователь</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="v4" th:each="lst, iter : ${userList}" th:id="${iter.count - 1}" onclick="document.getElementById('rowIdDel').value = this.getAttribute('id');
+              document.getElementById('del').disabled = false;">
+              <td th:text="${iter.count}">№</td>
+              <td th:text="${lst.roleName}">Роль</td>
+              <td th:text="${lst.lastName} + ' ' + ${lst.firstName}">Пользователь</td>
+              <input name="id">
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <div class="v23_865"></div>
-    <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
-         src="../static/images/close.svg" th:src="@{images/close.svg}">
+    <a href="/planning-collection">
+      <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
+           src="../static/images/close.svg" th:src="@{images/close.svg}">
+    </a>
     <span class="v23_866">Бригада</span>
     <div class="v23_941">
-      <span class="v23_878">Роли</span>
-      <span style="left:300px" class="v23_878">Пользователи</span>
-      <input type="submit" value="Добавить инкассатора" class="v336_485">
+      <span class="v23_878">Сотрудники</span>
+      <form action="/planning-collection/create-brigade/add" method="post">
+        <input id="add" type="submit" value="Добавить инкассатора" class="v336_485" disabled>
+        <input type="hidden" name="rowId" id="rowIdAdd">
+      </form>
+      <div class="v18_232">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Роль</th>
+            <th>Пользователь</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="v3" th:each="lst : ${users}" th:id="${lst.id}" onclick="document.getElementById('rowIdAdd').value = this.getAttribute('id');
+            document.getElementById('add').disabled = false;">
+            <td th:text="${lst.roleName}">Роль</td>
+            <td th:text="${lst.lastName} + ' ' + ${lst.firstName}">Пользователь</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+    <form action="/planning-collection/create-brigade/create" method="post">
     <div class="v336_490">
       <div class="v23_868"></div>
       <span class="v23_885">Бригада</span>
+
       <span class="v23_937">Действующий</span>
-      <input class="v17_446" type="checkbox">
-      <span class="v23_882">Компания</span>
-      <select class="v23_870"></select>
-      <input type="text" class="v23_871">
-    </div>
-    <input type="submit" value="Применить" class="v336_486">
-    <input type="submit" value="Закрыть" class="v336_488">
+
+        <span class="v23_882">Компания</span>
+        <select name="company" class="v23_870">
+          <option th:each="el, iterStat : ${companies}" th:value="${iterStat.index + 1}" th:text="${el.companyName}">
+          </option>
+        </select>
+
+        <input name="active" class="v17_446" type="checkbox">
+        <input required name="brigadeName" type="text" class="v23_871">
+      </div>
+      <input type="submit" value="Применить" class="v336_486">
+    </form>
+    <a href="/planning-collection">
+      <input type="submit" value="Закрыть" class="v336_488">
+    </a>
   </div>
 </div>
 

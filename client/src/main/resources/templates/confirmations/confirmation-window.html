@@ -4,11 +4,19 @@
     <span class="v249_741">Подтверждение</span>
     <img style="position: absolute;width: 54px;height: 54px;left: 24px;top: 67px;"
          src="../static/images/exception.svg" th:src="@{images/exception.svg}">
-    <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 10px;"
-         src="../static/images/close.svg" th:src="@{images/close.svg}">
+    <a th:href="${urlPage}">
+      <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 10px;"
+           src="../static/images/close.svg" th:src="@{images/close.svg}">
+    </a>
     <span class="v254_829">Подтвердить ваше действие?</span>
-    <input type="submit" class="v254_831" value="Да">
-    <input type="submit" class="v254_834" value="Нет">
+
+    <form th:action="${url}" method="post" >
+      <input type="submit" class="v254_831" value="Да">
+      <input type="hidden" name="rowId" th:value="${id}">
+    </form>
+    <a th:href="${urlPage}">
+      <input type="submit" class="v254_834" value="Нет">
+    </a>
   </div>
 </div>
 

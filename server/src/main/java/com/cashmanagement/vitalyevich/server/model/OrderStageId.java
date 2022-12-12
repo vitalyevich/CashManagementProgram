@@ -45,4 +45,12 @@ public class OrderStageId implements Serializable {
         return Objects.equals(this.orderId, entity.orderId) &&
                 Objects.equals(this.stageId, entity.stageId);
     }
+
+    public OrderStageId() {
+    }
+
+    public OrderStageId(Integer orderId, Integer stageId) {
+        this.orderId = orderId;
+        this.stageId = stageId;
+    }
 }

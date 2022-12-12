@@ -1,6 +1,8 @@
 package com.cashmanagement.vitalyevich.client.model;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class OrderStage {
 
@@ -24,6 +26,18 @@ public class OrderStage {
         return stageDate;
     }
 
+    private String date;
+
+    public String getDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYYY hh:mm").withZone(ZoneId.systemDefault());;
+
+        return formatter.format(stageDate);
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public void setStageDate(Instant stageDate) {
         this.stageDate = stageDate;
     }
@@ -42,5 +56,14 @@ public class OrderStage {
 
     public void setId(OrderStageId id) {
         this.id = id;
+    }
+
+    public OrderStage() {
+    }
+
+    public OrderStage(OrderStageId id, Order order, Instant stageDate) {
+        this.id = id;
+        this.order = order;
+        this.stageDate = stageDate;
     }
 }

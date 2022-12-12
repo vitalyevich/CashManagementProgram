@@ -1,6 +1,7 @@
 package com.cashmanagement.vitalyevich.client.controller.atm;
 
 import com.cashmanagement.vitalyevich.client.model.Atm;
+import com.cashmanagement.vitalyevich.client.model.Cassette;
 import com.cashmanagement.vitalyevich.client.service.AtmServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 
 @RequestMapping("/monitoring")
 @Controller
@@ -23,16 +25,19 @@ public class MonitoringController {
 
         Iterable<Atm> atms = atmService.getAtms();
 
-       /* for (Atm atm : atms) {
-            if (atm.getCassettes().iterator().next() == null) {
-                atm.setListCassettes("NOT");
-                continue;
+        for (Atm atm : atms) {
+            atm.setListCassettes("");
+            atm.setAmount(0);
+            if (!atm.getCassettes().iterator().hasNext()) {
+                atm.setListCassettes(" ");
             }
-            while (atm.getCassettes().iterator().hasNext()) {
-                    atm.setListCassettes(atm.getListCassettes() +
-                            atm.getCassettes().iterator().next().getAmount() + "("+atm.getCassettes().iterator().next().getBanknote()+")" + " ");
-                }
-            }*/
+            for (Cassette cassette: atm.getCassettes())
+            {
+                atm.setListCassettes(atm.getListCassettes() +
+                        cassette.getAmount() + " ("+cassette.getBanknote()+")" + " ");
+                atm.setAmount(atm.getAmount() + cassette.getAmount());
+            }
+        }
 
         model.addAttribute("atms", atms);
         model.addAttribute("headerText", "Мониторинг");

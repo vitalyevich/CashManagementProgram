@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="v1_2">
@@ -16,11 +17,12 @@
   <div th:insert="blocks/filter :: filter"></div>
   <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
+    <div class="v18_231">
     <table class="table">
       <thead>
       <tr>
-        <th>Тип объекта</th>
-        <th>ID объекта</th>
+        <th>Тип</th>
+        <th>Код</th>
         <th>Стадия</th>
         <th>Дата инкассации</th>
         <th>Исполнитель</th>
@@ -29,26 +31,32 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${storageOrders}">
-        <td>Банкомат</td>
-        <td th:text="${lst.order.plan.atm.atmUid}">ID объекта</td>
-        <td th:text="${lst.order.stage}">Стадия</td>
-        <td th:text="${lst.orderDate}">Дата инкассации</td>
+      <tr class="v1"  th:each="lst : ${storageOrders}" th:id="${lst.id}" onclick="document.getElementById('rowIdCancel').value = this.getAttribute('id');
+document.getElementById('rowIdConfirm').value = this.getAttribute('id'); document.getElementById('cancel').disabled = false;
+document.getElementById('confirm').disabled = false;">
+        <td style="vertical-align: inherit; width: 4vw;" >Банкомат</td>
+        <td style="vertical-align: inherit; width: 4vw;" th:text="${lst.order.plan.atm.atmUid}">Код</td>
+        <td style="vertical-align: inherit; width: 16vw; color: white;" th:bgcolor="${lst.order.colorSecond}" th:text="${lst.order.stage}">Стадия</td>
+        <td style="vertical-align: inherit; width: 7vw;" th:text="${lst.orderDate}">Дата инкассации</td>
         <td> </td>
         <td> </td>
         <td th:text="${lst.order.plan.atm.companies}">Компания</td>
+        <input name="id">
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
   <div class="v334_407">
     <div class="v334_405">
-      <a href="/collection/cancel-order">
-        <input type="submit" class="v329_861" value="Отклонить заказ">
-      </a>
-      <a href="/collection/confirm-order">
-        <input type="submit" class="v329_869" value="Подтвердить">
-      </a>
+      <form action="/collection/cancel-order" method="post" >
+        <input id="cancel" type="submit" class="v329_861" value="Отклонить заказ" disabled>
+        <input type="hidden" name="rowId" id="rowIdCancel">
+      </form>
+      <form action="/collection/confirm-order" method="post" >
+        <input id="confirm" type="submit" class="v329_869" value="Подтвердить" disabled>
+        <input type="hidden" name="rowId" id="rowIdConfirm">
+      </form>
       <span class="v329_872">А0100075, Заказ 1, План. инкассация 01.11.2022</span>
     </div>
     <div class="v334_406">
@@ -59,12 +67,15 @@
         <img class="v331_953" src="../static/images/arrow2.svg" th:src="@{images/arrow2.svg}" id="arrow2">
         <img class="v334_399" src="../static/images/arrow6.svg" th:src="@{images/arrow6.svg}" id="arrow6">
         <img class="v331_951" src="../static/images/arrow1.svg" th:src="@{images/arrow1.svg}" id="arrow1">
-        <img class="v329_905" src="../static/images/stage1.svg" th:src="@{images/stage1.svg}" id="stage1">
+
+
+        <input type="submit" class="v329_905" id="stage1" value="">
         <img class="v329_906" src="../static/images/stage2.svg" th:src="@{images/stage2.svg}" id="stage2">
         <img class="v330_930" src="../static/images/stage3.svg" th:src="@{images/stage3.svg}" id="stage3">
         <img class="v330_918" src="../static/images/stage4.svg" th:src="@{images/stage4.svg}" id="stage4">
         <img class="v331_942" src="../static/images/stage5.svg" th:src="@{images/stage5.svg}" id="stage5">
         <img class="v330_934" src="../static/images/stage6.svg" th:src="@{images/stage6.svg}" id="stage6">
+
       </div>
       <div class="v334_404">
         <input type="submit" class="v331_957" value="Шаг назад">
@@ -88,10 +99,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="lst : ${orderStages}">
+    <tr class="v2" th:id="${lst.id}" th:each="lst : ${orderStages}">
       <td style="width: 1vw; text-align: center;" th:text="${lst.id.stageId}">Стадия</td>
       <td style="width: 16vw;" th:text="${lst.stageName}">Название стадии</td>
-      <td style="width: 9vw;" th:text="${lst.stageDate}">Дата</td>
+      <td style="width: 9vw;" th:text="${lst.date}">Дата</td>
+      <input name="id">
     </tr>
     </tbody>
   </table>
@@ -101,7 +113,47 @@
 </body>
 </html>
 
+<script>
+  $(document).ready(function(){
+    $('.v1').on('click', function(e) {
+
+      $('.v1').removeClass('marked');
+      $(this).addClass('marked');
+
+      $('.v329_861').removeClass('marked');
+      $('.v329_861').addClass('marked');
+
+      $('.v329_869').removeClass('marked');
+      $('.v329_869').addClass('marked');
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function(){
+    $('.v329_905').on('click', function(e) {
+
+      $('.v329_905').removeClass('marked');
+      $(this).addClass('marked');
+
+      $('.v2').removeClass('marked');
+      $('.v2').addClass('marked');
+
+    });
+  });
+</script>
+
 <style>
+  .v18_231 {
+    width: 109vw;
+    height: 300px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 27px;
+    left: 0px;
+    overflow: auto;
+  }
   .v1_3 {
     top:240px;
   }
@@ -184,7 +236,7 @@
     background-position: center center;
     border-radius: 10px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     top: 1px;
     left: 0px;
@@ -202,7 +254,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     top: 0px;
     left: 195px;
@@ -297,8 +349,16 @@
     position: absolute;
     top: 92px;
     left: 3px;
-    overflow: hidden;
+    cursor: pointer;
+    background-image: url("../images/stage1_unchecked.svg");
   }
+  img {
+    border: none;
+  }
+  .v329_905.marked {
+    background: url("../images/stage1_checked.svg");
+  }
+
   .v329_899 {
     width: 80px;
     height: 80px;
@@ -350,6 +410,7 @@
     top: 93px;
     left: 184px;
     overflow: hidden;
+    cursor: pointer;
   }
   .v329_907 {
     width: 80px;
@@ -440,6 +501,7 @@
     top: 0px;
     left: 509px;
     overflow: hidden;
+    cursor: pointer;
   }
   .v330_919 {
     width: 80px;
@@ -499,6 +561,7 @@
     top: 0px;
     left: 331px;
     overflow: hidden;
+    cursor: pointer;
   }
   .v330_931 {
     width: 80px;
@@ -558,6 +621,7 @@
     top: 183px;
     left: 336px;
     overflow: hidden;
+    cursor: pointer;
   }
   .v330_935 {
     width: 80px;
@@ -617,6 +681,7 @@
     top: 183px;
     left: 514px;
     overflow: hidden;
+    cursor: pointer;
   }
   .v331_943 {
     width: 80px;
@@ -863,7 +928,7 @@
   }
   .table {
     border: none;
-    top: 20px;
+    top: 0px;
     left: 25px;
     position: absolute;
   }
@@ -891,7 +956,7 @@
     font-weight: 400;
     flex-wrap: nowrap;
     font-size: 13px;
-    width: 13vw;
+    width: 10vw;
   }
   .table tbody tr{
     background: #ffffff;
@@ -901,6 +966,16 @@
   }
   .table tbody tr td:last-child {
     border-radius: 0 8px 8px 0;
+  }
+
+  .table tr.marked{
+    background-color: #E0E0E0;
+  }
+  .v329_861.marked{
+    opacity: 1;
+  }
+  .v329_869.marked{
+    opacity: 1;
   }
 
 </style>

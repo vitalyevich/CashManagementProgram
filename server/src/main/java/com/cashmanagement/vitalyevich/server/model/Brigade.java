@@ -67,4 +67,11 @@ public class Brigade {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Brigade(Integer id) {
+        this.id = id;
+    }
+
+    public Brigade() {
+    }
 }
