@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
   <link rel="stylesheet" href="/css/storage/balance-storage.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="v1_2">
@@ -23,27 +24,27 @@
           <th>Остаток в хранилище</th>
           <th>Денежный поток (Пополнение)</th>
           <th>Денежный поток (Вывоз)</th>
-          <th>Остаток в сети</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="lst : ${storages}">
-          <td th:text="${lst.companies}">Компания</td>
+        <tr th:class="'v1 ' + ${lst.marked}" th:each="lst,iter : ${storages}" th:id="${iter.count - 1}" onclick="document.getElementById('rowIdEdit').value = this.getAttribute('id'); document.getElementById('edit').disabled = false;
+          location.href='/monitoring-storage/' + this.getAttribute('id');">
+          <td th:text="${lst.companyName}">Компания</td>
           <td style="vertical-align: inherit; width: 3vw; text-align: center;" th:text="${lst.currency}">Валюта</td>
-          <td style="vertical-align: inherit; width: 6vw;" th:text="${lst.banknote} * ${lst.amount}">Остаток в хранилище</td>
-          <td>10000</td>
-          <td>0</td>
-          <td style="vertical-align: inherit; width: 6vw;" >15000</td>
+          <td style="vertical-align: inherit; width: 9vw;" th:text="${lst.sumAmount}">Остаток в хранилище</td>
+          <td th:text="${lst.amountOperationPlus}"></td>
+          <td th:text="${lst.amountOperationMinus}"></td>
         </tr>
         </tbody>
       </table>
       </div>
   </div>
-  <a href="/balance-storage">
-  <input class="v18_3" type="submit" value="Коррекция"/>
-  </a>
+  <form action="/monitoring-storage/balance-storage" method="post">
+    <input id="edit" th:class="'v18_3 ' + ${marked} " type="submit" value="Коррекция" th:disabled="${disabled}"/>
+    <input type="hidden" th:value="${id}" name="rowId" id="rowIdEdit">
+  </form>
   <a href="/monitoring-storages">
-  <input class="v18_4" type="submit" value="Учет возврата"/>
+  <input id="mon" class="v18_4" type="submit" value="Учет возврата" />
   </a>
 
   <div class="v18_235" style="top:930px; width: 37vw;" >
@@ -57,11 +58,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${storages}">
-        <td style="width: 4vw; text-align: center;" th:utext="${lst.banknote}">Номинал</td>
-        <td style="width: 7vw;" th:utext="${lst.amount}">Количество</td>
-        <td style="width: 7vw;" th:utext="${lst.banknote} * ${lst.amount}">Сумма</td>
-        <td style="width: 7vw;" > </td>
+      <!--    <input type="hidden" name="rowId" id="rowIdMon">-->
+      <tr th:each="lst : ${storage}">
+        <td style="width: 4vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
+        <td style="width: 7vw;" th:text="${lst.amount}">Количество</td>
+        <td style="width: 7vw;" th:text="${lst.banknote} * ${lst.amount}">Сумма</td>
+        <td style="width: 7vw;" th:text="${lst.sumAmount}"> </td>
       </tr>
       </tbody>
     </table>
@@ -72,7 +74,30 @@
 </body>
 </html>
 
+<script>
+  $(document).ready(function(){
+    $('.v1').on('click', function(e) {
+
+      $('.v1').removeClass('marked');
+      $(this).addClass('marked');
+
+      $('.v18_3').removeClass('marked');
+      $('.v18_3').addClass('marked');
+
+    });
+  });
+</script>
+
 <style>
+  .table tr.marked{
+    background-color: #E0E0E0;
+  }
+  .v18_3.marked{
+    opacity: 1;
+  }
+  .v18_4.marked{
+    opacity: 1;
+  }
   input {
     outline: none;
     border: none;
@@ -129,7 +154,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);
@@ -220,7 +245,7 @@
     font-weight: 400;
     flex-wrap: nowrap;
     font-size: 13px;
-    width: 21.2vw;
+    width: 22.8vw;
   }
   .table tbody tr{
     background: #ffffff;

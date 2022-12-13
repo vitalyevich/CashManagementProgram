@@ -3,99 +3,258 @@
   <title>Мониторинг</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="/css/header.css">
-  <link rel="stylesheet" href="/css/search.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body>
 <div class="v1_2">
   <div th:insert="blocks/header :: header"></div>
-  <div th:insert="blocks/search :: search"></div>
+
   <div class="v18_235">
+    <span class="v18_247">Хранилища</span>
+    <div class="v0">
+      <a href="/monitoring-storages">
+        <img src="../static/images/refresh.svg" th:src="@{images/refresh.svg}">
+      </a>
+    </div>
+    <div class="v18_231">
     <table class="table">
       <thead>
       <tr>
+        <th>Хранилище</th>
         <th>Дата</th>
         <th>Валюта</th>
         <th>Остаток на утро</th>
         <th>Текущий остаток</th>
         <th>Остаток на вечер</th>
-        <th>Вечерняя касса</th>
         <th>Вывоз</th>
         <th>Пополнение</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${operations}">
-        <td th:utext="${lst.updateDate}">Дата</td>
-        <!--<td th:utext="${lst.firstName}">Валюта</td>-->
-<!--        <td th:utext="${lst.lastName}">Остаток на утро</td>
-        <td th:utext="${lst.phone}">Текущий остаток</td>
-        <td th:utext="${lst.email}">Остаток на вечер</td>
-        <td th:utext="${lst.email}">Вечерняя касса</td>
-        <td th:utext="${lst.email}">Вывоз</td>-->
-        <td th:utext="${lst.amountOperation}">Пополнение</td>
+      <tr th:class="'v1 ' + ${lst.marked}" th:each="lst, iter : ${storages}" th:id="${iter.count - 1}" onclick="
+          location.href='/monitoring-storages/' + this.getAttribute('id');">
+        <td style="vertical-align: inherit; width: 16vw;" th:text="${lst.companyName}"></td>
+        <td style="vertical-align: inherit; width: 5vw;" th:text="${date}"></td>
+        <td style="vertical-align: inherit; width: 3vw; text-align: center;" th:text="${lst.currency}"></td>
+        <td th:text="${lst.balanceMorning}"></td>
+        <td style="vertical-align: inherit; width: 9vw;" th:text="${lst.sumAmount}"></td>
+        <td style="vertical-align: inherit; width: 9vw;" th:text="${lst.sumAmount}"></td>
+        <td th:text="${lst.amountOperationMinus}">Вывоз</td>
+        <td th:text="${lst.amountOperationPlus}">Пополнение</td>
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
-  <input class="v18_2" type="submit" value="Начало дня"/>
-  <input class="v18_3" type="submit" value="Текущие остатки"/>
-  <input class="v18_4" type="submit" value="Конец дня"/>
-  <input class="v18_5" type="submit" value="Вечерняя касса"/>
 
   <div class="v348_704">
-    <div class="v348_705">
-      <div class="v348_706"></div>
-      <span class="v348_707">КВ 1: AZN</span>
+      <span class="v348_707" th:text="${text}"></span>
       <div class="v348_708">
-        <div class="v348_721"></div>
-        <div class="v348_722"></div>
-        <span class="v348_723">Остатки на утро</span>
-        <span class="v348_724">Общая сумма: 40</span>
+        <div class="v348_721">
+          <span class="v348_724" th:text="'Общая сумма: ' + ${balanceEnd}"></span>
+        </div>
+        <div class="v348_722">
+          <span class="v348_723">Остатки на утро</span>
+        </div>
+
+        <div class="v18_232">
+        <table style="left: 5px;" class="table">
+          <thead>
+          <tr>
+            <th>Номинал</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="lst : ${storage3}">
+            <td style="width: 4vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
+            <td style="width: 7vw;" th:text="${lst.amount}">Количество</td>
+            <td style="width: 7vw;" th:text="${lst.banknote} * ${lst.amount}">Сумма</td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
       </div>
       <div class="v348_725">
-      <div class="v348_738"></div>
-        <div class="v348_739"></div>
-        <span class="v348_740">Текущие остатки</span>
-        <span class="v348_741">Общая сумма: 40</span>
+      <div class="v348_738">
+        <span class="v348_741" th:text="'Общая сумма: ' + ${balanceNow}"></span>
+      </div>
+        <div class="v348_739">
+          <span class="v348_740">Текущие остатки</span>
+        </div>
+        <div class="v18_232">
+        <table style="left: 5px;" class="table">
+          <thead>
+          <tr>
+            <th>Номинал</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="lst : ${storage}">
+            <td style="width: 4vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
+            <td style="width: 7vw;" th:text="${lst.amount}">Количество</td>
+            <td style="width: 7vw;" th:text="${lst.banknote} * ${lst.amount}">Сумма</td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
       </div>
       <div class="v348_742">
-        <div class="v348_755"></div>
-        <div class="v348_756"></div>
-        <span class="v348_757">Вечерняя касса</span>
-        <span class="v348_758">Общая сумма: 40</span>
+        <div class="v348_755">
+          <span class="v348_758" th:text="'Общая сумма: ' + ${balanceNow}"></span>
+        </div>
+        <div class="v348_756">
+          <span class="v348_757">Вечерняя касса</span>
+        </div>
+        <div class="v18_232">
+        <table style="left: 5px;" class="table">
+          <thead>
+          <tr>
+            <th>Номинал</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="lst : ${storage}">
+            <td style="width: 4vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
+            <td style="width: 7vw;" th:text="${lst.amount}">Количество</td>
+            <td style="width: 7vw;" th:text="${lst.banknote} * ${lst.amount}">Сумма</td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
       </div>
       <div class="v348_759">
-        <div class="v348_772"></div>
-        <div class="v348_773"></div>
-        <span class="v348_774">Вывоз</span>
-        <span class="v348_775">Общая сумма: 40</span>
+        <div class="v348_772">
+          <span class="v348_775" th:text="'Общая сумма: ' + ${balanceMin}"></span>
+        </div>
+        <div class="v348_773">
+          <span class="v348_774">Вывоз</span>
+        </div>
+        <div class="v18_232">
+        <table style="left: 5px;" class="table">
+          <thead>
+          <tr>
+            <th>Номинал</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!--    <input type="hidden" name="rowId" id="rowIdMon">-->
+          <tr th:each="lst : ${storage2}">
+            <td style="width: 4vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
+            <td style="width: 7vw;" th:text="${lst.amount}">Количество</td>
+            <td style="width: 7vw;" th:text="${lst.banknote} * ${lst.amount}">Сумма</td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
       </div>
       <div class="v348_776">
-        <div class="v348_789"></div>
-        <div class="v348_790"></div>
-        <span class="v348_791">Пополнение</span>
-        <span class="v348_792">Общая сумма: 40</span>
+        <div class="v348_789">
+          <span class="v348_792" th:text="'Общая сумма: ' + ${balanceAdd}"></span>
+        </div>
+        <div class="v348_790">
+          <span class="v348_791">Пополнение</span>
+        </div>
+        <div class="v18_232">
+        <table style="left: 5px;" class="table">
+          <thead>
+          <tr>
+            <th>Номинал</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!--    <input type="hidden" name="rowId" id="rowIdMon">-->
+          <tr th:each="lst : ${storage1}">
+            <td style="width: 4vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
+            <td style="width: 7vw;" th:text="${lst.amount}">Количество</td>
+            <td style="width: 7vw;" th:text="${lst.banknote} * ${lst.amount}">Сумма</td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
       </div>
-    </div>
   </div>
 </div>
 </body>
 </html>
 
+<script>
+  $(document).ready(function(){
+    $('.v1').on('click', function(e) {
+
+      $('.v1').removeClass('marked');
+      $(this).addClass('marked');
+    });
+  });
+</script>
+
 <style>
+  .table tr.marked{
+    background-color: #E0E0E0;
+  }
+  .v18_231 {
+    width: 93vw;
+    height: 406px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 47px;
+    left: 0px;
+    overflow: auto;
+  }
+  .v18_232 {
+    width: 312px;
+    height: 131px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 29px;
+    left: 0px;
+    overflow-y: overlay;
+  }
+  .v0 {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    right: 37px;
+    top: 15px;
+    cursor: pointer;
+  }
+  .v18_247 {
+    width: 107px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 17px;
+    left: 23px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+  }
   input {
     outline: none;
     border: none;
   }
   .v348_704 {
-    width: 100%;
+    width: 95vw;
     height: 239px;
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 693px;
-    left: 56px;
-    overflow: hidden;
+    top: 650px;
+    left: 30px;
+    overflow: auto;
   }
   .v348_705 {
     width: 100%;
@@ -125,7 +284,7 @@
     overflow: hidden;
   }
   .v348_707 {
-    width: 68px;
+    width: 300px;
     color: rgba(0,0,0,1);
     position: absolute;
     top: 7px;
@@ -157,6 +316,7 @@
     position: absolute;
     top: 160px;
     left: 0px;
+    border-radius: 10px;
   }
   .v348_722 {
     width: 312px;
@@ -166,24 +326,25 @@
     position: absolute;
     top: 0px;
     left: 0px;
+    border-radius: 10px;
   }
   .v348_723 {
     width: 128px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 3px;
-    left: 92px;
+    top: 4px;
+    left: 93px;
     font-family: Montserrat;
     font-weight: 700;
     font-size: 14px;
     opacity: 1;
-    text-align: left;
+    text-align: center;
   }
   .v348_724 {
     width: 179px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 165px;
+    top: 5px;
     left: 13px;
     font-family: Montserrat;
     font-weight: 700;
@@ -212,6 +373,7 @@
     position: absolute;
     top: 160px;
     left: 0px;
+    border-radius: 10px;
   }
   .v348_739 {
     width: 312px;
@@ -221,24 +383,25 @@
     position: absolute;
     top: 0px;
     left: 0px;
+    border-radius: 10px;
   }
   .v348_740 {
-    width: 160px;
+    width: 135px;
     color: rgba(255,255,255,1);
     position: absolute;
     top: 4px;
-    left: 88px;
+    left: 93px;
     font-family: Montserrat;
     font-weight: 700;
     font-size: 14px;
     opacity: 1;
-    text-align: left;
+    text-align: center;
   }
   .v348_741 {
     width: 179px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 165px;
+    top: 5px;
     left: 13px;
     font-family: Montserrat;
     font-weight: 700;
@@ -267,6 +430,7 @@
     position: absolute;
     top: 160px;
     left: 0px;
+    border-radius: 10px;
   }
   .v348_756 {
     width: 312px;
@@ -276,24 +440,25 @@
     position: absolute;
     top: 0px;
     left: 0px;
+    border-radius: 10px;
   }
   .v348_757 {
-    width: 136px;
+    width: 128px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 5px;
-    left: 95px;
+    top: 4px;
+    left: 93px;
     font-family: Montserrat;
     font-weight: 700;
     font-size: 14px;
     opacity: 1;
-    text-align: left;
+    text-align: center;
   }
   .v348_758 {
     width: 179px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 165px;
+    top: 5px;
     left: 13px;
     font-family: Montserrat;
     font-weight: 700;
@@ -322,6 +487,7 @@
     position: absolute;
     top: 160px;
     left: 0px;
+    border-radius: 10px;
   }
   .v348_773 {
     width: 312px;
@@ -331,24 +497,25 @@
     position: absolute;
     top: 0px;
     left: 0px;
+    border-radius: 10px;
   }
   .v348_774 {
-    width: 52px;
+    width: 128px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 5px;
-    left: 130px;
+    top: 4px;
+    left: 93px;
     font-family: Montserrat;
     font-weight: 700;
     font-size: 14px;
     opacity: 1;
-    text-align: left;
+    text-align: center;
   }
   .v348_775 {
     width: 179px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 165px;
+    top: 5px;
     left: 13px;
     font-family: Montserrat;
     font-weight: 700;
@@ -377,6 +544,7 @@
     position: absolute;
     top: 160px;
     left: 0px;
+    border-radius: 10px;
   }
   .v348_790 {
     width: 312px;
@@ -386,24 +554,25 @@
     position: absolute;
     top: 0px;
     left: 0px;
+    border-radius: 10px;
   }
   .v348_791 {
-    width: 103px;
+    width: 128px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 6px;
-    left: 105px;
+    top: 4px;
+    left: 93px;
     font-family: Montserrat;
     font-weight: 700;
     font-size: 14px;
     opacity: 1;
-    text-align: left;
+    text-align: center;
   }
   .v348_792 {
     width: 179px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 165px;
+    top: 5px;
     left: 13px;
     font-family: Montserrat;
     font-weight: 700;
@@ -504,13 +673,13 @@
     border-bottom-right-radius: 10px;
   }
   .v18_235 {
-    width: 79vw;
-    height: 354px;
+    width: 95vw;
+    height: 500px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 250px;
-    left: 287px;
+    top: 115px;
+    left: 30px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -519,9 +688,9 @@
   }
   .v1_2 {
     width: 100vw;
-    height: 100vh;
+    height: 116vh;
     max-width: 100%;
-    max-height: 100%;
+    /* max-height: 100%; */
     opacity: 1;
     position: absolute;
     top: 0px;
@@ -531,7 +700,7 @@
   }
   .table {
     border: none;
-    top: 20px;
+    top: 0px;
     left: 25px;
     position: absolute;
   }

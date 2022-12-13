@@ -1,6 +1,9 @@
 package com.cashmanagement.vitalyevich.client.model;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 
 public class StorageOperation {
@@ -11,24 +14,27 @@ public class StorageOperation {
 
     private LocalDate updateDate;
 
-    private Double banknote;
+    private Integer amountOperation;
 
-    private Double amountOperation;
+    private String date;
 
-    public Double getAmountOperation() {
+    public String getDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYYY");;
+
+        return formatter.format(updateDate);
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
+    public Integer getAmountOperation() {
         return amountOperation;
     }
 
-    public void setAmountOperation(Double amountOperation) {
+    public void setAmountOperation(Integer amountOperation) {
         this.amountOperation = amountOperation;
-    }
-
-    public Double getBanknote() {
-        return banknote;
-    }
-
-    public void setBanknote(Double banknote) {
-        this.banknote = banknote;
     }
 
     public LocalDate getUpdateDate() {

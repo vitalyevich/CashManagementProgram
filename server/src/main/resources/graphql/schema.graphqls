@@ -10,7 +10,8 @@ type Query {
     plans: [PlanAtm!]!
     plan(id: ID): PlanAtm!
     storages: [Storage!]!
-    operations: [StorageOperation!]!
+    storage(id: ID): Storage!
+    operations(id: ID): [StorageOperation]
     orders: [Order!]!
     brigades: [Brigade]
     cities: [City!]!
@@ -197,7 +198,7 @@ type Storage {
     id: ID!,
     banknote: Float!,
     currency: String!,
-    amount: Float!,
+    amount: Int!,
     companies: [Company]!,
     storageOperations: [StorageOperation]
 }
@@ -206,8 +207,7 @@ type StorageOperation {
     id: ID!,
     storage: Storage!,
     updateDate: String!,
-    banknote: Float!,
-    amountOperation: Float!
+    amountOperation: Int!
 }
 
 type Order {

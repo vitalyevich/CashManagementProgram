@@ -164,7 +164,9 @@ public class PlanningCollectionController {
         brigadeOrder.getOrder().setStatus("Рассчитан");
         orderService.updateOrder(brigadeOrder.getOrder(), brigadeOrder.getOrder().getPlan().getId(), brigadeOrder.getUser().getId());
 
-        userService.deleteBrigade(brigadeOrder.getBrigade().getId());
+        if (brigadeOrder.getBrigade() != null) {
+            userService.deleteBrigade(brigadeOrder.getBrigade().getId());
+        }
 
         return "redirect:/planning-collection";
     }

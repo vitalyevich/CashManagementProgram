@@ -5,8 +5,13 @@ import com.cashmanagement.vitalyevich.server.model.StorageOperation;
 import com.cashmanagement.vitalyevich.server.repository.StorageOperationRepository;
 import com.cashmanagement.vitalyevich.server.repository.StorageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Optional;
 
 @Controller
 public class StorageController {
@@ -24,12 +29,18 @@ public class StorageController {
 
     @QueryMapping
     Iterable<Storage> storages () {
-        return storageRepository.findAll();
+        return storageRepository.findByOrderByCompaniesAscCurrencyAsc();
     }
 
     @QueryMapping
-    Iterable<StorageOperation> operations () {
-        return storageOperationRepository.findAll();
+    Iterable<StorageOperation> operations (@Argument Integer id) {
+        return storageOperationRepository.findAllByUpdateDateAndStorageId(LocalDate.now(), id);
+    }
+
+
+    @QueryMapping
+    Optional<Storage> storage (@Argument Integer id) {
+        return storageRepository.findById(id);
     }
 
 }

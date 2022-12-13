@@ -2,6 +2,7 @@
     <div class="v25_1053">
         <div class="v364_441">
             <div class="v25_1058">
+                <div class="v18_111">
                 <table class="table">
                     <thead>
                     <tr>
@@ -22,24 +23,23 @@
                     </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
             <span class="v25_1071">Номиналы</span>
             <span class="v25_1119">Редактировать номиналы</span>
             <span class="v25_1118">Количество - единственное редактируемое поле</span>
         </div>
         <div class="v364_440">
-            <div class="v350_827">
-                <div class="v25_1068"></div>
-                <span class="v25_1084">Применить</span>
-            </div>
-            <div class="v350_828">
-                <div class="v25_1069"></div>
-                <span class="v25_1085">Закрыть</span>
-            </div>
+            <input type="submit" class="v350_827" value="Применить">
+            <input type="submit" class="v350_828" value="Закрыть">
         </div>
         <div class="v364_442">
             <div class="v25_1056"></div>
-            <span class="v25_1057">БГУИР - Остаток в хранилище</span>
+            <span class="v25_1057" th:text="${textWindow} + ' - Остаток в хранилище'"></span>
+            <a href="/monitoring-storage">
+                <img style="position: absolute;width: 24px;height: 24px;right: 12px;top: 7px;"
+                     src="../static/images/close.svg" th:src="@{images/close.svg}">
+            </a>
         </div>
     </div>
 </div>

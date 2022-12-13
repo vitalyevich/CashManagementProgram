@@ -8,6 +8,8 @@ public interface StorageService {
 
     Iterable<Storage> getStorages();
 
-    Iterable<StorageOperation> getStorageOperations();
+    Iterable<StorageOperation> getStorageOperations(Integer storageId);
+
+    Storage getStorage(Integer id);
 
 }

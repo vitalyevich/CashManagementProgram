@@ -19,7 +19,7 @@ public class Storage {
     private String currency;
 
     @Column(name = "amount", nullable = false)
-    private Double amount;
+    private Integer amount;
 
     @ManyToMany
     @JoinTable(name = "company_storages",
@@ -46,11 +46,11 @@ public class Storage {
         this.companies = companies;
     }
 
-    public Double getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 

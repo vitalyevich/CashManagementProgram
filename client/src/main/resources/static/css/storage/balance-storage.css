@@ -11,7 +11,7 @@ select {
 }
 .table {
     border: none;
-    top: 50px;
+    top: 0px;
     left: 138px;
     position: absolute;
 }
@@ -116,7 +116,7 @@ select {
     color: rgba(0,148,63,1);
     position: absolute;
     top: 18px;
-    left: 206px;
+    left: 225px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
@@ -185,70 +185,50 @@ select {
 .v350_827 {
     width: 103px;
     height: 27px;
-    background: url("../images/v350_827.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 0px;
     overflow: hidden;
-}
-.v25_1068 {
-    width: 103px;
-    height: 27px;
     background: rgba(0,148,63,1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
-.v25_1084 {
-    width: 87px;
     color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 8px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
 }
+
+
 .v350_828 {
     width: 95px;
     height: 27px;
-    background: url("../images/v350_828.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 119px;
     overflow: hidden;
-}
-.v25_1069 {
-    width: 95px;
-    height: 27px;
     background: rgba(0,148,63,1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
-.v25_1085 {
-    width: 63px;
     color: rgba(255,255,255,1);
-    position: absolute;
-    top: 5px;
-    left: 16px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.v18_111 {
+    width: 79vw;
+    height: 377px;
+    background: transparent;
     opacity: 1;
-    text-align: left;
+    position: absolute;
+    top: 47px;
+    left: 200px;
+    overflow: auto;
 }
 .v364_442 {
     width: 821px;
@@ -274,7 +254,7 @@ select {
     overflow: hidden;
 }
 .v25_1057 {
-    width: 259px;
+    width: 450px;
     color: rgba(255,255,255,1);
     position: absolute;
     top: 9px;
