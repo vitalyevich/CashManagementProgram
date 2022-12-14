@@ -27,6 +27,7 @@ public class UserController {
     @GetMapping("")
     public String users(Model model) {
         model.addAttribute("headerText", "Пользователи");
+        model.addAttribute("headerPost", "Руководитель " + seance.getUser().getFirstName());
         //userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "вход на страницу с вкладкой пользователи"));
 
         Iterable<Access> accesses = userService.getAccesses();

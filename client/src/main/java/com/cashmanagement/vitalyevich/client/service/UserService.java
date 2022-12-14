@@ -23,6 +23,8 @@ public interface UserService {
 
     Access getAccess(Integer id);
 
+    Access getAccessByLogin(String login);
+
     Access updateAccess(Access access, Integer userId);
 
     Access saveAccess(Access access, Integer userId);

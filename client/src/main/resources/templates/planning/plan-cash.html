@@ -1,29 +1,27 @@
 <div th:fragment="plan-cash" class="planCash">
-  <div class="v22_754">
-    <div class="v321_697">
+  <div class="v22_750">
+    <div class="v321_690">
       <span class="v22_770">Количество - единственное редактируемое поле</span>
+      <div class="v18_23">
       <table class="table">
         <thead>
         <tr>
+          <th>Номер</th>
           <th>Кассета</th>
           <th>Количество</th>
           <th>Сумма</th>
-          <th>Номер кассеты</th>
-          <th>Раскладка М, %</th>
-          <th>Раскладка S, %</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="lst : ${users}">
+          <td th:text="${lst.phone}">Номер</td>
           <td th:text="${lst.id}">Кассета</td>
           <td th:text="${lst.firstName}">Количество</td>
           <td th:text="${lst.lastName}">Сумма</td>
-          <td th:text="${lst.phone}">Номер кассеты</td>
-          <td th:text="${lst.email}">Раскладка М, %</td>
-          <td th:text="${lst.email}">Раскладка S, %</td>
         </tr>
         </tbody>
       </table>
+      </div>
       <span class="v22_846">Кассеты</span>
       <span class="v22_842">Всего</span>
       <span class="v22_844">Расходы (EUR)</span>
@@ -31,28 +29,29 @@
       <span class="v22_845">10,20</span>
     </div>
     <div class="v22_755"></div>
-    <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
-         src="../static/images/close.svg" th:src="@{images/close.svg}">
+    <a href="/planning">
+      <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
+           src="../static/images/close.svg" th:src="@{images/close.svg}">
+    </a>
     <span class="v22_756">План наличных</span>
-    <div class="v22_811"></div>
+    <div class="v22_800"></div>
     <input type="number" class="v22_816">
     <input type="date" class="v22_831">
     <select class="v22_834">
-      <option value="1">План</option>
-      <option value="2">Внеплановые загрузки</option>
-    </select>
-    <select class="v22_835">
       <option value="1">Статистический</option>
       <option value="2">Пользовательский</option>
     </select>
-    <input type="submit" value="Применить" class="v22_765">
-    <input type="submit" value="Закрыть" class="v22_768">
+
+    <input type="submit" value="Применить" class="v22_760">
+
+    <a href="/planning">
+      <input type="submit" value="Закрыть" class="v22_761">
+    </a>
     <span class="v22_769">А0100089, Заказ, План. инкассация 07.08.2022</span>
     <span class="v22_810">Дата инкассации</span>
     <span class="v22_814">Период</span>
     <span class="v22_815">Диапазон: 1 - 30</span>
-    <span class="v22_812">Тип инкассации</span>
-    <span class="v22_813">Алгоритм</span>
+    <span class="v22_812">Алгоритм</span>
     <input type="submit" value="Рассчитать" class="v321_627">
   </div>
 </div>

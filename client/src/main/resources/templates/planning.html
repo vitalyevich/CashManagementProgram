@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
   <link rel="stylesheet" href="/css/planning/plan-cash.css">
   <link rel="stylesheet" href="/css/planning/edit-plan-cash.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="v1_2">
@@ -37,12 +38,17 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${plans}">
+      <tr th:class="'v1 ' + ${lst.marked}" th:each="lst : ${plans}" th:id="${lst.id}" onclick="document.getElementById('rowIdPlan').value = this.getAttribute('id');
+document.getElementById('rowIdAccept').value = this.getAttribute('id'); document.getElementById('rowIdCreate').value = this.getAttribute('id');
+document.getElementById('rowIdEdit').value = this.getAttribute('id');
+document.getElementById('plan').disabled = false; document.getElementById('accept').disabled = false;
+document.getElementById('create').disabled = false; document.getElementById('edit').disabled = false;
+location.href='/planning/' + this.getAttribute('id');">
         <td style="text-align: center;">Банкомат</td>
         <td style="text-align: center;" th:text="${lst.atm.atmUid}">ID объекта</td>
         <td style="text-align: center; color: white;" th:text="${lst.status}" th:bgcolor="${lst.colorFirst}">Статус</td>
         <td style="text-align: center; width: 3vw; " th:text="${lst.planPeriod}">Период</td>
-        <td style="width: 5vw; "></td> <!--07.08.2022-->
+        <td style="width: 5vw; " th:text="${lst.date}"></td>
         <td style="text-align: center; width: 5vw; ">План</td>
         <td th:text="${lst.amount}"></td>
         <td style=" width: 265vw; " th:text="${lst.listCassettes}"></td>
@@ -55,22 +61,27 @@
     </table>
     </div>
   </div>
-  <a href="/planning/plan-cash">
-  <input class="v18_2" type="submit" value="Рассчитать"/>
-  </a>
-  <a href="/planning/accept">
-    <input class="v18_3" type="submit" value="Принять"/>
-  </a>
-  <a href="/planning/create-order">
-    <input class="v18_4" type="submit" value="Передать на исполнение"/>
-  </a>
+  <form action="/planning/plan-cash" method="get">
+  <input id="plan" th:class="'v18_2 ' + ${marked}" type="submit" value="Рассчитать" th:disabled="${disabled}"/>
+    <input type="hidden" th:value="${id}" name="rowId" id="rowIdPlan">
+  </form>
+  <form action="/planning/accept" method="post">
+    <input id="accept" th:class="'v18_3 ' + ${marked}" type="submit" value="Принять" th:disabled="${disabled}"/>
+    <input type="hidden" th:value="${id}" name="rowId" id="rowIdAccept">
+  </form>
+  <form action="/planning/create-order" method="post">
+    <input id="create" th:class="'v18_4 ' + ${marked}" type="submit" value="Передать на исполнение" th:disabled="${disabled}"/>
+    <input type="hidden" th:value="${id}" name="rowId" id="rowIdCreate">
+  </form>
 
-  <a href="/planning/edit-plan-cash">
-  <input class="v18_5" type="submit" value="Изменить"/>
-  </a>
-  <span class="v1_300">A0100133, План. инкассация 20.10.2022</span>
-  <div class="v18_235" style="top: 965px; height: 400px">
-    <table class="table" style="top:20px">
+  <form action="/planning/edit-plan-cash" method="get">
+  <input id="edit" th:class="'v18_5 ' + ${marked}" type="submit" value="Изменить" th:disabled="${disabled}"/>
+    <input type="hidden" th:value="${id}" name="rowId" id="rowIdEdit">
+  </form>
+  <span class="v1_300" th:text="${text}"></span>
+  <div class="v18_235" style="top: 965px; height: 460px; width: 46vw;">
+    <div class="v18_232">
+    <table class="table">
       <thead>
       <tr>
         <th>Параметр</th>
@@ -78,22 +89,19 @@
         <th>Номинал</th>
         <th>Количество</th>
         <th>Сумма</th>
-        <th>Кассета</th>
-        <th>Статус</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${users}">
-        <td th:utext="${lst.id}">Параметр</td>
-        <td th:utext="${lst.firstName}">Значение</td>
-        <td th:utext="${lst.lastName}">Номинал</td>
-        <td th:utext="${lst.phone}">Количество</td>
-        <td th:utext="${lst.email}">Сумма</td>
-        <td th:utext="${lst.email}">Кассета</td>
-        <td th:utext="${lst.email}">Статус</td>
+      <tr th:each="lst : ${plan}">
+        <td style="font-weight: 700; " th:text="${lst.parameter}">Параметр</td>
+        <td style="vertical-align: inherit; width: 6vw; text-align: center;" th:text="${lst.value}">Значение</td>
+        <td style="vertical-align: inherit; width: 6vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
+        <td style="vertical-align: inherit; width: 6vw; text-align: center;" th:text="${lst.amountCassette}">Количество</td>
+        <td style="vertical-align: inherit; width: 6vw; text-align: center;" th:text="${lst.sum}">Сумма</td>
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
   <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
   <div th:insert="confirmations/confirmation-window :: blackout-confirm"></div>
@@ -103,10 +111,59 @@
 </body>
 </html>
 
+<script>
+  $(document).ready(function(){
+    $('.v1').on('click', function(e) {
+
+      $('.v1').removeClass('marked');
+      $(this).addClass('marked');
+
+      $('.v18_2').removeClass('marked');
+      $('.v18_2').addClass('marked');
+
+      $('.v18_3').removeClass('marked');
+      $('.v18_3').addClass('marked');
+
+      $('.v18_4').removeClass('marked');
+      $('.v18_4').addClass('marked');
+
+      $('.v18_5').removeClass('marked');
+      $('.v18_5').addClass('marked');
+
+    });
+  });
+</script>
+
 <style>
+
+  .table tr.marked{
+    background-color: #E0E0E0;
+  }
+  .v18_2.marked{
+    opacity: 1;
+  }
+  .v18_3.marked{
+    opacity: 1;
+  }
+  .v18_4.marked{
+    opacity: 1;
+  }
+  .v18_5.marked{
+    opacity: 1;
+  }
   .v18_231 {
     width: 119vw;
     height: 496px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    overflow: auto;
+  }
+  .v18_232 {
+    width: 44vw;
+    height: 410px;
     background: transparent;
     opacity: 1;
     position: absolute;
@@ -122,7 +179,7 @@
       top:255px;
     }
   .v1_50 {
-    height: 166vh;
+    height: 174vh;
   }
   .v1_300 {
     width: 550px;
@@ -150,7 +207,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);
@@ -173,7 +230,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);
@@ -196,7 +253,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);
@@ -219,7 +276,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);

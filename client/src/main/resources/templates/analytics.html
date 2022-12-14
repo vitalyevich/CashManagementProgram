@@ -12,45 +12,24 @@
   <div th:insert="blocks/menu-country :: menu-country"></div>
   <div th:insert="blocks/header :: header"></div>
   <div th:insert="blocks/filter :: filter"></div>
-  <div class="v326_736">
-    <div class="v326_732"></div>
-    <span class="v326_728">Текущие остатки: USD</span>
-    <span class="v326_783">Всего: 45 454</span>
-  </div>
-  <div class="v326_768">
-    <div class="v326_769"></div>
+  <div class="v326_769">
     <span class="v326_770">Выданные наличные (Всего): BYN</span>
-    <div class="v326_767">
-      <input type="radio" id="cashChoice1" name="cash" value="sum">
-      <label class="v326_763" for="cashChoice1">Сумма</label>
-
-      <input type="radio" id="cashChoice2" name="cash" value="amount" style="left: 100px;position: absolute;">
-      <label class="v326_764" for="cashChoice2">Количество банкнот</label>
-    </div>
+    <div id="chart_div" style="position: absolute;top:45px;"></div>
+    <span class="v326_763">Сумма</span>
   </div>
-  <div class="v326_771">
-    <div class="v326_772"></div>
-    <span class="v326_773">Выданные наличные (Всего): USD</span>
-    <div class="v326_774">
-      <input type="radio" id="cashValue1" name="cash" value="sum">
-      <label class="v326_775" for="cashValue1">Сумма</label>
-
-      <input type="radio" id="cashValue2" name="cash" value="amount" style="left: 100px;position: absolute;">
-      <label class="v326_777" for="cashValue2">Количество банкнот</label>
-    </div>
+  <div class="v326_700">
+    <span class="v326_770">Выданные наличные (Всего): BYN</span>
+    <div id="chart_div2" style="position: absolute;top:45px;"></div>
+    <span class="v326_764">Количество банкнот</span>
   </div>
   <span class="v326_750">Показатели</span>
   <div class="v326_743">
-    <div class="v326_746"></div>
+    <div id="piechart2" style="width: 550px; height: 300px; position: absolute;"></div>
     <span class="v326_745">Статус сервиса: BYN</span>
     <span class="v326_784">Всего: 45 454</span>
   </div>
-  <div class="v326_747">
-    <div class="v326_748"></div>
-    <span class="v326_749">Статус сервиса: USD</span>
-    <span class="v326_785">Всего: 45 454</span>
-  </div><div class="v326_740">
-  <div class="v326_741"></div>
+  <div class="v326_740">
+    <div id="piechart" style="width: 500px; height: 300px; position: absolute;"></div>
   <span class="v326_742">Текущие остатки: BYN</span>
   <span class="v326_781">Всего: 45 454</span>
 </div>
@@ -66,6 +45,174 @@
 </div>
 </body>
 </html>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Banknote', 'Amount'],
+      ['5 BYN', 11000],
+      ['10 BYN', 2141],
+      ['20 BYN', 2222],
+      ['50 BYN', 242],
+      ['100 BYN', 7442],
+      ['200 BYN', 4242]
+    ]);
+
+    var options = {
+      title: ''
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
+  }
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Status', 'Amount'],
+      ['Нормальный', 11000],
+      ['Проблематичный', 2141],
+      ['Неопределенный', 2222]
+    ]);
+
+    var options = {
+      title: ''
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+    chart.draw(data, options);
+  }
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['line', 'corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var chartDiv = document.getElementById('chart_div');
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('date', 'Месяц');
+    data.addColumn('number', "5 BYN");
+    data.addColumn('number', "10 BYN");
+    data.addColumn('number', "20 BYN");
+    data.addColumn('number', "50 BYN");
+    data.addColumn('number', "100 BYN");
+    data.addColumn('number', "200 BYN");
+
+    data.addRows([
+      [new Date(2021, 0),  100, 155,102,1515,215,851],
+      [new Date(2021, 1),  200, 255,202,515,215,911],
+      [new Date(2021, 2),   300, 755,55,515,615,711],
+      [new Date(2021, 3),  400, 855,12,415,315,611],
+      [new Date(2021, 4),  300, 155,12,415,315,811],
+      [new Date(2021, 5),   400, 355,102,415,215,911],
+      [new Date(2021, 6), 500, 155,302,665,215,511],
+      [new Date(2021, 7), 1000, 455,402,715,215,511],
+      [new Date(2021, 8), 400, 155,502,815,415,411],
+      [new Date(2021, 9),  300, 955,402,615,415,911],
+      [new Date(2021, 10), 200, 15,502,415,615,911],
+      [new Date(2021, 11), 800, 55,602,315,615,811],
+      [new Date(2021, 12), 500, 15,402,715,815,711]
+    ]);
+
+    var materialOptions = {
+      chart: {
+        title: ''
+      },
+      width: 1200,
+      height: 200,
+      series: {
+        // Gives each series an axis name that matches the Y-axis below.
+        0: {axis: 'Amount'},
+        1: {axis: 'Date'}
+      },
+      axes: {
+        // Adds labels to each axis; they don't have to match the axis names.
+        y: {
+          Amount: {label: 'Количество'},
+          Date: {label: 'Дата'}
+        }
+      }
+    };
+
+    var materialChart = new google.charts.Line(chartDiv);
+    materialChart.draw(data, materialOptions);
+
+
+  }
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['line', 'corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var chartDiv = document.getElementById('chart_div2');
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('date', 'Месяц');
+    data.addColumn('number', "5 BYN");
+    data.addColumn('number', "10 BYN");
+    data.addColumn('number', "20 BYN");
+    data.addColumn('number', "50 BYN");
+    data.addColumn('number', "100 BYN");
+    data.addColumn('number', "200 BYN");
+
+    data.addRows([
+      [new Date(2021, 0),  100, 155,102,1515,215,851],
+      [new Date(2021, 1),  200, 255,202,515,215,911],
+      [new Date(2021, 2),   300, 755,55,515,615,711],
+      [new Date(2021, 3),  400, 855,12,415,315,611],
+      [new Date(2021, 4),  300, 155,12,415,315,811],
+      [new Date(2021, 5),   400, 355,102,415,215,911],
+      [new Date(2021, 6), 500, 155,302,665,215,511],
+      [new Date(2021, 7), 1000, 455,402,715,215,511],
+      [new Date(2021, 8), 400, 155,502,815,415,411],
+      [new Date(2021, 9),  300, 955,402,615,415,911],
+      [new Date(2021, 10), 200, 15,502,415,615,911],
+      [new Date(2021, 11), 800, 55,602,315,615,811],
+      [new Date(2021, 12), 500, 15,402,715,815,711]
+    ]);
+
+    var materialOptions = {
+      chart: {
+        title: ''
+      },
+      width: 1200,
+      height: 200,
+      series: {
+        // Gives each series an axis name that matches the Y-axis below.
+        0: {axis: 'Amount'},
+        1: {axis: 'Date'}
+      },
+      axes: {
+        // Adds labels to each axis; they don't have to match the axis names.
+        y: {
+          Amount: {label: 'Количество'},
+          Date: {label: 'Дата'}
+        }
+      }
+    };
+
+    var materialChart = new google.charts.Line(chartDiv);
+    materialChart.draw(data, materialOptions);
+  }
+</script>
 
 <style>
   input {
@@ -136,27 +283,28 @@
     opacity: 1;
     text-align: left;
   }
-  .v326_768 {
-    width: 100%;
-    height: 222px;
-    background: url("../images/v326_768.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 815px;
-    left: 287px;
-    overflow: hidden;
-  }
   .v326_769 {
     width: 79vw;
-    height: 222px;
-    background: rgba(247,247,247,1);
+    height: 255px;
+    background: transparent;
     opacity: 1;
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 615px;
+    left: 290px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  .v326_700 {
+    width: 79vw;
+    height: 255px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 880px;
+    left: 290px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -192,8 +340,8 @@
     width: 49px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 1px;
-    left: 30px;
+    top: 0px;
+    left: 37px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -204,8 +352,8 @@
     width: 149px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 1px;
-    left: 131px;
+    top: 0px;
+    left: 37px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -289,13 +437,13 @@
     text-align: left;
   }
   .v1_50 {
-    height: 157vh;
+    height: 138vh;
   }
   .v326_750 {
     width: 101px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 765px;
+    top: 574px;
     left: 287px;
     font-family: Montserrat;
     font-weight: 600;
@@ -305,14 +453,10 @@
   }
   .v326_743 {
     width: 542px;
-    height: 222px;
-    background: url("../images/v326_743.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    height: 330px;
     opacity: 1;
     position: absolute;
-    top: 278px;
+    top: 276px;
     left: 848px;
     overflow: hidden;
   }
@@ -407,11 +551,7 @@
   }
   .v326_740 {
     width: 542px;
-    height: 222px;
-    background: url("../images/v326_740.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    height: 330px;
     opacity: 1;
     position: absolute;
     top: 276px;
@@ -461,7 +601,7 @@
     height: 27px;
     opacity: 1;
     position: absolute;
-    top: 762px;
+    top: 570px;
     left: 435px;
     border: 1px solid rgba(0,0,0,1);
     border-radius: 10px;
@@ -499,7 +639,7 @@
     width: 8px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 766px;
+    top: 575px;
     left: 417px;
     font-family: Montserrat;
     font-weight: 400;
@@ -512,7 +652,7 @@
     height: 27px;
     opacity: 1;
     position: absolute;
-    top: 762px;
+    top: 570px;
     left: 646px;
     border: 1px solid rgba(0,0,0,1);
     border: 1px solid rgba(0,0,0,1);
@@ -527,7 +667,7 @@
     width: 19px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 766px;
+    top: 574px;
     left: 610px;
     font-family: Montserrat;
     font-weight: 400;
@@ -543,7 +683,7 @@
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 763px;
+    top: 569px;
     left: 836px;
     overflow: hidden;
     background: rgba(0,148,63,1);

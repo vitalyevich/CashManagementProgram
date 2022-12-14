@@ -50,7 +50,7 @@
                 </script>
 
                 <select id="selectRole" name="role" class="v17_444">
-                    <option th:each="el, iterStat : ${roles}" th:value="${iterStat.index + 1}" th:text="${el.roleName}">
+                    <option th:each="el, iterStat : ${roles}" th:value="${iterStat.index + 1}" th:text="${el.nameRole}">
                     </option>
                 </select>
 
@@ -84,7 +84,7 @@
             <span class="v17_426">Номер телефона</span>
             <span class="v17_427">Роль пользователя</span>
             <span class="v17_428">Компания</span>
-            <span class="v17_429">Логин запрещён</span>
+            <span class="v17_429">Логин разрешен</span>
         </div>
     </div>
 </div>

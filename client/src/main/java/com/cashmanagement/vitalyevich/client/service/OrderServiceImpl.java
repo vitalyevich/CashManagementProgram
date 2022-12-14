@@ -55,6 +55,28 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public Order getOrder(Integer id) {
+        String document = "query {\n" +
+                "    order(id: "+id+") {\n" +
+                "        id,\n" +
+                "        orderDate,\n" +
+                "        stage\n" +
+                "        status\n" +
+                "    }\n" +
+                "}";
+
+        try {
+            Order order = graphClient.httpGraphQlClient().document(document)
+                    .retrieve("order")
+                    .toEntity(Order.class).block();
+            return order;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
     public Iterable<StorageOrder> getStorageOrders() {
         String document = """
                       query {
@@ -190,6 +212,33 @@ public class OrderServiceImpl implements OrderService{
         try {
             Order order1 = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
                     .retrieve("updateOrder")
+                    .toEntity(Order.class).block());
+            return order1;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public Order saveOrder(Order order, Integer planId, Integer userId) {
+        String document = "mutation {\n" +
+                "    createOrder(order: {\n" +
+                "        stage: \""+order.getStage()+"\",\n" +
+                "        status: \""+order.getStatus()+"\",\n" +
+                "        orderDate: \""+order.getOrderDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))+"\",\n" +
+                "    }, plan: {\n" +
+                "        id: "+planId+"\n" +
+                "    }, user: {\n" +
+                "        id: "+userId+"\n" +
+                "    }) {\n" +
+                "        id\n" +
+                "    }\n" +
+                "}";
+
+        try {
+            Order order1 = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("createOrder")
                     .toEntity(Order.class).block());
             return order1;
         } catch (GraphQlTransportException ex) {

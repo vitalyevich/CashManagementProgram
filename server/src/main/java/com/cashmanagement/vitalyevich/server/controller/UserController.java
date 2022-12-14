@@ -128,4 +128,9 @@ public class UserController {
     void deleteBrigade(@Argument Integer id) {
         brigadeRepository.deleteById(id);
     }
+
+    @QueryMapping
+    Optional<Access> accessByLogin (@Argument String login) {
+        return accessRepository.findAccessByLogin(login);
+    }
 }

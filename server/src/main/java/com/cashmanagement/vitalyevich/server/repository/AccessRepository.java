@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface AccessRepository extends JpaRepository<Access, Integer> {
     Optional<Access> findAccessByUserId(Integer id);
     Iterable<Access> findByOrderByIdAsc();
+
+    Optional<Access> findAccessByLogin(String login);
 }

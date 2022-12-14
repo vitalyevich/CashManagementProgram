@@ -1,5 +1,7 @@
 package com.cashmanagement.vitalyevich.client.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -22,6 +24,90 @@ public class PlanAtm extends ColorTable {
     private String currency;
 
     private Integer amount;
+
+    private Order order;
+
+    private String parameter;
+
+    private String marked;
+
+    private String value;
+
+    private String banknote;
+
+    private String amountCassette;
+
+    private Integer sum;
+
+    public Integer getSum() {
+        return sum;
+    }
+
+    public void setSum(Integer sum) {
+        this.sum = sum;
+    }
+
+    public String getAmountCassette() {
+        return amountCassette;
+    }
+
+    public void setAmountCassette(String amountCassette) {
+        this.amountCassette = amountCassette;
+    }
+
+    public String getBanknote() {
+        return banknote;
+    }
+
+    public void setBanknote(String banknote) {
+        this.banknote = banknote;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getMarked() {
+        return marked;
+    }
+
+    public void setMarked(String marked) {
+        this.marked = marked;
+    }
+
+    public String getParameter() {
+        return parameter;
+    }
+
+    public void setParameter(String parameter) {
+        this.parameter = parameter;
+    }
+
+    private String date;
+
+    public String getDate() {
+        if (order == null) {
+            return " ";
+        }
+        return order.getOrderDate().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public User getUser() {
         return user;
@@ -65,7 +151,11 @@ public class PlanAtm extends ColorTable {
             return "#3AACED";
         } else if (status.equals("Изменен")) {
             return "#F1CB00";
-        } else {
+        }
+        else if (status.equals("Принят")) {
+            return "#57DB4E";
+        }
+        else {
             return "#FF3F3F";
         }
     }
@@ -119,4 +209,20 @@ public class PlanAtm extends ColorTable {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public PlanAtm() {
+    }
+
+    public PlanAtm(Atm atm) {
+        this.atm = atm;
+    }
+
+    public PlanAtm(String date) {
+        this.date = date;
+    }
+
+    public PlanAtm(Integer planPeriod) {
+        this.planPeriod = planPeriod;
+    }
+
 }

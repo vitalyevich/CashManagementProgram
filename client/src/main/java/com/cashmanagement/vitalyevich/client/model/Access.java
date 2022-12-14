@@ -1,23 +1,34 @@
 package com.cashmanagement.vitalyevich.client.model;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "access")
 public class Access extends ColorTable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "access_id", nullable = false)
     private Integer id;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(name = "login", nullable = false, length = 20)
     private String login;
 
+    @Column(name = "user_password", nullable = false)
     private String userPassword;
 
+    @Column(name = "active", nullable = false)
     private Boolean active = false;
 
     private String stage;
 
     @Override
     public String getColorFirst() {
-        return active.equals(false) ? "#57DB4E" : "#FF3F3F";
+        return active.equals(true) ? "#57DB4E" : "#FF3F3F";
     }
 
     public Boolean getActive() {

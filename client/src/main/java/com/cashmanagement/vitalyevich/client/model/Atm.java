@@ -111,6 +111,9 @@ public class Atm extends ColorTable {
     }
 
     public String getCompanies() {
+        if (!companies.iterator().hasNext()) {
+            return " ";
+        }
         return companies.iterator().next().getCompanyName();
     }
 

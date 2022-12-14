@@ -60,7 +60,7 @@ public class OrderController {
 
     @QueryMapping
     Optional<Order> order (@Argument Integer id) {
-        return orderRepository.findById(id);
+        return orderRepository.findByPlanId(id);
     }
 
     @QueryMapping
@@ -80,6 +80,14 @@ public class OrderController {
 
     @MutationMapping
     Order updateOrder(@Argument Order order, @Argument PlanAtm plan, @Argument User user) {
+
+        order.setUser(user);
+        order.setPlan(plan);
+        return orderRepository.save(order);
+    }
+
+    @MutationMapping
+    Order createOrder(@Argument Order order, @Argument PlanAtm plan, @Argument User user) {
 
         order.setUser(user);
         order.setPlan(plan);
@@ -123,7 +131,6 @@ public class OrderController {
     BrigadeOrder updateBrigadeOrder(@Argument BrigadeOrder brigadeOrder, @Argument Integer orderId,
                                     @Argument Integer brigadeId, @Argument Integer userId) {
 
-        // BRIGADEiD
         if (brigadeId == null) {
             brigadeOrder.setBrigade(null);
         }

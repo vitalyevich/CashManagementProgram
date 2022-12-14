@@ -1,5 +1,6 @@
 package com.cashmanagement.vitalyevich.client.controller.storage;
 
+import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.model.Order;
 import com.cashmanagement.vitalyevich.client.model.Storage;
 import com.cashmanagement.vitalyevich.client.service.OrderService;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class OrderCollectionStorageController {
 
+    private Seance seance = Seance.getInstance();
+
     @Autowired
     private OrderServiceImpl orderService;
 
@@ -26,6 +29,7 @@ public class OrderCollectionStorageController {
         model.addAttribute("orders", orders);
 
         model.addAttribute("headerText", "Заказ инкассации");
+        model.addAttribute("headerPost", "Старший кассир хранилища " + seance.getUser().getFirstName());
         return "storage-collection";
     }
 

@@ -1,5 +1,6 @@
 package com.cashmanagement.vitalyevich.client.controller.collection;
 
+import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.model.*;
 import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
 import com.cashmanagement.vitalyevich.client.service.OrderService;
@@ -21,6 +22,8 @@ import java.util.*;
 @RequestMapping("/planning-collection")
 @Controller
 public class PlanningCollectionController {
+
+    private Seance seance = Seance.getInstance();
 
     @Autowired
     private OrderServiceImpl orderService;
@@ -79,6 +82,7 @@ public class PlanningCollectionController {
         model.addAttribute("brigadeOrders", brigadeOrders);
 
         model.addAttribute("headerText", "Планирование");
+        model.addAttribute("headerPost", "Старший инкассатор " + seance.getUser().getFirstName());
         return "planning-collection";
     }
 

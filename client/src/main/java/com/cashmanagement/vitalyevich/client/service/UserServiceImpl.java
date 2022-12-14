@@ -258,6 +258,37 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Access getAccessByLogin(String login) {
+        String document = "query {\n" +
+                "    accessByLogin(login: \""+login+"\") {\n" +
+                "        user {\n" +
+                "            id,\n" +
+                "            firstName,\n" +
+                "            lastName,\n" +
+                "            roles {\n" +
+                "                id,\n" +
+                "                roleName\n" +
+                "            }\n" +
+                "            companies {\n" +
+                "            id,\n" +
+                "            companyName,\n" +
+                "            }\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        try {
+            Access access = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("accessByLogin")
+                    .toEntity(Access.class).block());
+            return access;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
     public Access updateAccess(Access access, Integer userId) {
         String document = "mutation {\n" +
                 "                          updateAccess(access: {\n" +

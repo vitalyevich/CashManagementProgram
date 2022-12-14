@@ -1,5 +1,5 @@
 .planCash {
-    width: 996px;
+    width: 874px;
     height: 686px;
     background: rgba(255,255,255,1);
     opacity: 1;
@@ -83,8 +83,8 @@ select {
 .table tbody tr td:last-child {
     border-radius: 0 8px 8px 0;
 }
-.v22_754 {
-    width: 996px;
+.v22_750 {
+    width: 874px;
     height: 686px;
     background: rgba(255,255,255,1);
     opacity: 1;
@@ -93,13 +93,23 @@ select {
     left: 0px;
     overflow: hidden;
 }
-.v321_697 {
-    width: 949px;
+.v18_23 {
+    width: 46vw;
+    height: 270px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 40px;
+    left: 117px;
+    overflow: auto;
+}
+.v321_690 {
+    width: 830px;
     height: 381px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 227px;
+    top: 210px;
     left: 24px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
@@ -129,9 +139,9 @@ select {
     opacity: 1;
     text-align: left;
 }
-.v22_811 {
-    width: 949px;
-    height: 129px;
+.v22_800 {
+    width: 830px;
+    height: 100px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
@@ -197,14 +207,14 @@ select {
     font-size: 14px;
     padding-left: 7px;
 }
-.v22_765 {
+.v22_760 {
     width: 103px;
     height: 27px;
     background: rgba(0,148,63,1);
     opacity: 1;
     position: absolute;
     top: 630px;
-    left: 728px;
+    left: 612px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -214,14 +224,14 @@ select {
     cursor: pointer;
     border-radius: 10px;
 }
-.v22_768 {
+.v22_761 {
     width: 95px;
     height: 27px;
     background: rgba(0,148,63,1);
     opacity: 1;
     position: absolute;
     top: 630px;
-    left: 841px;
+    left: 735px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -320,7 +330,7 @@ select {
     color: rgba(0,0,0,1);
     position: absolute;
     top: 100px;
-    left: 698px;
+    left: 700px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;

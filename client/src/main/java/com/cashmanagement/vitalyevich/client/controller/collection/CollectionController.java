@@ -1,5 +1,6 @@
 package com.cashmanagement.vitalyevich.client.controller.collection;
 
+import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.model.*;
 import com.cashmanagement.vitalyevich.client.service.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import java.util.List;
 @RequestMapping("/collection")
 @Controller
 public class CollectionController {
+
+    private Seance seance = Seance.getInstance();
 
     @Autowired
     private OrderServiceImpl orderService;
@@ -46,6 +49,7 @@ public class CollectionController {
         model.addAttribute("orderStages", orderStages);
 
         model.addAttribute("headerText", "Инкассации");
+        model.addAttribute("headerPost", "Старший инкассатор " + seance.getUser().getFirstName());
         return "collection";
     }
 

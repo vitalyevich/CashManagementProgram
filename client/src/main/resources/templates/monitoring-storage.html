@@ -27,9 +27,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:class="'v1 ' + ${lst.marked}" th:each="lst,iter : ${storages}" th:id="${iter.count - 1}" onclick="document.getElementById('rowIdEdit').value = this.getAttribute('id'); document.getElementById('edit').disabled = false;
+        <tr th:class="'v1 ' + ${lst.marked}" th:each="lst,iter : ${storages}" th:id="${iter.count - 1}" onclick="document.getElementById('rowIdEdit').value = document.getElementById('company').value; document.getElementById('edit').disabled = false;
           location.href='/monitoring-storage/' + this.getAttribute('id');">
-          <td th:text="${lst.companyName}">Компания</td>
+          <td id="company" th:value="${lst.id}" th:text="${lst.companyName}">Компания</td>
           <td style="vertical-align: inherit; width: 3vw; text-align: center;" th:text="${lst.currency}">Валюта</td>
           <td style="vertical-align: inherit; width: 9vw;" th:text="${lst.sumAmount}">Остаток в хранилище</td>
           <td th:text="${lst.amountOperationPlus}"></td>
@@ -58,7 +58,6 @@
       </tr>
       </thead>
       <tbody>
-      <!--    <input type="hidden" name="rowId" id="rowIdMon">-->
       <tr th:each="lst : ${storage}">
         <td style="width: 4vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
         <td style="width: 7vw;" th:text="${lst.amount}">Количество</td>

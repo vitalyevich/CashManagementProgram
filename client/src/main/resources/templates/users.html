@@ -31,7 +31,7 @@
             <th>Имя пользователя</th>
             <th>Фамилия</th>
             <th>Роль пользователя</th>
-            <th>Логин запрещен</th>
+            <th>Доступ</th>
           </tr>
           </thead>
           <tbody>
@@ -40,7 +40,7 @@ document.getElementById('rowIdEdit').value = this.getAttribute('id'); document.g
             <td style="width: 2vw; text-align: center;" th:text="${iter.count}">Код</td>
             <td th:text="${lst.user.firstName}">Имя пользователя</td>
             <td th:text="${lst.user.lastName}">Фамилия</td>
-            <td th:text="${lst.user.roleName}">Роль пользователя</td>
+            <td th:text="${lst.user.nameRole}">Роль пользователя</td>
             <td style="width: 10vw; text-align: center; color: white;" th:bgcolor="${lst.colorFirst}" th:text="${lst.stage}">Логин запрещен</td>
             <input name="id">
           </tr>

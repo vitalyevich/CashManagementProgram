@@ -1,5 +1,6 @@
 package com.cashmanagement.vitalyevich.client.controller.storage;
 
+import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.model.Atm;
 import com.cashmanagement.vitalyevich.client.model.Storage;
 import com.cashmanagement.vitalyevich.client.model.StorageOperation;
@@ -20,6 +21,8 @@ import java.util.List;
 @Controller
 public class MonitoringStorageController {
 
+    private Seance seance = Seance.getInstance();
+
     @Autowired
     private StorageServiceImpl storageService;
 
@@ -35,32 +38,58 @@ public class MonitoringStorageController {
         if (storages != null) {
             String companyName = "";
             String currency = "";
+
+            Integer balance = 0;
+
             for (Storage storage : storages) {
+
+                storage.setAmountOperationPlus(0);
+                storage.setAmountOperationMinus(0);
+                storage.setBalanceMorning(0);
 
                 if (storage.getCompanyName().equals(companyName)) {
                     storage.setCompanies(null);
+
                     if (storage.getCurrency().equals(currency)) {
+                        for (StorageOperation storageOperation: storageService.getStorageOperations(storage.getId())) {
+                            if (storageOperation.getAmountOperation() >= 0) {
+                                storageList.get(storageList.size() - 1).setAmountOperationPlus((storageList.get(storageList.size() - 1).getAmountOperationPlus() + (storageOperation.getAmountOperation() * Integer.parseInt(storage.getBanknote()))));
+                            } else {
+                                storageList.get(storageList.size() - 1).setAmountOperationMinus((storageList.get(storageList.size() - 1).getAmountOperationMinus() + ((storageOperation.getAmountOperation() * -1) * Integer.parseInt(storage.getBanknote()))));
+                            }
+                        }
                         storageList.get(storageList.size() - 1).setSumAmount(storageList.get(storageList.size() - 1).getSumAmount() + ((int) (storage.getAmount() * Integer.parseInt(storage.getBanknote()))));
+                        storageList.get(storageList.size() - 1).setBalanceMorning(storageList.get(storageList.size() - 1).getSumAmount() - storageList.get(storageList.size() - 1).getAmountOperationPlus() + storageList.get(storageList.size() - 1).getAmountOperationMinus());
+
                     } else {
+                        for (StorageOperation storageOperation: storageService.getStorageOperations(storage.getId())) {
+                            if (storageOperation.getAmountOperation() >= 0) {
+                                storage.setAmountOperationPlus(storage.getAmountOperationPlus() + (storageOperation.getAmountOperation() * Integer.parseInt(storage.getBanknote())));
+                            } else {
+                                storage.setAmountOperationMinus(storage.getAmountOperationMinus() + ((storageOperation.getAmountOperation() * -1) * Integer.parseInt(storage.getBanknote())));
+                            }
+                        }
                         storage.setSumAmount((int) (storage.getAmount() * Integer.parseInt(storage.getBanknote())));
+                        storage.setBalanceMorning(storage.getSumAmount() - storage.getAmountOperationPlus() + storage.getAmountOperationMinus());
+
                         storageList.add(storage);
                     }
                 } else {
                     companyName = storage.getCompanyName();
                     currency = storage.getCurrency();
-                    storage.setSumAmount((int) (storage.getAmount() * Integer.parseInt(storage.getBanknote())));
-                    storageList.add(storage);
-                }
 
-                storage.setAmountOperationPlus(0);
-                storage.setAmountOperationMinus(0);
-
-                for (StorageOperation storageOperation: storage.getStorageOperations()) {
-                    if (storageOperation.getAmountOperation() >= 0) {
-                        storage.setAmountOperationPlus(storage.getAmountOperationPlus() + storageOperation.getAmountOperation());
-                    } else {
-                        storage.setAmountOperationMinus(storage.getAmountOperationMinus() + (storageOperation.getAmountOperation() * -1));
+                    for (StorageOperation storageOperation: storageService.getStorageOperations(storage.getId())) {
+                        if (storageOperation.getAmountOperation() >= 0) {
+                            storage.setAmountOperationPlus(storage.getAmountOperationPlus() + (storageOperation.getAmountOperation() * Integer.parseInt(storage.getBanknote())));
+                        } else {
+                            storage.setAmountOperationMinus(storage.getAmountOperationMinus() + ((storageOperation.getAmountOperation() * -1) * Integer.parseInt(storage.getBanknote())));
+                        }
                     }
+
+                    storage.setSumAmount((int) (storage.getAmount() * Integer.parseInt(storage.getBanknote())));
+                    storage.setBalanceMorning(storage.getSumAmount() - storage.getAmountOperationPlus() + storage.getAmountOperationMinus());
+
+                    storageList.add(storage);
                 }
             }
         }
@@ -84,6 +113,7 @@ public class MonitoringStorageController {
         model.addAttribute("storage", storageArrayList);
 
         model.addAttribute("headerText", "Мониторинг");
+        model.addAttribute("headerPost", "Старший кассир хранилища " + seance.getUser().getFirstName());
         return "monitoring-storage";
     }
 
@@ -176,6 +206,7 @@ public class MonitoringStorageController {
 
 
         model.addAttribute("headerText", "Мониторинг");
+        model.addAttribute("headerPost", "Старший кассир хранилища " + seance.getUser().getFirstName());
         return "monitoring-storages";
     }
 
@@ -185,10 +216,12 @@ public class MonitoringStorageController {
 
     @PostMapping("/monitoring-storage/balance-storage")
     public String balanceStorage(@RequestParam Integer rowId, RedirectAttributes rm) {
-
         storageId = rowId;
-        Storage storage = storageService.getStorage(rowId);
-        rm.addFlashAttribute("textWindow", storage.getCompanies().iterator().next().getCompanyName());
+
+        Storage serviceStorage = storageList.get(storageId);
+        serviceStorage = storageService.getStorage(serviceStorage.getId());
+
+        rm.addFlashAttribute("textWindow", serviceStorage.getCompanies().iterator().next().getCompanyName());
         return "redirect:/monitoring-storage#blackout-balance";
     }
 

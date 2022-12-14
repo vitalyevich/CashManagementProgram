@@ -5,9 +5,10 @@
     <script src="https://unpkg.com/imask"></script>
 </head>
 <body>
+<form th:action="@{/authorization}" method="post">
 <div class="v9_170">
     <div class="v1_01">
-        <input required type="text"  name="login" class="v9_312" placeholder="Логин">
+        <input required type="text" name="login" class="v9_312" placeholder="Логин">
         <div class="v1_6">
             <input required type="password" id="password-input" name="password" maxlength="20" class="v9_314" placeholder="Пароль">
             <a href="#" class="password-control"></a>
@@ -26,11 +27,10 @@
                 });
             </script>
         </div>
-        <a href="/profile-admin">
-            <div class="v1_05"></div>
-        </a>
+        <input type="submit" value="" class="v1_05">
     </div>
 </div>
+</form>
 </body>
 </html>
 
@@ -42,6 +42,7 @@
         right: 1px;
         top: 455px;
         background: transparent;
+        cursor: pointer;
     }
     .v1_6 {
         width: 384px;

@@ -16,12 +16,12 @@ public class Brigade extends ColorTable {
     private String brigadeActive;
 
     public String getBrigadeActive() {
-        return active.equals(false) ? "разрешен" : "запрещен";
+        return active.equals(true) ? "разрешен" : "запрещен";
     }
 
     @Override
     public String getColorFirst() {
-        return active.equals(false) ? "#57DB4E" : "#FF3F3F";
+        return active.equals(true) ? "#57DB4E" : "#FF3F3F";
     }
 
     public void setBrigadeActive(String brigadeActive) {

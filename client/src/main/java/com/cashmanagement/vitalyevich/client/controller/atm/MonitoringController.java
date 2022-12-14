@@ -1,5 +1,6 @@
 package com.cashmanagement.vitalyevich.client.controller.atm;
 
+import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.model.Atm;
 import com.cashmanagement.vitalyevich.client.model.Cassette;
 import com.cashmanagement.vitalyevich.client.service.AtmServiceImpl;
@@ -16,6 +17,8 @@ import java.util.Iterator;
 @RequestMapping("/monitoring")
 @Controller
 public class MonitoringController {
+
+    private Seance seance = Seance.getInstance();
 
     @Autowired
     private AtmServiceImpl atmService;
@@ -34,13 +37,14 @@ public class MonitoringController {
             for (Cassette cassette: atm.getCassettes())
             {
                 atm.setListCassettes(atm.getListCassettes() +
-                        cassette.getAmount() + " ("+cassette.getBanknote()+")" + " ");
+                        cassette.getAmount() + " ("+cassette.getBanknote()+")" + ", ");
                 atm.setAmount(atm.getAmount() + cassette.getAmount());
             }
         }
 
         model.addAttribute("atms", atms);
         model.addAttribute("headerText", "Мониторинг");
+        model.addAttribute("headerPost", "Старший кассир " + seance.getUser().getFirstName());
         return "monitoring";
     }
 
