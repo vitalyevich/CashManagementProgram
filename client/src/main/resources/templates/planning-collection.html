@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
   <link rel="stylesheet" href="/css/planning/create-brigade.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="v1_2">
@@ -97,6 +98,23 @@ document.getElementById('cancel').disabled = false;">
 </div>
 </body>
 </html>
+
+<script>
+  var dropdown = document.getElementsByClassName("dropdown-btn");
+  var i;
+
+  for (i = 0; i < dropdown.length; i++) {
+    dropdown[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var dropdownContent = this.nextElementSibling;
+      if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+      } else {
+        dropdownContent.style.display = "block";
+      }
+    });
+  }
+</script>
 
 <script>
   $(document).ready(function(){

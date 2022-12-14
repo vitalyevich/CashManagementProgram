@@ -3,7 +3,10 @@ package com.cashmanagement.vitalyevich.client.controller.atm;
 import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.model.Atm;
 import com.cashmanagement.vitalyevich.client.model.Cassette;
+import com.cashmanagement.vitalyevich.client.model.City;
+import com.cashmanagement.vitalyevich.client.model.Country;
 import com.cashmanagement.vitalyevich.client.service.AtmServiceImpl;
+import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 @RequestMapping("/monitoring")
 @Controller
 public class MonitoringController {
 
     private Seance seance = Seance.getInstance();
+
+    @Autowired
+    private CompanyServiceImpl companyService;
 
     @Autowired
     private AtmServiceImpl atmService;
@@ -45,6 +53,11 @@ public class MonitoringController {
         model.addAttribute("atms", atms);
         model.addAttribute("headerText", "Мониторинг");
         model.addAttribute("headerPost", "Старший кассир " + seance.getUser().getFirstName());
+
+
+        Sidebar sidebar = new Sidebar();
+        sidebar.getDropDown("/monitoring", companyService, model);
+
         return "monitoring";
     }
 

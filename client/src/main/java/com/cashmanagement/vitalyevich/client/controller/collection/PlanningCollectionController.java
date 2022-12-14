@@ -1,6 +1,7 @@
 package com.cashmanagement.vitalyevich.client.controller.collection;
 
 import com.cashmanagement.vitalyevich.client.config.Seance;
+import com.cashmanagement.vitalyevich.client.controller.atm.Sidebar;
 import com.cashmanagement.vitalyevich.client.model.*;
 import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
 import com.cashmanagement.vitalyevich.client.service.OrderService;
@@ -83,6 +84,10 @@ public class PlanningCollectionController {
 
         model.addAttribute("headerText", "Планирование");
         model.addAttribute("headerPost", "Старший инкассатор " + seance.getUser().getFirstName());
+
+        Sidebar sidebar = new Sidebar();
+        sidebar.getDropDown("/planning-collection", companyService, model);
+
         return "planning-collection";
     }
 

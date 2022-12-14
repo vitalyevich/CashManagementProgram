@@ -1,7 +1,9 @@
 package com.cashmanagement.vitalyevich.client.controller.collection;
 
 import com.cashmanagement.vitalyevich.client.config.Seance;
+import com.cashmanagement.vitalyevich.client.controller.atm.Sidebar;
 import com.cashmanagement.vitalyevich.client.model.*;
+import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
 import com.cashmanagement.vitalyevich.client.service.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class CollectionController {
 
     @Autowired
     private OrderServiceImpl orderService;
+
+    @Autowired
+    private CompanyServiceImpl companyService;
 
     @GetMapping("")
     public String collection(Model model) {
@@ -50,6 +55,10 @@ public class CollectionController {
 
         model.addAttribute("headerText", "Инкассации");
         model.addAttribute("headerPost", "Старший инкассатор " + seance.getUser().getFirstName());
+
+        Sidebar sidebar = new Sidebar();
+        sidebar.getDropDown("/collection", companyService, model);
+
         return "collection";
     }
 

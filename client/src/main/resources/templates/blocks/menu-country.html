@@ -1,4 +1,17 @@
 <div th:fragment="menu-country">
   <div class="v1_50">
+    <div class="sidenav">
+      <button class="dropdown-btn" th:text="'Беларусь ('+ ${countryCities} + ')'">
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-container" th:each="el, iterStat : ${countries}">
+        <button class="dropdown-btn" th:text="${el.cityName} + ' ('+ ${el.cityAtms} + ')'">
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a th:href="${url} + '/' + ${el.id}" th:each="el, iterStat : ${atmList}" th:text="${el.atmUid}"></a>
+        </div>
+    </div>
+    </div>
 </div>
 </div>

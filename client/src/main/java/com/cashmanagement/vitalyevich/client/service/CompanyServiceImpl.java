@@ -70,6 +70,14 @@ public class CompanyServiceImpl implements CompanyService{
                        countries {
                            id,
                            countryName
+                           cities { 
+                           id,
+                           cityName,
+                           atms {
+                           id,
+                           atmUid,
+                           }
+                           }
                            }
                        }
                 """;
