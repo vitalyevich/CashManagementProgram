@@ -9,5 +9,7 @@ public interface AtmRepository extends JpaRepository<Atm, Integer> {
 
     Optional<Atm> findAllById(Integer id);
 
+    Optional<Atm> findById(Integer id);
+
     Iterable<Atm> findByOrderById();
 }

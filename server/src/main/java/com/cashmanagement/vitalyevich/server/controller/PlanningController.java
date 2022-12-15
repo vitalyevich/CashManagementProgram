@@ -22,7 +22,7 @@ public class PlanningController {
 
     @QueryMapping
     Iterable<PlanAtm> plans () {
-        return planAtmRepository.findByOrderByIdAsc();
+        return planAtmRepository.findByOrderByIdAscCassettesAsc();
     }
 
     @QueryMapping

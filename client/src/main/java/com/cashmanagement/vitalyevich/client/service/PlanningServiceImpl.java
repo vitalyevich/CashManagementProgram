@@ -75,6 +75,13 @@ public class PlanningServiceImpl implements PlanningService {
                 "            atm {\n" +
                 "                id,\n" +
                 "                atmUid,\n" +
+                "                cassettes {\n" +
+                "                id,\n" +
+                "                cassetteNum,\n" +
+                "                banknote,\n" +
+                "                currency,\n" +
+                "                amount,\n" +
+                "            }\n" +
                 "            },\n" +
                 "            planMethod,\n" +
                 "            status,\n" +
@@ -84,6 +91,7 @@ public class PlanningServiceImpl implements PlanningService {
                 "            }\n" +
                 "            cassettes {\n" +
                 "                id,\n" +
+                "                cassetteNum,\n" +
                 "                banknote,\n" +
                 "                currency,\n" +
                 "                amount,\n" +

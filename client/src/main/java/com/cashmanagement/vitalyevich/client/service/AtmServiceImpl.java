@@ -56,6 +56,13 @@ public class AtmServiceImpl implements AtmService{
                 "                              atmUid,\n" +
                 "                              cashState,\n" +
                 "                              atmState\n" +
+                "                              cassettes {\n" +
+                "                              id,\n" +
+                "                              cassetteNum,\n" +
+                "                              banknote,\n" +
+                "                              currency,\n" +
+                "                              amount,\n" +
+                "                              }\n" +
                 "                          }\n" +
                 "                      }";
 

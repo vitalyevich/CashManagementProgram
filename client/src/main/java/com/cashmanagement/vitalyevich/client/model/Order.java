@@ -21,11 +21,31 @@ public class Order extends ColorTable {
 
     private Set<OrderStage> orderStages = new LinkedHashSet<>();
 
+    private String marked;
+
+    private Integer amount;
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public String getMarked() {
+        return marked;
+    }
+
+    public void setMarked(String marked) {
+        this.marked = marked;
+    }
+
     @Override
     public String getColorFirst() {
         if (status.equals("Рассчитан")) {
             return "#3AACED";
-        } else if (status.equals("Передан на исполнение")) {
+        } else if (status.equals("Передан на исполнение") || status.equals("Подтвержден")) {
             return "#57DB4E";
         }
         else {

@@ -23,8 +23,10 @@ type Query {
     orderStages: [OrderStage!]!
     orderStage(id: ID): OrderStage!
     order(id: ID): Order
+    orderById(id: ID): Order
     brigadeOrder(id: ID): BrigadeOrder!
     storageOrder(id: ID): StorageOrder!
+    withdrawalCash(id: ID): WithdrawalCash
 }
 
 type Mutation {
@@ -44,6 +46,7 @@ type Mutation {
     createOrder(order: CreateOrderInput!, plan: UpdateIdInput!, user: UpdateIdInput!): Order!
 
     deleteOrder(id: ID!): Int
+    deleteByOrder(id: ID!): Int
 
     updateBrigadeOrder(brigadeOrder: UpdateBrigadeOrderInput!, orderId: ID!, brigadeId: ID, userId: ID!): BrigadeOrder!
 
@@ -52,6 +55,13 @@ type Mutation {
 
     updatePlan(plan: UpdatePlanInput!, atm: UpdateIdInput!, user: UpdateIdInput!): PlanAtm!
 
+    updateStorageOrder(storageOrder: UpdateStorageOrderInput!, orderId: ID!, userId: ID!): StorageOrder
+
+}
+
+input UpdateStorageOrderInput {
+    id: ID!,
+    orderDate: String!
 }
 
 input UpdatePlanInput {
@@ -204,7 +214,7 @@ type PlanAtm {
     planMethod: String!,
     status: String!,
     planPeriod: Int!
-    cassettes: [Cassette]!
+    cassettes: [Cassette]
     user: User!
 }
 
@@ -285,5 +295,5 @@ type WithdrawalCash {
     withdrawalDate: String!,
     atm: Atm!,
     cassette: Cassette,
-    amount: Float!
+    amount: Int!
 }

@@ -20,7 +20,7 @@
             <tr class="v4" th:each="lst, iter : ${userList}" th:id="${iter.count - 1}" onclick="document.getElementById('rowIdDel').value = this.getAttribute('id');
               document.getElementById('del').disabled = false;">
               <td th:text="${iter.count}">№</td>
-              <td th:text="${lst.roleName}">Роль</td>
+              <td th:text="${lst.nameRole}">Роль</td>
               <td th:text="${lst.lastName} + ' ' + ${lst.firstName}">Пользователь</td>
               <input name="id">
             </tr>

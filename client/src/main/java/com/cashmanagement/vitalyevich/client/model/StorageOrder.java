@@ -43,4 +43,20 @@ public class StorageOrder {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public StorageOrder() {
+    }
+
+    public StorageOrder(Integer id, Order order, LocalDate orderDate, User user) {
+        this.id = id;
+        this.order = order;
+        this.orderDate = orderDate;
+        this.user = user;
+    }
+
+    public StorageOrder(Order order, LocalDate orderDate, User user) {
+        this.order = order;
+        this.orderDate = orderDate;
+        this.user = user;
+    }
 }

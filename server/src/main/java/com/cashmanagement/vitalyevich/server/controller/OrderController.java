@@ -29,18 +29,22 @@ public class OrderController {
     @Autowired
     private final OrderStageRepository orderStageRepository;
 
+    @Autowired
+    private final UserRepository userRepository;
 
-    public OrderController(OrderRepository orderRepository, BrigadeOrderRepository brigadeOrderRepository, BrigadeRepository brigadeRepository, StorageOrderRepository storageOrderRepository, OrderStageRepository orderStageRepository) {
+
+    public OrderController(OrderRepository orderRepository, BrigadeOrderRepository brigadeOrderRepository, BrigadeRepository brigadeRepository, StorageOrderRepository storageOrderRepository, OrderStageRepository orderStageRepository, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.brigadeOrderRepository = brigadeOrderRepository;
         this.brigadeRepository = brigadeRepository;
         this.storageOrderRepository = storageOrderRepository;
         this.orderStageRepository = orderStageRepository;
+        this.userRepository = userRepository;
     }
 
     @QueryMapping
     Iterable<Order> orders () {
-        return orderRepository.findAll();
+        return orderRepository.findByOrderByIdAsc();
     }
 
     @QueryMapping
@@ -62,6 +66,12 @@ public class OrderController {
     Optional<Order> order (@Argument Integer id) {
         return orderRepository.findByPlanId(id);
     }
+
+    @QueryMapping
+    Optional<Order> orderById (@Argument Integer id) {
+        return orderRepository.findById(id);
+    }
+
 
     @QueryMapping
     Optional<OrderStage> orderStage (@Argument Integer orderId, @Argument Integer stageId) {
@@ -117,6 +127,11 @@ public class OrderController {
     }
 
     @MutationMapping
+    void deleteByOrder(@Argument Integer id) {
+        orderRepository.deleteById(id);
+    }
+
+    @MutationMapping
     OrderStage createStage(@Argument String stageDate, @Argument Integer orderId, @Argument Integer stageId) {
 
         OrderStage orderStage = new OrderStage();
@@ -143,5 +158,16 @@ public class OrderController {
         User user = new User(userId);
         brigadeOrder.setUser(user);
         return brigadeOrderRepository.save(brigadeOrder);
+    }
+
+    @MutationMapping
+    StorageOrder updateStorageOrder(@Argument StorageOrder storageOrder, @Argument Integer orderId,
+                                    @Argument Integer userId) {
+
+        Order order = orderRepository.findOrderById(orderId);
+        storageOrder.setOrder(order);
+        User user = userRepository.findUserById(userId);
+        storageOrder.setUser(user);
+        return storageOrderRepository.save(storageOrder);
     }
 }

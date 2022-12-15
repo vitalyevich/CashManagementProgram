@@ -23,13 +23,13 @@ public class WithdrawalCash {
     private Cassette cassette;
 
     @Column(name = "amount", nullable = false)
-    private Double amount;
+    private Integer amount;
 
-    public Double getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 

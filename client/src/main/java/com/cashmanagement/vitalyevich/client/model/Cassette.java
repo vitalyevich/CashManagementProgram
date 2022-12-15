@@ -19,6 +19,16 @@ public class Cassette {
 
     private Integer amount;
 
+    private Integer sumAmount;
+
+    public Integer getSumAmount() {
+        return sumAmount;
+    }
+
+    public void setSumAmount(Integer sumAmount) {
+        this.sumAmount = sumAmount;
+    }
+
     public Integer getAmount() {
         return amount;
     }

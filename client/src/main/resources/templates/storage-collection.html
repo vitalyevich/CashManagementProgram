@@ -3,21 +3,22 @@
   <title>Заказ инкассации</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="/css/header.css">
-  <link rel="stylesheet" href="/css/menu-country.css">
   <link rel="stylesheet" href="/css/filter.css">
   <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
   <link rel="stylesheet" href="/css/storage/cash-order.css">
   <link rel="stylesheet" href="/css/storage/edit-cash-order.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="v1_2">
-  <div th:insert="blocks/menu-country :: menu-country"></div>
   <div th:insert="blocks/header :: header"></div>
   <div th:insert="blocks/filter :: filter"></div>
   <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
+    <div class="v18_231">
     <table class="table">
       <thead>
       <tr>
@@ -32,43 +33,53 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${orders}">
-        <td th:text="${lst.orderDate}">Дата заказа</td>
+      <tr th:each="lst : ${orders}" th:class="'v1 ' + ${lst.marked}" th:id="${lst.id}" onclick="document.getElementById('rowIdCancel').value = this.getAttribute('id');
+document.getElementById('rowIdExecute').value = this.getAttribute('id'); document.getElementById('rowIdConfirm').value = this.getAttribute('id');
+document.getElementById('rowIdTransfer').value = this.getAttribute('id');
+document.getElementById('cancel').disabled = false; document.getElementById('confirm').disabled = false;
+document.getElementById('execute').disabled = false;document.getElementById('transfer').disabled = false;
+location.href='/storage-collection/' + this.getAttribute('id');">
+        <td style="vertical-align: inherit; width: 7vw;" th:text="${lst.orderDate}">Дата заказа</td>
         <td>Заказ наличных</td>
         <td th:text="${lst.user.lastName} + ' ' + ${lst.user.firstName}">Заказал</td>
-        <td th:text="${lst.status}">Статус заказа</td>
+        <td th:text="${lst.status}" style="vertical-align: inherit; width: 16vw; color: white;" th:bgcolor="${lst.colorFirst}">Статус заказа</td>
         <td> </td>
         <td th:text="${lst.plan.atm.companies}">Получатель</td>
-        <td> </td>
-        <td>50000</td>
+        <td style="vertical-align: inherit; width: 3vw; text-align: center;" th:text="${lst.plan.currency}"></td>
+        <td style="vertical-align: inherit; width: 7vw;" th:text="${lst.amount}"> </td>
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
   <a href="/storage-collection/cash-order">
-    <input type="submit" value="Заказ на доставку" class="v335_451">
+    <input id="cash" type="submit" value="Заказ на доставку" class="v335_451">
   </a>
   <a href="/storage-collection/edit-cash-order">
-    <input type="submit" value="Редактировать" class="v105_1493">
+    <input id="edit" type="submit" value="Редактировать" class="v105_1493">
   </a>
-  <a href="/storage-collection/cancel">
-    <input type="submit" value="Отклонить" class="v335_453">
-  </a>
-  <a href="/storage-collection/confirm">
-    <input type="submit" value="Подтвердить заказ" class="v335_454">
-  </a>
-  <a href="/storage-collection/execute">
-    <input type="submit" value="Заказ выполнен" class="v335_455">
-  </a>
-  <a href="/storage-collection/transfer">
-    <input type="submit" value="Передать на исполнение" class="v335_456">
-  </a>
+  <form action="/storage-collection/cancel" method="post">
+    <input id="cancel" type="submit" value="Отклонить" th:class="'v335_453 '+ ${marked}" th:disabled="${disabled}">
+    <input type="hidden" th:value="${id}" name="rowId" id="rowIdCancel">
+  </form>
+  <form action="/storage-collection/confirm" method="post">
+    <input id="confirm" type="submit" value="Подтвердить заказ" th:class="'v335_454 '+ ${marked}" th:disabled="${disabled}">
+    <input type="hidden" th:value="${id}" name="rowId" id="rowIdConfirm">
+  </form>
+  <form action="/storage-collection/execute" method="post">
+    <input id="execute" type="submit" value="Заказ выполнен" th:class="'v335_455 '+ ${marked}" th:disabled="${disabled}">
+    <input type="hidden" th:value="${id}" name="rowId" id="rowIdExecute">
+  </form>
+  <form action="/storage-collection/transfer" method="post">
+    <input id="transfer" type="submit" value="Передать на исполнение" th:class="'v335_456 '+ ${marked}" th:disabled="${disabled}">
+    <input type="hidden" th:value="${id}" name="rowId" id="rowIdTransfer">
+  </form>
   <span class="v1_301">Детализация заказа</span>
-  <span class="v1_300">VB1, Заказ наличных</span>
+  <span class="v1_300" th:text="${text}"> </span>
 
-  <div style="top:975px; width: 34vw; height: 500px;" class="v18_235">
+  <div style="top: 975px; width: 64vw;height: 350px;" class="v18_235">
 
-    <table class="table">
+    <table style="top: 25px" class="table">
       <thead>
       <tr>
         <th>Валюта</th>
@@ -78,11 +89,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${users}">
-        <td th:utext="${lst.id}">Валюта</td>
-        <td th:utext="${lst.firstName}">Номинал</td>
-        <td th:utext="${lst.lastName}">Количество</td>
-        <td th:utext="${lst.phone}">Сумма</td>
+      <tr th:each="lst : ${cassettes}">
+        <td th:utext="${lst.currency}">Валюта</td>
+        <td th:utext="${lst.banknote}">Номинал</td>
+        <td th:utext="${lst.amount}">Количество</td>
+        <td th:utext="${lst.sumAmount}">Сумма</td>
       </tr>
       </tbody>
     </table>
@@ -95,13 +106,61 @@
 </body>
 </html>
 
+
+<script>
+  $(document).ready(function(){
+    $('.v1').on('click', function(e) {
+
+      $('.v1').removeClass('marked');
+      $(this).addClass('marked');
+
+      $('.v335_453').removeClass('marked');
+      $('.v335_453').addClass('marked');
+
+      $('.v335_454').removeClass('marked');
+      $('.v335_454').addClass('marked');
+
+      $('.v335_455').removeClass('marked');
+      $('.v335_455').addClass('marked');
+
+      $('.v335_456').removeClass('marked');
+      $('.v335_456').addClass('marked');
+
+    });
+  });
+</script>
+
 <style>
+  .table tr.marked{
+    background-color: #E0E0E0;
+  }
+  .v105_1493.marked{
+    opacity: 1;
+  }
+  .v335_453.marked{
+    opacity: 1;
+  }
+  .v335_454.marked{
+    opacity: 1;
+  }
+  .v335_455.marked{
+    opacity: 1;
+  }
+  .v335_456.marked{
+    opacity: 1;
+  }
   input {
     outline: none;
     border: none;
   }
+  .v14_532 {
+    width: 95vw;
+    left: 30px;
+  }
   .v1_3 {
-    top: 248px;
+    top: 250px;
+    left: 55px;
+    width: 93vw;
   }
   .v1_50 {
     height: 181vh;
@@ -111,7 +170,7 @@
     color: rgba(0,0,0,1);
     position: absolute;
     top: 940px;
-    left: 312px;
+    left: 60px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 15px;
@@ -123,7 +182,7 @@
       color: rgba(0,0,0,1);
       position: absolute;
       top: 912px;
-      left: 312px;
+      left: 60px;
       font-family: Montserrat;
       font-weight: 600;
       font-size: 16px;
@@ -135,8 +194,8 @@
     height: 27px;
     opacity: 1;
     position: absolute;
-    top: 870px;
-    left: 312px;
+    top: 875px;
+    left: 60px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -153,8 +212,8 @@
     height: 27px;
     opacity: 1;
     position: absolute;
-    top: 870px;
-    left: 490px;
+    top: 875px;
+    left: 265px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -168,10 +227,10 @@
   .v335_453 {
     width: 129px;
     height: 27px;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
-    top: 870px;
-    left: 670px;
+    top: 875px;
+    left: 450px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -185,10 +244,10 @@
   .v335_454 {
     width: 178px;
     height: 27px;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
-    top: 870px;
-    left: 830px;
+    top: 875px;
+    left: 610px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -202,10 +261,10 @@
   .v335_455 {
     width: 155px;
     height: 27px;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
-    top: 870px;
-    left: 1040px;
+    top: 875px;
+    left: 820px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -219,10 +278,10 @@
   .v335_456 {
     width: 215px;
     height: 27px;
-    opacity: 1;
+    opacity: 0.4;
     position: absolute;
-    top: 870px;
-    left: 1230px;
+    top: 875px;
+    left: 1010px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -252,24 +311,34 @@
     cursor: pointer;
   }
   .v18_235 {
-    width: 79vw;
+    width: 95vw;
     height: 560px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 290px;
-    left: 287px;
+    top: 300px;
+    left: 30px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     overflow: auto;
   }
+  .v18_231 {
+    width: 105vw;
+    height: 496px;
+    background: transparent;
+    opacity: 1;
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    overflow-y: auto;
+  }
   .v1_2 {
     width: 100vw;
-    height: 100vh;
+    height: 172vh;
     max-width: 100%;
-    max-height: 100%;
+    /* max-height: 100%; */
     opacity: 1;
     position: absolute;
     top: 0px;
@@ -279,7 +348,7 @@
   }
   .table {
     border: none;
-    top: 20px;
+    top: 0px;
     left: 25px;
     position: absolute;
   }

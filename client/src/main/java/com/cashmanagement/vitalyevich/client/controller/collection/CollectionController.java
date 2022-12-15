@@ -62,6 +62,12 @@ public class CollectionController {
         return "collection";
     }
 
+    @GetMapping("/{id}")
+    public String atmCollection(Model model, @PathVariable String id) {
+
+        return "collection";
+    }
+
     @PostMapping("/cancel-order")
     public String cancelOrder(@RequestParam Integer rowId, RedirectAttributes rm) {
 

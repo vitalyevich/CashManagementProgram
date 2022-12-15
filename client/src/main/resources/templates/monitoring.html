@@ -57,7 +57,7 @@
             <tr data-th-each="lst,iter : *{atms}">
               <td style="vertical-align: inherit; width: 6vw; text-align: center;">Банкомат</td>
               <td style="vertical-align: inherit; width: 6vw; text-align: center;" data-th-text="*{lst.atmUid}">ID объекта</td>
-              <td style="vertical-align: inherit; width: 6vw; text-align: center; color: white;" data-th-bgcolor="'#FF3F3F'">0 д.</td>
+              <td style="vertical-align: inherit; width: 6vw; text-align: center; color: white;" data-th-bgcolor="*{lst.colorSecond}" data-th-text="*{lst.day}"></td>
               <td style="vertical-align: inherit; width: 5vw;" data-th-text="*{lst.amount}"></td>
               <td style="width: 16vw;" data-th-text="*{lst.listCassettes}"></td>
               <td style="vertical-align: inherit; width: 3vw; text-align: center;" data-th-text="*{lst.currency}"></td>

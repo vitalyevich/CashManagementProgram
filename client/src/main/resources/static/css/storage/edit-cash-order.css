@@ -63,15 +63,14 @@ select {
 .v363_433 {
     width: 623px;
     height: 298px;
-    background: url("../images/v363_433.png");
-    background-repeat: no-repeat;
-    background-position: center center;
+    background: white;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 236px;
     left: 23px;
     overflow: hidden;
+    border-radius: 30px;
 }
 .v363_432 {
     width: 120px;
@@ -112,18 +111,17 @@ select {
     opacity: 1;
     text-align: left;
 }
-.v363_431 {
+.v363_401 {
     width: 623px;
     height: 260px;
-    background: url("../images/v363_431.png");
-    background-repeat: no-repeat;
-    background-position: center center;
+    background: rgba(247,247,247,1);
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 38px;
     left: 0px;
     overflow: hidden;
+    border-radius: 30px;
 }
 .v23_951 {
     width: 623px;
@@ -155,7 +153,7 @@ select {
     width: 176px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 207px;
+    top: 224px;
     left: 24px;
     font-family: Montserrat;
     font-weight: 600;
@@ -167,7 +165,7 @@ select {
     width: 56px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 12px;
+    top: 16px;
     left: 463px;
     font-family: Montserrat;
     font-weight: 600;
@@ -251,51 +249,66 @@ select {
     text-align: left;
 }
 .v23_954 {
-    width: 144px;
-    height: 25px;
-    background: rgba(247,247,247,1);
+    width: 153px;
+    height: 28px;
+    border: 1px solid black;
+    border-radius: 10px;
     opacity: 1;
     position: absolute;
     top: 10px;
     left: 132px;
-    border: 1px solid rgba(0,0,0,1);
+    padding-left: 7px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
 }
 .v23_1018 {
-    width: 144px;
-    height: 25px;
-    background: rgba(247,247,247,1);
+    width: 153px;
+    height: 28px;
+    border: 1px solid black;
+    border-radius: 10px;
     opacity: 1;
     position: absolute;
     top: 10px;
-    left: 416px;
-    border: 1px solid rgba(0,0,0,1);
+    left: 416px;padding-left: 7px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
 }
 .v23_956 {
-    width: 115px;
-    height: 25px;
+    width: 144px;
+    height: 27px;
+    border: 1px solid black;
+    border-radius: 10px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
     top: 47px;
     left: 132px;
-    border: 1px solid rgba(0,0,0,1);
+    padding-left: 7px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
 }
 .v23_1021 {
     width: 115px;
     height: 25px;
     background: rgba(247,247,247,1);
+    border: 1px solid black;
+    border-radius: 10px;
     opacity: 1;
     position: absolute;
     top: 50px;
     left: 416px;
-    border: 1px solid rgba(0,0,0,1);
+}
+select {
+    appearance: none;
+    background: url("../../images/angle-down.svg") no-repeat right;
+    background-position-x: calc(100% - 3px);
 }
 .v363_436 {
     width: 672px;
     height: 38px;
-    background: url("../images/v363_436.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
@@ -328,10 +341,6 @@ select {
 .v363_430 {
     width: 623px;
     height: 127px;
-    background: url("../images/v363_430.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 554px;
@@ -372,7 +381,6 @@ select {
     position: absolute;
     top: 40px;
     left: 24px;
-    border: 1px solid rgba(0,0,0,1);
 }
 .v23_961 {
     width: 344px;
@@ -388,16 +396,18 @@ select {
 }
 .v363_434 {
     width: 72px;
-    height: 25px;
-    background: url("../images/v363_434.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    height: 27px;
+    border-radius: 10px;
+    border: 1px solid black;
     opacity: 1;
     position: absolute;
     top: 286px;
     left: 552px;
-    overflow: hidden;
+    text-align: left;
+    padding-left: 7px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
 }
 .v23_1031 {
     width: 72px;
@@ -407,7 +417,6 @@ select {
     position: absolute;
     top: 0px;
     left: 0px;
-    border: 1px solid rgba(0,0,0,1);
 }
 .v23_1034 {
     width: 38px;
@@ -437,70 +446,38 @@ select {
 .v363_427 {
     width: 103px;
     height: 27px;
-    background: url("../images/v363_427.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 0px;
     overflow: hidden;
-}
-.v23_959 {
-    width: 103px;
-    height: 27px;
     background: rgba(0,148,63,1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
-.v23_973 {
-    width: 87px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 5px;
-    left: 8px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
 }
 .v363_428 {
     width: 95px;
     height: 27px;
-    background: url("../images/v363_428.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 109px;
     overflow: hidden;
-}
-.v23_960 {
-    width: 95px;
-    height: 27px;
     background: rgba(0,148,63,1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
-.v23_974 {
-    width: 63px;
     color: rgba(255,255,255,1);
     position: absolute;
-    top: 5px;
-    left: 16px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
-    opacity: 1;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
 }
 .v363_438 {
     width: 380px;
@@ -564,7 +541,7 @@ select {
     text-align: left;
 }
 
-.cash {
+.edit {
     width: 672px;
     height: 600px;
     background: rgba(255,255,255,1);

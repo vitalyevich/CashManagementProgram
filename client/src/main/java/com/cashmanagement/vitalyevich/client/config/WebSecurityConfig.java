@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //http.cors().disable().csrf().disable();
+        http.cors().disable().csrf().disable();
        http
                 .authorizeRequests()
                 .mvcMatchers("/profile-admin", "/users/**", "/analytics/**","/collection/**", "/planning-collection/**", "/monitoring/**", "/planning/**", "/monitoring-storage/**",

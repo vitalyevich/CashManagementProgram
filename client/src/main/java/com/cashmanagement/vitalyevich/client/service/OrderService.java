@@ -7,6 +7,7 @@ public interface OrderService {
     Iterable<Order> getOrders();
 
     Order getOrder(Integer id);
+    Order getOrderById(Integer id);
 
     Iterable<StorageOrder> getStorageOrders();
 
@@ -24,9 +25,15 @@ public interface OrderService {
 
     void deleteOrder(Integer id);
 
+    void deleteByOrder(Integer id);
+
     StorageOrder getStorageOrder(Integer orderId);
 
     BrigadeOrder updateBrigadeOrder(BrigadeOrder brigadeOrder);
+
+    StorageOrder updateStorageOrder(StorageOrder storageOrder);
+
+    StorageOrder saveStorageOrder(StorageOrder storageOrder);
 
     BrigadeOrder deleteBrigadeInOrder(BrigadeOrder brigadeOrder);
 

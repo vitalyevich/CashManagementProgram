@@ -23,6 +23,12 @@ public class OrderServiceImpl implements OrderService{
                           orders {
                               id,
                               plan {
+                              cassettes {
+                                  id,
+                                  banknote,
+                                  currency,
+                                  amount
+                                  }
                                   atm { 
                                   id,
                                   atmUid,
@@ -54,20 +60,61 @@ public class OrderServiceImpl implements OrderService{
         return null;
     }
 
+    // by planId
     @Override
     public Order getOrder(Integer id) {
         String document = "query {\n" +
                 "    order(id: "+id+") {\n" +
                 "        id,\n" +
                 "        orderDate,\n" +
-                "        stage\n" +
-                "        status\n" +
+                "        stage,\n" +
+                "        status,\n" +
+                "        plan {\n" +
+                "        id,\n" +
+                "        },\n" +
+                "        user {\n" +
+                "        id,\n" +
+                "        },\n" +
                 "    }\n" +
                 "}";
 
         try {
             Order order = graphClient.httpGraphQlClient().document(document)
                     .retrieve("order")
+                    .toEntity(Order.class).block();
+            return order;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public Order getOrderById(Integer id) {
+        String document = "query {\n" +
+                "    orderById(id: "+id+") {\n" +
+                "        id,\n" +
+                "        orderDate,\n" +
+                "        stage,\n" +
+                "        status,\n" +
+                "        plan {\n" +
+                "        id,\n" +
+                "        cassettes {\n" +
+                "        id,\n" +
+                "        banknote,\n" +
+                "        currency,\n" +
+                "        amount,\n" +
+                "        }\n" +
+                "        },\n" +
+                "        user {\n" +
+                "        id,\n" +
+                "        },\n" +
+                "    }\n" +
+                "}";
+
+        try {
+            Order order = graphClient.httpGraphQlClient().document(document)
+                    .retrieve("orderById")
                     .toEntity(Order.class).block();
             return order;
         } catch (GraphQlTransportException ex) {
@@ -335,6 +382,20 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public void deleteByOrder(Integer id) {
+        String document = "mutation {\n" +
+                "        deleteByOrder(id: "+id+")\n" +
+                "    }";
+
+        try {
+            graphClient.httpGraphQlClient().document(document)
+                    .retrieve("deleteByOrder").toEntity(Order.class).block();
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+    }
+
+    @Override
     public StorageOrder getStorageOrder(Integer orderId) {
         String document = "query {\n" +
                 "                           storageOrder(id:"+orderId+") {\n" +
@@ -393,6 +454,57 @@ public class OrderServiceImpl implements OrderService{
                     .retrieve("updateBrigadeOrder")
                     .toEntity(BrigadeOrder.class).block());
             return brigadeOrder1;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public StorageOrder updateStorageOrder(StorageOrder storageOrder) {
+        String document = "mutation {\n" +
+                "    updateStorageOrder(\n" +
+                "        storageOrder : {\n" +
+                "            id: "+storageOrder.getId()+",\n" +
+                "            orderDate: \""+storageOrder.getOrderDate().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"))+"\"\n" +
+                "        },\n" +
+                "        orderId: "+storageOrder.getOrder().getId()+",\n" +
+                "        userId: "+storageOrder.getUser().getId()+"\n" +
+                "    ) {\n" +
+                "        orderDate\n" +
+                "    }\n" +
+                "}";
+
+        try {
+            StorageOrder storageOrder1 = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("updateStorageOrder")
+                    .toEntity(StorageOrder.class).block());
+            return storageOrder1;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public StorageOrder saveStorageOrder(StorageOrder storageOrder) {
+        String document = "mutation {\n" +
+                "    createStorageOrder(\n" +
+                "        storageOrder : {\n" +
+                "            orderDate: \""+storageOrder.getOrderDate().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"))+"\"\n" +
+                "        },\n" +
+                "        orderId: "+storageOrder.getOrder().getId()+",\n" +
+                "        userId: "+storageOrder.getUser().getId()+"\n" +
+                "    ) {\n" +
+                "        orderDate\n" +
+                "    }\n" +
+                "}";
+
+        try {
+            StorageOrder storageOrder1 = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("createStorageOrder")
+                    .toEntity(StorageOrder.class).block());
+            return storageOrder1;
         } catch (GraphQlTransportException ex) {
             System.out.println("Ошибка соединения!"); // test
         }

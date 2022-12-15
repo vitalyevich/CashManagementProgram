@@ -75,7 +75,7 @@ public class UserController {
     }
 
     @QueryMapping
-    Optional<User> user (@Argument Integer id) {
+    User user (@Argument Integer id) {
         return userRepository.findUserById(id);
     }
 

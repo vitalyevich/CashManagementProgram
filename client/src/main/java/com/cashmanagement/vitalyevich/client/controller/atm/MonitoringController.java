@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 @RequestMapping("/monitoring")
 @Controller
@@ -37,6 +39,7 @@ public class MonitoringController {
         Iterable<Atm> atms = atmService.getAtms();
 
         for (Atm atm : atms) {
+            atm.setDay((int)Math.floor(Math.random() * 24) + 0);
             atm.setListCassettes("");
             atm.setAmount(0);
             if (!atm.getCassettes().iterator().hasNext()) {
@@ -58,6 +61,11 @@ public class MonitoringController {
         Sidebar sidebar = new Sidebar();
         sidebar.getDropDown("/monitoring", companyService, model);
 
+        return "monitoring";
+    }
+
+    @GetMapping("/{id}")
+    public String atmMonitoring(Model model, @PathVariable String id) {
         return "monitoring";
     }
 

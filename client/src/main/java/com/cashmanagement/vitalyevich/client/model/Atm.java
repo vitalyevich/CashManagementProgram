@@ -27,6 +27,16 @@ public class Atm extends ColorTable {
 
     private String currency;
 
+    private Integer day;
+
+    public Integer getDay() {
+        return day;
+    }
+
+    public void setDay(Integer day) {
+        this.day = day;
+    }
+
     private Integer amount;
 
     @Column(name = "address", nullable = false)
@@ -132,9 +142,9 @@ public class Atm extends ColorTable {
             return " ";
         }
 
-        if (atmState.equals("Нормальный")) {
+        if (atmState.equals("Нормальный") || day > 20) {
             return "#57DB4E";
-        } else if (atmState.equals("Неопределённый")) {
+        } else if (atmState.equals("Неопределённый") || day < 20 && day > 10) {
             return "#F1CB00";
         } else {
             return "#FF3F3F";
