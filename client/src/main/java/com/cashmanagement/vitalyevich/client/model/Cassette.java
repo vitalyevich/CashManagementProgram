@@ -13,7 +13,7 @@ public class Cassette {
 
     private Integer cassetteNum;
 
-    private Double banknote;
+    private Double banknote; // int
 
     private String currency;
 

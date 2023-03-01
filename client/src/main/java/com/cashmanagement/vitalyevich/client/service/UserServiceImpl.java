@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService{
                     .toEntity(User[].class).block()));
             return users;
         } catch (GraphQlTransportException ex) {
-            System.out.println("Ошибка соединения!"); // test
+            System.out.println("Ошибка соединения!");
         }
         return null;
     }

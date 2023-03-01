@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.swing.text.DateFormatter;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RequestMapping("/planning-collection")
 @Controller
@@ -38,13 +39,17 @@ public class PlanningCollectionController {
         Iterable<Company> companies = companyService.getCompany();
         Iterable<User> users = userService.getUsers();
 
+        if (companies == null) {
+            return "/error/500";
+        }
+
         model.addAttribute("userList", userList);
         model.addAttribute("companies", companies);
         model.addAttribute("users", users);
 
         Iterable<BrigadeOrder> brigadeOrders = orderService.getBrigadeOrders();
 ///
-        for (BrigadeOrder brigadeOrder : brigadeOrders) {
+        /*for (BrigadeOrder brigadeOrder : brigadeOrders) {
             brigadeOrder.getOrder().getPlan().setListCassettes("");
             brigadeOrder.getOrder().getPlan().setAmount(0);
             if (!brigadeOrder.getOrder().getPlan().getCassettes().iterator().hasNext()) {
@@ -56,7 +61,22 @@ public class PlanningCollectionController {
                         cassette.getAmount() + " ("+cassette.getBanknote()+")" + ", ");
                 brigadeOrder.getOrder().getPlan().setAmount(brigadeOrder.getOrder().getPlan().getAmount() + cassette.getAmount());
             }
-        }
+        }*/
+
+        brigadeOrders.forEach(brigadeOrder -> {
+            brigadeOrder.getOrder().getPlan().setListCassettes(
+                    brigadeOrder.getOrder().getPlan().getCassettes()
+                            .stream()
+                            .map(cassette -> cassette.getAmount() + " (" + cassette.getBanknote() + ")")
+                            .collect(Collectors.joining(", "))
+            );
+            brigadeOrder.getOrder().getPlan().setAmount(
+                    brigadeOrder.getOrder().getPlan().getCassettes()
+                            .stream()
+                            .mapToInt(Cassette::getAmount)
+                            .sum()
+            );
+        });
 ///
         try {
             List<Brigade> brigades = (List<Brigade>) userService.getBrigades();
@@ -99,6 +119,11 @@ public class PlanningCollectionController {
     public String count(@RequestParam Integer rowId) {
 
         BrigadeOrder brigadeOrder = orderService.getBrigadeOrder(rowId);
+
+        if (brigadeOrder == null) {
+            return "/error/500";
+        }
+
         brigadeOrder.getOrder().setStatus("Рассчитан");
 
         orderService.updateOrder(brigadeOrder.getOrder(), brigadeOrder.getOrder().getPlan().getId(), brigadeOrder.getUser().getId());
@@ -153,6 +178,12 @@ public class PlanningCollectionController {
 
         Set<User> users = new LinkedHashSet<>();
         users.addAll(userList);
+
+        Iterable<Brigade> brigades = userService.getBrigades();
+        if (brigades == null) {
+            return "/error/500";
+        }
+
         Brigade brigade = userService.saveBrigade(new Brigade(brigadeName, active, users), companyId);
 
         BrigadeOrder brigadeOrder = orderService.getBrigadeOrder(id);

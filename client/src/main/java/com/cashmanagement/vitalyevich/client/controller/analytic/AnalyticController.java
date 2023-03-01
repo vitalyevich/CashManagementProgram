@@ -31,6 +31,10 @@ public class AnalyticController {
         sidebar.getDropDown("/collection", companyService, model);
 
         Iterable<Atm> atms = atmService.getAtms();
+        if (atms == null) {
+            return "/error/500";
+        }
+
         model.addAttribute("atms", atms);
 
         return "analytics";

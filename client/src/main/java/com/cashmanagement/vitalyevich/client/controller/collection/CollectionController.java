@@ -32,6 +32,10 @@ public class CollectionController {
 
         Iterable<StorageOrder> storageOrders = orderService.getStorageOrders();
 
+        if (storageOrders == null) {
+            return "/error/500";
+        }
+
         List<OrderStage> orderStages = (List<OrderStage>) orderService.getOrderStages();
 
         List<String> nameStages = new ArrayList<>();

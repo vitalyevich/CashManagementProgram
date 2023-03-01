@@ -34,6 +34,10 @@ public class OrderCollectionStorageController {
 
         List<Order> orders = (List<Order>) orderService.getOrders();
 
+        if (orders == null) {
+            return "/error/500";
+        }
+
         for (Order order: orders) {
             for (Cassette cassette: order.getPlan().getCassettes()) {
                 order.setAmount(cassette.getAmount() * Integer.parseInt(cassette.getBanknote()));
@@ -130,6 +134,11 @@ public class OrderCollectionStorageController {
     @PostMapping("/execute")
     public String execute(Model model, RedirectAttributes rm, @RequestParam Integer rowId) {
         Order order = orderService.getOrderById(rowId);
+
+        if (order == null) {
+            return "/error/500";
+        }
+
         order.setStatus("Выполнен");
         orderService.updateOrder(order, order.getPlan().getId(), order.getUser().getId());
         return "redirect:/storage-collection";

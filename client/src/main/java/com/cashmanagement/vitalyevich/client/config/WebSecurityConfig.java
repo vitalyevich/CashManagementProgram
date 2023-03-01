@@ -32,13 +32,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().disable().csrf().disable();
        http
                 .authorizeRequests()
-                .mvcMatchers("/profile-admin", "/users/**", "/analytics/**","/collection/**", "/planning-collection/**", "/monitoring/**", "/planning/**", "/monitoring-storage/**",
-                        "/storage-collection/**, /monitoring-storages/**", "/edit-password").hasRole("ADMIN")
-                .mvcMatchers("/profile-cashier", "/monitoring/**", "/planning/**").hasRole("CASHIER")
-               .mvcMatchers("/profile-cashier-storage/**", "/monitoring-storage/**", "/storage-collection/**, /monitoring-storages/**").hasRole("CASHIERSTORAGE")
-               .mvcMatchers("/profile-dealer", "/analytics/**").hasRole("DIALER")
-               .mvcMatchers("/profile-collection", "/collection/**","/planning-collection/**").hasRole("COLLECTOR")
-
+               .mvcMatchers("/monitoring/**", "/planning/**").hasAnyRole("ADMIN", "CASHIER")
+               .mvcMatchers("/monitoring-storage/**", "/storage-collection/**, /monitoring-storages/**").hasAnyRole("ADMIN", "CASHIERSTORAGE")
+               .mvcMatchers( "/collection/**","/planning-collection/**").hasAnyRole("ADMIN", "COLLECTOR")
+               .mvcMatchers( "/analytics/**").hasAnyRole("ADMIN", "DIALER")
+               .mvcMatchers("/edit-password", "/users/**").hasRole("ADMIN")
+               .mvcMatchers("/profile-dealer").hasRole("DIALER")
+               .mvcMatchers("/profile-collection").hasRole("COLLECTOR")
+               .mvcMatchers("/profile-cashier").hasRole("CASHIER")
+               .mvcMatchers("/profile-cashier-storage/**").hasRole("CASHIERSTORAGE")
                 .antMatchers("/authorization").permitAll()
                 .anyRequest().authenticated()
                 .and()

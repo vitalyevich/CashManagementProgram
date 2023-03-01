@@ -1,10 +1,7 @@
 package com.cashmanagement.vitalyevich.client.controller.atm;
 
 import com.cashmanagement.vitalyevich.client.config.Seance;
-import com.cashmanagement.vitalyevich.client.model.Atm;
-import com.cashmanagement.vitalyevich.client.model.Cassette;
-import com.cashmanagement.vitalyevich.client.model.City;
-import com.cashmanagement.vitalyevich.client.model.Country;
+import com.cashmanagement.vitalyevich.client.model.*;
 import com.cashmanagement.vitalyevich.client.service.AtmServiceImpl;
 import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +34,9 @@ public class MonitoringController {
     public String monitoring(Model model) {
 
         Iterable<Atm> atms = atmService.getAtms();
+        if (atms == null) {
+            return "/error/500";
+        }
 
         for (Atm atm : atms) {
             atm.setDay((int)Math.floor(Math.random() * 24) + 0);

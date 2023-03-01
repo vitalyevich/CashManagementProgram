@@ -42,6 +42,7 @@ public class PlanningController {
 
         List<PlanAtm> planAtms = (List<PlanAtm>) planningService.getPlans();
 
+
         for (PlanAtm planAtm : planAtms) {
 
             Order order = orderService.getOrder(planAtm.getId());
@@ -162,9 +163,12 @@ public class PlanningController {
     public String function(@RequestParam Integer period, @RequestParam String date, @RequestParam Integer type, Model model, RedirectAttributes rm) {
         cassetteList1 = new LinkedList<>();
         forecast = true;
-        // брать и просто добавить несколько
 
         PlanAtm planAtm = planningService.getPlan(atmId);
+
+        if (planAtm == null) {
+            return "/error/500";
+        }
 
         for (Cassette cassette :planAtm.getCassettes()) {
             int sum = cassette.getAmount() + 329;
@@ -195,6 +199,11 @@ public class PlanningController {
 
     @PostMapping("/create-order")
     public String createOrder(@RequestParam Integer rowId, RedirectAttributes rm) {
+
+        List<PlanAtm> planAtms = (List<PlanAtm>) planningService.getPlans();
+        if (planAtms == null) {
+            return "/error/500";
+        }
 
         rm.addFlashAttribute("url", "/planning/create-order/confirm");
         rm.addFlashAttribute("urlPage", "/planning");

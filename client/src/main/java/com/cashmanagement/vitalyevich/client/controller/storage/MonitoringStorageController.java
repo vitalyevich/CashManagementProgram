@@ -33,6 +33,10 @@ public class MonitoringStorageController {
 
         Iterable<Storage> storages = storageService.getStorages();
 
+        if (storages == null) {
+            return "/error/500";
+        }
+
         storageList = new ArrayList<>();
 
         if (storages != null) {

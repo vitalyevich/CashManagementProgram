@@ -34,7 +34,7 @@ public class AuthorizationController {
             return "redirect:/profile-admin";
         }
         else if (access.getUser().getNameRole().equals("Старший дилер")) {
-            return "redirect:/profile-dialer";
+            return "redirect:/profile-dealer";
         }
         else if (access.getUser().getNameRole().equals("Старший кассир")) {
             return "redirect:/profile-cashier";

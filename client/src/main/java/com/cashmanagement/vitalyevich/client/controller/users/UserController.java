@@ -7,10 +7,13 @@ import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
 import com.cashmanagement.vitalyevich.client.service.UserServiceImpl;
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.client.GraphQlTransportException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.IllegalFormatCodePointException;
 
 @RequestMapping("/users")
 @Controller
@@ -27,23 +30,29 @@ public class UserController {
     @GetMapping("")
     public String users(Model model) {
         model.addAttribute("headerText", "Пользователи");
+
         model.addAttribute("headerPost", "Руководитель " + seance.getUser().getFirstName());
+
         //userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "вход на страницу с вкладкой пользователи"));
 
-        Iterable<Access> accesses = userService.getAccesses();
-        Iterable<Role> roles = userService.getRoles();
-        Iterable<Company> companies = companyService.getCompany();
+            Iterable<Access> accesses = userService.getAccesses();
 
-        Iterable<Country> countries = companyService.getCountries();
-        Iterable<City> cities = companyService.getCities();
+            if (accesses == null) {
+                return "/error/500";
+            }
 
-        int size = IterableUtils.size(accesses);
-        model.addAttribute("countries", countries);
-        model.addAttribute("cities", cities);
-        model.addAttribute("accesses", accesses);
-        model.addAttribute("roles",roles);
-        model.addAttribute("companies",companies);
-        model.addAttribute("size", size);
+            Iterable<Role> roles = userService.getRoles();
+            Iterable<Company> companies = companyService.getCompany();
+            Iterable<Country> countries = companyService.getCountries();
+            Iterable<City> cities = companyService.getCities();
+
+            int size = IterableUtils.size(accesses);
+            model.addAttribute("countries", countries);
+            model.addAttribute("cities", cities);
+            model.addAttribute("accesses", accesses);
+            model.addAttribute("roles",roles);
+            model.addAttribute("companies",companies);
+            model.addAttribute("size", size);
 
         return "users"; //error/502
     }
@@ -122,6 +131,12 @@ public class UserController {
     @PostMapping("/edit")
     public String edit(User userForm,Access accessForm, Model model, @RequestParam(name = "role") int roleId, @RequestParam(name = "company") int companyId,
                        @RequestParam(name = "userId") int userId, @RequestParam(name = "accessId") int accessId) {
+
+
+        Iterable<Access> accesses = userService.getAccesses();
+        if (accesses == null) {
+            return "/error/500";
+        }
 
         userForm.setId(userId);
         accessForm.setUser(userForm);

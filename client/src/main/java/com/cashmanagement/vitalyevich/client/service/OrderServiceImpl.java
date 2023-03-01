@@ -269,9 +269,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Order saveOrder(Order order, Integer planId, Integer userId) {
-        String document = "mutation {\n" +
-                "    createOrder(order: {\n" +
-                "        stage: \""+order.getStage()+"\",\n" +
+        String document = "mutation {\\n\" +\n" +
+                "                \"    createOrder(order: {\\n\" +\n" +
+                "                \"        stage: \""+order.getStage()+"\",\n" +
                 "        status: \""+order.getStatus()+"\",\n" +
                 "        orderDate: \""+order.getOrderDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))+"\",\n" +
                 "    }, plan: {\n" +
