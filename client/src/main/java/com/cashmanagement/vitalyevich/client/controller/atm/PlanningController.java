@@ -123,14 +123,9 @@ public class PlanningController {
     @PostMapping("/plan-cash-funct")
     public String funct(@RequestParam Integer period, @RequestParam String date, @RequestParam Integer type, Model model, RedirectAttributes rm) {
         cassetteList.clear();
-        Function function = new Function();
+
         forecast = true;
 
-        if (type.equals(1)) {
-            cassetteList = function.staticForecast(date, period, atmId);
-        } else {
-            cassetteList = function.userForecast(date, period, atmId);
-        }
 
         return "redirect:/planning#blackout-plan";
     }

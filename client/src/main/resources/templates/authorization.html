@@ -3,131 +3,487 @@
     <title>Авторизация</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <script src="https://unpkg.com/imask"></script>
+    <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
-<form th:action="@{/authorization}" method="post">
-<div class="v9_170">
-    <div class="v1_01">
-        <input required type="text" name="login" class="v9_312" placeholder="Логин">
-        <div class="v1_6">
-            <input required type="password" id="password-input" name="password" maxlength="20" class="v9_314" placeholder="Пароль">
-            <a href="#" class="password-control"></a>
-
-            <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
-            <script>
-                $('body').on('click', '.password-control', function(){
-                    if ($('#password-input').attr('type') == 'password'){
-                        $(this).addClass('view');
-                        $('#password-input').attr('type', 'text');
-                    } else {
-                        $(this).removeClass('view');
-                        $('#password-input').attr('type', 'password');
-                    }
-                    return false;
-                });
-            </script>
+<form action="/authorization" method="post">
+    <div class="v9_170">
+        <div class="v803_288">
+            <div class="v825_301">
+                <div class="v803_294">
+                    <img src="../../static/images/angle-right-white-button.svg" th:src="@{images/angle-right-white-button.svg}">
+                </div>
+                <div class="v803_297">
+                    <img src="../../static/images/angle-right-white-button.svg" th:src="@{images/angle-right-white-button.svg}">
+                </div>
+                <div class="v803_302">
+                    <img src="../../static/images/angle-right-white-button.svg" th:src="@{images/angle-right-white-button.svg}">
+                </div>
+                <div class="v803_307">
+                    <img src="../../static/images/angle-right-white-button.svg" th:src="@{images/angle-right-white-button.svg}">
+                </div>
+            </div>
         </div>
-        <input type="submit" value="" class="v1_05">
+
+        <div class="v803_287">
+            <div class="v803_413">
+                <div class="v803_362">
+                    <span class="v803_364">VITALYEVICH</span>
+                </div>
+                <div class="v803_363">
+                    <span class="v803_365">АВТОРИЗАЦИЯ</span>
+                </div>
+            </div>
+            <div class="v803_397">
+                <span class="v803_398">Введите логин</span>
+                <input required type="text" name="login" class="v803_414" maxlength="20">
+
+                <span class="v803_399">Введите пароль</span>
+                <div class="v1_6">
+                    <input required type="password" id="password-input" name="password" maxlength="20" class="v803_415">
+                    <a href="#" class="password-control"></a>
+                </div>
+            </div>
+
+            <div class="v803_348">
+                <span class="v803_358">АВТОРИЗОВАТЬСЯ</span>
+                <div class="v803_360">
+                    <img style="position: relative; top: 2em;" src="../../static/images/enter.svg" th:src="@{images/enter.svg}">
+                </div>
+            </div>
+        </div>
+
+        <div class="v803_289">
+            <div class="v825_302">
+                <div class="v803_312">
+                    <img src="../../static/images/angle-left-white-button.svg" th:src="@{images/angle-left-white-button.svg}">
+                </div>
+                <div class="v803_345">
+                    <img src="../../static/images/angle-left-white-button.svg" th:src="@{images/angle-left-white-button.svg}">
+                </div>
+                <div class="v803_340">
+                    <img src="../../static/images/angle-left-white-button.svg" th:src="@{images/angle-left-white-button.svg}">
+                </div>
+                <div class="v803_335">
+                    <img src="../../static/images/angle-left-white-button.svg" th:src="@{images/angle-left-white-button.svg}">
+                    <input type="submit" value="" class="v1_05">
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </form>
+
+<script>
+    $('body').on('click', '.password-control', function(){
+        if ($('#password-input').attr('type') == 'password'){
+            $(this).addClass('view');
+            $('#password-input').attr('type', 'text');
+        } else {
+            $(this).removeClass('view');
+            $('#password-input').attr('type', 'password');
+        }
+        return false;
+    });
+</script>
+
 </body>
 </html>
 
 <style>
-    .v1_05 {
+    .v803_287 {
+        width: 76vw;
+        height: 100%;
+        background: rgba(255,255,255,1);
+        opacity: 1;
         position: absolute;
-        width: 54px;
-        height: 53px;
-        right: 1px;
-        top: 455px;
-        background: transparent;
-        cursor: pointer;
+        top: 0px;
+        left: 12vw;
+        overflow: hidden;
+        box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.25);
     }
-    .v1_6 {
-        width: 384px;
-        height: 40px;
+    .v803_288 {
+        width: 12vw;
+        height: 100%;
+        background: rgba(240,240,240,1);
+        opacity: 1;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+    }
+    .v803_289 {
+        width: 12vw;
+        height: 100%;
+        background: rgba(240,240,240,1);
+        opacity: 1;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        overflow: hidden;
+    }
+    .v803_413 {
+        width: 100%;
+        height: 215px;
+        background: url("../images/v803_413.png");
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
         opacity: 1;
         position: absolute;
-        top: 324px;
-        left: 180px;
+        top: 0px;
+        left: 0px;
         overflow: hidden;
+    }
+    .v803_362 {
+        width: 100%;
+        height: 85px;
+        background: rgba(0,148,63,1);
+        opacity: 1;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+    }
+    .v803_363 {
+        width: 100%;
+        height: 130px;
+        background: rgba(20,126,75,1);
+        opacity: 1;
+        position: absolute;
+        top: 85px;
+        left: 0px;
+        overflow: hidden;
+    }
+    .v803_365 {
+        width: 100%;
+        color: rgba(255,255,255,1);
+        position: absolute;
+        top: 25px;
+        left: 0px;
+        font-family: Montserrat;
+        font-weight: 700;
+        font-size: 64px;
+        opacity: 1;
+        text-align: center;
+    }
+    .v803_364 {
+        color: rgba(255,255,255,1);
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 32px;
+        opacity: 1;
+        text-align: left;
+    }
+    .v803_397 {
+        width: 537px;
+        height: 300px;
+        opacity: 1;
+        position: relative;
+        top: 300px;
+        overflow: hidden;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+    .v803_398 {
+        width: 537px;
+        color: rgba(0,0,0,1);
+        position: absolute;
+        top: 20px;
+        left: 0px;
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 32px;
+        opacity: 1;
+        text-align: center;
+    }
+    .v803_399 {
+        width: 537px;
+        color: rgba(0,0,0,1);
+        position: absolute;
+        top: 150px;
+        left: 0px;
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 32px;
+        opacity: 1;
+        text-align: center;
+    }
+    .v803_414 {
+        width: 415px;
+        height: 58px;
+        background-size: cover;
+        opacity: 1;
+        position: absolute;
+        top: 68px;
+        left: 48px;
+        border: 2px solid rgba(85,85,85,1);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        overflow: hidden;
+
+        color: black;
+        font-family: Montserrat;
+        font-weight: 400;
+        font-size: 25px;
+        padding-left: 20px;
+
+    }
+    .v803_414:focus {
+        border: 3px solid rgba(85,85,85,1);
+    }
+
+    .v803_415 {
+        width: 415px;
+        height: 58px;
+        background-size: cover;
+        opacity: 1;
+        position: relative;
+        border: 2px solid rgba(85,85,85,1);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        overflow: hidden;
+        color: black;
+        font-family: Montserrat;
+        font-weight: 400;
+        font-size: 25px;
+        padding-left: 20px;
+    }
+
+    .v803_415:focus {
+        border: 3px solid rgba(85,85,85,1);
+    }
+
+    .v825_301 {
+        width: 7em;
+        height: 100%;
+        opacity: 1;
+        position: relative;
+        overflow: hidden;
+        top: 255px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .v803_294 {
+        width: 90px;
+        height: 90px;
+        background: rgba(85,85,85,1);
+        opacity: 1;
+        position: relative;
+        top: 0px;
+        left: 0px;
+        border: 8px solid rgba(247,247,247,1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .v803_297 {
+        width: 90px;
+        height: 90px;
+        background: rgba(85,85,85,1);
+        opacity: 1;
+        position: relative;
+        top: 30px;
+        left: 0px;
+        border: 8px solid rgba(247,247,247,1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .v803_302 {
+        width: 90px;
+        height: 90px;
+        background: rgba(85,85,85,1);
+        opacity: 1;
+        position: relative;
+        top: 60px;
+        left: 0px;
+        border: 8px solid rgba(247,247,247,1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .v803_307 {
+        width: 90px;
+        height: 90px;
+        background: rgba(85,85,85,1);
+        opacity: 1;
+        position: relative;
+        top: 90px;
+        left: 0px;
+        border: 8px solid rgba(247,247,247,1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .v825_302 {
+        width: 7em;
+        height: 100%;
+        opacity: 1;
+        position: relative;
+        overflow: hidden;
+        top: 255px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .v803_312 {
+        width: 90px;
+        height: 90px;
+        background: rgba(85,85,85,1);
+        opacity: 1;
+        position: relative;
+        top: 0px;
+        left: 0px;
+        border: 8px solid rgba(247,247,247,1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .v803_345 {
+        width: 90px;
+        height: 90px;
+        background: rgba(85,85,85,1);
+        opacity: 1;
+        position: relative;
+        top: 30px;
+        left: 0px;
+        border: 8px solid rgba(247,247,247,1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .v803_340 {
+        width: 90px;
+        height: 90px;
+        background: rgba(85,85,85,1);
+        opacity: 1;
+        position: relative;
+        top: 60px;
+        left: 0px;
+        border: 8px solid rgba(247,247,247,1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .v803_335 {
+        width: 90px;
+        height: 90px;
+        background: rgba(85,85,85,1);
+        opacity: 1;
+        position: relative;
+        top: 90px;
+        left: 0px;
+        border: 8px solid rgba(247,247,247,1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .v803_335:hover {
+        background: #45A73E;
+        transition-duration: 1s;
+        border: 8px solid rgba(247,247,247,1);
+        box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .v803_348 {
+        width: 441px;
+        height: 105px;
+        background: rgba(247,247,247,1);
+        opacity: 1;
+        position: absolute;
+        border: 0px solid rgba(0,0,0,1);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        overflow: hidden;
+        top: 665px;
+        right: 40px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .v803_358 {
+        width: 396px;
+        color: rgba(69,167,62,1);
+        position: relative;
+        top: 31px;
+        display: block;
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 32px;
+        opacity: 1;
+        text-align: center;
+    }
+    .v803_360 {
+        width: 45px;
+        height: 105px;
+        background: rgba(0,148,63,1);
+        opacity: 1;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .v1_05 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        background: transparent;
+        cursor: pointer;
     }
     .password-control {
         position: absolute;
-        top: 5px;
-        right: 6px;
+        top: 17px;
+        right: 0px;
         display: inline-block;
-        width: 24px;
-        height: 24px;
-        background: url("../images/password-lock.svg") 0 0 no-repeat;
+        width: 30px;
+        height: 30px;
+        background: url("../images/password-lock-gray.svg") 0 0 no-repeat;
     }
     .password-control.view {
-        background: url("../images/password-unlock.svg") 0 0 no-repeat;
+        background: url("../images/password-unlock-gray.svg") 0 0 no-repeat;
     }
-input {
-    outline: none;
-    border: none;
-    background: transparent;
-    /*border: 1px solid white;*/
-}
-::placeholder {
-    color: white;
-}
-.v9_170 {
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    opacity: 1;
-    background: url("../images/atm.svg");
-    background-size: cover;
-    background-position-y: -20px;
-    overflow: hidden;
-    position: fixed;
-}
-.v1_01 {
-    width: 796px;
-    height: 544px;
-    top: 126px;
-    left: 217px;
-    background: transparent;
-    min-width: 796px;
-    min-height: 544px;
-    position: relative;
-    display: block;
-}
-.v9_312 {
-    width: 380px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 241px;
-    left: 180px;
-    font-family: Montserrat;
-    font-weight: 500;
-    font-size: 21px;
-    opacity: 1;
-    text-align: left;
-    overflow: hidden;
-    border-bottom: 1px solid white;
-    padding-bottom: 8px;
-}
-.v9_314 {
-    width: 380px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    font-family: Montserrat;
-    font-weight: 500;
-    font-size: 21px;
-    opacity: 1;
-    text-align: left;
-    overflow: hidden;
-    border-bottom: 1px solid white;
-    padding-bottom: 8px;
-}
+    input {
+        outline: none;
+        border: none;
+        background: transparent;
+        /*border: 1px solid white;*/
+    }
+    ::placeholder {
+        color: white;
+    }
+    .v1_6 {
+        width: 425px;
+        height: 58px;
+        opacity: 1;
+        position: absolute;
+        top: 202px;
+        left: 48px;
+    }
+    .v9_170 {
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        opacity: 1;
+        background: white;
+        overflow: hidden;
+        position: fixed;
+    }
 </style>
