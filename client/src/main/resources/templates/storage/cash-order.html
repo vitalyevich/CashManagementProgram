@@ -3,10 +3,10 @@
         <div class="v363_433">
             <div class="v363_432">
                 <div class="v23_1028"></div>
-                <span class="v23_1026">Наличные</span>
+                <span class="v23_1026">Номиналы</span>
             </div>
             <div class="v363_401">
-                    <table class="table" style="top:35px;">
+                    <table class="table" style="top:25px;">
                         <thead>
                         <tr>
                             <th>Валюта</th>
@@ -24,7 +24,6 @@
                         </tr>
                         </tbody>
                     </table>
-                <span class="v23_962">Номиналы</span>
                 <span class="v23_1036">Общая сумма: 0,00 EUR</span>
                 <span class="v23_1030">Валюта</span>
             </div>
@@ -44,27 +43,23 @@
         </div>
         <div class="v363_436">
             <div class="v23_949">
-                <a href="/storage-collection">
-                    <img style="position: absolute;width: 24px;height: 24px;right: 11px;top: 7px;"
-                         src="../static/images/close.svg" th:src="@{images/close.svg}">
-                </a>
+                <span class="v23_950">Заказ наличных</span>
             </div>
-            <span class="v23_950">Заказ наличных</span>
         </div>
         <span class="v23_961">А0100089, Заказ, План. инкассация 07.08.2022</span>
         <select class="v363_434">
             <option>BYN</option>
         </select>
-        <div class="v363_429">
-            <input type="submit" class="v363_427" value="Применить">
-            <input type="submit" class="v363_428" value="Закрыть">
-        </div>
+            <a href="#">
+                <input type="submit" class="v363_427" value="Отменить">
+            </a>
+            <input type="submit" class="v363_428" value="Применить">
     </div>
 </div>
 
 <div th:fragment="blackout-cash" id="blackout-cash">
     <a href="#" class="close"></a>
-    <div id="window-black">
+    <div id="window-black-cash">
         <div th:insert="storage/cash-order :: cash-order"></div>
     </div>
 </div>

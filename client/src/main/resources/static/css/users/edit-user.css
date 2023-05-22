@@ -29,12 +29,13 @@
 }
 
 .edit {
-    width: 566px;
-    height: 572px;
-    background: rgba(255,255,255,1);
+    background: transparent;
     opacity: 1;
     position: relative;
     overflow: hidden;
+    width: 547px;
+    height: 580px;
+    border-radius: 10px;
 }
 #blackout-edit {
     background: rgba(40, 40, 40, 0.7);
@@ -45,10 +46,10 @@
     left: 0;
     display: none;
 }
-#window-black {
+#window-black-ed {
     display: flex;
     justify-content: center;
-    padding: 100px 0;
+    padding: 9% 0;
     margin: auto;
 }
 .close {
@@ -74,14 +75,15 @@ select {
     background-position-x: calc(100% - 3px);
 }
 .v17_358 {
-    width: 575px;
-    height: 565px;
+    width: 547px;
+    height: 580px;
     background: rgba(255,255,255,1);
     opacity: 1;
     position: relative;
     top: 0px;
     left: 0px;
     overflow: hidden;
+    border-radius: 10px;
 }
 .v17_415 {
     width: 575px;
@@ -109,23 +111,20 @@ select {
 .v17_417 {
     width: 543px;
     height: 453px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: absolute;
     top: 54px;
     left: 7px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 5px;
     overflow: hidden;
 }
 .v17_416 {
     width: 234px;
     color: rgba(255,255,255,1);
     position: relative;
-    top: 0px;
-    left: 0px;
+    left: 13px;
+    top: 9px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 16px;
@@ -135,16 +134,13 @@ select {
 .v17_437 {
     width: 301px;
     height: 31px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: absolute;
     top: 96px;
     left: 197px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -154,16 +150,13 @@ select {
 .v17_438 {
     width: 301px;
     height: 31px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: absolute;
     top: 137px;
     left: 197px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -179,10 +172,7 @@ select {
     top: 0px;
     left: 0px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -192,16 +182,13 @@ select {
 .v17_440 {
     width: 301px;
     height: 31px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: absolute;
     top: 219px;
     left: 197px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -211,16 +198,13 @@ select {
 .v17_441 {
     width: 301px;
     height: 31px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: absolute;
     top: 260px;
     left: 197px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -230,16 +214,13 @@ select {
 .v17_442 {
     width: 301px;
     height: 31px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: absolute;
     top: 300px;
     left: 197px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -249,16 +230,13 @@ select {
 .v17_443 {
     width: 301px;
     height: 31px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: absolute;
     top: 341px;
     left: 197px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -273,10 +251,7 @@ select {
     top: 382px;
     left: 197px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -292,10 +267,7 @@ select {
     top: 423px;
     left: 197px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -325,52 +297,56 @@ select {
     opacity: 1;
 }
 .v17_430 {
-    width: 145px;
-    height: 27px;
-    background: rgba(0,148,63,1);
     opacity: 1;
     position: absolute;
-    top: 518px;
-    left: 95px;
-    color: rgba(255,255,255,1);
+    color: white;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    border-radius: 10px;
     cursor: pointer;
+    position: absolute;
+    width: 152.2px;
+    height: 40px;
+    left: 82px;
+    top: 512px;
+    background: #00943F;
+    border-radius: 5px;
 }
 .v17_433 {
-    width: 107px;
-    height: 27px;
-    background: rgba(0,148,63,1);
+    background: white;
     opacity: 1;
-    position: absolute;
-    top: 518px;
-    left: 272px;
-    color: rgba(255,255,255,1);
+    color: black;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
     text-align: center;
     border-radius: 10px;
     cursor: pointer;
+    box-sizing: border-box;
+    position: absolute;
+    width: 116px;
+    height: 40px;
+    left: 260px;
+    top: 512px;
+    border: 1px solid #000000;
+    border-radius: 5px;
 }
 .v17_435 {
-    width: 95px;
-    height: 27px;
-    background: rgba(0,148,63,1);
     opacity: 1;
-    position: absolute;
-    top: 518px;
-    left: 390px;
-    color: rgba(255,255,255,1);
+    color: white;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    border-radius: 10px;
     cursor: pointer;
+    position: absolute;
+    width: 116px;
+    height: 40px;
+    left: 402px;
+    top: 512px;
+    background: #00943F;
+    border-radius: 5px;
 }
 .v17_418 {
     width: 248px;
@@ -383,6 +359,13 @@ select {
     font-size: 14px;
     text-align: left;
     opacity: 1;
+}
+.v1_24 {
+    position: absolute;
+    width: 475px;
+    height: 428px;
+    left: 6px;
+    top: 0px;
 }
 .v17_419 {
     width: 139px;
@@ -508,4 +491,21 @@ select {
 
 input {
     padding-left: 10px;
+}
+
+.v17_433:hover {
+    background: #45A73E;
+    border: 0px;
+    transition-duration: 1s;
+    color: white;
+}
+
+.v17_435:hover {
+    background: #45A73E;
+    transition-duration: 1s;
+}
+
+.v17_430:hover {
+    background: #45A73E;
+    transition-duration: 1s;
 }

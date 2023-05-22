@@ -3,7 +3,6 @@
   <title>Планирование</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="/css/header.css">
-  <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/menu-country.css">
   <link rel="stylesheet" href="/css/filter.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
@@ -18,7 +17,6 @@
   <div th:insert="blocks/menu-country :: menu-country"></div>
   <div th:insert="blocks/header :: header"></div>
   <div th:insert="blocks/filter :: filter"></div>
-  <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
     <div class="v18_231">
     <table class="table">
@@ -27,10 +25,8 @@
         <th>Тип</th>
         <th>ID объекта</th>
         <th>Статус</th>
-        <th>Период</th>
-        <th>Дата инкассации</th>
-        <th>Тип инкассации</th>
-        <th>Загружаемые наличные</th>
+        <th>Дата</th>
+        <th>Наличные</th>
         <th>Кассеты</th>
         <th>Валюта</th>
         <th>Рассчитал(-а)</th>
@@ -45,18 +41,16 @@ document.getElementById('rowIdEdit').value = this.getAttribute('id');
 document.getElementById('plan').disabled = false; document.getElementById('accept').disabled = false;
 document.getElementById('create').disabled = false; document.getElementById('edit').disabled = false;
 location.href='/planning/' + this.getAttribute('id');">
-        <td style="text-align: center;">Банкомат</td>
-        <td style="text-align: center;" th:text="${lst.atm.atmUid}">ID объекта</td>
+        <td style="text-align: center; width: 5vw;">Банкомат</td>
+        <td style="text-align: center; width: 6vw;" th:text="${lst.atm.atmUid}">ID объекта</td>
         <td style="text-align: center; color: white;" th:text="${lst.status}" th:bgcolor="${lst.colorFirst}">Статус</td>
-        <td style="text-align: center; width: 3vw; " th:text="${lst.planPeriod}">Период</td>
         <td style="width: 5vw; " th:text="${lst.date}"></td>
-        <td style="text-align: center; width: 5vw; ">План</td>
         <td th:text="${lst.amount}"></td>
-        <td style=" width: 265vw; " th:text="${lst.listCassettes}"></td>
+        <td style=" width: 20vw; " th:text="${lst.listCassettes}"></td>
         <td style="vertical-align: inherit; width: 3vw; text-align: center;" th:text="${lst.currency}"></td>
-        <td style="width: 30vw; " th:text="${lst.user.lastName} + ' ' + ${lst.user.firstName}"></td>
-        <td style="width: 100vw; " th:text="${lst.atm.company}"></td>
-        <td style="width: 50vw; " th:text="${lst.atm.address} + ', ' + ${lst.atm.homeNum}">Центральная 12, 5</td>
+        <td style="width: 14vw; " th:text="${lst.user.lastName} + ' ' + ${lst.user.firstName}"></td>
+        <td style="width: 15vw; " th:text="${lst.atm.company}"></td>
+        <td style="width: 14vw; " th:text="${lst.atm.address} + ', ' + ${lst.atm.homeNum}">Центральная 12, 5</td>
       </tr>
       </tbody>
     </table>
@@ -80,7 +74,7 @@ location.href='/planning/' + this.getAttribute('id');">
     <input type="hidden" th:value="${id}" name="rowId" id="rowIdEdit">
   </form>
   <span class="v1_300" th:text="${text}"></span>
-  <div class="v18_235" style="top: 965px; height: 460px; width: 46vw;">
+  <div class="v18_235" style="top: 835px;height: 395px;width: 46vw;">
     <div class="v18_232">
     <table class="table">
       <thead>
@@ -170,8 +164,8 @@ location.href='/planning/' + this.getAttribute('id');">
     opacity: 1;
   }
   .v18_231 {
-    width: 119vw;
-    height: 496px;
+    width: 109vw;
+    height: 368px;
     background: transparent;
     opacity: 1;
     position: absolute;
@@ -181,7 +175,7 @@ location.href='/planning/' + this.getAttribute('id');">
   }
   .v18_232 {
     width: 44vw;
-    height: 410px;
+    height: 370px;
     background: transparent;
     opacity: 1;
     position: absolute;
@@ -193,17 +187,32 @@ location.href='/planning/' + this.getAttribute('id');">
     outline: none;
     border: none;
   }
-  .v1_3 {
-      top:255px;
-    }
+  .v14_534 {
+    left: 287px;
+    width: 79vw;
+  }
+  .v14_53 {
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 195px;
+    left: 287px;
+    width: 79vw;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .v14 {
+    left: 270px;
+  }
   .v1_50 {
-    height: 174vh;
+    height: 150vh;
   }
   .v1_300 {
     width: 550px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 880px;
+    top: 790px;
     left: 287px;
     font-family: Montserrat;
     font-weight: 600;
@@ -212,9 +221,9 @@ location.href='/planning/' + this.getAttribute('id');">
     text-align: left;
   }
   .v18_2 {
-    width: 110px;
-    height: 27px;
-    top: 915px;
+    width: 116px;
+    height: 40px;
+    top: 725px;
     left: 287px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
@@ -224,20 +233,16 @@ location.href='/planning/' + this.getAttribute('id');">
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
   }
   .v18_3 {
-    width: 95px;
-    height: 27px;
-    top: 915px;
+    width: 90px;
+    height: 40px;
+    top: 725px;
     left: 435px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
@@ -248,20 +253,17 @@ location.href='/planning/' + this.getAttribute('id');">
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
   }
   .v18_4 {
-    width: 215px;
-    height: 27px;
-    top: 915px;
-    left: 570px;
+    width: 220px;
+    height: 40px;
+    top: 725px;
+    left: 560px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -271,20 +273,17 @@ location.href='/planning/' + this.getAttribute('id');">
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
   }
   .v18_5 {
-    width: 100px;
-    height: 27px;
-    top: 915px;
-    left: 810px;
+    width: 110px;
+    height: 40px;
+    top: 725px;
+    left: 815px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -294,27 +293,21 @@ location.href='/planning/' + this.getAttribute('id');">
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
   }
   .v18_235 {
     width: 79vw;
-    height: 560px;
+    height: 410px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 300px;
+    top: 290px;
     left: 287px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 10px;
     overflow: auto;
   }
   .v1_2 {
@@ -332,7 +325,7 @@ location.href='/planning/' + this.getAttribute('id');">
   .table {
     border: none;
     top: 0px;
-    left: 20px;
+    left: 25px;
     position: absolute;
   }
   .table thead th {

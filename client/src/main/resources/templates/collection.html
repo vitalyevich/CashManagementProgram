@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/menu-country.css">
   <link rel="stylesheet" href="/css/filter.css">
-  <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -16,7 +15,6 @@
   <div th:insert="blocks/menu-country :: menu-country"></div>
   <div th:insert="blocks/header :: header"></div>
   <div th:insert="blocks/filter :: filter"></div>
-  <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
     <div class="v18_231">
     <table class="table">
@@ -91,7 +89,8 @@ document.getElementById('confirm').disabled = false;">
       </div>
     </div>
   </div>
-  <table style="top: 755px;left: 968px;" class="table">
+  <div class="v18_236">
+    <table style="top:25px;" class="table">
     <thead>
     <tr>
       <th>Стадия</th>
@@ -101,13 +100,14 @@ document.getElementById('confirm').disabled = false;">
     </thead>
     <tbody>
     <tr class="v2" th:id="${lst.id}" th:each="lst : ${orderStages}">
-      <td style="width: 1vw; text-align: center;" th:text="${lst.id.stageId}">Стадия</td>
-      <td style="width: 16vw;" th:text="${lst.stageName}">Название стадии</td>
-      <td style="width: 9vw;" th:text="${lst.date}">Дата</td>
+      <td style="width: 0vw; text-align: center;" th:text="${lst.id.stageId}">Стадия</td>
+      <td style="width: 17vw;" th:text="${lst.stageName}">Название стадии</td>
+      <td style="width: 7vw;" th:text="${lst.date}">Дата</td>
       <input name="id">
     </tr>
     </tbody>
   </table>
+  </div>
   <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
   <div th:insert="confirmations/confirmation-window :: blackout-confirm"></div>
 </div>
@@ -163,17 +163,32 @@ document.getElementById('confirm').disabled = false;">
 
 <style>
   .v18_231 {
-    width: 109vw;
-    height: 300px;
+    width: 77vw;
+    height: 355px;
     background: transparent;
     opacity: 1;
     position: absolute;
-    top: 27px;
+    top: 25px;
     left: 0px;
     overflow: auto;
   }
-  .v1_3 {
-    top:240px;
+  .v14_534 {
+    left: 287px;
+    width: 79vw;
+  }
+  .v14_53 {
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 195px;
+    left: 287px;
+    width: 79vw;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .v14 {
+    left: 270px;
   }
   input {
     outline: none;
@@ -181,20 +196,19 @@ document.getElementById('confirm').disabled = false;">
   }
   .v334_407 {
     width: 641px;
-    height: 458px;
-    background: url("../images/v334_407.png");
+    height: 505px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 660px;
+    top: 730px;
     left: 293px;
     overflow: hidden;
   }
   .v334_405 {
     width: 529px;
-    height: 66px;
+    height: 80px;
     background: url("../images/v334_405.png");
     background-repeat: no-repeat;
     background-position: center center;
@@ -246,17 +260,17 @@ document.getElementById('confirm').disabled = false;">
     text-align: left;
   }
   .v329_861 {
-    width: 161px;
-    height: 27px;
+    width: 165px;
+    height: 40px;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
     background-repeat: no-repeat;
     background-position: center center;
-    border-radius: 10px;
+    border-radius: 5px;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
-    top: 1px;
+    top: 0px;
     left: 0px;
     overflow: hidden;
     font-family: Montserrat;
@@ -267,15 +281,15 @@ document.getElementById('confirm').disabled = false;">
   }
 
   .v329_869 {
-    width: 125px;
-    height: 27px;
+    width: 130px;
+    height: 40px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
     top: 0px;
-    left: 195px;
+    left: 200px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -283,14 +297,14 @@ document.getElementById('confirm').disabled = false;">
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
   }
   .v329_872 {
     width: 390px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 46px;
+    top: 65px;
     left: 0px;
     font-family: Montserrat;
     font-weight: 600;
@@ -300,11 +314,11 @@ document.getElementById('confirm').disabled = false;">
   }
   .v334_406 {
     width: 598px;
-    height: 349px;
+    height: 380px;
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 90px;
+    top: 120px;
     left: 0px;
     overflow: hidden;
   }
@@ -317,7 +331,7 @@ document.getElementById('confirm').disabled = false;">
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 0px;
+    top: 10px;
     left: 0px;
     overflow: hidden;
   }
@@ -346,7 +360,7 @@ document.getElementById('confirm').disabled = false;">
     left: 262px;
   }
   .v1_50 {
-    height: 133vh;
+    height: 150vh;
     }
   .v334_399 {
     opacity: 1;
@@ -748,17 +762,17 @@ document.getElementById('confirm').disabled = false;">
     text-align: left;
   }
   .v334_404 {
-    width: 540px;
-    height: 27px;
+    width: 600px;
+    height: 40px;
     opacity: 1;
     position: absolute;
-    top: 322px;
-    left: 50px;
+    top: 340px;
+    left: 0px;
     overflow: hidden;
   }
   .v331_957 {
-    width: 101px;
-    height: 27px;
+    width: 115px;
+    height: 40px;
     background-size: cover;
     opacity: 1;
     position: absolute;
@@ -772,16 +786,16 @@ document.getElementById('confirm').disabled = false;">
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v331_958 {
-    width: 101px;
-    height: 27px;
+    width: 120px;
+    height: 40px;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
-    left: 413px;
+    left: 476px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -790,16 +804,16 @@ document.getElementById('confirm').disabled = false;">
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v331_960 {
-    width: 32px;
-    height: 27px;
+    width: 40px;
+    height: 40px;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
-    left: 112px;
+    left: 125px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     font-family: Montserrat;
@@ -807,17 +821,17 @@ document.getElementById('confirm').disabled = false;">
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
     color: rgba(255,255,255,1);
   }
   .v331_978 {
-    width: 32px;
-    height: 27px;
+    width: 40px;
+    height: 40px;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
-    left: 370px;
+    left: 426px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     font-family: Montserrat;
@@ -825,17 +839,17 @@ document.getElementById('confirm').disabled = false;">
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
     color: rgba(255,255,255,1);
   }
   .v331_975 {
-    width: 32px;
-    height: 27px;
+    width: 40px;
+    height: 40px;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
-    left: 327px;
+    left: 376px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     font-family: Montserrat;
@@ -843,17 +857,17 @@ document.getElementById('confirm').disabled = false;">
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
     color: rgba(255,255,255,1);
   }
   .v331_972 {
-    width: 32px;
-    height: 27px;
+    width: 40px;
+    height: 40px;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
-    left: 284px;
+    left: 326px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     font-family: Montserrat;
@@ -861,17 +875,17 @@ document.getElementById('confirm').disabled = false;">
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
     color: rgba(255,255,255,1);
   }
   .v331_969 {
-    width: 32px;
-    height: 27px;
+    width: 40px;
+    height: 40px;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
-    left: 241px;
+    left: 276px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     font-family: Montserrat;
@@ -879,17 +893,17 @@ document.getElementById('confirm').disabled = false;">
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
     color: rgba(255,255,255,1);
   }
   .v331_966 {
-    width: 32px;
-    height: 27px;
+    width: 40px;
+    height: 40px;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
-    left: 198px;
+    left: 226px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     font-family: Montserrat;
@@ -897,17 +911,17 @@ document.getElementById('confirm').disabled = false;">
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
     color: rgba(255,255,255,1);
   }
   .v331_963 {
-    width: 32px;
-    height: 27px;
+    width: 40px;
+    height: 40px;
     background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
-    left: 155px;
+    left: 176px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     font-family: Montserrat;
@@ -915,21 +929,30 @@ document.getElementById('confirm').disabled = false;">
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
     color: rgba(255,255,255,1);
   }
   .v18_235 {
     width: 79vw;
-    height: 354px;
+    height: 415px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 280px;
+    top: 290px;
     left: 287px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .v18_236 {
+    width: 37vw;
+    height: 495px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 735px;
+    right: 25px;
+    border-radius: 10px;
     overflow: hidden;
   }
   .v1_2 {

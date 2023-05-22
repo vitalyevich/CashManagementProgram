@@ -1,14 +1,11 @@
 <div th:fragment="company" class="company">
   <div class="v414_277">
-    <div class="v414_278"></div>
-    <span class="v414_279">Регистрация компании</span>
-    <a href="/users/registration">
-      <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
-           src="../static/images/close.svg" th:src="@{images/close.svg}">
-    </a>
+    <div class="v414_278">
+      <span class="v414_279">Регистрация компании</span>
+    </div>
+
     <form th:action="@{/users/registration-company}" method="post">
       <div class="v414_281">
-        <div class="v414_282"></div>
 
         <input name="companyName" required type="text" class="v414_283">
 
@@ -27,12 +24,13 @@
         <span class="v414_298">Улица</span>
         <span class="v414_299">Дом</span>
 
-        <input type="submit" class="v601_278" value="Применить">
-
-      <a href="/users/registration">
-        <input type="button" class="v601_277" value="Отменить">
-      </a>
       </div>
+        <a href="#">
+          <input type="button" class="v601_278" value="Отменить">
+        </a>
+
+        <input type="submit" class="v601_277" value="Применить">
+
     </form>
   </div>
 </div>

@@ -1,12 +1,12 @@
 <div th:fragment="confirmation-exit" class="window">
   <div class="v105_829">
-    <div class="v249_729"></div>
-    <div class="v249_730"></div>
     <span class="v249_731">Вы действительно хотите выйти?</span>
-    <a href="/logout">
-      <input type="submit" class="v249_732" value="Да">
+    <a href="#">
+      <input type="submit" class="v249_732" value="Отменить">
     </a>
-    <input type="submit" class="v249_735" value="Нет">
+    <a href="/logout">
+      <input type="submit" class="v249_735" value="Продолжить">
+    </a>
   </div>
 </div>
 
@@ -14,5 +14,5 @@
   <a href="#" class="close"></a>
   <div id="window-black">
     <div th:insert="confirmations/confirmation-exit :: confirmation-exit"></div>
-  </div>g
+  </div>
 </div>

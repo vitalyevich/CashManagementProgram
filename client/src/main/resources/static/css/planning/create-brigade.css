@@ -3,8 +3,9 @@ input {
 }
 .windowBrigade {
     width: 684px;
-    height: 797px;
-    background: rgba(255,255,255,1);
+    height: 860px;
+    background: transparent;
+    border-radius: 10px;
     opacity: 1;
     position: relative;
     overflow: hidden;
@@ -12,7 +13,7 @@ input {
 #blackout-brigade {
     background: rgba(40, 40, 40, 0.7);
     width: 100%;
-    height: 170.4vh;
+    height: 170.5vh;
     position: absolute;
     top: 0;
     left: 0;
@@ -50,7 +51,7 @@ select {
     height: 24px;
     opacity: 1;
     position: absolute;
-    top: 80px;
+    top: 90px;
     left: 110px;
     border-radius: 30%;
     border: 1px solid black;
@@ -109,40 +110,25 @@ select {
 }
 .v23_864 {
     width: 684px;
-    height: 797px;
+    height: 860px;
     background: rgba(255,255,255,1);
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 0px;
     overflow: hidden;
+    border-radius: 10px;
 }
 .v336_489 {
-    width: 635px;
-    height: 262px;
-    background: url("../images/v336_489.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 202px;
+    top: 250px;
     left: 24px;
-    overflow: hidden;
-}
-.v23_867 {
     width: 635px;
-    height: 262px;
+    height: 240px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 0px;
-    left: 0px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
     overflow: hidden;
+    border-radius: 10px;
 }
 .table tr.marked{
     background-color: #E0E0E0;
@@ -154,13 +140,13 @@ select {
     opacity: 1;
 }
 .v336_487 {
-    width: 178px;
-    height: 27px;
+    width: 188px;
+    height: 40px;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
-    top: 215px;
-    left: 425px;
+    top: 188px;
+    right: 15px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -169,13 +155,25 @@ select {
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 .v23_878 {
     width: 119px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 13px;
+    top: 220px;
+    left: 25px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 1;
+    text-align: left;
+}
+.v23_879 {
+    width: 119px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 502px;
     left: 25px;
     font-family: Montserrat;
     font-weight: 600;
@@ -206,61 +204,43 @@ select {
     text-align: left;
 }
 .v18_232 {
-    width: 33vw;
-    height: 152px;
+    width: 40vw;
+    height: 153px;
     background: transparent;
     opacity: 1;
     position: absolute;
-    top: 37px;
+    top: 25px;
     left: 0px;
     overflow: auto;
 }
 .v23_941 {
     width: 635px;
-    height: 262px;
+    height: 240px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 479px;
+    top: 530px;
     left: 24px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 10px;
     overflow: hidden;
 }
 .v336_490 {
     width: 635px;
-    height: 122px;
-    background: url("../images/v336_490.png");
-    background-repeat: no-repeat;
-    background-position: center center;
+    height: 145px;
+    background: rgba(247,247,247,1);
+    position: absolute;
+    border-radius: 10px;
     background-size: cover;
     opacity: 1;
-    position: absolute;
-    top: 67px;
+    top: 63px;
     left: 24px;
-    overflow: hidden;
-}
-.v23_868 {
-    width: 635px;
-    height: 122px;
-    background: rgba(247,247,247,1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
     overflow: hidden;
 }
 .v23_885 {
     width: 64px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 51px;
+    top: 57px;
     left: 38px;
     font-family: Montserrat;
     font-weight: 600;
@@ -272,7 +252,7 @@ select {
     width: 108px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 86px;
+    top: 96px;
     left: 148px;
     font-family: Montserrat;
     font-weight: 600;
@@ -293,7 +273,7 @@ select {
     text-align: left;
 }
 .v23_870 {
-    width: 429px;
+    width: 280px;
     height: 30px;
     opacity: 1;
     position: absolute;
@@ -306,15 +286,14 @@ select {
     opacity: 1;
     text-align: left;
     padding-left: 7px;
-    border-radius: 10px;
+    border-radius: 5px;
     appearance: none;
 }
 .v23_871 {
-    width: 416px;
+    width: 267px;
     height: 25px;
-    opacity: 1;
     position: absolute;
-    top: 47px;
+    top: 52px;
     left: 114px;
     border: 1px solid rgba(0,0,0,1);
     font-family: Montserrat;
@@ -322,34 +301,35 @@ select {
     font-size: 14px;
     opacity: 1;
     text-align: left;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 .v336_486 {
-    width: 103px;
-    height: 27px;
-    background-size: cover;
     opacity: 1;
-    position: absolute;
-    top: 753px;
-    left: 429px;
     overflow: hidden;
-    background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    box-sizing: border-box;
+    position: absolute;
+    width: 116px;
+    height: 40px;
+    left: 399px;
+    top: 796px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    color: black;
 }
 .v336_485 {
-    width: 192px;
-    height: 27px;
+    width: 200px;
+    height: 40px;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
-    top: 215px;
-    left: 410px;
+    top: 188px;
+    right: 14px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -358,16 +338,16 @@ select {
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 .v336_488 {
-    width: 95px;
-    height: 27px;
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 753px;
-    left: 549px;
+    width: 116px;
+    height: 40px;
+    left: 543px;
+    top: 796px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -376,5 +356,17 @@ select {
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
+}
+
+.v336_486:hover {
+    background: #45A73E;
+    border: 0px;
+    transition-duration: 1s;
+    color: white;
+}
+
+.v336_488:hover {
+    background: #45A73E;
+    transition-duration: 1s;
 }

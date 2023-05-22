@@ -25,7 +25,7 @@ public class Role {
         if (roleName.equals("ROLE_ADMIN")) {
             return "Руководитель";
         }
-        else if (roleName.equals("ROLE_DIALER")) {
+        else if (roleName.equals("ROLE_DEALER")) {
             return "Старший дилер";
         }
         else if (roleName.equals("ROLE_CASHIER")) {

@@ -10,13 +10,15 @@
 <div class="v1_2">
   <div th:insert="blocks/header :: header"></div>
 
+  <div class="v0">
+    <a href="/monitoring-storages">
+      <img src="../static/images/refresh.svg" th:src="@{images/refresh.svg}">
+    </a>
+  </div>
+
+  <span class="v18_247">Хранилища</span>
+
   <div class="v18_235">
-    <span class="v18_247">Хранилища</span>
-    <div class="v0">
-      <a href="/monitoring-storages">
-        <img src="../static/images/refresh.svg" th:src="@{images/refresh.svg}">
-      </a>
-    </div>
     <div class="v18_231">
     <table class="table">
       <thead>
@@ -59,7 +61,7 @@
         </div>
 
         <div class="v18_232">
-        <table style="left: 5px;" class="table">
+        <table class="tab">
           <thead>
           <tr>
             <th>Номинал</th>
@@ -85,7 +87,7 @@
           <span class="v348_740">Текущие остатки</span>
         </div>
         <div class="v18_232">
-        <table style="left: 5px;" class="table">
+        <table class="tab">
           <thead>
           <tr>
             <th>Номинал</th>
@@ -111,7 +113,7 @@
           <span class="v348_757">Вечерняя касса</span>
         </div>
         <div class="v18_232">
-        <table style="left: 5px;" class="table">
+        <table class="tab">
           <thead>
           <tr>
             <th>Номинал</th>
@@ -137,7 +139,7 @@
           <span class="v348_774">Вывоз</span>
         </div>
         <div class="v18_232">
-        <table style="left: 5px;" class="table">
+        <table class="tab">
           <thead>
           <tr>
             <th>Номинал</th>
@@ -164,7 +166,7 @@
           <span class="v348_791">Пополнение</span>
         </div>
         <div class="v18_232">
-        <table style="left: 5px;" class="table">
+        <table class="tab">
           <thead>
           <tr>
             <th>Номинал</th>
@@ -203,12 +205,12 @@
     background-color: #E0E0E0;
   }
   .v18_231 {
-    width: 93vw;
-    height: 406px;
+    width: 94vw;
+    height: 320px;
     background: transparent;
     opacity: 1;
     position: absolute;
-    top: 47px;
+    top: 30px;
     left: 0px;
     overflow: auto;
   }
@@ -226,16 +228,16 @@
     position: absolute;
     width: 24px;
     height: 24px;
-    right: 37px;
-    top: 15px;
+    left: 37px;
+    top: 96px;
     cursor: pointer;
   }
   .v18_247 {
     width: 107px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 17px;
-    left: 23px;
+    top: 100px;
+    left: 70px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
@@ -247,13 +249,13 @@
     border: none;
   }
   .v348_704 {
-    width: 95vw;
+    width: 98vw;
     height: 239px;
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 650px;
-    left: 30px;
+    top: 530px;
+    left: 0px;
     overflow: auto;
   }
   .v348_705 {
@@ -316,7 +318,7 @@
     position: absolute;
     top: 160px;
     left: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v348_722 {
     width: 312px;
@@ -326,7 +328,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v348_723 {
     width: 128px;
@@ -373,7 +375,7 @@
     position: absolute;
     top: 160px;
     left: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v348_739 {
     width: 312px;
@@ -383,7 +385,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v348_740 {
     width: 135px;
@@ -430,7 +432,7 @@
     position: absolute;
     top: 160px;
     left: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v348_756 {
     width: 312px;
@@ -440,7 +442,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v348_757 {
     width: 128px;
@@ -487,7 +489,7 @@
     position: absolute;
     top: 160px;
     left: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v348_773 {
     width: 312px;
@@ -497,7 +499,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v348_774 {
     width: 128px;
@@ -544,7 +546,7 @@
     position: absolute;
     top: 160px;
     left: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v348_790 {
     width: 312px;
@@ -554,7 +556,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .v348_791 {
     width: 128px;
@@ -673,30 +675,26 @@
     border-bottom-right-radius: 10px;
   }
   .v18_235 {
-    width: 95vw;
-    height: 500px;
+    width: 96vw;
+    height: 385px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 115px;
+    top: 140px;
     left: 30px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 10px;
     overflow: hidden;
   }
   .v1_2 {
     width: 100vw;
-    height: 116vh;
+    height: 100vh;
     max-width: 100%;
-    /* max-height: 100%; */
+    max-height: 100%;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 0px;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
   }
   .table {
     border: none;
@@ -737,6 +735,48 @@
     border-radius: 8px 0 0 8px;
   }
   .table tbody tr td:last-child {
+    border-radius: 0 8px 8px 0;
+  }
+
+  .tab {
+    border: none;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+  }
+  .tab thead th {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    background: #d8d8d8;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .tab thead tr th:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+  .tab thead tr th:last-child {
+    border-radius: 0 8px 8px 0;
+  }
+  .tab tbody td {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    vertical-align: top;
+    font-family: Montserrat;
+    font-weight: 400;
+    flex-wrap: nowrap;
+    font-size: 13px;
+    width: 13vw;
+  }
+  .tab tbody tr{
+    background: rgba(247,247,247,1);
+  }
+  .tab tbody tr td:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+  .tab tbody tr td:last-child {
     border-radius: 0 8px 8px 0;
   }
 

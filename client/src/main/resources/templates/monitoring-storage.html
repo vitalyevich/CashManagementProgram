@@ -4,7 +4,6 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/filter.css">
-  <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
   <link rel="stylesheet" href="/css/storage/balance-storage.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -13,7 +12,13 @@
 <div class="v1_2">
   <div th:insert="blocks/header :: header"></div>
   <div th:insert="blocks/filter :: filter"></div>
-  <div th:insert="blocks/search :: search"></div>
+
+  <div class="v15">
+    <img style="position: absolute;width: 24px;height: 24px;left: 15px;top: 12px;" src="../static/images/storage.svg" th:src="@{images/storage.svg}">
+    <span class="v14_550">Хранилища</span>
+  </div>
+
+
   <div class="v18_235">
     <div class="v18_231">
       <table class="table">
@@ -22,18 +27,18 @@
           <th>Компания</th>
           <th>Валюта</th>
           <th>Остаток в хранилище</th>
-          <th>Денежный поток (Пополнение)</th>
-          <th>Денежный поток (Вывоз)</th>
+          <th>Пополнение</th>
+          <th>Вывоз</th>
         </tr>
         </thead>
         <tbody>
         <tr th:class="'v1 ' + ${lst.marked}" th:each="lst,iter : ${storages}" th:id="${iter.count - 1}" onclick="document.getElementById('rowIdEdit').value = document.getElementById('company').value; document.getElementById('edit').disabled = false;
           location.href='/monitoring-storage/' + this.getAttribute('id');">
-          <td id="company" th:value="${lst.id}" th:text="${lst.companyName}">Компания</td>
-          <td style="vertical-align: inherit; width: 3vw; text-align: center;" th:text="${lst.currency}">Валюта</td>
-          <td style="vertical-align: inherit; width: 9vw;" th:text="${lst.sumAmount}">Остаток в хранилище</td>
-          <td th:text="${lst.amountOperationPlus}"></td>
-          <td th:text="${lst.amountOperationMinus}"></td>
+          <td style="width: 15vw;" id="company" th:value="${lst.id}" th:text="${lst.companyName}">Компания</td>
+          <td style="text-align: center; width: 5vw;" th:text="${lst.currency}">Валюта</td>
+          <td style="text-align: center; width: 11vw;" th:text="${lst.sumAmount}">Остаток в хранилище</td>
+          <td style="text-align: center; width: 8vw;" th:text="${lst.amountOperationPlus}"></td>
+          <td style="text-align: center; width: 8vw;" th:text="${lst.amountOperationMinus}"></td>
         </tr>
         </tbody>
       </table>
@@ -47,8 +52,8 @@
   <input id="mon" class="v18_4" type="submit" value="Учет возврата" />
   </a>
 
-  <div class="v18_235" style="top:930px; width: 37vw;" >
-    <table style="top: 25px" class="table">
+  <div class="v18_236">
+    <table class="tab">
       <thead>
       <tr>
         <th>Номинал</th>
@@ -59,10 +64,10 @@
       </thead>
       <tbody>
       <tr th:each="lst : ${storage}">
-        <td style="width: 4vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
-        <td style="width: 7vw;" th:text="${lst.amount}">Количество</td>
-        <td style="width: 7vw;" th:text="${lst.banknote} * ${lst.amount}">Сумма</td>
-        <td style="width: 7vw;" th:text="${lst.sumAmount}"> </td>
+        <td style="width: 0vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
+        <td style="width: 0vw; text-align: center;" th:text="${lst.amount}">Количество</td>
+        <td style="width: 0vw; text-align: center;" th:text="${lst.banknote} * ${lst.amount}">Сумма</td>
+        <td style="width: 7vw; text-align: center;" th:text="${lst.sumAmount}"> </td>
       </tr>
       </tbody>
     </table>
@@ -88,31 +93,37 @@
 </script>
 
 <style>
+  .v15 {
+    opacity: 1;
+    position: absolute;
+    left: 14px;
+    top: 215px;
+    width: 592px;
+    height: 70px;
+    overflow: hidden;
+  }
   .table tr.marked{
     background-color: #E0E0E0;
   }
   .v18_3.marked{
     opacity: 1;
   }
-  .v18_4.marked{
-    opacity: 1;
+  select {
+    appearance: none;
+    background: url("../../images/angle-down.svg") no-repeat right;
+    background-position-x: calc(100% - 3px);
   }
   input {
     outline: none;
     border: none;
   }
-  .v1_3 {
-    top: 250px;
-    left: 55px;
-    width: 93vw;
-  }
   .v18_231 {
-    width: 119vw;
-    height: 496px;
+    width: 60vw;
+    height: 370px;
     background: transparent;
     opacity: 1;
     position: absolute;
-    top: 25px;
+    top: 30px;
     left: 0px;
     overflow-y: auto;
   }
@@ -140,10 +151,10 @@
     border-bottom-right-radius: 10px;
   }
   .v18_3 {
-    width: 100px;
-    height: 27px;
-    top: 880px;
-    left: 55px;
+  width: 116px;
+    height: 40px;
+    left: 655px;
+    top: 725px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -152,15 +163,11 @@
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;
-    opacity: 0.4;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
+    opacity: 0.5;
   }
   .v14_532 {
     width: 95vw;
@@ -168,9 +175,9 @@
   }
   .v18_4 {
     width: 140px;
-    height: 27px;
-    top: 880px;
-    left: 195px;
+    height: 40px;
+    left: 800px;
+    top: 725px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -179,45 +186,49 @@
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     overflow: hidden;
     background: rgba(0,148,63,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
   }
   .v18_235 {
-    width: 95vw;
-    height: 560px;
+    width: 62vw;
+    height: 430px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 300px;
+    top: 270px;
     left: 30px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .v18_236 {
+    width: 32vw;
+    height: 495px;
+    background: rgba(247,247,247,1);
+    opacity: 1;
+    position: absolute;
+    top: 270px;
+    right: 30px;
+    border-radius: 10px;
     overflow: hidden;
   }
   .v1_2 {
     width: 100vw;
-    height: 192vh;
+    height: 100vh;
     max-width: 100%;
+    max-height: 100%;
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 0px;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
   }
   .table {
     border: none;
     top: 0px;
-    left: 25px;
+    left: 30px;
     position: absolute;
   }
   .table thead th {
@@ -253,6 +264,48 @@
     border-radius: 8px 0 0 8px;
   }
   .table tbody tr td:last-child {
+    border-radius: 0 8px 8px 0;
+  }
+
+  .tab {
+    border: none;
+    top: 30px;
+    right: 30px;
+    position: absolute;
+  }
+  .tab thead th {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    background: #d8d8d8;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .tab thead tr th:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+  .tab thead tr th:last-child {
+    border-radius: 0 8px 8px 0;
+  }
+  .tab tbody td {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    vertical-align: top;
+    font-family: Montserrat;
+    font-weight: 400;
+    flex-wrap: nowrap;
+    font-size: 13px;
+    width: 22.8vw;
+  }
+  .tab tbody tr{
+    background: #ffffff;
+  }
+  .tab tbody tr td:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+  .tab tbody tr td:last-child {
     border-radius: 0 8px 8px 0;
   }
 

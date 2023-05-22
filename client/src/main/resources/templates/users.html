@@ -17,12 +17,6 @@
       <div th:insert="blocks/menu-admin :: menu-admin"></div>
       <div th:insert="blocks/header :: header"></div>
       <div class="v18_235">
-        <span class="v18_247">Пользователи</span>
-        <div class="v0">
-          <a href="/users">
-            <img src="../static/images/refresh.svg" th:src="@{images/refresh.svg}">
-          </a>
-        </div>
         <div class="v18_231">
         <table class="table">
           <thead>
@@ -48,7 +42,12 @@ document.getElementById('rowIdEdit').value = this.getAttribute('id'); document.g
         </table>
         </div>
       </div>
-        <span class="v28_658" th:text="'Всего пользователей в системе: ' + ${size}"></span>
+      <div class="v0">
+        <a href="/users">
+          <img src="../static/images/refresh.svg" th:src="@{images/refresh.svg}">
+        </a>
+      </div>
+        <p class="v28_658">Всего пользователей в системе: <span class="v28_600" th:text="${size}"></span></p>
         <a href="/users/registration">
           <input class="v18_248" type="submit" value="Новый (-ая)">
         </a>
@@ -95,6 +94,24 @@ input {
   outline: none;
   border: none;
 }
+.v2_00 {
+  color: white;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: left;
+  width: 220px;
+  height: 34px;
+  opacity: 1;
+  position: absolute;
+  top: 64px;
+  left: 11px;
+  padding-left: 27px;
+  cursor: pointer;
+  background: rgba(69,167,62,1);
+  border-radius: 5px;
+  overflow: hidden;
+}
 .v1_2 {
   width: 100vw;
   height: 100vh;
@@ -110,8 +127,8 @@ input {
   position: absolute;
   width: 24px;
   height: 24px;
-  right: 37px;
-  top: 15px;
+  left: 271px;
+  top: 100px;
   cursor: pointer;
 }
 .table {
@@ -171,118 +188,93 @@ table tr.marked{
   width: 265px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 109px;
-  left: 287px;
+  left: 304px;
+  top: 90px;
   font-family: Montserrat;
   font-weight: 400;
   font-size: 14px;
   opacity: 1;
   text-align: left;
 }
+.v28_600 {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+}
+
 .v18_231 {
   width: 79vw;
   height: 476px;
   background: transparent;
   opacity: 1;
   position: absolute;
-  top: 47px;
-  left: 0px;
+  top: 27px;
+  left: 7px;
   overflow: auto;
 }
 .v18_235 {
   width: 79vw;
-  height: 570px;
+  height: 550px;
   background: rgba(247,247,247,1);
   opacity: 1;
   position: absolute;
-  top: 139px;
   left: 287px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
+  top: 146px;
+  border-radius: 10px;
   overflow: hidden;
 }
 .v18_248 {
-  top: 730px;
-  left: 1057px;
-  width: 103px;
-  height: 27px;
   color: rgba(255,255,255,1);
   font-family: Montserrat;
   font-weight: 600;
   font-size: 14px;
   text-align: center;
   cursor: pointer;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
   opacity: 1;
   position: absolute;
   overflow: hidden;
-  background: rgba(0,148,63,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-.v18_247 {
-  width: 107px;
-  color: rgba(0,0,0,1);
   position: absolute;
-  top: 17px;
-  left: 23px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 1;
-  text-align: left;
+  width: 116px;
+  height: 40px;
+  right: 350px;
+  top: 720px;
+  background: #00943F;
+  border-radius: 5px;
 }
-
 .v18_249 {
-  width: 95px;
-  height: 27px;
-  top: 730px;
-  left: 1180px;
+  top: 720px;
+  right: 210px;
   color: rgba(255,255,255,1);
   font-family: Montserrat;
   font-weight: 600;
   font-size: 14px;
   text-align: center;
   cursor: pointer;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 0.4;
+  opacity: 0.5;
   position: absolute;
   overflow: hidden;
-  background: rgba(0,148,63,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  position: absolute;
+  width: 116px;
+  height: 40px;
+  background: #00943F;
+  border-radius: 5px;
 }
 .v18_282 {
-  width: 95px;
-  height: 27px;
-  top: 730px;
-  left: 1294px;
+  top: 720px;
+  right: 70px;
   color: rgba(255,255,255,1);
   font-family: Montserrat;
   font-weight: 600;
   font-size: 14px;
   text-align: center;
   cursor: pointer;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 0.4;
+  opacity: 0.5;
   position: absolute;
   overflow: hidden;
-  background: rgba(0,148,63,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  position: absolute;
+  width: 116px;
+  height: 40px;
+  background: #00943F;
+  border-radius: 5px;
 }
 </style>

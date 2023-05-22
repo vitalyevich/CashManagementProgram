@@ -1,8 +1,8 @@
 <div th:fragment="create-brigade" class="windowBrigade">
   <div class="v23_864">
+    <span class="v23_878">Члены бригады</span>
+    <span class="v23_879">Сотрудники</span>
     <div class="v336_489">
-      <div class="v23_867">
-        <span class="v23_878">Члены бригады</span>
         <form action="/planning-collection/create-brigade/del" method="post">
         <input id="del" type="submit" value="Удалить инкассатора" class="v336_487" disabled>
         <input type="hidden" name="rowId" id="rowIdDel">
@@ -19,24 +19,18 @@
             <tbody>
             <tr class="v4" th:each="lst, iter : ${userList}" th:id="${iter.count - 1}" onclick="document.getElementById('rowIdDel').value = this.getAttribute('id');
               document.getElementById('del').disabled = false;">
-              <td th:text="${iter.count}">№</td>
-              <td th:text="${lst.nameRole}">Роль</td>
-              <td th:text="${lst.lastName} + ' ' + ${lst.firstName}">Пользователь</td>
+              <td style="width: 0vw" th:text="${iter.count}">№</td>
+              <td style="width: 14vw" th:text="${lst.nameRole}">Роль</td>
+              <td style="width: 18vw" th:text="${lst.lastName} + ' ' + ${lst.firstName}">Пользователь</td>
               <input name="id">
             </tr>
             </tbody>
           </table>
         </div>
       </div>
-    </div>
     <div class="v23_865"></div>
-    <a href="/planning-collection">
-      <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
-           src="../static/images/close.svg" th:src="@{images/close.svg}">
-    </a>
     <span class="v23_866">Бригада</span>
     <div class="v23_941">
-      <span class="v23_878">Сотрудники</span>
       <form action="/planning-collection/create-brigade/add" method="post">
         <input id="add" type="submit" value="Добавить инкассатора" class="v336_485" disabled>
         <input type="hidden" name="rowId" id="rowIdAdd">
@@ -52,8 +46,8 @@
           <tbody>
           <tr class="v3" th:each="lst : ${users}" th:id="${lst.id}" onclick="document.getElementById('rowIdAdd').value = this.getAttribute('id');
             document.getElementById('add').disabled = false;">
-            <td th:text="${lst.roleName}">Роль</td>
-            <td th:text="${lst.lastName} + ' ' + ${lst.firstName}">Пользователь</td>
+            <td style="width: 14vw" th:text="${lst.nameRole}">Роль</td>
+            <td style="width: 18vw;" th:text="${lst.lastName} + ' ' + ${lst.firstName}">Пользователь</td>
           </tr>
           </tbody>
         </table>
@@ -61,25 +55,28 @@
     </div>
     <form action="/planning-collection/create-brigade/create" method="post">
     <div class="v336_490">
-      <div class="v23_868"></div>
-      <span class="v23_885">Бригада</span>
+         <div style="position: absolute;top: 10px">
+            <span class="v23_885">Бригада</span>
 
-      <span class="v23_937">Действующий</span>
+            <span class="v23_937">Действующий</span>
 
-        <span class="v23_882">Компания</span>
-        <select name="company" class="v23_870">
-          <option th:each="el, iterStat : ${companies}" th:value="${iterStat.index + 1}" th:text="${el.companyName}">
-          </option>
-        </select>
+              <span class="v23_882">Компания</span>
+              <select name="company" class="v23_870">
+                <option th:each="el, iterStat : ${companies}" th:value="${iterStat.index + 1}" th:text="${el.companyName}">
+                </option>
+              </select>
 
-        <input name="active" class="v17_446" type="checkbox">
-        <input required name="brigadeName" type="text" class="v23_871">
+              <input name="active" class="v17_446" type="checkbox">
+              <input required name="brigadeName" type="text" class="v23_871">
+        </div>
       </div>
-      <input type="submit" value="Применить" class="v336_486">
+      <input type="submit" value="Применить" class="v336_488">
     </form>
-    <a href="/planning-collection">
-      <input type="submit" value="Закрыть" class="v336_488">
+
+    <a href="#">
+      <input type="submit" value="Отменить" class="v336_486">
     </a>
+
   </div>
 </div>
 

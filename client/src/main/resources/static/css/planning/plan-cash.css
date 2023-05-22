@@ -1,7 +1,8 @@
 .planCash {
-    width: 874px;
-    height: 686px;
-    background: rgba(255,255,255,1);
+    width: 672px;
+    height: 590px;
+    border-radius: 10px;
+    background: transparent;
     opacity: 1;
     position: relative;
     overflow: hidden;
@@ -84,8 +85,9 @@ select {
     border-radius: 0 8px 8px 0;
 }
 .v22_750 {
-    width: 874px;
-    height: 686px;
+    width: 672px;
+    height: 590px;
+    border-radius: 10px;
     background: rgba(255,255,255,1);
     opacity: 1;
     position: absolute;
@@ -94,27 +96,24 @@ select {
     overflow: hidden;
 }
 .v18_23 {
-    width: 46vw;
-    height: 270px;
+    width: 33vw;
+    height: 230px;
     background: transparent;
     opacity: 1;
     position: absolute;
     top: 40px;
-    left: 117px;
+    left: 85px;
     overflow: auto;
 }
 .v321_690 {
-    width: 830px;
-    height: 381px;
+    width: 625px;
+    height: 335px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 210px;
+    top: 170px;
     left: 24px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 10px;
     overflow: hidden;
 }
 .v22_755 {
@@ -140,17 +139,14 @@ select {
     text-align: left;
 }
 .v22_800 {
-    width: 830px;
-    height: 100px;
+    width: 625px;
+    height: 60px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
     top: 86px;
     left: 24px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 10px;
     overflow: hidden;
 }
 .v22_816 {
@@ -166,14 +162,14 @@ select {
     overflow: hidden;
 }
 .v22_831 {
-    width: 163px;
+    width: 110px;
     height: 27px;
     opacity: 1;
     position: absolute;
-    top: 96px;
-    left: 183px;
+    top: 16px;
+    left: 170px;
     border: 1px solid rgba(0,0,0,1);
-    border-radius: 10px;
+    border-radius: 5px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -208,30 +204,30 @@ select {
     padding-left: 7px;
 }
 .v22_760 {
-    width: 103px;
-    height: 27px;
-    background: rgba(0,148,63,1);
-    opacity: 1;
-    position: absolute;
-    top: 630px;
-    left: 612px;
-    color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
     opacity: 1;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    box-sizing: border-box;
+    position: absolute;
+    width: 116px;
+    height: 40px;
+    left: 386px;
+    top: 530px;
+    border: 1px solid #000000;
+    color: black;
+    border-radius: 5px;
 }
 .v22_761 {
-    width: 95px;
-    height: 27px;
+    width: 116px;
+    height: 40px;
     background: rgba(0,148,63,1);
     opacity: 1;
     position: absolute;
-    top: 630px;
-    left: 735px;
+    left: 533px;
+    top: 530px;
     color: rgba(255,255,255,1);
     font-family: Montserrat;
     font-weight: 600;
@@ -239,7 +235,7 @@ select {
     opacity: 1;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 .v22_769 {
     width: 552px;
@@ -257,8 +253,8 @@ select {
     width: 372px;
     color: rgba(0,148,63,1);
     position: absolute;
-    top: 19px;
-    left: 138px;
+    top: 15px;
+    left: 110px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
@@ -270,7 +266,7 @@ select {
     color: rgba(69,167,62,1);
     position: absolute;
     top: 128px;
-    left: 60px;
+    left: 25px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
@@ -293,8 +289,8 @@ select {
     width: 109px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 330px;
-    left: 60px;
+    top: 0px;
+    left: 25px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
@@ -305,8 +301,8 @@ select {
     width: 130px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 100px;
-    left: 48px;
+    top: 20px;
+    left: 25px;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
@@ -362,13 +358,13 @@ select {
     text-align: left;
 }
 .v321_627 {
-    width: 103px;
-    height: 27px;
+    width: 116px;
+    height: 40px;
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 137px;
-    left: 512px;
+    top: 10px;
+    left: 315px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -377,14 +373,14 @@ select {
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 .v22_843 {
     width: 90px;
     color: rgba(8,8,8,1);
     position: absolute;
-    top: 330px;
-    left: 177px;
+    top: 0px;
+    left: 135px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -402,4 +398,16 @@ select {
     font-size: 14px;
     opacity: 1;
     text-align: left;
+}
+
+.v22_760:hover {
+    background: #45A73E;
+    border: 0px;
+    transition-duration: 1s;
+    color: white;
+}
+
+.v22_761:hover {
+    background: #45A73E;
+    transition-duration: 1s;
 }

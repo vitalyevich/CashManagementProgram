@@ -1,6 +1,9 @@
 <div th:fragment="balance-storage" class="balance">
     <div class="v25_1053">
-        <div class="v364_441">
+
+        <span class="v25_1071">Номиналы</span>
+        <span class="v25_1118">Количество - единственное редактируемое поле</span>
+
             <div class="v25_1058">
                 <div class="v18_111">
                 <table class="table">
@@ -10,7 +13,6 @@
                         <th>Номинал</th>
                         <th>Количество</th>
                         <th>Сумма</th>
-                        <th>Количество</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -19,27 +21,22 @@
                         <td th:utext="${lst.firstName}">Номинал</td>
                         <td th:utext="${lst.lastName}">Количество</td>
                         <td th:utext="${lst.phone}">Сумма</td>
-                        <td th:utext="${lst.phone}">Количество</td>
                     </tr>
                     </tbody>
                 </table>
                 </div>
-            </div>
-            <span class="v25_1071">Номиналы</span>
-            <span class="v25_1119">Редактировать номиналы</span>
-            <span class="v25_1118">Количество - единственное редактируемое поле</span>
         </div>
-        <div class="v364_440">
-            <input type="submit" class="v350_827" value="Применить">
-            <input type="submit" class="v350_828" value="Закрыть">
-        </div>
-        <div class="v364_442">
-            <div class="v25_1056"></div>
-            <span class="v25_1057" th:text="${textWindow} + ' - Остаток в хранилище'"></span>
-            <a href="/monitoring-storage">
-                <img style="position: absolute;width: 24px;height: 24px;right: 12px;top: 7px;"
-                     src="../static/images/close.svg" th:src="@{images/close.svg}">
+
+            <a href="#">
+                <input type="submit" class="v350_827" value="Отменить">
             </a>
+
+            <input type="submit" class="v350_828" value="Применить">
+
+        <div class="v364_442">
+            <div class="v25_1056">
+                <span class="v25_1057" th:text="${textWindow} + ' - Остаток в хранилище'"></span>
+            </div>
         </div>
     </div>
 </div>

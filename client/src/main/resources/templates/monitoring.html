@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/menu-country.css">
   <link rel="stylesheet" href="/css/filter.css">
-  <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -15,28 +14,36 @@
   <div th:insert="blocks/header :: header"></div>
   <div th:insert="blocks/filter :: filter"></div>
 
-  <div class="v1_532">
+  <div style="position: absolute; left: 270px; top: 270px;">
     <img style="position: absolute;width: 24px;height: 24px;left: 15px;top: 12px;"
          src="../static/images/angle-up-black.svg" th:src="@{images/angle-up-black.svg}">
     <span class="v1_550">Фильтр</span>
-    <span class="v1_565">Скрыть</span>
-    <div style="left: -134px;position: absolute;">
+  </div>
+  <div class="v1_532">
+    <div style="left: 0px;top: 0px;position: absolute;">
       <select class="v1_558">
         <option value="BYN">BYN</option>
         <option value="RUB">RUB</option>
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
       </select>
-      <select class="v1_560"></select>
-      <select class="v1_561"></select>
+      <select class="v1_560">
+        <option value="1">Нормальное</option>
+        <option value="2">Нижний лимит</option>
+        <option value="3">Неопределенное</option>
+      </select>
+      <select class="v1_561">
+        <option value="1">Нормальный</option>
+        <option value="2">Неопределенный</option>
+        <option value="3">Проблематичный</option>
+      </select>
       <input class="v1_564">
       <span class="v1_555">Валюта</span>
       <span class="v1_559">Состояние наличных</span>
-      <span class="v1_563">До опустошения (дн.)</span>
-      <span class="v1_566">Статус сервиса</span>
+      <span class="v1_563">Статус сервиса</span>
+      <span class="v1_566">До опустошения (дн.)</span>
     </div>
   </div>
-  <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
     <div class="v18_231">
           <table class="table">
@@ -44,24 +51,20 @@
             <tr>
               <th>Тип</th>
               <th>ID объекта</th>
-              <th>До опустошения</th>
               <th>Остаток</th>
               <th>Кассеты</th>
               <th>Валюта</th>
-              <th>Дата инкассации</th>
               <th>Состояние наличных</th>
               <th>Состояние банкомата</th>
             </tr>
             </thead>
             <tbody>
             <tr data-th-each="lst,iter : *{atms}">
-              <td style="vertical-align: inherit; width: 6vw; text-align: center;">Банкомат</td>
+              <td style="vertical-align: inherit; width: 5vw; text-align: center;">Банкомат</td>
               <td style="vertical-align: inherit; width: 6vw; text-align: center;" data-th-text="*{lst.atmUid}">ID объекта</td>
-              <td style="vertical-align: inherit; width: 6vw; text-align: center; color: white;" data-th-bgcolor="*{lst.colorSecond}" data-th-text="*{lst.day}"></td>
-              <td style="vertical-align: inherit; width: 5vw;" data-th-text="*{lst.amount}"></td>
-              <td style="width: 16vw;" data-th-text="*{lst.listCassettes}"></td>
+              <td style="vertical-align: inherit; width: 5vw; text-align: center; color: white;" data-th-bgcolor="*{lst.colorSecond}" data-th-text="*{lst.amount}"></td>
+              <td style="width: 20vw;" data-th-text="*{lst.listCassettes}"></td>
               <td style="vertical-align: inherit; width: 3vw; text-align: center;" data-th-text="*{lst.currency}"></td>
-              <td style="vertical-align: inherit; width: 9vw;"> </td> <!--30.07.2015 12.50 (171)-->
               <td style="vertical-align: inherit; width: 11vw; color: white; text-align: center;" data-th-text="*{lst.cashState}" data-th-bgcolor="*{lst.colorFirst}" >Состояние наличных</td>
               <td style="vertical-align: inherit; width: 11vw; color: white; text-align: center;" data-th-text="*{lst.atmState}" data-th-bgcolor="*{lst.colorSecond}" >Состояние банкомата</td>
             </tr>
@@ -69,37 +72,46 @@
           </table>
       </div>
   </div>
-  <span class="v1_300">A0100133, Остатки наличных, с, 25.10.2022 до 30.10.2022</span>
-  <a href="/monitoring/stats">
-    <input class="v18_248" type="submit" value="Применить"/>
-  </a>
-  <span class="v18_251">с</span>
-  <span class="v18_252">до</span>
-  <input type="date" class="v18_249">
-  <input type="date" class="v18_250">
-  <div class="v18_235" style="top: 1100px; height: 450px; width: 28vw;">
+
+  <div style="position: absolute; top: 790px; left: 287px;">
+    <span class="v1_300">А0100075, История транзакционной активности, с 01.11.2023 до 03.11.2023</span>
+    <span class="v1_300" style="top: 40px; left: 0px;">Показатели</span>
+    <a href="/monitoring/stats">
+      <input class="v18_248" type="submit" value="Применить"/>
+    </a>
+    <span class="v18_251">с</span>
+    <span class="v18_252">до</span>
+    <input type="date" class="v18_249">
+    <input type="date" class="v18_250">
+  </div>
+
+  <div class="v18_235" style="top: 885px;height: 450px;width: 41vw;">
     <div class="v18_232">
     <table class="table">
       <thead>
       <tr>
+        <th>№</th>
         <th>Дата</th>
         <th>Валюта</th>
-        <th>Остаток</th>
-        <th>Прогноз. остаток</th>
+        <th>Номинал</th>
+        <th>Количество</th>
+        <th>Сумма</th>
       </tr>
       </thead>
       <tbody>
       <tr>
+        <td style="width: 0vw;">1</td>
         <td style="width: 4vw;">29.07.2022</td>
-        <td style="width: 4vw; text-align: center;">BYN</td>
-        <td style="width: 4vw;">56 780</td>
-        <td style="width: 4vw;" >57 878</td>
+        <td style="width: 3vw; text-align: center;">BYN</td>
+        <td style="width: 4vw;">10</td>
+        <td style="width: 4vw;" >100</td>
+        <td style="width: 6vw;" >1000</td>
       </tr>
       </tbody>
     </table>
     </div>
   </div>
-  <div id="chart_div" style="position: absolute; width: 1100px;height: 200px;top: 1565px;left: 287px;"></div>
+  <div id="chart_div" style="position: absolute;width: 1100px;height: 200px;top: 1360px;left: 287px;"></div>
   <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
 </div>
 </body>
@@ -142,7 +154,7 @@
     ]);
 
     var options = {
-      vAxis: {title: 'Остатки: BYN'},
+      vAxis: {title: 'Общая сумма: BYN'},
       hAxis: {title: 'Дата'},
       seriesType: 'bars',
       series: {1: {type: 'line'}}
@@ -158,19 +170,37 @@
     width: 1000px;
     height: 300px;
   }*/
+.v14_534 {
+  left: 287px;
+  width: 79vw;
+}
+.v14_53 {
+  background: rgba(247,247,247,1);
+  opacity: 1;
+  position: absolute;
+  top: 195px;
+  left: 287px;
+  width: 79vw;
+  height: 70px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.v14 {
+  left: 270px;
+}
   .v18_231 {
-    width: 96vw;
-    height: 496px;
+    width: 78vw;
+    height: 302px;
     background: transparent;
     opacity: 1;
     position: absolute;
-    top: 27px;
+    top: 20px;
     left: 0px;
     overflow: auto;
   }
 .v18_232 {
-  width: 26vw;
-  height: 398px;
+  width: 39vw;
+  height: 395px;
   background: transparent;
   opacity: 1;
   position: absolute;
@@ -179,8 +209,8 @@
   overflow: auto;
 }
 .v18_251 {
-  top: 1049px;
-  left: 287px;
+  top: 41px;
+  left: 130px;
   font-family: Montserrat;
   font-weight: 400;
   font-size: 14px;
@@ -190,8 +220,8 @@
   overflow: hidden;
 }
 .v18_252 {
-  top: 1049px;
-  left: 430px;
+  top: 41px;
+  left: 290px;
   font-family: Montserrat;
   font-weight: 400;
   font-size: 14px;
@@ -201,10 +231,10 @@
   overflow: hidden;
 }
 .v18_250 {
-  top: 1045px;
-  left: 465px;
+  top: 37px;
+  left: 320px;
   height: 25px;
-  width: 100px;
+  width: 110px;
   color: black;
   font-family: Montserrat;
   font-weight: 400;
@@ -214,16 +244,14 @@
   position: absolute;
   overflow: hidden;
   border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 5px;
   background: transparent;
+  padding-left: 7px;
 }
 .v18_249 {
-  top: 1045px;
-  left: 310px;
-  width: 100px;
+  top: 37px;
+  left: 150px;
+  width: 110px;
   height: 25px;
   color: black;
   font-family: Montserrat;
@@ -234,17 +262,15 @@
   position: absolute;
   overflow: hidden;
   border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 5px;
   background: transparent;
+  padding-left: 7px;
 }
 .v18_248 {
-  top: 1045px;
-  left: 605px;
-  width: 103px;
-  height: 27px;
+  top: 30px;
+  left: 470px;
+  width: 116px;
+  height: 40px;
   color: white;
   font-family: Montserrat;
   font-weight: 600;
@@ -258,17 +284,14 @@
   position: absolute;
   overflow: hidden;
   background: rgba(0,148,63,1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 5px;
 }
 .v1_300 {
-  width: 550px;
+  width: 630px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 1010px;
-  left: 287px;
+  top: 0px;
+  left: 0px;
   font-family: Montserrat;
   font-weight: 600;
   font-size: 16px;
@@ -284,51 +307,42 @@
     background: transparent;
   }
   .v1_50 {
-    height: 217vh;
+    height: 191vh;
   }
   .v1_532 {
     width: 79vw;
-    height: 106px;
+    height: 65px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 255px;
-    left: 290px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    top: 322px;
+    left: 287px;
+    border-radius: 10px;
     overflow: hidden;
   }
   .v1_558 {
-    top: 40px;
+    top: 16px;
     height: 28px;
-    left: 270px;
-    width: 112px;
+    left: 85px;
+    width: 74px;
     opacity: 1;
     position: absolute;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
     padding-left: 7px;
   }
   .v1_560 {
-    width: 145px;
-    top: 40px;
+    width: 170px;
+    top: 16px;
     height: 28px;
-    left: 800px;
+    left: 620px;
     opacity: 1;
     position: absolute;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -336,16 +350,13 @@
   }
   .v1_561 {
     width: 145px;
-    top: 40px;
+    top: 16px;
     height: 28px;
-    left: 1165px;
+    left: 960px;
     opacity: 1;
     position: absolute;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -353,16 +364,13 @@
   }
   .v1_564 {
     width: 35px;
-    top: 40px;
+    top: 16px;
     height: 25px;
-    left: 545px;
+    left: 370px;
     opacity: 1;
     position: absolute;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -398,8 +406,8 @@
     width: 89px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 44px;
-    left: 190px;
+    top: 20px;
+    left: 20px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -410,8 +418,8 @@
     width: 165px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 44px;
-    left: 620px;
+    top: 20px;
+    left: 450px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -419,11 +427,11 @@
     text-align: left;
   }
   .v1_566 {
-    width: 112px;
+    width: 160px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 44px;
-    left: 410px;
+    top: 20px;
+    left: 200px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -434,8 +442,8 @@
     width: 160px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 44px;
-    left: 980px;
+    top: 20px;
+    left: 830px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -448,16 +456,13 @@
   }
   .v18_235 {
     width: 79vw;
-    height: 560px;
+    height: 350px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
-    top: 425px;
+    top: 415px;
     left: 287px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 10px;
     overflow: auto;
   }
   .v1_2 {

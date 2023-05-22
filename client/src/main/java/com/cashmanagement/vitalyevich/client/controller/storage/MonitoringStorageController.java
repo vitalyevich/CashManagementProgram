@@ -209,7 +209,7 @@ public class MonitoringStorageController {
 
 
 
-        model.addAttribute("headerText", "Мониторинг");
+        model.addAttribute("headerText", "Учет возврата");
         model.addAttribute("headerPost", "Старший кассир хранилища " + seance.getUser().getFirstName());
         return "monitoring-storages";
     }

@@ -1,12 +1,13 @@
 .v414_277 {
-    width: 575px;
-    height: 381px;
-    background: rgba(255,255,255,1);
     opacity: 1;
-    position: relative;
     top: 0px;
     left: 0px;
     overflow: hidden;
+    position: relative;
+    width: 490px;
+    height: 381px;
+    background: white;
+    border-radius: 5px;
 }
 .v414_278 {
     width: 575px;
@@ -20,7 +21,7 @@
 }
 .v414_279 {
     width: 203px;
-    color: rgba(255,255,255,1);
+    color: white;
     position: absolute;
     top: 9px;
     left: 16px;
@@ -30,23 +31,20 @@
     opacity: 1;
     text-align: left;
 }
-.name {
-    color: #fff;
-}
 .v414_281 {
-    width: 543px;
-    height: 308px;
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 59px;
-    left: 20px;
     overflow: hidden;
+    width: 463px;
+    height: 241px;
+    left: 2px;
+    top: 50px;
 }
 .v414_282 {
     width: 543px;
     height: 263px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: relative;
     top: 0px;
@@ -69,18 +67,15 @@ select {
     background-position-x: calc(100% - 3px);
 }
 .v414_283 {
-    width: 301px;
+    width: 249px;
     height: 31px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: absolute;
     top: 42px;
-    left: 190px;
+    left: 199px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -88,17 +83,14 @@ select {
     text-align: left;
 }
 .v414_284 {
-    width: 315px;
+    width: 263px;
     height: 35px;
     opacity: 1;
     position: absolute;
     top: 83px;
-    left: 190px;
+    left: 199px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -107,17 +99,14 @@ select {
     padding-left: 7px;
 }
 .v414_285 {
-    width: 315px;
+    width: 263px;
     height: 35px;
     opacity: 1;
     position: absolute;
     top: 124px;
-    left: 190px;
+    left: 199px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -126,18 +115,15 @@ select {
     padding-left: 7px;
 }
 .v414_286 {
-    width: 301px;
+    width: 249px;
     height: 31px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: absolute;
     top: 165px;
-    left: 190px;
+    left: 199px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -145,18 +131,15 @@ select {
     text-align: left;
 }
 .v414_287 {
-    width: 301px;
+    width: 59px;
     height: 31px;
-    background: rgba(247,247,247,1);
+    background: white;
     opacity: 1;
     position: absolute;
     top: 206px;
-    left: 190px;
+    left: 199px;
     border: 1px solid rgba(0,0,0,1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     font-family: Montserrat;
     font-weight: 400;
@@ -236,53 +219,52 @@ select {
     text-align: left;
 }
 .v601_278 {
-    width: 103px;
-    height: 27px;
-    background: url("../images/v601_278.png");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;
     opacity: 1;
-    position: absolute;
-    top: 281px;
-    left: 282px;
     overflow: hidden;
-    background: rgba(0,148,63,1);
-    color: rgba(255,255,255,1);
+    background: transparent;
+    color: black;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    cursor:pointer;
-    border-radius: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: absolute;
+    width: 116px;
+    height: 40px;
+    left: 205px;
+    top: 314px;
+    border: 1px solid #000000;
+    border-radius: 5px;
 }
 
 .v601_277 {
-    width: 95px;
-    height: 27px;
-    background-size: cover;
     opacity: 1;
-    position: absolute;
-    top: 281px;
-    left: 404px;
-    overflow: hidden;
-    background: rgba(0,148,63,1);
-    color: rgba(255,255,255,1);
+    color: white;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    cursor:pointer;
-    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+    width: 116px;
+    height: 40px;
+    left: 347px;
+    top: 314px;
+    background: #00943F;
+    border-radius: 5px;
 }
 
 .company {
-    width: 575px;
-    height: 381px;
-    background: rgba(255,255,255,1);
+    background: transparent;
     opacity: 1;
     position: relative;
     overflow: hidden;
+    width: 490px;
+    height: 381px;
+    border-radius: 10px;
 }
 #blackout-company {
     background: rgba(40, 40, 40, 0.7);
@@ -309,3 +291,15 @@ select {
     cursor:pointer;
 }
 #blackout-company:target {display: block;}
+
+.v601_278:hover {
+    background: #45A73E;
+    border: 0px;
+    transition-duration: 1s;
+    color: white;
+}
+
+.v601_277:hover {
+    background: #45A73E;
+    transition-duration: 1s;
+}

@@ -1,17 +1,38 @@
 <div th:fragment="filter">
-    <div class="v14_532">
+    <div class="v14">
         <img style="position: absolute;width: 24px;height: 24px;left: 15px;top: 12px;" src="../static/images/angle-up-black.svg" th:src="@{images/angle-up-black.svg}">
         <span class="v14_550">Общий фильтр</span>
-        <span class="v14_565">Скрыть</span>
-        <div style="left: 50px;position: absolute;">
-            <select class="v14_558">
-                <option value="1">Банкомат</option>
-            </select>
+    </div>
+    <div class="v14_534">
+        <div style="left: 20px;top: 25px;position: absolute;;position:absolute;">
             <select class="v14_560"></select>
             <input class="v14_564">
-            <span class="v14_555">Тип объекта</span>
             <span class="v14_559">ID объекта</span>
             <span class="v14_563">Адрес</span>
+        </div>
+    </div>
+
+    <div class="v14_53">
+        <div class="v1_3">
+            <img  src="../static/images/refresh.svg" th:src="@{images/refresh.svg}"
+                  style="position: absolute;width: 24px;height: 24px;left: 680px;top: -3px;">
+            <img  src="../static/images/angle-right-double.svg" th:src="@{images/angle-right-double.svg}"
+                  style="position: absolute;width: 24px;height: 24px;left: 650px;top: -3px;">
+            <img  src="../static/images/angle-right.svg" th:src="@{images/angle-right.svg}"
+                  style="position: absolute;width: 24px;height: 24px;left: 630px;top: -3px;">
+            <img  src="../static/images/angle-left.svg" th:src="@{images/angle-left.svg}"
+                  style="position: absolute;width: 24px;height: 24px;left: 410px;top: -3px;">
+            <img  src="../static/images/angle-left-double.svg" th:src="@{images/angle-left-double.svg}"
+                  style="position: absolute;width: 24px;height: 24px;left: 390px;top: -3px;">
+
+            <input name="active" class="v17_44" type="checkbox" checked="true">
+
+            <input type="text" class="v14_606">
+            <select class="v14_602"></select>
+            <span class="v14_596">Автообновление</span>
+            <span class="v14_601">Размер страницы</span>
+            <span class="v14_605">Страница</span>
+            <span class="v14_607">из 1</span>
         </div>
     </div>
 </div>

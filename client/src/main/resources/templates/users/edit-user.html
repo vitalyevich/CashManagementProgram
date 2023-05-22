@@ -1,16 +1,17 @@
 <div th:fragment="edit" class="edit">
     <div class="v17_358">
-        <div class="v17_415"></div>
-        <div class="v306_440">
-            <div class="v17_417"></div>
+        <div class="v17_415">
             <span class="v17_416">Редактирование пользователя</span>
-            <a href="/users">
-                <img style="position: absolute;width: 24px;height: 24px;right: 5px;top: -1px;"
-                     src="../static/images/close.svg" th:src="@{images/close.svg}">
-            </a>
-            <form th:action="@{/users/edit}" method="post">
+        </div>
+
+        <form th:action="@{/users/edit}" method="post">
+
+            <div class="v1_24">
+
                 <input type="hidden" name="userId" th:value="${userId}"/>
                 <input type="hidden" name="accessId" th:value="${accessId}"/>
+
+
 
                 <input th:value="${login}" name="login" type="text" required class="v17_437">
                 <input th:value="${email}" name="email" type="email" required class="v17_438">
@@ -67,13 +68,18 @@
                     document.getElementById('selectCompany').value= [[${company}]];
                 </script>
 
+
                 <input name="active" th:checked="${active}" class="v17_446" type="checkbox">
 
-                <input type="submit" class="v17_433" value="Применить">
-            </form>
-            <a href="/users">
-                <input class="v17_435" value="Отменить">
-            </a>
+            </div>
+
+                    <a href="#">
+                        <input  class="v17_433" value="Отменить">
+                    </a>
+
+        <input type="submit" class="v17_435" value="Применить">
+        </form>
+
             <span class="v17_418">Пожалуйста, заполните все поля</span>
             <span class="v17_419">Имя пользователя</span>
             <span class="v17_421">Электронная почта</span>
@@ -85,13 +91,13 @@
             <span class="v17_427">Роль пользователя</span>
             <span class="v17_428">Компания</span>
             <span class="v17_429">Логин разрешен</span>
-        </div>
+
     </div>
 </div>
 
 <div th:fragment="blackout-edit" id="blackout-edit">
     <a href="#" class="close"></a>
-    <div id="window-black">
+    <div id="window-black-ed">
         <div th:insert="users/edit-user :: edit"></div>
     </div>
 </div>

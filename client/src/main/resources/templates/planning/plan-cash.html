@@ -14,8 +14,8 @@
         </thead>
         <tbody>
         <tr th:each="lst : ${cassettes}">
-          <td th:text="${lst.cassetteNum}">Номер</td>
-          <td th:text="${lst.banknote}">Кассета</td>
+          <td th:text="${lst.cassetteNum}">№</td>
+          <td th:text="${lst.banknote}">Номинал</td>
           <td th:text="${lst.amount}">Количество</td>
           <td th:text="${lst.sumAmount}">Сумма</td>
         </tr>
@@ -23,38 +23,31 @@
       </table>
       </div>
       <span class="v22_846">Кассеты</span>
-      <span class="v22_844">Всего (BYN)</span>
-      <span class="v22_843" th:text="${sum} + ' BYN'"></span>
+
+      <div style="position: absolute; top: 300px;">
+        <span class="v22_844">Всего (BYN)</span>
+        <span class="v22_843" th:text="${sum} + ' BYN'"></span>
+      </div>
+
     </div>
     <div class="v22_755"></div>
-    <a href="/planning">
-      <img style="position: absolute;width: 24px;height: 24px;right: 10px;top: 7px;"
-           src="../static/images/close.svg" th:src="@{images/close.svg}">
-    </a>
     <span class="v22_756">План наличных</span>
-    <div class="v22_800"></div>
-    <form action="planning/plan-cash-function" method="post">
-    <input name="period" required type="number" class="v22_816">
-    <input name="date" required type="date" class="v22_831">
-    <select name="type" required class="v22_834">
-      <option value="1">Статистический</option>
-      <option value="2">Пользовательский</option>
-    </select>
-    <input type="submit" value="Рассчитать" class="v321_627">
-    </form>
+    <div class="v22_800">
+      <form action="planning/plan-cash-function" method="post">
+      <input name="date" required type="date" class="v22_831">
+      <input type="submit" value="Рассчитать" class="v321_627">
+      </form>
+      <span class="v22_810">Дата инкассации</span>
+    </div>
 
     <a href="/planning/add">
-      <input type="submit" value="Применить" class="v22_760">
+      <input type="submit" value="Применить" class="v22_761">
     </a>
 
-    <a href="/planning">
-      <input type="submit" value="Закрыть" class="v22_761">
+    <a href="#">
+      <input type="submit" value="Отменить" class="v22_760">
     </a>
     <span class="v22_769">А0100089, Заказ, План. инкассация 07.08.2022</span>
-    <span class="v22_810">Дата инкассации</span>
-    <span class="v22_814">Период</span>
-    <span class="v22_815">Диапазон: 1 - 30</span>
-    <span class="v22_812">Алгоритм</span>
   </div>
 </div>
 

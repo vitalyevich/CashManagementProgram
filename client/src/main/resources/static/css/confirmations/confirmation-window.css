@@ -5,9 +5,10 @@ input {
     /*border: 1px solid white;*/
 }
 .v249_738 {
-    width: 440px;
-    height: 195px;
+    width: 434px;
+    height: 197px;
     background: rgba(255,255,255,1);
+    border-radius: 10px;
     opacity: 1;
     position: relative;
     top: 0px;
@@ -37,44 +38,48 @@ input {
     text-align: left;
 }
 .v254_829 {
-    width: 270px;
-    color: rgba(8,8,8,1);
     position: absolute;
-    top: 85px;
+    width: 260px;
+    height: 20px;
     left: 92px;
+    top: 85px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 16px;
-    opacity: 1;
-    text-align: left;
+    line-height: 20px;
+    color: #090808;
 }
 .v254_831 {
-    width: 103px;
-    height: 27px;
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 136px;
-    left: 109px;
     overflow: hidden;
-    background: rgba(0,148,63,1);
-    color: rgba(255,255,255,1);
+    background: white;
+    color: black;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 14px;
     opacity: 1;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    width: 116px;
+    height: 40px;
+    left: 164px;
+    top: 133px;
+    box-sizing: border-box;
+    position: absolute;
+    width: 116px;
+    height: 40px;
+    left: 164px;
+    top: 133px;
+    border: 1px solid #000000;
+    border-radius: 5px;
 }
 .v254_834 {
     width: 103px;
-    height: 27px;
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 136px;
-    left: 235px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -84,13 +89,30 @@ input {
     opacity: 1;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    width: 116px;
+    height: 40px;
+    left: 294px;
+    top: 133px;
+    border-radius: 5px;
+}
+
+.v254_831:hover {
+    background: #45A73E;
+    border: 0px;
+    transition-duration: 1s;
+    color: white;
+}
+
+.v254_834:hover {
+    background: #45A73E;
+    transition-duration: 1s;
 }
 
 .confirm {
-    width: 440px;
-    height: 195px;
-    background: rgba(255,255,255,1);
+    width: 434px;
+    height: 197px;
+    background: transparent;
+    border-radius: 10px;
     opacity: 1;
     position: relative;
     overflow: hidden;
@@ -107,7 +129,7 @@ input {
 #window-black {
     display: flex;
     justify-content: center;
-    padding: 100px 0;
+    padding: 20% 0;
     margin: auto;
 }
 .close {

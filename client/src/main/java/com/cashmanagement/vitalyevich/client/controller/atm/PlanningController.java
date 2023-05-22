@@ -267,18 +267,8 @@ public class PlanningController {
         planAtmArrayList.add(planAtm);
 
         planAtm = planningService.getPlan(id);
-        planAtm.setParameter("Период");
-        planAtm.setValue(planAtm.getPlanPeriod().toString());
-        planAtmArrayList.add(planAtm);
-
-        planAtm = planningService.getPlan(id);
         planAtm.setParameter("Статус");
         planAtm.setValue(planAtm.getStatus());
-        planAtmArrayList.add(planAtm);
-
-        planAtm = planningService.getPlan(id);
-        planAtm.setParameter("Тип инкассации");
-        planAtm.setValue("План");
         planAtmArrayList.add(planAtm);
 
         int sum = 0;
@@ -295,13 +285,6 @@ public class PlanningController {
             sum += planAtm.getSum();
             planAtmArrayList.add(planAtm);
         }
-
-        planAtm = planningService.getPlan(id);
-        planAtm.setParameter("Алгоритм");
-        planAtm.setAmountCassette(null);
-        planAtm.setBanknote(null);
-        planAtm.setValue(planAtm.getPlanMethod());
-        planAtmArrayList.add(planAtm);
 
         planAtm = planningService.getPlan(id);
         planAtm.setParameter("Всего");

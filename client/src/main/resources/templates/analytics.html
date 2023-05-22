@@ -23,24 +23,26 @@
     <div id="chart_div2" style="position: absolute;top:45px;"></div>
     <span class="v326_764">Количество банкнот</span>
   </div>
-  <span class="v326_750">Показатели</span>
+  <div style="position: absolute;top: 15px;">
+    <span class="v326_750">Показатели</span>
+    <span class="v326_751">с</span>
+    <input type="date" class="v326_722">
+    <span class="v326_754">до</span>
+    <input type="date" class="v326_752">
+    <input type="submit" class="v326_756" value="Применить">
+  </div>
   <div class="v326_743">
     <div id="piechart2" style="width: 550px; height: 300px; position: absolute;"></div>
     <span class="v326_745">Статус сервиса: BYN</span>
     <span class="v326_784">Всего: 45 454</span>
   </div>
   <div class="v326_740">
-    <div id="piechart" style="width: 500px; height: 300px; position: absolute;"></div>
+    <div id="piechart" style="width: 550px; height: 300px; position: absolute;"></div>
   <span class="v326_742">Текущие остатки: BYN</span>
   <span class="v326_781">Всего: 45 454</span>
 </div>
-  <input type="date" class="v326_722">
   <span class="v326_725">Банкоматы</span>
   <span class="v326_797">Банкоматы</span>
-  <span class="v326_751">с</span>
-  <input type="date" class="v326_752">
-  <span class="v326_754">до</span>
-  <input type="submit" class="v326_756" value="Применить">
 
   <div th:insert="confirmations/confirmation-exit :: blackout-exit"></div>
 </div>
@@ -307,7 +309,7 @@
     background: transparent;
     opacity: 1;
     position: absolute;
-    top: 615px;
+    top: 650px;
     left: 290px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
@@ -321,7 +323,7 @@
     background: transparent;
     opacity: 1;
     position: absolute;
-    top: 880px;
+    top: 900px;
     left: 290px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
@@ -622,7 +624,7 @@
     top: 570px;
     left: 435px;
     border: 1px solid rgba(0,0,0,1);
-    border-radius: 10px;
+    border-radius: 5px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -658,7 +660,7 @@
     color: rgba(0,0,0,1);
     position: absolute;
     top: 575px;
-    left: 417px;
+    left: 410px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -674,7 +676,7 @@
     left: 646px;
     border: 1px solid rgba(0,0,0,1);
     border: 1px solid rgba(0,0,0,1);
-    border-radius: 10px;
+    border-radius: 5px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -694,14 +696,10 @@
     text-align: left;
   }
   .v326_756 {
-    width: 103px;
-    height: 27px;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;
-    opacity: 1;
     position: absolute;
-    top: 569px;
+    top: 564px;
     left: 836px;
     overflow: hidden;
     background: rgba(0,148,63,1);
@@ -712,6 +710,18 @@
     opacity: 1;
     text-align: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
+    width: 116px;
+    height: 40px;
+  }
+  .v14_53 {
+    display: none;
+  }
+  .v14_534 {
+    left: 300px;
+    width: 76vw;
+  }
+  .v14 {
+    left: 284px;
   }
 </style>

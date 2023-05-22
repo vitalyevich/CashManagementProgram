@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/menu-country.css">
   <link rel="stylesheet" href="/css/filter.css">
-  <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
   <link rel="stylesheet" href="/css/confirmations/confirmation-window.css">
   <link rel="stylesheet" href="/css/planning/create-brigade.css">
@@ -17,7 +16,6 @@
   <div th:insert="blocks/menu-country :: menu-country"></div>
   <div th:insert="blocks/header :: header"></div>
   <div th:insert="blocks/filter :: filter"></div>
-  <div th:insert="blocks/search :: search"></div>
   <div class="v18_235">
     <div class="v18_231">
       <table class="table">
@@ -69,11 +67,14 @@ document.getElementById('cancel').disabled = false;">
     <input type="hidden" name="rowId" id="rowIdApprove">
   </form>
   <form action="/planning-collection/cancel-order" method="post">
-    <input id="cancel" type="submit" value="Отклонить заказ" class="v335_455" disabled>
+    <input id="cancel" type="submit" value="Отклонить" class="v335_455" disabled>
     <input type="hidden" name="rowId" id="rowIdCancel">
   </form>
-  <div style="top:920px; width: 28vw; height: 400px;" class="v18_235">
-    <div class="v18_231" style="height: 346px">
+
+  <span class="v14_550" style="top: 800px;left: 287px;">Бригады</span>
+
+  <div style="top: 845px;width: 28vw;height: 480px;" class="v18_235">
+    <div class="v18_231" style="height: 425px;width: 26vw;">
         <table class="table">
           <thead>
           <tr>
@@ -172,8 +173,8 @@ document.getElementById('cancel').disabled = false;">
 
 <style>
   .v18_231 {
-    width: 109vw;
-    height: 496px;
+    width: 77vw;
+    height: 360px;
     background: transparent;
     opacity: 1;
     position: absolute;
@@ -185,20 +186,35 @@ document.getElementById('cancel').disabled = false;">
     outline: none;
     border: none;
   }
-  .v1_3 {
-    top: 248px;
-  }
   .v1_50 {
     height: 161vh;
   }
-  .v335_451 {
-    width: 103px;
-    height: 27px;
-    background-size: cover;
-    opacity: 0.4;
+  .v14_534 {
+    left: 287px;
+    width: 79vw;
+  }
+  .v14_53 {
+    background: rgba(247,247,247,1);
+    opacity: 1;
     position: absolute;
-    top: 870px;
-    left: 342px;
+    top: 195px;
+    left: 287px;
+    width: 79vw;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .v14 {
+    left: 270px;
+  }
+  .v335_451 {
+    width: 122px;
+    height: 40px;
+    background-size: cover;
+    opacity: 0.5;
+    position: absolute;
+    top: 730px;
+    left: 287px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -206,18 +222,18 @@ document.getElementById('cancel').disabled = false;">
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
   }
 
   .v105_1493 {
-    width: 217px;
-    height: 27px;
+    width: 245px;
+    height: 40px;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
-    top: 870px;
-    left: 470px;
+    top: 730px;
+    left: 440px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -225,17 +241,17 @@ document.getElementById('cancel').disabled = false;">
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
   }
   .v335_453 {
-    width: 230px;
-    height: 27px;
+    width: 265px;
+    height: 40px;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
-    top: 870px;
-    left: 704px;
+    top: 730px;
+    left: 720px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -243,17 +259,17 @@ document.getElementById('cancel').disabled = false;">
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
   }
   .v335_454 {
-    width: 178px;
-    height: 27px;
+    width: 200px;
+    height: 40px;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
-    top: 870px;
-    left: 953px;
+    top: 730px;
+    left: 1020px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -261,17 +277,17 @@ document.getElementById('cancel').disabled = false;">
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
   }
   .v335_455 {
-    width: 178px;
-    height: 27px;
+    width: 116px;
+    height: 40px;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.5;
     position: absolute;
-    top: 870px;
-    left: 1148px;
+    top: 730px;
+    left: 1250px;
     overflow: hidden;
     background: rgba(0,148,63,1);
     color: rgba(255,255,255,1);
@@ -279,21 +295,18 @@ document.getElementById('cancel').disabled = false;">
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
   }
   .v18_235 {
     width: 79vw;
-    height: 560px;
+    height: 415px;
     background: rgba(247,247,247,1);
     opacity: 1;
     position: absolute;
     top: 290px;
     left: 287px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 10px;
     overflow: hidden;
   }
   .v1_2 {

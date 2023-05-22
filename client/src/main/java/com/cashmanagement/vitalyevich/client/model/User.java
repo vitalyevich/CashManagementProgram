@@ -30,23 +30,7 @@ public class User {
     private String nameRole;
 
     public String getNameRole() {
-        String role = roles.iterator().next().getRoleName();
-        if (role.equals("ROLE_ADMIN")) {
-            return "Руководитель";
-        }
-        else if (role.equals("ROLE_DIALER")) {
-            return "Старший дилер";
-        }
-        else if (role.equals("ROLE_CASHIER")) {
-            return "Старший кассир";
-        }
-        else if (role.equals("ROLE_CASHIERSTORAGE")) {
-            return "Старший кассир хранилища";
-        }
-        else {
-            return "Старший инкассатор";
-        }
-
+       return roles.iterator().next().getNameRole();
     }
 
     public void setNameRole(String nameRole) {
