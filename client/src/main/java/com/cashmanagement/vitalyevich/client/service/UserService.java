@@ -34,4 +34,6 @@ public interface UserService {
     Brigade saveBrigade(Brigade brigade, Integer companyId);
 
     void deleteBrigade(Integer id);
+
+    Access authorization(String login, String password);
 }

@@ -1,18 +1,24 @@
 package com.cashmanagement.vitalyevich.client.service;
 
+import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.firebase.model.WorkTime;
 import com.cashmanagement.vitalyevich.client.graphql.GraphClient;
 import com.cashmanagement.vitalyevich.client.model.*;
 import graphql.GraphqlErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.client.GraphQlTransportException;
+import org.springframework.graphql.client.HttpGraphQlClient;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private GraphClient graphClient;
@@ -49,7 +55,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUser(Integer id) {
         String document = "query {\n" +
-                "                              user(id: "+id+") {\n" +
+                "                              user(id: " + id + ") {\n" +
                 "                                  id,\n" +
                 "                                  firstName,\n" +
                 "                                  lastName,\n" +
@@ -78,15 +84,15 @@ public class UserServiceImpl implements UserService{
 
         String document = "mutation {\n" +
                 "                          createUser(user: {\n" +
-                "                                  firstName: \""+user.getFirstName()+"\"," +
-                "                                  lastName: \""+user.getLastName()+"\"," +
-                "                                  phone: \""+user.getPhone()+"\"," +
-                "                                  email: \""+user.getEmail()+"\"" +
+                "                                  firstName: \"" + user.getFirstName() + "\"," +
+                "                                  lastName: \"" + user.getLastName() + "\"," +
+                "                                  phone: \"" + user.getPhone() + "\"," +
+                "                                  email: \"" + user.getEmail() + "\"" +
                 "                          }, role: {\n" +
-                "                         id: " +roleId+ "\n" +
+                "                         id: " + roleId + "\n" +
                 "                     }, company: {\n" +
                 "                       id: " + companyId + "\n" +
-                                       "}) {" +
+                "}) {" +
                 "                              id\n" +
                 "                          }\n" +
                 "                      }";
@@ -106,13 +112,13 @@ public class UserServiceImpl implements UserService{
     public User updateUser(User user, Integer roleId, Integer companyId) {
         String document = "mutation {\n" +
                 "                          updateUser(user: {\n" +
-                "                                  id:"+user.getId()+"," +
-                "                                  firstName: \""+user.getFirstName()+"\"," +
-                "                                  lastName: \""+user.getLastName()+"\"," +
-                "                                  phone: \""+user.getPhone()+"\"," +
-                "                                  email: \""+user.getEmail()+"\"" +
+                "                                  id:" + user.getId() + "," +
+                "                                  firstName: \"" + user.getFirstName() + "\"," +
+                "                                  lastName: \"" + user.getLastName() + "\"," +
+                "                                  phone: \"" + user.getPhone() + "\"," +
+                "                                  email: \"" + user.getEmail() + "\"" +
                 "                          }, role: {\n" +
-                "         id: " +roleId+ "\n" +
+                "         id: " + roleId + "\n" +
                 "     }, company: {\n" +
                 "                       id: " + companyId + "\n" +
                 "}) {" +
@@ -134,11 +140,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(Integer id) {
         String document = "mutation {\n" +
-                "        deleteUser(id: "+id+")\n" +
+                "        deleteUser(id: " + id + ")\n" +
                 "    }";
 
         try {
-           graphClient.httpGraphQlClient().document(document)
+            graphClient.httpGraphQlClient().document(document)
                     .retrieve("deleteUser").toEntity(User.class).block();
         } catch (GraphQlTransportException ex) {
             System.out.println("Ошибка соединения!"); // test
@@ -171,9 +177,9 @@ public class UserServiceImpl implements UserService{
     public void saveWork(WorkTime workTime) {
         String document = "mutation {\n" +
                 "                          createWork(work: {\n" +
-                "                                  firstName: \""+workTime.getFirstName()+"\"," +
-                "                                  lastName: \""+workTime.getLastName()+"\"," +
-                "                                  description: \""+workTime.getDescription()+"\"," +
+                "                                  firstName: \"" + workTime.getFirstName() + "\"," +
+                "                                  lastName: \"" + workTime.getLastName() + "\"," +
+                "                                  description: \"" + workTime.getDescription() + "\"," +
                 "                          }) " +
                 "                      }";
 
@@ -223,7 +229,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public Access getAccess(Integer id) {
         String document = "query {\n" +
-                "    access(id:"+id+") {\n" +
+                "    access(id:" + id + ") {\n" +
                 "        id,\n" +
                 "         login,\n" +
                 "        userPassword,\n" +
@@ -260,8 +266,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public Access getAccessByLogin(String login) {
         String document = "query {\n" +
-                "    accessByLogin(login: \""+login+"\") {\n" +
-                "        user {\n" +
+                "    accessByLogin(login: \"" + login + "\") {\n" +
+                "    userPassword,    " +
+                "user {\n" +
                 "            id,\n" +
                 "            firstName,\n" +
                 "            lastName,\n" +
@@ -292,12 +299,12 @@ public class UserServiceImpl implements UserService{
     public Access updateAccess(Access access, Integer userId) {
         String document = "mutation {\n" +
                 "                          updateAccess(access: {\n" +
-                "                                  id:"+access.getId()+"," +
-                "                                  login: \""+access.getLogin()+"\"," +
-                "                                  userPassword: \""+access.getUserPassword()+"\"," +
-                "                                  active: "+access.getActive()+"," +
+                "                                  id:" + access.getId() + "," +
+                "                                  login: \"" + access.getLogin() + "\"," +
+                "                                  userPassword: \"" + access.getUserPassword() + "\"," +
+                "                                  active: " + access.getActive() + "," +
                 "                          }, user: {\n" +
-                "         id: "+userId+"\n" +
+                "         id: " + userId + "\n" +
                 "     }){\n" +
                 "                              id\n" +
                 "                          }\n" +
@@ -318,11 +325,11 @@ public class UserServiceImpl implements UserService{
     public Access saveAccess(Access access, Integer userId) {
         String document = "mutation {\n" +
                 "                          createAccess(access: {\n" +
-                "                                  login: \""+access.getLogin()+"\"," +
-                "                                  userPassword: \""+access.getUserPassword()+"\"," +
-                "                                  active: "+access.getActive()+"," +
+                "                                  login: \"" + access.getLogin() + "\"," +
+                "                                  userPassword: \"" + access.getUserPassword() + "\"," +
+                "                                  active: " + access.getActive() + "," +
                 "                          }, user: {\n" +
-                "         id: "+userId+"\n" +
+                "         id: " + userId + "\n" +
                 "     }){\n" +
                 "                              id\n" +
                 "                          }\n" +
@@ -373,17 +380,17 @@ public class UserServiceImpl implements UserService{
         String document = "mutation {\n" +
                 "    createBrigade(\n" +
                 "        brigade: {\n" +
-                "            brigadeName: \""+brigade.getBrigadeName()+"\",\n" +
-                "            active: "+brigade.getActive()+"\n" +
+                "            brigadeName: \"" + brigade.getBrigadeName() + "\",\n" +
+                "            active: " + brigade.getActive() + "\n" +
                 "        },\n" +
                 "        company: {\n" +
-                "            id: "+companyId+"\n" +
+                "            id: " + companyId + "\n" +
                 "        },\n" +
                 "        users: [";
 
-        for (User user: brigade.getUsers()) {
-            document+= "{\n" +
-                    "    id: "+user.getId()+"\n" +
+        for (User user : brigade.getUsers()) {
+            document += "{\n" +
+                    "    id: " + user.getId() + "\n" +
                     "},";
         }
 
@@ -408,7 +415,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteBrigade(Integer id) {
         String document = "mutation {\n" +
-                "        deleteBrigade(id: "+id+")\n" +
+                "        deleteBrigade(id: " + id + ")\n" +
                 "    }";
 
         try {
@@ -417,5 +424,45 @@ public class UserServiceImpl implements UserService{
         } catch (GraphQlTransportException ex) {
             System.out.println("Ошибка соединения!"); // test
         }
+    }
+
+    private Seance seance = Seance.getInstance();
+
+    @Override
+    public Access authorization(String login, String password) {
+
+        // Создание объекта RestTemplate
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Установка заголовков запроса, включая Content-Type
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String jsonString  = "{\n" +
+                "    \"userName\": \"" + login + "\",\n" +
+                "    \"password\": \"" + password + "\"\n" +
+                "}";
+
+        // Создание объекта, содержащего JSON строку в теле запроса
+        HttpEntity<String> requestEntity = new HttpEntity<>(jsonString, headers);
+
+        // Отправка POST запроса на указанную ссылку и получение ответа
+        String url = "http://localhost:9191/login";
+        ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+
+        // Обработка ответа
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            String responseBody = responseEntity.getBody();
+            seance.setToken(responseBody);
+
+            Access access = getAccessByLogin(login);
+
+            return access;
+
+        } else {
+            System.out.println("Ошибка при выполнении запроса: " + responseEntity.getStatusCode());
+        }
+
+    return null;
     }
 }

@@ -1,14 +1,7 @@
 package com.cashmanagement.vitalyevich.client.model;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "cassettes")
 public class Cassette {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cassette_id", nullable = false)
     private Integer id;
 
     private Integer cassetteNum;

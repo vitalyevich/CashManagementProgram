@@ -1,8 +1,10 @@
 package com.cashmanagement.vitalyevich.client.graphql;
 
+import com.cashmanagement.vitalyevich.client.config.Seance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.graphql.client.HttpGraphQlClient;
 
 import javax.annotation.PostConstruct;
@@ -10,11 +12,17 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class GraphClient {
 
-    @Bean()
-    public HttpGraphQlClient httpGraphQlClient() {
-        //WebClient webClient = WebClient.create("http://localhost:9191/graphql");
-        //HttpGraphQlClient graphQlClient = HttpGraphQlClient.create(webClient);
+    private Seance seance = Seance.getInstance();
 
-        return HttpGraphQlClient.builder().url("http://localhost:9191/graphql").build();
+
+
+    // переделать
+    @Bean()
+    @Lazy
+    public HttpGraphQlClient httpGraphQlClient() {
+
+            return HttpGraphQlClient.builder().url("http://localhost:9191/graphql").header("Authorization", "Token " + seance.getToken()).build();
+
     }
+
 }

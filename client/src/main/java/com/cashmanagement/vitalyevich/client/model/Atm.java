@@ -1,26 +1,16 @@
 package com.cashmanagement.vitalyevich.client.model;
 
-import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "atms", indexes = {
-        @Index(name = "atms_atm_uid_key", columnList = "atm_uid", unique = true)
-})
 public class Atm extends ColorTable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "atm_id", nullable = false)
+
     private Integer id;
 
-    @Column(name = "atm_uid", nullable = false, length = 8)
     private String atmUid;
 
-    @Column(name = "cash_state", nullable = false)
     private String cashState;
 
-    @Column(name = "atm_state", nullable = false)
     private String atmState;
 
     private String listCassettes;
@@ -39,10 +29,8 @@ public class Atm extends ColorTable {
 
     private Integer amount;
 
-    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "home_num", nullable = false)
     private Integer homeNum;
 
     public Integer getAmount() {
@@ -101,22 +89,10 @@ public class Atm extends ColorTable {
         this.homeNum = homeNum;
     }
 
-    @ManyToMany
-    @JoinTable(name = "atm_cassettes",
-            joinColumns = @JoinColumn(name = "atm_id"),
-            inverseJoinColumns = @JoinColumn(name = "cassette_id"))
     private Set<Cassette> cassettes = new LinkedHashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "company_atms",
-            joinColumns = @JoinColumn(name = "atm_id"),
-            inverseJoinColumns = @JoinColumn(name = "company_id"))
     private Set<Company> companies = new LinkedHashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "city_atms",
-            joinColumns = @JoinColumn(name = "atm_id"),
-            inverseJoinColumns = @JoinColumn(name = "city_id"))
     private Set<City> cities = new LinkedHashSet<>();
 
     public Set<City> getCities() {

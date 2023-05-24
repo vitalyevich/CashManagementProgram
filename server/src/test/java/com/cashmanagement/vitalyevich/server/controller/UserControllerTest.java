@@ -331,6 +331,16 @@ class UserControllerTest {
     }
 
     /**
+     * Method under test: {@link UserController#accesses()}
+     */
+    @Test
+    void testAccesses2() {
+        when(this.accessRepository.findByOrderByIdAsc()).thenReturn((Iterable<Access>) mock(Iterable.class));
+        this.userController.accesses();
+        verify(this.accessRepository).findByOrderByIdAsc();
+    }
+
+    /**
      * Method under test: {@link UserController#brigades()}
      */
     @Test

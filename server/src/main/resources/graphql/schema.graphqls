@@ -57,6 +57,9 @@ type Mutation {
 
     updateStorageOrder(storageOrder: UpdateStorageOrderInput!, orderId: ID!, userId: ID!): StorageOrder
 
+
+    login(userName: String!, password: String!): String!
+
 }
 
 input UpdateStorageOrderInput {

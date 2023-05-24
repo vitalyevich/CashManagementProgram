@@ -1,33 +1,18 @@
 package com.cashmanagement.vitalyevich.client.model;
 
-import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "companies", indexes = {
-        @Index(name = "companies_company_name_key", columnList = "company_name", unique = true)
-})
 public class Company {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "company_id", nullable = false)
     private Integer id;
 
-    @Column(name = "company_name", nullable = false)
     private String companyName;
 
-    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "home_num", nullable = false)
     private Integer homeNum;
 
-    @ManyToMany
-    @JoinTable(name = "city_companies",
-            joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "city_id"))
     private Set<City> cities = new LinkedHashSet<>();
 
     public Set<City> getCities() {

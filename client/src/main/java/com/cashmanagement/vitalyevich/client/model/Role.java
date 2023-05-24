@@ -1,18 +1,9 @@
 package com.cashmanagement.vitalyevich.client.model;
 
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "roles")
 public class Role {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id", nullable = false)
     private Integer id;
 
-    @Column(name = "role_name", nullable = false)
     private String roleName;
 
     private String nameRole;
@@ -22,16 +13,16 @@ public class Role {
     }
 
     public String getNameRole() {
-        if (roleName.equals("ROLE_ADMIN")) {
+        if (roleName.equals("ADMIN")) {
             return "Руководитель";
         }
-        else if (roleName.equals("ROLE_DEALER")) {
+        else if (roleName.equals("DEALER")) {
             return "Старший дилер";
         }
-        else if (roleName.equals("ROLE_CASHIER")) {
+        else if (roleName.equals("CASHIER")) {
             return "Старший кассир";
         }
-        else if (roleName.equals("ROLE_CASHIERSTORAGE")) {
+        else if (roleName.equals("CASHIERSTORAGE")) {
             return "Старший кассир хранилища";
         }
         else {
