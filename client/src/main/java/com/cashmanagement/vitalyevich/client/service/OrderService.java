@@ -15,6 +15,8 @@ public interface OrderService {
 
     Iterable<OrderStage> getOrderStages();
 
+    Iterable<OrderStage> getOrderStage(Integer id);
+
     Order updateOrder(Order order, Integer planId, Integer userId);
 
     Order saveOrder(Order order, Integer planId, Integer userId);
@@ -30,6 +32,8 @@ public interface OrderService {
     StorageOrder getStorageOrder(Integer orderId);
 
     BrigadeOrder updateBrigadeOrder(BrigadeOrder brigadeOrder);
+
+    BrigadeOrder saveBrigadeOrder(BrigadeOrder brigadeOrder);
 
     StorageOrder updateStorageOrder(StorageOrder storageOrder);
 

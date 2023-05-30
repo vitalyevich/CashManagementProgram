@@ -30,9 +30,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="v1"  th:each="lst : ${storageOrders}" th:id="${lst.id}" onclick="document.getElementById('rowIdCancel').value = this.getAttribute('id');
-document.getElementById('rowIdConfirm').value = this.getAttribute('id'); document.getElementById('cancel').disabled = false;
-document.getElementById('confirm').disabled = false;">
+      <tr th:class="'v1 ' + ${lst.marked}"  th:each="lst, iter : ${storageOrders}" th:id="${iter.count}" onclick="location.href='/collection/' + this.getAttribute('id');">
         <td style="vertical-align: inherit; width: 4vw;" >Банкомат</td>
         <td style="vertical-align: inherit; width: 4vw;" th:text="${lst.order.plan.atm.atmUid}">Код</td>
         <td style="vertical-align: inherit; width: 16vw; color: white;" th:bgcolor="${lst.order.colorSecond}" th:text="${lst.order.stage}">Стадия</td>
@@ -48,43 +46,40 @@ document.getElementById('confirm').disabled = false;">
   </div>
   <div class="v334_407">
     <div class="v334_405">
-      <form action="/collection/cancel-order" method="post" >
-        <input id="cancel" type="submit" class="v329_861" value="Отклонить заказ" disabled>
-        <input type="hidden" name="rowId" id="rowIdCancel">
+      <form action="/collection/cancel-order" method="get" >
+        <input id="cancel" type="submit" th:class="'v329_861 ' + ${marked}" value="Отклонить заказ" th:disabled="${disabled}">
       </form>
-      <form action="/collection/confirm-order" method="post" >
-        <input id="confirm" type="submit" class="v329_869" value="Подтвердить" disabled>
-        <input type="hidden" name="rowId" id="rowIdConfirm">
+      <form action="/collection/confirm-order" method="get" >
+        <input id="confirm" type="submit" th:class="'v329_869 ' + ${marked}" value="Подтвердить" th:disabled="${disabled}">
       </form>
-      <span class="v329_872">А0100075, Заказ 1, План. инкассация 01.11.2022</span>
+      <span class="v329_872" th:text="${text}"></span>
     </div>
     <div class="v334_406">
       <div class="v334_403">
-        <img class="v334_400" src="../static/images/arrow3.svg" th:src="@{images/arrow3.svg}" id="arrow3">
-        <img class="v334_402" src="../static/images/arrow5.svg" th:src="@{images/arrow5.svg}" id="arrow5">
-        <img class="v334_401" src="../static/images/arrow4.svg" th:src="@{images/arrow4.svg}" id="arrow4">
-        <img class="v331_953" src="../static/images/arrow2.svg" th:src="@{images/arrow2.svg}" id="arrow2">
-        <img class="v334_399" src="../static/images/arrow6.svg" th:src="@{images/arrow6.svg}" id="arrow6">
-        <img class="v331_951" src="../static/images/arrow1.svg" th:src="@{images/arrow1.svg}" id="arrow1">
+        <img class="v334_400" th:src="@{/images/arrow3.svg}" id="arrow3">
+        <img class="v334_402" th:src="@{/images/arrow5.svg}" id="arrow5">
+        <img class="v334_401" th:src="@{/images/arrow4.svg}" id="arrow4">
+        <img class="v331_953" th:src="@{/images/arrow2.svg}" id="arrow2">
+        <img class="v334_399" th:src="@{/images/arrow6.svg}" id="arrow6">
+        <img class="v331_951" th:src="@{/images/arrow1.svg}" id="arrow1">
 
-
-        <input type="submit" class="v329_905" id="stage1" value="">
-        <img class="v329_906" src="../static/images/stage2.svg" th:src="@{images/stage2.svg}" id="stage2">
-        <img class="v330_930" src="../static/images/stage3.svg" th:src="@{images/stage3.svg}" id="stage3">
-        <img class="v330_918" src="../static/images/stage4.svg" th:src="@{images/stage4.svg}" id="stage4">
-        <img class="v331_942" src="../static/images/stage5.svg" th:src="@{images/stage5.svg}" id="stage5">
-        <img class="v330_934" src="../static/images/stage6.svg" th:src="@{images/stage6.svg}" id="stage6">
+        <img class="v329_905" th:src="@{/images/stage1.svg}" id="stage1">
+        <img class="v329_906" th:src="@{/images/stage2.svg}" id="stage2">
+        <img class="v330_930" th:src="@{/images/stage3.svg}" id="stage3">
+        <img class="v330_918" th:src="@{/images/stage4.svg}" id="stage4">
+        <img class="v331_942" th:src="@{/images/stage5.svg}" id="stage5">
+        <img class="v330_934" th:src="@{/images/stage6.svg}" id="stage6">
 
       </div>
       <div class="v334_404">
         <input type="submit" class="v331_957" value="Шаг назад">
-        <input type="submit" class="v331_960" value="1">
-        <input type="submit" class="v331_978" value="7">
-        <input type="submit" class="v331_975" value="6">
-        <input type="submit" class="v331_972" value="5">
-        <input type="submit" class="v331_969" value="4">
-        <input type="submit" class="v331_966" value="3">
-        <input type="submit" class="v331_963" value="2">
+        <input type="button" class="v331_960" value="1" id="button1">
+        <input type="button" class="v331_978" value="7" id="button7">
+        <input type="button" class="v331_975" value="6" id="button6">
+        <input type="button" class="v331_972" value="5" id="button5">
+        <input type="button" class="v331_969" value="4" id="button4">
+        <input type="button" class="v331_966" value="3" id="button3">
+        <input type="button" class="v331_963" value="2" id="button2">
         <input type="submit" class="v331_958" value="Применить">
       </div>
     </div>
@@ -148,18 +143,488 @@ document.getElementById('confirm').disabled = false;">
 </script>
 
 <script>
+  // Получаем ссылки на изображения
+  var stage1 = document.getElementById('stage1');
+  var stage2 = document.getElementById('stage2');
+  var stage3 = document.getElementById('stage3');
+  var stage4 = document.getElementById('stage4');
+  var stage5 = document.getElementById('stage5');
+  var stage6 = document.getElementById('stage6');
+
+  var arrow1 = document.getElementById('arrow1');
+  var arrow2 = document.getElementById('arrow2');
+  var arrow3 = document.getElementById('arrow3');
+  var arrow4 = document.getElementById('arrow4');
+  var arrow5 = document.getElementById('arrow5');
+  var arrow6 = document.getElementById('arrow6');
+
+  var button1 = document.getElementById('button1');
+  var button2 = document.getElementById('button2');
+  var button3 = document.getElementById('button3');
+  var button4 = document.getElementById('button4');
+  var button5 = document.getElementById('button5');
+  var button6 = document.getElementById('button6');
+  var button7 = document.getElementById('button7');
+
+  var stage = [[${stage}]];
+
+  if (stage === 1) {
+    button1.classList.add('pos1');
+    stage1.classList.add('pos1');
+  } else if (stage === 2) {
+    button2.classList.add('pos2');
+    stage1.classList.add('pos2');
+    arrow1.classList.add('pos2');
+    stage2.classList.add('pos2');
+  } else if (stage === 3) {
+    button3.classList.add('pos3');
+    stage1.classList.add('pos2');
+    arrow1.classList.add('pos2');
+    stage2.classList.add('pos3');
+    arrow2.classList.add('pos3');
+    stage3.classList.add('pos3');
+    arrow3.classList.add('pos3');
+  } else if (stage === 4) {
+    button4.classList.add('pos4');
+    stage1.classList.add('pos2');
+    arrow1.classList.add('pos2');
+    stage2.classList.add('pos3');
+    arrow2.classList.add('pos3');
+    stage3.classList.add('pos4');
+    arrow3.classList.add('pos4');
+    stage4.classList.add('pos4');
+    arrow4.classList.add('pos4');
+  } else if (stage === 5) {
+    button5.classList.add('pos5');
+    stage1.classList.add('pos2');
+    arrow1.classList.add('pos2');
+    stage2.classList.add('pos3');
+    arrow2.classList.add('pos3');
+    stage3.classList.add('pos4');
+    arrow3.classList.add('pos4');
+    stage4.classList.add('pos5');
+    arrow4.classList.add('pos5');
+    stage5.classList.add('pos5');
+    arrow5.classList.add('pos5');
+  } else if (stage === 6) {
+    button6.classList.add('pos6');
+    stage1.classList.add('pos2');
+    arrow1.classList.add('pos2');
+    stage2.classList.add('pos3');
+    arrow2.classList.add('pos3');
+    stage3.classList.add('pos4');
+    arrow3.classList.add('pos4');
+    stage4.classList.add('pos5');
+    arrow4.classList.add('pos5');
+    stage5.classList.add('pos6');
+    arrow5.classList.add('pos6');
+    stage6.classList.add('pos6');
+    arrow6.classList.add('pos6');
+  } else if (stage === 7) {
+    button7.classList.add('pos7');
+    stage1.classList.add('pos2');
+    arrow1.classList.add('pos2');
+    stage2.classList.add('pos2');
+    arrow2.classList.add('pos2');
+    stage3.classList.add('pos4');
+    arrow3.classList.add('pos4');
+    stage4.classList.add('pos5');
+    arrow4.classList.add('pos5');
+    stage5.classList.add('pos6');
+    arrow5.classList.add('pos6');
+    stage6.classList.add('pos7');
+    arrow6.classList.add('pos7');
+  }
+</script>
+
+
+<!--pos1-->
+<script>
   $(document).ready(function(){
-    $('.v329_905').on('click', function(e) {
+    $('.v331_960').on('click', function(e) {
 
-      $('.v329_905').removeClass('marked');
-      $(this).addClass('marked');
+      $('.v331_960').removeClass('pos1');
+      $(this).addClass('pos1');
 
-      $('.v2').removeClass('marked');
-      $('.v2').addClass('marked');
+      $('.v331_963').removeClass('pos2');
+      $('.v331_966').removeClass('pos3');
+      $('.v331_969').removeClass('pos4');
+      $('.v331_972').removeClass('pos5');
+      $('.v331_975').removeClass('pos6');
+      $('.v331_978').removeClass('pos7');
+
+      $('.v329_905').removeClass('pos1');
+      $('.v329_905').removeClass('pos2');
+      $('.v329_905').addClass('pos1');
+
+      $('.v331_951').removeClass('pos2');
+      $('.v331_953').removeClass('pos3');
+      $('.v334_400').removeClass('pos4');
+      $('.v334_401').removeClass('pos5');
+      $('.v334_402').removeClass('pos6');
+      $('.v334_399').removeClass('pos7');
+
+      $('.v329_906').removeClass('pos2');
+      $('.v329_906').removeClass('pos3');
+
+
+      $('.v330_930').removeClass('pos3');
+      $('.v330_930').removeClass('pos4');
+
+      $('.v330_918').removeClass('pos4');
+      $('.v330_918').removeClass('pos5');
+
+      $('.v331_942').removeClass('pos5');
+      $('.v331_942').removeClass('pos6');
+
+      $('.v330_934').removeClass('pos6');
+      $('.v330_934').removeClass('pos7');
+
+/*      $('.v2').removeClass('marked');
+      $('.v2').addClass('marked');*/
 
     });
   });
 </script>
+
+<!--pos2-->
+<script>
+  $(document).ready(function(){
+    $('.v331_963').on('click', function(e) {
+
+      $('.v331_963').removeClass('pos2');
+      $(this).addClass('pos2');
+
+      $('.v331_960').removeClass('pos1');
+      $('.v331_966').removeClass('pos3');
+      $('.v331_969').removeClass('pos4');
+      $('.v331_972').removeClass('pos5');
+      $('.v331_975').removeClass('pos6');
+      $('.v331_978').removeClass('pos7');
+
+      $('.v329_905').removeClass('pos1');
+      $('.v329_905').removeClass('pos2');
+      $('.v329_905').addClass('pos2');
+
+      $('.v331_951').removeClass('pos2');
+      $('.v331_951').addClass('pos2');
+
+      $('.v329_906').removeClass('pos2');
+      $('.v329_906').removeClass('pos3');
+      $('.v329_906').addClass('pos2');
+
+
+      $('.v331_953').removeClass('pos3');
+      $('.v334_400').removeClass('pos4');
+      $('.v334_401').removeClass('pos5');
+      $('.v334_402').removeClass('pos6');
+      $('.v334_399').removeClass('pos7');
+
+      $('.v330_930').removeClass('pos3');
+      $('.v330_930').removeClass('pos4');
+
+      $('.v330_918').removeClass('pos4');
+      $('.v330_918').removeClass('pos5');
+
+      $('.v331_942').removeClass('pos5');
+      $('.v331_942').removeClass('pos6');
+
+      $('.v330_934').removeClass('pos6');
+      $('.v330_934').removeClass('pos7');
+
+
+    });
+  });
+</script>
+
+<!--pos3-->
+<script>
+  $(document).ready(function(){
+    $('.v331_966').on('click', function(e) {
+
+      $('.v331_966').removeClass('pos3');
+      $(this).addClass('pos3');
+
+      $('.v331_960').removeClass('pos1');
+      $('.v331_963').removeClass('pos2');
+      $('.v331_969').removeClass('pos4');
+      $('.v331_972').removeClass('pos5');
+      $('.v331_975').removeClass('pos6');
+      $('.v331_978').removeClass('pos7');
+
+      $('.v330_930').removeClass('pos3');
+      $('.v330_930').removeClass('pos4');
+      $('.v330_930').addClass('pos3');
+
+      $('.v331_953').removeClass('pos3');
+      $('.v331_953').addClass('pos3');
+
+      $('.v329_905').removeClass('pos1');
+      $('.v329_905').removeClass('pos2');
+      $('.v329_905').addClass('pos2');
+
+      $('.v329_906').removeClass('pos2');
+      $('.v329_906').removeClass('pos3');
+      $('.v329_906').addClass('pos3');
+
+      $('.v331_951').removeClass('pos2');
+      $('.v331_951').addClass('pos2');
+
+
+      $('.v334_400').removeClass('pos4');
+      $('.v334_401').removeClass('pos5');
+      $('.v334_402').removeClass('pos6');
+      $('.v334_399').removeClass('pos7');
+
+
+      $('.v330_918').removeClass('pos4');
+      $('.v330_918').removeClass('pos5');
+
+      $('.v331_942').removeClass('pos5');
+      $('.v331_942').removeClass('pos6');
+
+      $('.v330_934').removeClass('pos6');
+      $('.v330_934').removeClass('pos7');
+
+
+    });
+  });
+</script>
+
+
+<!--pos4-->
+<script>
+  $(document).ready(function(){
+    $('.v331_969').on('click', function(e) {
+
+      $('.v331_969').removeClass('pos4');
+      $(this).addClass('pos4');
+
+      $('.v331_960').removeClass('pos1');
+      $('.v331_963').removeClass('pos2');
+      $('.v331_966').removeClass('pos3');
+      $('.v331_972').removeClass('pos5');
+      $('.v331_975').removeClass('pos6');
+      $('.v331_978').removeClass('pos7');
+
+      $('.v330_918').removeClass('pos4');
+      $('.v330_918').removeClass('pos5');
+      $('.v330_918').addClass('pos4');
+
+      $('.v330_930').removeClass('pos3');
+      $('.v330_930').removeClass('pos4');
+      $('.v330_930').addClass('pos4');
+
+      $('.v329_905').removeClass('pos1');
+      $('.v329_905').removeClass('pos2');
+      $('.v329_905').addClass('pos2');
+
+      $('.v329_906').removeClass('pos2');
+      $('.v329_906').removeClass('pos3');
+      $('.v329_906').addClass('pos3');
+
+      $('.v331_951').removeClass('pos2');
+      $('.v331_951').addClass('pos2');
+
+      $('.v331_953').removeClass('pos3');
+      $('.v331_953').addClass('pos3');
+
+      $('.v334_400').removeClass('pos4');
+      $('.v334_400').addClass('pos4');
+
+      $('.v334_401').removeClass('pos5');
+      $('.v334_402').removeClass('pos6');
+      $('.v334_399').removeClass('pos7');
+
+      $('.v331_942').removeClass('pos5');
+      $('.v331_942').removeClass('pos6');
+
+      $('.v330_934').removeClass('pos6');
+      $('.v330_934').removeClass('pos7');
+
+
+    });
+  });
+</script>
+
+
+<!--pos5-->
+<script>
+  $(document).ready(function(){
+    $('.v331_972').on('click', function(e) {
+
+      $('.v331_972').removeClass('pos5');
+      $(this).addClass('pos5');
+
+      $('.v331_960').removeClass('pos1');
+      $('.v331_963').removeClass('pos2');
+      $('.v331_966').removeClass('pos3');
+      $('.v331_969').removeClass('pos4');
+      $('.v331_975').removeClass('pos6');
+      $('.v331_978').removeClass('pos7');
+
+      $('.v331_942').removeClass('pos5');
+      $('.v331_942').removeClass('pos6');
+      $('.v331_942').addClass('pos5');
+
+      $('.v330_918').removeClass('pos4');
+      $('.v330_918').removeClass('pos5');
+      $('.v330_918').addClass('pos5');
+
+      $('.v330_930').removeClass('pos3');
+      $('.v330_930').removeClass('pos4');
+      $('.v330_930').addClass('pos4');
+
+      $('.v329_905').removeClass('pos1');
+      $('.v329_905').removeClass('pos2');
+      $('.v329_905').addClass('pos2');
+
+      $('.v329_906').removeClass('pos2');
+      $('.v329_906').removeClass('pos3');
+      $('.v329_906').addClass('pos3');
+
+      $('.v331_951').removeClass('pos2');
+      $('.v331_951').addClass('pos2');
+
+      $('.v331_953').removeClass('pos3');
+      $('.v331_953').addClass('pos3');
+
+      $('.v334_400').removeClass('pos4');
+      $('.v334_400').addClass('pos4');
+
+      $('.v334_401').removeClass('pos5');
+      $('.v334_401').addClass('pos5');
+
+
+      $('.v334_402').removeClass('pos6');
+      $('.v334_399').removeClass('pos7');
+
+      $('.v330_934').removeClass('pos6');
+      $('.v330_934').removeClass('pos7');
+
+    });
+  });
+</script>
+
+<!--pos6-->
+<script>
+  $(document).ready(function(){
+    $('.v331_975').on('click', function(e) {
+
+      $('.v331_975').removeClass('pos6');
+      $(this).addClass('pos6');
+
+      $('.v331_960').removeClass('pos1');
+      $('.v331_963').removeClass('pos2');
+      $('.v331_966').removeClass('pos3');
+      $('.v331_969').removeClass('pos4');
+      $('.v331_972').removeClass('pos5');
+      $('.v331_978').removeClass('pos7');
+
+      $('.v330_934').removeClass('pos6');
+      $('.v330_934').removeClass('pos7');
+      $('.v330_934').addClass('pos6');
+
+      $('.v331_942').removeClass('pos5');
+      $('.v331_942').removeClass('pos6');
+      $('.v331_942').addClass('pos6');
+
+      $('.v330_918').removeClass('pos4');
+      $('.v330_918').removeClass('pos5');
+      $('.v330_918').addClass('pos5');
+
+      $('.v330_930').removeClass('pos3');
+      $('.v330_930').removeClass('pos4');
+      $('.v330_930').addClass('pos4');
+
+      $('.v329_905').removeClass('pos1');
+      $('.v329_905').removeClass('pos2');
+      $('.v329_905').addClass('pos2');
+
+      $('.v329_906').removeClass('pos2');
+      $('.v329_906').removeClass('pos3');
+      $('.v329_906').addClass('pos3');
+
+      $('.v331_951').removeClass('pos2');
+      $('.v331_951').addClass('pos2');
+
+      $('.v331_953').removeClass('pos3');
+      $('.v331_953').addClass('pos3');
+
+      $('.v334_400').removeClass('pos4');
+      $('.v334_400').addClass('pos4');
+
+      $('.v334_401').removeClass('pos5');
+      $('.v334_401').addClass('pos5');
+
+      $('.v334_402').removeClass('pos6');
+      $('.v334_402').addClass('pos6');
+
+    });
+  });
+</script>
+
+<!--pos7-->
+<script>
+  $(document).ready(function(){
+    $('.v331_978').on('click', function(e) {
+
+      $('.v331_978').removeClass('pos7');
+      $(this).addClass('pos7');
+
+      $('.v331_960').removeClass('pos1');
+      $('.v331_963').removeClass('pos2');
+      $('.v331_966').removeClass('pos3');
+      $('.v331_969').removeClass('pos4');
+      $('.v331_972').removeClass('pos5');
+      $('.v331_975').removeClass('pos6');
+
+      $('.v329_906').removeClass('pos2');
+      $('.v329_906').removeClass('pos3');
+      $('.v329_906').addClass('pos2');
+
+      $('.v330_934').removeClass('pos6');
+      $('.v330_934').removeClass('pos7');
+      $('.v330_934').addClass('pos7');
+
+      $('.v331_942').removeClass('pos5');
+      $('.v331_942').removeClass('pos6');
+      $('.v331_942').addClass('pos6');
+
+      $('.v330_918').removeClass('pos4');
+      $('.v330_918').removeClass('pos5');
+      $('.v330_918').addClass('pos5');
+
+      $('.v330_930').removeClass('pos3');
+      $('.v330_930').removeClass('pos4');
+      $('.v330_930').addClass('pos4');
+
+      $('.v329_905').removeClass('pos1');
+      $('.v329_905').removeClass('pos2');
+      $('.v329_905').addClass('pos2');
+
+      $('.v331_951').removeClass('pos2');
+      $('.v331_951').addClass('pos2');
+
+      $('.v331_953').removeClass('pos3');
+      $('.v331_953').addClass('pos3');
+
+      $('.v334_400').removeClass('pos4');
+      $('.v334_400').addClass('pos4');
+
+      $('.v334_401').removeClass('pos5');
+      $('.v334_401').addClass('pos5');
+
+      $('.v334_402').removeClass('pos6');
+      $('.v334_402').addClass('pos6');
+
+      $('.v334_399').removeClass('pos7');
+      $('.v334_399').addClass('pos7');
+
+    });
+  });
+</script>
+
 
 <style>
   .v18_231 {
@@ -302,6 +767,7 @@ document.getElementById('confirm').disabled = false;">
   }
   .v329_872 {
     width: 390px;
+    height: 20px;
     color: rgba(0,0,0,1);
     position: absolute;
     top: 65px;
@@ -382,19 +848,90 @@ document.getElementById('confirm').disabled = false;">
     top: 92px;
     left: 3px;
     cursor: pointer;
-    background-image: url("../images/stage1_unchecked.svg");
   }
   img {
     border: none;
   }
-  .v329_905.marked {
-    background: url("../images/stage1_checked.svg");
+  .v329_905.pos1 {
+    content: url("/images/stage1_checked.svg");
+  }
+  .v329_905.pos2 {
+    content: url("/images/stage1_unchecked.svg");
+  }
+  .v331_951.pos2 {
+    content: url("/images/arrow1_checked.svg");
+  }
+  .v329_906.pos2 {
+    content: url("/images/stage2_checked.svg");
+  }
+  .v329_906.pos3 {
+    content: url("/images/stage2_unchecked.svg");
+  }
+  .v331_953.pos3 {
+    content: url("/images/arrow2_checked.svg");
+  }
+  .v334_400.pos4 {
+    content: url("/images/arrow3_checked.svg");
+  }
+  .v334_401.pos5 {
+    content: url("/images/arrow4_checked.svg");
+  }
+  .v334_402.pos6 {
+    content: url("/images/arrow5_checked.svg");
+  }
+  .v334_399.pos7 {
+    content: url("/images/arrow6_checked.svg");
+  }
+  .v330_930.pos3 {
+    content: url("/images/stage3_checked.svg");
+  }
+  .v330_930.pos4 {
+    content: url("/images/stage3_unchecked.svg");
+  }
+  .v330_918.pos4 {
+    content: url("/images/stage4_checked.svg");
+  }
+  .v330_918.pos5 {
+    content: url("/images/stage4_unchecked.svg");
+  }
+  .v331_942.pos5 {
+    content: url("/images/stage5_checked.svg");
+  }
+  .v331_942.pos6 {
+    content: url("/images/stage5_unchecked.svg");
+  }
+  .v330_934.pos6 {
+    content: url("/images/stage6_checked.svg");
+  }
+  .v330_934.pos7 {
+    content: url("/images/stage6_unchecked.svg");
+  }
+
+  .v331_960.pos1 {
+    opacity: 1;
+  }
+  .v331_963.pos2 {
+    opacity: 1;
+  }
+  .v331_966.pos3 {
+    opacity: 1;
+  }
+  .v331_969.pos4 {
+    opacity: 1;
+  }
+  .v331_972.pos5 {
+    opacity: 1;
+  }
+  .v331_975.pos6 {
+    opacity: 1;
+  }
+  .v331_978.pos7 {
+    opacity: 1;
   }
 
   .v329_899 {
     width: 80px;
     height: 80px;
-    background: url("../images/v331_990.png");
     opacity: 1;
     position: absolute;
     top: 5px;
@@ -403,7 +940,6 @@ document.getElementById('confirm').disabled = false;">
   .v331_990 {
     width: 17px;
     height: 17px;
-    background: url("../images/v331_990.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -456,10 +992,6 @@ document.getElementById('confirm').disabled = false;">
   .v331_996 {
     width: 17px;
     height: 17px;
-    background: url("../images/v331_996.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
@@ -490,10 +1022,6 @@ document.getElementById('confirm').disabled = false;">
   .v331_999 {
     width: 17px;
     height: 17px;
-    background: url("../images/v331_999.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 73px;
@@ -524,10 +1052,6 @@ document.getElementById('confirm').disabled = false;">
   .v330_918 {
     width: 85px;
     height: 87px;
-    background: url("../images/v330_918.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
@@ -550,10 +1074,6 @@ document.getElementById('confirm').disabled = false;">
   .v331_1008 {
     width: 17px;
     height: 17px;
-    background: url("../images/v331_1008.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
@@ -584,10 +1104,6 @@ document.getElementById('confirm').disabled = false;">
   .v330_930 {
     width: 85px;
     height: 87px;
-    background: url("../images/v330_930.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
@@ -610,10 +1126,6 @@ document.getElementById('confirm').disabled = false;">
   .v331_1005 {
     width: 17px;
     height: 17px;
-    background: url("../images/v331_1005.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 0px;
@@ -644,10 +1156,6 @@ document.getElementById('confirm').disabled = false;">
   .v330_934 {
     width: 87px;
     height: 82px;
-    background: url("../images/v330_934.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 183px;
@@ -670,10 +1178,6 @@ document.getElementById('confirm').disabled = false;">
   .v331_1002 {
     width: 17px;
     height: 17px;
-    background: url("../images/v331_1002.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 65px;
@@ -704,10 +1208,6 @@ document.getElementById('confirm').disabled = false;">
   .v331_942 {
     width: 84px;
     height: 82px;
-    background: url("../images/v331_942.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 183px;
@@ -730,10 +1230,6 @@ document.getElementById('confirm').disabled = false;">
   .v331_1011 {
     width: 17px;
     height: 17px;
-    background: url("../images/v331_1011.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 65px;
@@ -810,7 +1306,7 @@ document.getElementById('confirm').disabled = false;">
     width: 40px;
     height: 40px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.5;
     position: absolute;
     top: 0px;
     left: 125px;
@@ -828,7 +1324,7 @@ document.getElementById('confirm').disabled = false;">
     width: 40px;
     height: 40px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.5;
     position: absolute;
     top: 0px;
     left: 426px;
@@ -846,7 +1342,7 @@ document.getElementById('confirm').disabled = false;">
     width: 40px;
     height: 40px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.5;
     position: absolute;
     top: 0px;
     left: 376px;
@@ -864,7 +1360,7 @@ document.getElementById('confirm').disabled = false;">
     width: 40px;
     height: 40px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.5;
     position: absolute;
     top: 0px;
     left: 326px;
@@ -882,7 +1378,7 @@ document.getElementById('confirm').disabled = false;">
     width: 40px;
     height: 40px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.5;
     position: absolute;
     top: 0px;
     left: 276px;
@@ -900,7 +1396,7 @@ document.getElementById('confirm').disabled = false;">
     width: 40px;
     height: 40px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.5;
     position: absolute;
     top: 0px;
     left: 226px;
@@ -918,7 +1414,7 @@ document.getElementById('confirm').disabled = false;">
     width: 40px;
     height: 40px;
     background-size: cover;
-    opacity: 1;
+    opacity: 0.5;
     position: absolute;
     top: 0px;
     left: 176px;

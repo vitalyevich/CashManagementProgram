@@ -17,21 +17,21 @@ public class Atm extends ColorTable {
 
     private String currency;
 
-    private Integer day;
-
-    public Integer getDay() {
-        return day;
-    }
-
-    public void setDay(Integer day) {
-        this.day = day;
-    }
+    private String marked;
 
     private Integer amount;
 
     private String address;
 
     private Integer homeNum;
+
+    public String getMarked() {
+        return marked;
+    }
+
+    public void setMarked(String marked) {
+        this.marked = marked;
+    }
 
     public Integer getAmount() {
         return amount;
@@ -118,9 +118,25 @@ public class Atm extends ColorTable {
             return " ";
         }
 
-        if (atmState.equals("Нормальный") || day > 20) {
+        if (atmState.equals("Нормальный")) {
             return "#57DB4E";
-        } else if (atmState.equals("Неопределённый") || day < 20 && day > 10) {
+        } else if (atmState.equals("Неопределённый")) {
+            return "#F1CB00";
+        } else {
+            return "#FF3F3F";
+        }
+    }
+
+    @Override
+    public String getColorThird() {
+
+        if (amount == null) {
+            return " ";
+        }
+
+        if (amount > 1000) {
+            return "#57DB4E";
+        } else if (amount <= 500 && amount >= 300) {
             return "#F1CB00";
         } else {
             return "#FF3F3F";

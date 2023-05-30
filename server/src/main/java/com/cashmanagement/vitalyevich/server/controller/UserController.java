@@ -10,30 +10,27 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
-@Controller
+@RestController
 public class UserController {
 
-    private final UserRepository userRepository;
-
-    private final RoleRepository roleRepository;
-
-    private final AccessRepository accessRepository;
-
-    private final BrigadeRepository brigadeRepository;
-
-    public UserController(UserRepository userRepository, AccessRepository accessRepository, RoleRepository roleRepository, BrigadeRepository brigadeRepository) {
-        this.userRepository = userRepository;
-        this.accessRepository = accessRepository;
-        this.roleRepository = roleRepository;
-        this.brigadeRepository = brigadeRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private AccessRepository accessRepository;
+    @Autowired
+    private BrigadeRepository brigadeRepository;
 
     @QueryMapping
     Iterable<User> users () {
@@ -89,12 +86,18 @@ public class UserController {
     @MutationMapping
     Access updateAccess(@Argument Access access, @Argument User user) {
         access.setUser(user);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password = passwordEncoder.encode(access.getUserPassword());
+        access.setUserPassword(password);
         return accessRepository.save(access);
     }
 
     @MutationMapping
     Access createAccess(@Argument Access access, @Argument User user) {
         access.setUser(user);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password = passwordEncoder.encode(access.getUserPassword());
+        access.setUserPassword(password);
         return accessRepository.save(access);
     }
 

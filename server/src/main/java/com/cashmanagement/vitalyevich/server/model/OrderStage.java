@@ -40,4 +40,18 @@ public class OrderStage {
     public void setId(OrderStageId id) {
         this.id = id;
     }
+
+    public OrderStage(OrderStageId id, Order order, Instant stageDate) {
+        this.id = id;
+        this.order = order;
+        this.stageDate = stageDate;
+    }
+
+    public OrderStage(Order order, Instant stageDate) {
+        this.order = order;
+        this.stageDate = stageDate;
+    }
+
+    public OrderStage() {
+    }
 }

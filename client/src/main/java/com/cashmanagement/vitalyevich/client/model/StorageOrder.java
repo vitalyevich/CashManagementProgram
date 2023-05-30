@@ -1,6 +1,7 @@
 package com.cashmanagement.vitalyevich.client.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class StorageOrder {
 
@@ -10,7 +11,27 @@ public class StorageOrder {
 
     private LocalDate orderDate;
 
+    private String date;
+
+    public String getDate() {
+        return orderDate.format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     private User user;
+
+    private String marked;
+
+    public String getMarked() {
+        return marked;
+    }
+
+    public void setMarked(String marked) {
+        this.marked = marked;
+    }
 
     public User getUser() {
         return user;

@@ -65,4 +65,22 @@ public class BrigadeOrder {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public BrigadeOrder() {
+    }
+
+    public BrigadeOrder(Integer id, Order order, LocalDate orderDate, Brigade brigade, User user) {
+        this.id = id;
+        this.order = order;
+        this.orderDate = orderDate;
+        this.brigade = brigade;
+        this.user = user;
+    }
+
+    public BrigadeOrder(Order order, LocalDate orderDate, Brigade brigade, User user) {
+        this.order = order;
+        this.orderDate = orderDate;
+        this.brigade = brigade;
+        this.user = user;
+    }
 }

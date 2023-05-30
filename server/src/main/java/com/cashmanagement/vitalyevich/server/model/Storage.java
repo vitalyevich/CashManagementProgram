@@ -77,4 +77,24 @@ public class Storage {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Storage(Double banknote, String currency, Integer amount, Set<Company> companies, Set<StorageOperation> storageOperations) {
+        this.banknote = banknote;
+        this.currency = currency;
+        this.amount = amount;
+        this.companies = companies;
+        this.storageOperations = storageOperations;
+    }
+
+    public Storage(Integer id, Double banknote, String currency, Integer amount, Set<Company> companies, Set<StorageOperation> storageOperations) {
+        this.id = id;
+        this.banknote = banknote;
+        this.currency = currency;
+        this.amount = amount;
+        this.companies = companies;
+        this.storageOperations = storageOperations;
+    }
+
+    public Storage() {
+    }
 }

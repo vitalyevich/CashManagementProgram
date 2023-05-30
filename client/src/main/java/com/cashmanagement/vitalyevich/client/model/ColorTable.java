@@ -6,6 +6,8 @@ public abstract class ColorTable {
 
     public String colorSecond;
 
+    public String colorThird;
+
     public String getColorSecond() {
         return colorSecond;
     }
@@ -20,5 +22,13 @@ public abstract class ColorTable {
 
     public void setColorFirst(String colorFirst) {
         this.colorFirst = colorFirst;
+    }
+
+    public String getColorThird() {
+        return colorThird;
+    }
+
+    public void setColorThird(String colorThird) {
+        this.colorThird = colorThird;
     }
 }

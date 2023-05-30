@@ -17,6 +17,16 @@ public class Order extends ColorTable {
 
     private LocalDate orderDate;
 
+    private String date;
+
+    public String getDate() {
+        return orderDate.format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     private User user;
 
     private Set<OrderStage> orderStages = new LinkedHashSet<>();

@@ -61,4 +61,22 @@ public class Cassette {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Cassette() {
+    }
+
+    public Cassette(Integer id, Integer cassetteNum, Double banknote, String currency, Integer amount) {
+        this.id = id;
+        this.cassetteNum = cassetteNum;
+        this.banknote = banknote;
+        this.currency = currency;
+        this.amount = amount;
+    }
+
+    public Cassette(Integer cassetteNum, Double banknote, String currency, Integer amount) {
+        this.cassetteNum = cassetteNum;
+        this.banknote = banknote;
+        this.currency = currency;
+        this.amount = amount;
+    }
 }

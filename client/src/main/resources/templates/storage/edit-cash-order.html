@@ -1,60 +1,179 @@
 <div th:fragment="edit-cash-order" class="edit">
     <div class="v23_948">
-        <div class="v363_433">
-            <div class="v363_432">
-                <div class="v23_1028"></div>
-                <span class="v23_1026">Номиналы</span>
+        <form th:action="@{/storage-collection/cash}" method="post" th:object="${cassette}" onsubmit="collectTableData()">
+            <div class="v363_433">
+                <div class="v363_432">
+                    <div class="v23_1028"></div>
+                    <span class="v23_1026">Номиналы</span>
+                </div>
+
+                <div class="v363_401">
+                    <div class="v18_18">
+                        <table name="table" id="dynamicTable" class="table" style="top:25px;">
+                            <thead>
+                            <tr>
+                                <th>Валюта</th>
+                                <th>Номинал</th>
+                                <th>Количество</th>
+                                <th>Сумма</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <tr th:each="lst : ${cassettesList}">
+                                <td style="width: 1vw;" name="currency" th:text="${lst.currency}"></td>
+                                <td contenteditable="true" style="width: 1vw;" name="banknote" th:text="${lst.banknote}"></td>
+                                <td contenteditable style="width: 1vw;" name="amount" th:text="${lst.amount}"></td>
+                                <td style="width: 1vw;" th:text="${lst.banknote} * ${lst.amount}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <span class="v23_1036">Общая сумма: 0,00 EUR</span>
+                    <span class="v23_1030">Валюта</span>
+                </div>
             </div>
-            <div class="v363_401">
-                <table class="table" style="top:25px;">
-                    <thead>
-                    <tr>
-                        <th>Валюта</th>
-                        <th>Номинал</th>
-                        <th>Количество</th>
-                        <th>Сумма</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="lst : ${users}">
-                        <td th:utext="${lst.id}">Валюта</td>
-                        <td th:utext="${lst.firstName}">Номинал</td>
-                        <td th:utext="${lst.lastName}">Количество</td>
-                        <td th:utext="${lst.phone}">Сумма</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <span class="v23_1036">Общая сумма: 0,00 EUR</span>
-                <span class="v23_1030">Валюта</span>
+
+            <div class="v363_435">
+                <div class="v23_952"></div>
+                <span class="v23_966">Получатель</span>
+                <span class="v23_967">Отправитель</span>
+                <span class="v23_969">Дата заказа</span>
+
+                <select required class="v23_954">
+                    <option name="recipient" th:each="el, iterStat : ${companies}" th:value="${iterStat.index + 1}" th:text="${el.companyName}">
+                    </option>
+                </select>
+
+                <select required class="v23_1018">
+                    <option name="sender" th:each="el, iterStat : ${companies}" th:value="${iterStat.index + 1}" th:text="${el.companyName}">
+                </select>
+
+                <input name="date" required class="v23_956" type="date">
+
             </div>
-        </div>
-        <div class="v363_435">
-            <div class="v23_952"></div>
-            <span class="v23_966">Получатель</span>
-            <span class="v23_967">Отправитель</span>
-            <span class="v23_969">Дата заказа</span>
-            <select class="v23_954">
-                <option>TEST</option>
+
+            <div class="v363_436">
+                <div class="v23_949">
+                    <span class="v23_950">Заказ наличных</span>
+                </div>
+            </div>
+
+
+            <span class="v23_961">А0100089, Заказ, План. инкассация 07.08.2022</span>
+            <select id="currencySelect" onchange="addRowToTable()" class="v363_434">
+                <option value="">ТУТ</option>
+                <option value="BYN">BYN</option>
+                <option value="RUB">RUB</option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
             </select>
-            <select class="v23_1018">
-                <option>TEST</option>
-            </select>
-            <input class="v23_956" type="date">
-        </div>
-        <div class="v363_436">
-            <div class="v23_949">
-                <span class="v23_950">Редактирование заказа наличных</span>
-            </div>
-        </div>
-        <span class="v23_961">А0100089, Заказ, План. инкассация 07.08.2022</span>
-        <select class="v363_434">
-            <option>BYN</option>
-        </select>
-        <a href="#">
-            <input type="submit" class="v363_427" value="Отменить">
-        </a>
-        <input type="submit" class="v363_428" value="Применить">
+            <a href="#">
+                <input type="button" class="v363_427" value="Отменить">
+            </a>
+
+
+            <input type="hidden" id="tableDataField" name="tableData" />
+
+            <input type="submit" class="v363_428" value="Применить">
+
+        </form>
     </div>
+
+    <script>
+        function collectTableData() {
+            var tableData = "";
+            var tbody = document.getElementById("tbody");
+            var rows = tbody.getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var currency = row.getElementsByTagName("td")[0].innerText;
+                var banknote = row.getElementsByTagName("td")[1].innerText;
+                var amount = row.getElementsByTagName("td")[2].innerText;
+
+                tableData += currency + " " + banknote + " " + amount + "\n";
+            }
+
+            document.getElementById("tableDataField").value = tableData;
+            return true; // Позволяет отправить форму
+        }
+    </script>
+    <script>
+        function addRowToTable() {
+
+            var currencySelect = document.getElementById("currencySelect");
+            var selectedCurrency = currencySelect.value;
+
+            currencySelect.selectedIndex = 0;
+
+            var table = document.getElementById("dynamicTable");
+
+            var newRow = table.insertRow(-1);
+
+            var currencyCell = newRow.insertCell(0);
+            currencyCell.textContent = selectedCurrency;
+
+            var nominalCell = newRow.insertCell(1);
+            nominalCell.contentEditable = true;
+
+            var quantityCell = newRow.insertCell(2);
+            quantityCell.contentEditable = true;
+
+            var sumCell = newRow.insertCell(3);
+
+            // Можно добавить логику для вычисления суммы в зависимости от значений других полей
+
+            // Пример вычисления суммы
+            sumCell.textContent = "";
+
+            // Можно также добавить обработку событий изменения значений в других ячейках для автоматического вычисления суммы
+
+            // Пример обработки изменения значения в ячейке
+            nominalCell.addEventListener("input", calculateSum);
+            quantityCell.addEventListener("input", calculateSum);
+
+            // Вызов функции для обновления данных таблицы
+            updateTableData();
+
+            function calculateSum() {
+                var nominalValue = parseInt(nominalCell.textContent);
+                var quantityValue = parseInt(quantityCell.textContent);
+                var sumValue = nominalValue * quantityValue;
+                sumCell.textContent = isNaN(sumValue) ? "" : sumValue.toFixed(0);
+            }
+
+            function updateTableData() {
+                var table = document.getElementById("dynamicTable");
+                var tableData = [];
+
+                // Перебрать строки таблицы и извлечь данные
+                for (var i = 1; i < table.rows.length; i++) {
+                    var row = table.rows[i];
+                    var currency = row.cells[0].textContent;
+                    var banknote = row.cells[1].textContent;
+                    var amount = row.cells[2].textContent;
+
+                    // Создать объект с данными строки таблицы
+                    var rowData = {
+                        currency: currency,
+                        banknote: banknote,
+                        amount: amount
+                    };
+
+                    // Добавить данные строки в массив
+                    tableData.push(rowData);
+                }
+
+                // Преобразовать массив данных в JSON-строку
+                var jsonData = JSON.stringify(tableData);
+
+                // Обновить значение скрытого поля
+                document.getElementById("tableData").value = jsonData;
+            }
+        }
+
+    </script>
+
 </div>
 
 <div th:fragment="blackout-edit" id="blackout-edit">

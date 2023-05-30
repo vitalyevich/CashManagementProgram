@@ -3,7 +3,7 @@
 
         <span class="v25_1071">Номиналы</span>
         <span class="v25_1118">Количество - единственное редактируемое поле</span>
-
+        <form action="monitoring-storage/accept" method="post">
             <div class="v25_1058">
                 <div class="v18_111">
                 <table class="table">
@@ -16,11 +16,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="lst : ${users}">
-                        <td th:utext="${lst.id}">Валюта</td>
-                        <td th:utext="${lst.firstName}">Номинал</td>
-                        <td th:utext="${lst.lastName}">Количество</td>
-                        <td th:utext="${lst.phone}">Сумма</td>
+                    <tr th:each="lst : ${storage}">
+                        <td style="width: 7vw; text-align: center;" th:text="${lst.currency}">Валюта</td>
+                        <td style="width: 0vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
+                        <td contenteditable style="width: 0vw; text-align: center;" th:text="${lst.amount}">Количество</td>
+                        <td style="width: 0vw; text-align: center;" th:text="${lst.banknote} * ${lst.amount}">Сумма</td>
                     </tr>
                     </tbody>
                 </table>
@@ -28,10 +28,11 @@
         </div>
 
             <a href="#">
-                <input type="submit" class="v350_827" value="Отменить">
+                <input class="v350_827" value="Отменить">
             </a>
 
             <input type="submit" class="v350_828" value="Применить">
+            </form>
 
         <div class="v364_442">
             <div class="v25_1056">

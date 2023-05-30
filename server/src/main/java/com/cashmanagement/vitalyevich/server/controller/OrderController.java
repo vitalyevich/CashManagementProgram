@@ -7,40 +7,31 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class OrderController {
 
     @Autowired
-    private final OrderRepository orderRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
-    private final BrigadeOrderRepository brigadeOrderRepository;
+    private BrigadeOrderRepository brigadeOrderRepository;
 
     @Autowired
-    private final BrigadeRepository brigadeRepository;
+    private BrigadeRepository brigadeRepository;
 
     @Autowired
-    private final StorageOrderRepository storageOrderRepository;
+    private StorageOrderRepository storageOrderRepository;
 
     @Autowired
-    private final OrderStageRepository orderStageRepository;
+    private OrderStageRepository orderStageRepository;
 
     @Autowired
-    private final UserRepository userRepository;
-
-
-    public OrderController(OrderRepository orderRepository, BrigadeOrderRepository brigadeOrderRepository, BrigadeRepository brigadeRepository, StorageOrderRepository storageOrderRepository, OrderStageRepository orderStageRepository, UserRepository userRepository) {
-        this.orderRepository = orderRepository;
-        this.brigadeOrderRepository = brigadeOrderRepository;
-        this.brigadeRepository = brigadeRepository;
-        this.storageOrderRepository = storageOrderRepository;
-        this.orderStageRepository = orderStageRepository;
-        this.userRepository = userRepository;
-    }
+    private UserRepository userRepository;
 
     @QueryMapping
     Iterable<Order> orders () {
@@ -72,10 +63,9 @@ public class OrderController {
         return orderRepository.findById(id);
     }
 
-
     @QueryMapping
-    Optional<OrderStage> orderStage (@Argument Integer orderId, @Argument Integer stageId) {
-        return orderStageRepository.findById(new OrderStageId(orderId, stageId));
+    Iterable<OrderStage> orderStage (@Argument Integer id) {
+        return orderStageRepository.findByOrderId(id);
     }
 
     @QueryMapping
@@ -161,7 +151,30 @@ public class OrderController {
     }
 
     @MutationMapping
+    BrigadeOrder createBrigadeOrder(@Argument BrigadeOrder brigadeOrder, @Argument Integer orderId, @Argument Integer userId) {
+
+        brigadeOrder.setBrigade(null);
+
+        Order order = orderRepository.findOrderById(orderId);
+        brigadeOrder.setOrder(order);
+        User user = userRepository.findUserById(userId);
+        brigadeOrder.setUser(user);
+        return brigadeOrderRepository.save(brigadeOrder);
+    }
+
+    @MutationMapping
     StorageOrder updateStorageOrder(@Argument StorageOrder storageOrder, @Argument Integer orderId,
+                                    @Argument Integer userId) {
+
+        Order order = orderRepository.findOrderById(orderId);
+        storageOrder.setOrder(order);
+        User user = userRepository.findUserById(userId);
+        storageOrder.setUser(user);
+        return storageOrderRepository.save(storageOrder);
+    }
+
+    @MutationMapping
+    StorageOrder createStorageOrder(@Argument StorageOrder storageOrder, @Argument Integer orderId,
                                     @Argument Integer userId) {
 
         Order order = orderRepository.findOrderById(orderId);

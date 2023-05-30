@@ -9,22 +9,21 @@
     overflow: hidden;
 }
 
-/* Fixed sidenav, full height */
 .sidenav {
     height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 80px;
-    left: 9px;
+    width: 185px;
+    position: relative;
+/*    z-index: 1;*/
+    top: 20px;
+    left: 10px;
     background-color: transparent;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-left: 10px;
 }
 
 /* Style the sidenav links and the dropdown button */
 .dropdown-btn {
-    padding: 6px 8px 6px 16px;
+    padding: 8px 8px 8px 16px;
     text-decoration: none;
     font-family: Montserrat;
     font-weight: 600;
@@ -40,7 +39,7 @@
 }
 
 .sidenav a {
-    padding: 6px 8px 6px 28px;
+    padding: 10px 8px 10px 0px;
     text-decoration: none;
     font-family: Montserrat;
     font-weight: 400;
@@ -49,15 +48,19 @@
     display: block;
     border: none;
     background: none;
-    width: 100%;
-    text-align: left;
+    text-align: center;
     cursor: pointer;
     outline: none;
 }
 
 /* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-    color: #f1f1f1;
+.sidenav a:hover {
+    background: rgba(69,167,62,1);
+    opacity: 1;
+    border-radius: 5px;
+    overflow: hidden;
+    transition-duration: 1s;
+    font-weight: 500;
 }
 
 /* Main content */

@@ -62,4 +62,22 @@ public class Access {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Access() {
+    }
+
+    public Access(User user, String login, String userPassword, Boolean active) {
+        this.user = user;
+        this.login = login;
+        this.userPassword = userPassword;
+        this.active = active;
+    }
+
+    public Access(Integer id, User user, String login, String userPassword, Boolean active) {
+        this.id = id;
+        this.user = user;
+        this.login = login;
+        this.userPassword = userPassword;
+        this.active = active;
+    }
 }

@@ -28,11 +28,13 @@ public class WithdrawalCashServiceImpl implements WithdrawalCashService{
                                     id,
                                     cassettes {
                                         id
-                                        amount
+                                        amount,
+                                        banknote,
                                     }
                                 },
                                 cassette {
-                                    id
+                                    id,
+                                    banknote
                                 }
                             }
                          }
@@ -43,6 +45,37 @@ public class WithdrawalCashServiceImpl implements WithdrawalCashService{
                     .retrieve("withdrawalCashes")
                     .toEntity(WithdrawalCash[].class).block()));
             return withdrawalCashes;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!");
+        }
+        return null;
+    }
+
+    @Override
+    public Iterable<WithdrawalCash> getCash(Integer id) {
+        String document = "query {\n" +
+                "                              withdrawalCash(id: " + id + ") {\n" +
+                "                                id,\n" +
+                "                                withdrawalDate,\n" +
+                "                                amount,\n" +
+                "                                atm {\n" +
+                "                                    id\n" +
+                "                                }\n" +
+                "                                cassette {\n" +
+                "                                    id,\n" +
+                "                                    cassetteNum,\n" +
+                "                                    banknote,\n" +
+                "                                    currency,\n" +
+                "                                    amount\n" +
+                "                                }\n" +
+                "                            }"+
+                "                         }";
+
+        try {
+            Iterable<WithdrawalCash> withdrawalCash = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("withdrawalCash")
+                    .toEntity(WithdrawalCash[].class).block()));
+            return withdrawalCash;
         } catch (GraphQlTransportException ex) {
             System.out.println("Ошибка соединения!");
         }

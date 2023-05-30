@@ -21,12 +21,12 @@ type Query {
     storageOrders: [StorageOrder!]!
     withdrawalCashes: [WithdrawalCash!]!
     orderStages: [OrderStage!]!
-    orderStage(id: ID): OrderStage!
+    orderStage(id: ID): [OrderStage]
     order(id: ID): Order
     orderById(id: ID): Order
     brigadeOrder(id: ID): BrigadeOrder!
     storageOrder(id: ID): StorageOrder!
-    withdrawalCash(id: ID): WithdrawalCash
+    withdrawalCash(id: ID): [WithdrawalCash]
 }
 
 type Mutation {
@@ -49,33 +49,47 @@ type Mutation {
     deleteByOrder(id: ID!): Int
 
     updateBrigadeOrder(brigadeOrder: UpdateBrigadeOrderInput!, orderId: ID!, brigadeId: ID, userId: ID!): BrigadeOrder!
+    createBrigadeOrder(brigadeOrder: CreateBrigadeOrderInput!, orderId: ID!, userId: ID!): BrigadeOrder!
 
     createBrigade(brigade: CreateBrigadeInput!, company: UpdateIdInput!, users: [UpdateIdInput]!): Brigade!
     deleteBrigade(id: ID!): Int
 
-    updatePlan(plan: UpdatePlanInput!, atm: UpdateIdInput!, user: UpdateIdInput!): PlanAtm!
+    updatePlan(plan: UpdatePlanInput!, cassette: [UpdateCassetteInput!], atm: UpdateIdInput!, user: UpdateIdInput!): PlanAtm!
 
     updateStorageOrder(storageOrder: UpdateStorageOrderInput!, orderId: ID!, userId: ID!): StorageOrder
+    createStorageOrder(storageOrder: CreateStorageOrderInput!, orderId: ID!, userId: ID!): StorageOrder
 
 
     login(userName: String!, password: String!): String!
 
+    createCassettes(cassette: [CreateCassetteInput!]): [Cassette!]!
+
+}
+
+input CreateCassetteInput {
+    banknote: Float,
+    currency: String!,
+    amount: Int!
 }
 
 input UpdateStorageOrderInput {
     id: ID!,
     orderDate: String!
 }
+input CreateStorageOrderInput {
+    orderDate: String!
+}
 
 input UpdatePlanInput {
     id: ID!,
-    planMethod: String!,
-    status: String!,
-    planPeriod: Int!
+    status: String!
 }
 
 input UpdateBrigadeOrderInput {
     id: ID!,
+    orderDate: String!,
+}
+input CreateBrigadeOrderInput {
     orderDate: String!,
 }
 
@@ -96,6 +110,14 @@ input UpdateOrderInput {
     stage: String!,
     status: String!,
     orderDate: String!,
+}
+
+input UpdateCassetteInput {
+    id: ID!,
+    cassetteNum: Int!,
+    banknote: Float,
+    currency: String!,
+    amount: Int!
 }
 
 input CreateOrderInput {

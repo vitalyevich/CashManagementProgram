@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
 
 @RequestMapping("/collection")
 @Controller
@@ -27,16 +30,67 @@ public class CollectionController {
     @Autowired
     private CompanyServiceImpl companyService;
 
+    Integer orderId = 1;
+
+    private List<OrderStage> orderStages = new LinkedList<>();
+
+    private List<StorageOrder> storageOrders = new LinkedList<>();
+
+
     @GetMapping("")
     public String collection(Model model) {
 
-        Iterable<StorageOrder> storageOrders = orderService.getStorageOrders();
+        storageOrders = new LinkedList<>();
+        storageOrders = (List<StorageOrder>) orderService.getStorageOrders();
 
         if (storageOrders == null) {
             return "/error/500";
         }
 
-        List<OrderStage> orderStages = (List<OrderStage>) orderService.getOrderStages();
+        if (orderId != null) {
+
+            generateOrderStagesByStorageOrder();
+
+            storageOrders.get(orderId-1).setMarked("marked");
+            model.addAttribute("id", orderId-1);
+
+            int Id = storageOrders.get(orderId-1).getId();
+            StorageOrder storageOrder = orderService.getStorageOrder(Id);
+            model.addAttribute("text", storageOrder.getOrder().getPlan().getAtm().getAtmUid()+", План. инкассация " + storageOrder.getDate());
+
+            if (orderStages.size() >= 1 || storageOrder.getOrder().getStatus().equals("Не определен")) {
+
+                model.addAttribute("stage", orderStages.size());
+                model.addAttribute("disabled", true);
+            }
+            else {
+                model.addAttribute("marked", "marked");
+                model.addAttribute("disabled", false);
+            }
+            model.addAttribute("orderStages", orderStages);
+        } else {
+            model.addAttribute("disabled", true);
+        }
+
+
+        model.addAttribute("storageOrders", storageOrders);
+
+        model.addAttribute("headerText", "Инкассации");
+        model.addAttribute("headerPost", "Старший инкассатор " + seance.getUser().getFirstName());
+
+        Sidebar sidebar = new Sidebar();
+        sidebar.getDropDown("/collection", companyService, model);
+
+        model.addAttribute("url", "/collection/cancel-order/confirm");
+
+        return "collection";
+    }
+
+    private void generateOrderStagesByStorageOrder() {
+        int Id = storageOrders.get(orderId-1).getId();
+        orderStages = new LinkedList<>();
+
+        orderStages = (List<OrderStage>) orderService.getOrderStage(Id);
 
         List<String> nameStages = new ArrayList<>();
         nameStages.add("Генерация заказа наличных денег");
@@ -47,37 +101,25 @@ public class CollectionController {
         nameStages.add("Инкассация (разгрузка остатков)");
         nameStages.add("Приём наличных в хранилище");
 
-        int count = 0;
+
         for (OrderStage orderStage: orderStages) {
-            orderStage.setStageName(nameStages.get(count));
-            count++;
+            orderStage.setStageName(nameStages.get(orderStage.getId().getStageId()-1));
         }
-
-
-        model.addAttribute("storageOrders", storageOrders);
-        model.addAttribute("orderStages", orderStages);
-
-        model.addAttribute("headerText", "Инкассации");
-        model.addAttribute("headerPost", "Старший инкассатор " + seance.getUser().getFirstName());
-
-        Sidebar sidebar = new Sidebar();
-        sidebar.getDropDown("/collection", companyService, model);
-
-        return "collection";
     }
 
     @GetMapping("/{id}")
-    public String atmCollection(Model model, @PathVariable String id) {
+    public String atmCollection(Model model, @PathVariable Integer id) {
 
-        return "collection";
+        orderId = id;
+
+        return "redirect:/collection";
     }
 
-    @PostMapping("/cancel-order")
-    public String cancelOrder(@RequestParam Integer rowId, RedirectAttributes rm) {
+    @GetMapping("/cancel-order")
+    public String cancelOrder(Model model, RedirectAttributes rm) {
 
         rm.addFlashAttribute("url", "/collection/cancel-order/confirm");
-        rm.addFlashAttribute("urlPage", "/collection");
-        rm.addFlashAttribute("id", rowId);
+        rm.addFlashAttribute("id", orderId);
 
         return "redirect:/collection#blackout-confirm";
     }
@@ -85,23 +127,43 @@ public class CollectionController {
     @PostMapping("/cancel-order/confirm")
     public String cancelConfirm(@RequestParam Integer rowId) {
 
-        StorageOrder storageOrder = orderService.getStorageOrder(rowId);
-        orderService.deleteOrder(storageOrder.getOrder().getId());
+        int Id = storageOrders.get(orderId-1).getId();
+
+        StorageOrder storageOrder = orderService.getStorageOrder(Id);
+
+        if (storageOrder == null) {
+            return "/error/500";
+        }
+
+        storageOrder.getOrder().setStatus("Не определен");
+
+        orderService.updateOrder(storageOrder.getOrder(), storageOrder.getOrder().getPlan().getId(), storageOrder.getUser().getId());
 
         return "redirect:/collection";
     }
 
-    @PostMapping("/confirm-order")
-    public String confirmOrder(@RequestParam Integer rowId) {
+    @GetMapping("/confirm-order")
+    public String confirmOrder(Model model) {
 
-        BrigadeOrder brigadeOrder = orderService.getBrigadeOrder(rowId);
-        brigadeOrder.getOrder().setStage("Принятие заказа наличных денег");
+        int Id = storageOrders.get(orderId-1).getId();
 
-        orderService.updateOrder(brigadeOrder.getOrder(), brigadeOrder.getOrder().getPlan().getId(),
-                brigadeOrder.getUser().getId());
+        StorageOrder storageOrder = orderService.getStorageOrder(Id);
 
-        orderService.saveOrderStage(new OrderStage(new OrderStageId(brigadeOrder.getOrder().getId(), 2),
-                brigadeOrder.getOrder(), Instant.now()));
+        BrigadeOrder brigadeOrder = new BrigadeOrder();
+        brigadeOrder.setBrigade(null);
+        brigadeOrder.setOrder(storageOrder.getOrder());
+        brigadeOrder.setOrderDate(LocalDate.now());
+        brigadeOrder.setUser(seance.getUser());
+
+        orderService.saveBrigadeOrder(brigadeOrder);
+
+        brigadeOrder.getOrder().setStage("Генерация заказа наличных денег");
+
+        orderService.updateOrder(storageOrder.getOrder(), storageOrder.getOrder().getPlan().getId(),
+                storageOrder.getUser().getId());
+
+        orderService.saveOrderStage(new OrderStage(new OrderStageId(storageOrder.getOrder().getId(), 1),
+                storageOrder.getOrder(), Instant.now()));
 
         return "redirect:/collection";
     }

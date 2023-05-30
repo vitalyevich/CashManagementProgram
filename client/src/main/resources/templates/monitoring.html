@@ -15,8 +15,7 @@
   <div th:insert="blocks/filter :: filter"></div>
 
   <div style="position: absolute; left: 270px; top: 270px;">
-    <img style="position: absolute;width: 24px;height: 24px;left: 15px;top: 12px;"
-         src="../static/images/angle-up-black.svg" th:src="@{images/angle-up-black.svg}">
+    <img style="position: absolute;width: 24px;height: 24px;left: 15px;top: 12px;" th:src="@{/images/angle-up-black.svg}">
     <span class="v1_550">Фильтр</span>
   </div>
   <div class="v1_532">
@@ -59,10 +58,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr data-th-each="lst,iter : *{atms}">
+            <tr data-th-id="*{lst.id}" data-th-class="'v1 ' + *{lst.marked}" data-th-each="lst,iter : *{atms}" onclick="location.href='/monitoring/' + this.getAttribute('id');">
               <td style="vertical-align: inherit; width: 5vw; text-align: center;">Банкомат</td>
               <td style="vertical-align: inherit; width: 6vw; text-align: center;" data-th-text="*{lst.atmUid}">ID объекта</td>
-              <td style="vertical-align: inherit; width: 5vw; text-align: center; color: white;" data-th-bgcolor="*{lst.colorSecond}" data-th-text="*{lst.amount}"></td>
+              <td style="vertical-align: inherit; width: 5vw; text-align: center; color: white;" data-th-bgcolor="*{lst.colorThird}" data-th-text="*{lst.amount}"></td>
               <td style="width: 20vw;" data-th-text="*{lst.listCassettes}"></td>
               <td style="vertical-align: inherit; width: 3vw; text-align: center;" data-th-text="*{lst.currency}"></td>
               <td style="vertical-align: inherit; width: 11vw; color: white; text-align: center;" data-th-text="*{lst.cashState}" data-th-bgcolor="*{lst.colorFirst}" >Состояние наличных</td>
@@ -74,7 +73,7 @@
   </div>
 
   <div style="position: absolute; top: 790px; left: 287px;">
-    <span class="v1_300">А0100075, История транзакционной активности, с 01.11.2023 до 03.11.2023</span>
+    <span class="v1_300" data-th-text="*{text}"></span>
     <span class="v1_300" style="top: 40px; left: 0px;">Показатели</span>
     <a href="/monitoring/stats">
       <input class="v18_248" type="submit" value="Применить"/>
@@ -99,13 +98,13 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td style="width: 0vw;">1</td>
-        <td style="width: 4vw;">29.07.2022</td>
-        <td style="width: 3vw; text-align: center;">BYN</td>
-        <td style="width: 4vw;">10</td>
-        <td style="width: 4vw;" >100</td>
-        <td style="width: 6vw;" >1000</td>
+      <tr data-th-each="lst,iter : *{cash}">
+        <td style="width: 0vw;" data-th-text="*{iter.count}">1</td>
+        <td style="width: 4vw;" data-th-text="*{lst.date}">29.07.2022</td>
+        <td style="width: 3vw; text-align: center;" data-th-text="*{lst.cassette.currency}">BYN</td>
+        <td style="width: 4vw;" data-th-text="*{lst.cassette.banknote}">10</td>
+        <td style="width: 4vw;" data-th-text="*{lst.cassette.amount}">100</td>
+        <td style="width: 6vw;" data-th-text="*{lst.cassette.sumAmount}">1000</td>
       </tr>
       </tbody>
     </table>
@@ -134,6 +133,17 @@
   }
 </script>
 
+
+<script>
+  $(document).ready(function(){
+    $('.v1').on('click', function(e) {
+
+      $('.v1').removeClass('marked');
+      $(this).addClass('marked');
+    });
+  });
+</script>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load('current', {'packages':['corechart']});
@@ -143,14 +153,7 @@
     // Some raw data (not necessarily accurate)
     var data = google.visualization.arrayToDataTable([
       ['Month', '', ''],
-      ['2022/04', 938, 814.6],
-      ['2022/05',  899, 782],
-      ['2022/06',  787, 623],
-      ['2022/07', 638, 514.6],
-      ['2022/08',  599, 482],
-      ['2022/09',  487, 323],
-      ['2022/10',  315, 209.4],
-      ['2022/11',  229, 169.6]
+      [[${dataRowsAmount}]]
     ]);
 
     var options = {
@@ -166,6 +169,10 @@
 </script>
 
 <style>
+
+  .table tr.marked{
+    background-color: #E0E0E0;
+  }
 /*  rect {
     width: 1000px;
     height: 300px;

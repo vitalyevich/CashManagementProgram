@@ -31,13 +31,13 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="lst : ${orders}" th:class="'v1 ' + ${lst.marked}" th:id="${lst.id}" onclick="document.getElementById('rowIdCancel').value = this.getAttribute('id');
+      <tr th:each="lst, it : ${orders}" th:class="'v1 ' + ${lst.marked}" th:id="${it.count}" onclick="document.getElementById('rowIdCancel').value = this.getAttribute('id');
 document.getElementById('rowIdExecute').value = this.getAttribute('id'); document.getElementById('rowIdConfirm').value = this.getAttribute('id');
 document.getElementById('rowIdTransfer').value = this.getAttribute('id');
 document.getElementById('cancel').disabled = false; document.getElementById('confirm').disabled = false;
 document.getElementById('execute').disabled = false;document.getElementById('transfer').disabled = false;
 location.href='/storage-collection/' + this.getAttribute('id');">
-        <td style="text-align: center; width: 5vw;" th:text="${lst.orderDate}">Дата заказа</td>
+        <td style="text-align: center; width: 7vw;" th:text="${lst.date}">Дата заказа</td>
         <td>Заказ наличных</td>
         <td th:text="${lst.user.lastName} + ' ' + ${lst.user.firstName}">Заказал</td>
         <td th:text="${lst.status}" style="vertical-align: inherit; width: 16vw; color: white;" th:bgcolor="${lst.colorFirst}">Статус заказа</td>
@@ -72,8 +72,7 @@ location.href='/storage-collection/' + this.getAttribute('id');">
     <input id="transfer" type="submit" value="Передать на исполнение" th:class="'v335_456 '+ ${marked}" th:disabled="${disabled}">
     <input type="hidden" th:value="${id}" name="rowId" id="rowIdTransfer">
   </form>
-  <span class="v1_301">Детализация заказа</span>
-  <span class="v1_300" th:text="${text}"> </span>
+  <span class="v1_301" th:text="${text}"></span>
 
   <div style="top: 830px;width: 31vw;height: 500px;" class="v18_235">
     <table style="top: 25px" class="table">
@@ -173,7 +172,7 @@ location.href='/storage-collection/' + this.getAttribute('id');">
     text-align: left;
   }
   .v1_301 {
-    width: 180px;
+    width: 550px;
     color: rgba(0,0,0,1);
     position: absolute;
     top: 787px;

@@ -118,4 +118,30 @@ public class Atm {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Atm() {
+    }
+
+    public Atm(Integer id, String atmUid, String cashState, String atmState, String address, Integer homeNum, Set<City> cities, Set<Cassette> cassettes, Set<Company> companies) {
+        this.id = id;
+        this.atmUid = atmUid;
+        this.cashState = cashState;
+        this.atmState = atmState;
+        this.address = address;
+        this.homeNum = homeNum;
+        this.cities = cities;
+        this.cassettes = cassettes;
+        this.companies = companies;
+    }
+
+    public Atm(String atmUid, String cashState, String atmState, String address, Integer homeNum, Set<City> cities, Set<Cassette> cassettes, Set<Company> companies) {
+        this.atmUid = atmUid;
+        this.cashState = cashState;
+        this.atmState = atmState;
+        this.address = address;
+        this.homeNum = homeNum;
+        this.cities = cities;
+        this.cassettes = cassettes;
+        this.companies = companies;
+    }
 }

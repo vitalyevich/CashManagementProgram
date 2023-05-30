@@ -105,13 +105,15 @@ public class PlanningCollectionController {
         Sidebar sidebar = new Sidebar();
         sidebar.getDropDown("/planning-collection", companyService, model);
 
+        model.addAttribute("url", "/planning-collection/cancel-order/confirm");
+
         return "planning-collection";
     }
 
     @GetMapping("/{id}")
-    public String atmPlanningCollection(Model model, @PathVariable String id) {
+    public String atmPlanningCollection(Model model, @PathVariable Integer id) {
 
-        return "planning-collection";
+        return "redirect:/planning-collection";
     }
 
 
@@ -134,7 +136,6 @@ public class PlanningCollectionController {
     @PostMapping("/cancel-order")
     public String cancelOrder(@RequestParam Integer rowId, RedirectAttributes rm) {
         rm.addFlashAttribute("url", "/planning-collection/cancel-order/confirm");
-        rm.addFlashAttribute("urlPage", "/planning-collection");
         rm.addFlashAttribute("id", rowId);
 
         return "redirect:/planning-collection#blackout-confirm";
@@ -162,7 +163,6 @@ public class PlanningCollectionController {
     @PostMapping("/create-brigade/add")
     public String add(@RequestParam Integer rowId) {
         User user = userService.getUser(rowId);
-        //userSet.add(user);
         userList.add(user);
         return "redirect:/planning-collection#blackout-brigade";
     }
@@ -177,6 +177,10 @@ public class PlanningCollectionController {
     public String create(@RequestParam(name = "company") int companyId, @RequestParam(required=false) boolean active, @RequestParam(name="brigadeName") String brigadeName) {
 
         Set<User> users = new LinkedHashSet<>();
+
+        if (userList.size() < 2) {
+            return "redirect:/planning-collection";
+        }
         users.addAll(userList);
 
         Iterable<Brigade> brigades = userService.getBrigades();

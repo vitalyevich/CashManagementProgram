@@ -11,16 +11,6 @@ public class Country {
 
     private Integer countryCities;
 
-    private Integer cityAtms;
-
-    public Integer getCityAtms() {
-        return cityAtms;
-    }
-
-    public void setCityAtms(Integer cityAtms) {
-        this.cityAtms = cityAtms;
-    }
-
     private String cityName;
 
     private String atmUid;

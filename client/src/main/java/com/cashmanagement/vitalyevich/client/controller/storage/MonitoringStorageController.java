@@ -18,6 +18,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 @Controller
 public class MonitoringStorageController {
 
@@ -98,11 +101,6 @@ public class MonitoringStorageController {
             }
         }
 
-        if (storageId != 0) {
-            Storage storage = storageService.getStorage(storageId);
-            model.addAttribute("textWindow", storage.getCompanies().iterator().next().getCompanyName());
-        }
-
         if (this.id != null) {
             storageList.get(this.id).setMarked("marked");
             model.addAttribute("marked", "marked");
@@ -114,17 +112,22 @@ public class MonitoringStorageController {
 
         model.addAttribute("storages", storageList);
 
-        model.addAttribute("storage", storageArrayList);
+        if (!storageArrayList.isEmpty()) {
+            model.addAttribute("storage", storageArrayList);
+            model.addAttribute("textWindow", storageArrayList.get(0).getCompanies().iterator().next().getCompanyName());
+        }
 
         model.addAttribute("headerText", "Мониторинг");
         model.addAttribute("headerPost", "Старший кассир хранилища " + seance.getUser().getFirstName());
         return "monitoring-storage";
     }
 
+    private Iterable<Storage> storages;
+
     @GetMapping("/monitoring-storages")
     public String monitoringStorage(Model model) {
 
-        Iterable<Storage> storages = storageService.getStorages();
+        storages = storageService.getStorages();
 
         storageList = new ArrayList<>();
 
@@ -219,14 +222,15 @@ public class MonitoringStorageController {
     private Integer storageId = 0;
 
     @PostMapping("/monitoring-storage/balance-storage")
-    public String balanceStorage(@RequestParam Integer rowId, RedirectAttributes rm) {
-        storageId = rowId;
+    public String balanceStorage(RedirectAttributes rm) {
 
-        Storage serviceStorage = storageList.get(storageId);
-        serviceStorage = storageService.getStorage(serviceStorage.getId());
-
-        rm.addFlashAttribute("textWindow", serviceStorage.getCompanies().iterator().next().getCompanyName());
         return "redirect:/monitoring-storage#blackout-balance";
+    }
+
+    @PostMapping("/monitoring-storage/accept")
+    public String accept(RedirectAttributes rm) {
+
+        return "redirect:/monitoring-storage";
     }
 
     private List<Storage> storageArrayList = new LinkedList<>();
@@ -370,6 +374,8 @@ public class MonitoringStorageController {
 
         return "redirect:/monitoring-storages";
     }
+
+
 }
 
 

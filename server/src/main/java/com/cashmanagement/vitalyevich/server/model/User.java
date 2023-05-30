@@ -105,4 +105,23 @@ public class User {
     public User(Integer id) {
         this.id = id;
     }
+
+    public User(String firstName, String lastName, String phone, String email, Set<Company> companies, Set<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.companies = companies;
+        this.roles = roles;
+    }
+
+    public User(Integer id, String firstName, String lastName, String phone, String email, Set<Company> companies, Set<Role> roles) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.companies = companies;
+        this.roles = roles;
+    }
 }

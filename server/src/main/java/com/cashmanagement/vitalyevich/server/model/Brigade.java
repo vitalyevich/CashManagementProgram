@@ -74,4 +74,19 @@ public class Brigade {
 
     public Brigade() {
     }
+
+    public Brigade(Integer id, Company company, String brigadeName, Boolean active, Set<User> users) {
+        this.id = id;
+        this.company = company;
+        this.brigadeName = brigadeName;
+        this.active = active;
+        this.users = users;
+    }
+
+    public Brigade(Company company, String brigadeName, Boolean active, Set<User> users) {
+        this.company = company;
+        this.brigadeName = brigadeName;
+        this.active = active;
+        this.users = users;
+    }
 }

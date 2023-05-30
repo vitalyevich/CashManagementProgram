@@ -1,19 +1,15 @@
 package com.cashmanagement.vitalyevich.client.controller.users;
 
 import com.cashmanagement.vitalyevich.client.config.Seance;
-import com.cashmanagement.vitalyevich.client.firebase.model.WorkTime;
 import com.cashmanagement.vitalyevich.client.model.*;
 import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
 import com.cashmanagement.vitalyevich.client.service.UserServiceImpl;
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.graphql.client.GraphQlTransportException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.IllegalFormatCodePointException;
 
 @RequestMapping("/users")
 @Controller
@@ -30,7 +26,6 @@ public class UserController {
     @GetMapping("")
     public String users(Model model) {
         model.addAttribute("headerText", "Пользователи");
-
         model.addAttribute("headerPost", "Руководитель " + seance.getUser().getFirstName());
 
         //userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "вход на страницу с вкладкой пользователи"));
@@ -54,7 +49,7 @@ public class UserController {
             model.addAttribute("companies",companies);
             model.addAttribute("size", size);
 
-        return "users"; //error/502
+        return "users";
     }
 
     @GetMapping("/registration")
@@ -80,16 +75,6 @@ public class UserController {
     @PostMapping("/registration")
     public String addUser(User userForm,Access accessForm, Model model, @RequestParam(name = "role") int roleId,
                           @RequestParam(name = "company") int companyId) {
-    //  Access userFromDb = accessRepository.findByPhone(accessForm.getPhone());
-
-       /* if (userFromDb != null) {
-            rm.addFlashAttribute("message", "Данный номер телефона уже используется!");
-            return "redirect:/menu/rolls#blackout-registration";
-        }
-        if (!accessForm.getPassword().equals(accessForm.getConfirmPassword())) {
-            return "redirect:/menu/rolls#blackout-registration";
-        }*/
-
 
         User user = userService.saveUser(userForm, roleId, companyId);
 
@@ -97,7 +82,6 @@ public class UserController {
 
         userService.saveAccess(accessForm, user.getId());
 
-        //userService.saveWork(new WorkTime(seance.getUser().getFirstName(), seance.getUser().getLastName(), "добавление нового пользователя №" + userForm.getId() +""));
         return "redirect:/users";
     }
 

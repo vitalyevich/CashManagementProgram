@@ -64,4 +64,22 @@ public class WithdrawalCash {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public WithdrawalCash() {
+    }
+
+    public WithdrawalCash(Integer id, LocalDate withdrawalDate, Atm atm, Cassette cassette, Integer amount) {
+        this.id = id;
+        this.withdrawalDate = withdrawalDate;
+        this.atm = atm;
+        this.cassette = cassette;
+        this.amount = amount;
+    }
+
+    public WithdrawalCash(LocalDate withdrawalDate, Atm atm, Cassette cassette, Integer amount) {
+        this.withdrawalDate = withdrawalDate;
+        this.atm = atm;
+        this.cassette = cassette;
+        this.amount = amount;
+    }
 }

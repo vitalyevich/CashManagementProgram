@@ -14,9 +14,6 @@ public class GraphClient {
 
     private Seance seance = Seance.getInstance();
 
-
-
-    // переделать
     @Bean()
     @Lazy
     public HttpGraphQlClient httpGraphQlClient() {

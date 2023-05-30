@@ -95,4 +95,23 @@ public class Order {
     public Order(Integer id) {
         this.id = id;
     }
+
+    public Order(PlanAtm plan, String status, String stage, LocalDate orderDate, User user, Set<OrderStage> orderStages) {
+        this.plan = plan;
+        this.status = status;
+        this.stage = stage;
+        this.orderDate = orderDate;
+        this.user = user;
+        this.orderStages = orderStages;
+    }
+
+    public Order(Integer id, PlanAtm plan, String status, String stage, LocalDate orderDate, User user, Set<OrderStage> orderStages) {
+        this.id = id;
+        this.plan = plan;
+        this.status = status;
+        this.stage = stage;
+        this.orderDate = orderDate;
+        this.user = user;
+        this.orderStages = orderStages;
+    }
 }

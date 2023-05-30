@@ -2,6 +2,8 @@ package com.cashmanagement.vitalyevich.client.service;
 
 import com.cashmanagement.vitalyevich.client.graphql.GraphClient;
 import com.cashmanagement.vitalyevich.client.model.Atm;
+import com.cashmanagement.vitalyevich.client.model.Cassette;
+import com.cashmanagement.vitalyevich.client.model.PlanAtm;
 import com.cashmanagement.vitalyevich.client.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.client.GraphQlTransportException;
@@ -71,6 +73,40 @@ public class AtmServiceImpl implements AtmService{
                     .retrieve("atm")
                     .toEntity(Atm.class).block());
             return atm;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public Iterable<Cassette> saveCassettes(List<Cassette> cassetteList) {
+        String document = "mutation {\n" +
+                "  createCassettes(\n" +
+                "    cassette: [\n";
+        for (Cassette cassette: cassetteList) {
+            document +=
+                    "      {\n" +
+                            "        banknote: "+cassette.getBanknote()+",\n" +
+                            "        currency: \""+cassette.getCurrency()+"\",\n" +
+                            "        amount: " + cassette.getAmount() + ",\n" +
+                            "      }";
+
+        }
+
+        document +=
+                "    ],\n" +
+                "  ) {\n" +
+                "    id\n" +
+                "  }\n" +
+                "}";
+
+
+        try {
+            Iterable<Cassette> cassettes = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("createCassettes")
+                    .toEntity(Cassette[].class).block()));
+            return cassettes;
         } catch (GraphQlTransportException ex) {
             System.out.println("Ошибка соединения!"); // test
         }

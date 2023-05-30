@@ -8,28 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Controller
+@RestController
 public class CompanyController {
 
     @Autowired
-    private final CityRepository cityRepository;
-
-
-    private final CompanyRepository companyRepository;
+    private CityRepository cityRepository;
 
     @Autowired
-    private final CountryRepository countryRepository;
+    private CompanyRepository companyRepository;
 
-    public CompanyController(CityRepository cityRepository, CompanyRepository companyRepository, CountryRepository countryRepository) {
-        this.cityRepository = cityRepository;
-        this.companyRepository = companyRepository;
-        this.countryRepository = countryRepository;
-    }
+    @Autowired
+    private CountryRepository countryRepository;
 
     @QueryMapping
     Iterable<City> cities () {

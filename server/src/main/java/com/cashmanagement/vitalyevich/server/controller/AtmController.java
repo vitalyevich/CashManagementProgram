@@ -2,24 +2,31 @@ package com.cashmanagement.vitalyevich.server.controller;
 
 import com.cashmanagement.vitalyevich.server.model.Atm;
 import com.cashmanagement.vitalyevich.server.model.Cassette;
+import com.cashmanagement.vitalyevich.server.model.PlanAtm;
+import com.cashmanagement.vitalyevich.server.model.User;
 import com.cashmanagement.vitalyevich.server.repository.AtmRepository;
 import com.cashmanagement.vitalyevich.server.repository.CassetteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-@Controller
+// @Service
+@RestController
 public class AtmController {
+    @Autowired
+    private AtmRepository atmRepository;
+    @Autowired
+    private CassetteRepository cassetteRepository;
 
-    private final AtmRepository atmRepository;
-    private final CassetteRepository cassetteRepository;
-
-    public AtmController(AtmRepository atmRepository, CassetteRepository cassetteRepository) {
-        this.atmRepository = atmRepository;
-        this.cassetteRepository = cassetteRepository;
-    }
 
     @QueryMapping
     Iterable<Atm> atms () {
@@ -33,4 +40,16 @@ public class AtmController {
 
     @QueryMapping
     Iterable<Cassette> cassettes () { return cassetteRepository.findByOrderByCassetteNumAsc(); }
+
+
+    @MutationMapping
+    Iterable <Cassette> createCassettes(@Argument List<Cassette> cassette) {
+
+        for (Cassette cassette1: cassette) {
+            cassette1.setCassetteNum(1);
+            cassetteRepository.save(cassette1);
+        }
+
+        return cassette;
+    }
 }

@@ -36,4 +36,6 @@ public interface UserService {
     void deleteBrigade(Integer id);
 
     Access authorization(String login, String password);
+
+    Access authorization(String login);
 }

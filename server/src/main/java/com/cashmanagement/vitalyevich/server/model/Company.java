@@ -68,4 +68,22 @@ public class Company {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Company(Integer id, String companyName, String address, Integer homeNum, Set<City> cities) {
+        this.id = id;
+        this.companyName = companyName;
+        this.address = address;
+        this.homeNum = homeNum;
+        this.cities = cities;
+    }
+
+    public Company(String companyName, String address, Integer homeNum, Set<City> cities) {
+        this.companyName = companyName;
+        this.address = address;
+        this.homeNum = homeNum;
+        this.cities = cities;
+    }
+
+    public Company() {
+    }
 }

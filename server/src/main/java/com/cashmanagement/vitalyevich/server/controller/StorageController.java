@@ -8,24 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class StorageController {
 
     @Autowired
-    private final StorageRepository storageRepository;
+    private StorageRepository storageRepository;
 
     @Autowired
-    private final StorageOperationRepository storageOperationRepository;
-
-    public StorageController(StorageRepository storageRepository, StorageOperationRepository storageOperationRepository) {
-        this.storageRepository = storageRepository;
-        this.storageOperationRepository = storageOperationRepository;
-    }
+    private StorageOperationRepository storageOperationRepository;
 
     @QueryMapping
     Iterable<Storage> storages () {
@@ -36,7 +32,6 @@ public class StorageController {
     Iterable<StorageOperation> operations (@Argument Integer id) {
         return storageOperationRepository.findAllByUpdateDateAndStorageId(LocalDate.now(), id);
     }
-
 
     @QueryMapping
     Optional<Storage> storage (@Argument Integer id) {

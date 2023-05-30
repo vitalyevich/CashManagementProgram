@@ -9,24 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class WithdrawalCashController {
 
     @Autowired
-    private final WithdrawalCashRepository withdrawalCashRepository;
+    private WithdrawalCashRepository withdrawalCashRepository;
 
     @Autowired
-    private final PlanAtmRepository planAtmRepository;
+    private PlanAtmRepository planAtmRepository;
 
     @Autowired
-    private final AtmRepository atmRepository;
-
-    public WithdrawalCashController(WithdrawalCashRepository withdrawalCashRepository, PlanAtmRepository planAtmRepository, AtmRepository atmRepository) {
-        this.withdrawalCashRepository = withdrawalCashRepository;
-        this.planAtmRepository = planAtmRepository;
-        this.atmRepository = atmRepository;
-    }
+    private AtmRepository atmRepository;
 
     @QueryMapping
     Iterable<WithdrawalCash> withdrawalCashes () {

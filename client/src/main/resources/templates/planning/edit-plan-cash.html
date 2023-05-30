@@ -16,7 +16,7 @@
           <tr th:each="lst : ${cassettes}">
             <td th:text="${lst.cassetteNum}">№</td>
             <td th:text="${lst.banknote}">Номинал</td>
-            <td th:text="${lst.amount}">Количество</td>
+            <td contenteditable th:text="${lst.amount}">Количество</td>
             <td th:text="${lst.sumAmount}">Сумма</td>
           </tr>
           </tbody>
@@ -40,7 +40,7 @@
       <span class="v22_810">Дата инкассации</span>
     </div>
 
-    <a href="/planning/add">
+    <a href="planning/edit-plan-cash/accept">
       <input type="submit" value="Применить" class="v22_761">
     </a>
 

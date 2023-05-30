@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AuthorizationController {
@@ -20,7 +20,10 @@ public class AuthorizationController {
     private UserServiceImpl userService;
 
     @GetMapping("/authorization")
-    public String authorization(Model model) {
+    public String authorization(Model model, @RequestParam(required = false) String error) {
+        if (error != null && error.equals("true")) {
+            return "error/500";
+        }
         return "authorization";
     }
 

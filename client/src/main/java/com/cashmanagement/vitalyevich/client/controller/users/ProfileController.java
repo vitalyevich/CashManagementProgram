@@ -16,19 +16,8 @@ public class ProfileController {
 
     private Seance seance = Seance.getInstance();
 
-    @Autowired
-    private UserServiceImpl userService;
-
-    private void success () {
-        String login = SecurityContextHolder.getContext().getAuthentication().getName();
-        Access access = userService.getAccessByLogin(login);
-        seance.setUser(access.getUser());
-    }
-
     @GetMapping("/profile-admin")
     public String profileAdmin(Model model) {
-
-        success();
 
         model.addAttribute("headerText", "Профиль");
         model.addAttribute("headerPost", "Руководитель "+seance.getUser().getFirstName());
@@ -45,8 +34,6 @@ public class ProfileController {
     @GetMapping("/profile-cashier")
     public String profileCashier(Model model) {
 
-        success();
-
         model.addAttribute("headerText", "Профиль");
         model.addAttribute("headerPost", "Старший кассир " + seance.getUser().getFirstName());
         model.addAttribute("post", "Старший кассир");
@@ -58,8 +45,6 @@ public class ProfileController {
 
     @GetMapping("/profile-cashier-storage")
     public String profileCashierStorage(Model model) {
-
-        success();
 
         model.addAttribute("headerText", "Профиль");
         model.addAttribute("headerPost", "Старший кассир хранилища " + seance.getUser().getFirstName());
@@ -73,8 +58,6 @@ public class ProfileController {
     @GetMapping("/profile-collection")
     public String profileCollection(Model model) {
 
-        success();
-
         model.addAttribute("headerText", "Профиль");
         model.addAttribute("headerPost", "Старший инкассатор " + seance.getUser().getFirstName());
         model.addAttribute("post", "Старший инкассатор");
@@ -86,8 +69,6 @@ public class ProfileController {
 
     @GetMapping("/profile-dealer")
     public String profileDealer(Model model) {
-
-        success();
 
         model.addAttribute("headerText", "Профиль");
         model.addAttribute("headerPost", "Старший дилер " + seance.getUser().getFirstName());

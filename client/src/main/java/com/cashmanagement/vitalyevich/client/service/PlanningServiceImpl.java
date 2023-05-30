@@ -1,10 +1,7 @@
 package com.cashmanagement.vitalyevich.client.service;
 
 import com.cashmanagement.vitalyevich.client.graphql.GraphClient;
-import com.cashmanagement.vitalyevich.client.model.Atm;
-import com.cashmanagement.vitalyevich.client.model.BrigadeOrder;
-import com.cashmanagement.vitalyevich.client.model.Order;
-import com.cashmanagement.vitalyevich.client.model.PlanAtm;
+import com.cashmanagement.vitalyevich.client.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.client.GraphQlTransportException;
 import org.springframework.stereotype.Service;
@@ -112,22 +109,39 @@ public class PlanningServiceImpl implements PlanningService {
 
     @Override
     public PlanAtm updatePlanAtm(PlanAtm planAtm) {
-        String document = "mutation {\n" +
-                "    updatePlan(plan: {\n" +
+
+        String document =
+                "mutation {\n" +
+                "  updatePlan(\n" +
+                "    plan: {\n" +
                 "        id: "+planAtm.getId()+",\n" +
-                "        planMethod: \""+planAtm.getPlanMethod()+"\",\n" +
                 "        status: \""+planAtm.getStatus()+"\",\n" +
-                "        planPeriod: "+planAtm.getPlanPeriod()+",\n" +
                 "    },\n" +
-                "    atm : {\n" +
+                "    cassette: [\n";
+
+
+        for (Cassette cassette: planAtm.getCassettes()) {
+            document +=
+                            "      {\n" +
+                            "        id:"+cassette.getId()+",\n" +
+                            "        cassetteNum: "+cassette.getCassetteNum()+",\n" +
+                            "        banknote: "+cassette.getBanknote()+",\n" +
+                            "        currency: \"BYN\",\n" +
+                            "        amount: "+cassette.getAmount()+",\n" +
+                            "      }\n";
+        }
+
+                document +=
+                "    ],\n" +
+                "    atm: {\n" +
                 "        id: "+planAtm.getAtm().getId()+",\n" +
                 "    },\n" +
                 "    user: {\n" +
                 "        id: "+planAtm.getUser().getId()+",\n" +
-                "    }) {\n" +
-                "        id,\n" +
-                "        planMethod\n" +
                 "    }\n" +
+                "  ) {\n" +
+                "    id\n" +
+                "  }\n" +
                 "}";
 
         try {

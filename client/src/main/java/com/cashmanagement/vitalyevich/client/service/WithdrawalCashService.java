@@ -7,4 +7,5 @@ public interface WithdrawalCashService {
 
 
     Iterable<WithdrawalCash> getCashes();
+    Iterable<WithdrawalCash> getCash(Integer id);
 }

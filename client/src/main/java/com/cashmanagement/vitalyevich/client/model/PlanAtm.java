@@ -3,6 +3,7 @@ package com.cashmanagement.vitalyevich.client.model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public class PlanAtm extends ColorTable {

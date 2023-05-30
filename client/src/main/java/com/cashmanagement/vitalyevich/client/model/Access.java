@@ -24,7 +24,7 @@ public class Access extends ColorTable {
     }
 
     public String getStage() {
-        return active.equals(false) ? "разрешен" : "запрещен";
+        return active.equals(true) ? "разрешен" : "запрещен";
     }
 
     public void setActive(Boolean active) {

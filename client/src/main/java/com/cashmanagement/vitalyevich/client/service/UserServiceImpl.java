@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.client.GraphQlTransportException;
 import org.springframework.graphql.client.HttpGraphQlClient;
 import org.springframework.http.*;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -285,7 +286,8 @@ public class UserServiceImpl implements UserService {
                 "}";
 
         try {
-            Access access = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+            HttpGraphQlClient graphQlClient = HttpGraphQlClient.builder().url("http://localhost:9191/graphql").header("Authorization", "Token " + seance.getToken()).build();
+            Access access = Objects.requireNonNull(graphQlClient.document(document)
                     .retrieve("accessByLogin")
                     .toEntity(Access.class).block());
             return access;
@@ -447,6 +449,45 @@ public class UserServiceImpl implements UserService {
         HttpEntity<String> requestEntity = new HttpEntity<>(jsonString, headers);
 
         // Отправка POST запроса на указанную ссылку и получение ответа
+        try {
+            String url = "http://localhost:9191/authorization";
+            ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                String responseBody = responseEntity.getBody();
+                seance.setToken(responseBody);
+
+                Access access = getAccessByLogin(login);
+
+                return access;
+
+            } else {
+                System.out.println("Ошибка при выполнении запроса: " + responseEntity.getStatusCode());
+            }
+
+        } catch (InternalAuthenticationServiceException e) {
+
+        }
+
+    return null;
+    }
+
+    @Override
+    public Access authorization(String login) {
+        // Создание объекта RestTemplate
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Установка заголовков запроса, включая Content-Type
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String jsonString  = "{\n" +
+                "    \"userName\": \"" + login + "\""+
+                "}";
+
+        // Создание объекта, содержащего JSON строку в теле запроса
+        HttpEntity<String> requestEntity = new HttpEntity<>(jsonString, headers);
+
+        // Отправка POST запроса на указанную ссылку и получение ответа
         String url = "http://localhost:9191/login";
         ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
 
@@ -463,6 +504,6 @@ public class UserServiceImpl implements UserService {
             System.out.println("Ошибка при выполнении запроса: " + responseEntity.getStatusCode());
         }
 
-    return null;
+        return null;
     }
 }

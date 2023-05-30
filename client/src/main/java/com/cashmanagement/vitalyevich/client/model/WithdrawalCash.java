@@ -1,6 +1,7 @@
 package com.cashmanagement.vitalyevich.client.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class WithdrawalCash {
 
@@ -13,6 +14,16 @@ public class WithdrawalCash {
     private Cassette cassette;
 
     private Integer amount;
+
+    private String date;
+
+    public String getDate() {
+        return withdrawalDate.format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public Integer getAmount() {
         return amount;

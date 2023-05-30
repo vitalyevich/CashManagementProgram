@@ -53,4 +53,20 @@ public class StorageOperation {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public StorageOperation(Integer id, Storage storage, LocalDate updateDate, Integer amountOperation) {
+        this.id = id;
+        this.storage = storage;
+        this.updateDate = updateDate;
+        this.amountOperation = amountOperation;
+    }
+
+    public StorageOperation(Storage storage, LocalDate updateDate, Integer amountOperation) {
+        this.storage = storage;
+        this.updateDate = updateDate;
+        this.amountOperation = amountOperation;
+    }
+
+    public StorageOperation() {
+    }
 }

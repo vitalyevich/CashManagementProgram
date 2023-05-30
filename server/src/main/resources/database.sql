@@ -211,7 +211,7 @@ CREATE TABLE storage_orders (
     order_id INT NOT NULL,
     order_date DATE DEFAULT CURRENT_DATE NOT NULL,
     user_id INT NOT NULL,
-    status VARCHAR(30) CHECK (status IN ('Сформирован','Подтвержден', 'Новый', 'Сформировано поручение', 'Выполнен','Назначена бригада',' Передан на исполнение','Выполнен')) NOT NULL,
+    status VARCHAR(30) CHECK (status IN ('Сформирован','Подтвержден', 'Новый', 'Сформировано поручение', 'Выполнен','Назначена бригада',' Передан на исполнение','Отклонен')) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders (order_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
     PRIMARY KEY (id)
@@ -223,7 +223,7 @@ CREATE TABLE brigade_orders (
     order_date DATE DEFAULT CURRENT_DATE NOT NULL,
     brigade_id INT NOT NULL,
     order_comment VARCHAR(255) NOT NULL,
-    status VARCHAR(255) CHECK (status IN ('Не определен', 'Рассчитан', 'Принят','Передан на исполнение')) NOT NULL,
+    status VARCHAR(255) CHECK (status IN ('Не определен', 'Рассчитан', 'Принят','Передан на исполнение','Отклонен')) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders (order_id) ON DELETE CASCADE,
     FOREIGN KEY (brigade_id) REFERENCES brigades (brigade_id) ON DELETE CASCADE,
     PRIMARY KEY (id)

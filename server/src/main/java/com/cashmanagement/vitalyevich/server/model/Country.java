@@ -44,4 +44,18 @@ public class Country {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Country() {
+    }
+
+    public Country(Integer id, String countryName, Set<City> cities) {
+        this.id = id;
+        this.countryName = countryName;
+        this.cities = cities;
+    }
+
+    public Country(String countryName, Set<City> cities) {
+        this.countryName = countryName;
+        this.cities = cities;
+    }
 }

@@ -2,10 +2,13 @@ package com.cashmanagement.vitalyevich.client.service;
 
 import com.cashmanagement.vitalyevich.client.graphql.GraphClient;
 import com.cashmanagement.vitalyevich.client.model.*;
+import com.google.api.client.util.DateTime;
+import com.google.type.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.client.GraphQlTransportException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
@@ -71,6 +74,12 @@ public class OrderServiceImpl implements OrderService{
                 "        status,\n" +
                 "        plan {\n" +
                 "        id,\n" +
+                "        cassettes {\n" +
+                "        id,\n" +
+                "        banknote,\n" +
+                "        currency,\n" +
+                "        amount,\n" +
+                "        },\n" +
                 "        },\n" +
                 "        user {\n" +
                 "        id,\n" +
@@ -240,13 +249,36 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public Iterable<OrderStage> getOrderStage(Integer id) {
+        String document = "query {\n" +
+                "                           orderStage(id: "+id+") {\n" +
+                "                               id {\n" +
+                "                                   orderId,\n" +
+                "                                   stageId\n" +
+                "                               },\n" +
+                "                               stageDate\n" +
+                "                           }\n" +
+                "                       }";
+
+        try {
+            Iterable<OrderStage> orders = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("orderStage")
+                    .toEntity(OrderStage[].class).block()));
+            return orders;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
     public Order updateOrder(Order order, Integer planId, Integer userId) {
         String document = "mutation {\n" +
                 "    updateOrder(order: {\n" +
                 "        id: "+order.getId()+",\n" +
                 "        stage: \""+order.getStage()+"\",\n" +
                 "        status: \""+order.getStatus()+"\",\n" +
-                "        orderDate: \""+order.getOrderDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))+"\",\n" +
+                "        orderDate: \""+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))+"\",\n" +
                 "    }, plan: {\n" +
                 "        id: "+planId+"\n" +
                 "    }, user: {\n" +
@@ -269,9 +301,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Order saveOrder(Order order, Integer planId, Integer userId) {
-        String document = "mutation {\\n\" +\n" +
-                "                \"    createOrder(order: {\\n\" +\n" +
-                "                \"        stage: \""+order.getStage()+"\",\n" +
+        String document = "mutation {\n" +
+                "                    createOrder(order: {\n" +
+                "                        stage: \""+order.getStage()+"\",\n" +
                 "        status: \""+order.getStatus()+"\",\n" +
                 "        orderDate: \""+order.getOrderDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))+"\",\n" +
                 "    }, plan: {\n" +
@@ -402,8 +434,10 @@ public class OrderServiceImpl implements OrderService{
                 "                           id,\n" +
                 "                           order {\n" +
                 "                           id,\n" +
+                "                           status,\n"+
                 "                           stage,\n" +
                 "                               plan {\n" +
+                "                                   id,\n" +
                 "                                   atm {\n" +
                 "                                   id,\n" +
                 "                                   atmUid,\n" +
@@ -452,6 +486,31 @@ public class OrderServiceImpl implements OrderService{
         try {
             BrigadeOrder brigadeOrder1 = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
                     .retrieve("updateBrigadeOrder")
+                    .toEntity(BrigadeOrder.class).block());
+            return brigadeOrder1;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
+
+    @Override
+    public BrigadeOrder saveBrigadeOrder(BrigadeOrder brigadeOrder) {
+        String document = "mutation {\n" +
+                "    createBrigadeOrder(\n" +
+                "        brigadeOrder : {\n" +
+                "            orderDate: \""+brigadeOrder.getOrderDate().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"))+"\"\n" +
+                "        },\n" +
+                "        orderId: "+brigadeOrder.getOrder().getId()+",\n" +
+                "        userId: "+brigadeOrder.getUser().getId()+"\n" +
+                "    ) {\n" +
+                "        orderDate\n" +
+                "    }\n" +
+                "}";
+
+        try {
+            BrigadeOrder brigadeOrder1 = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("createBrigadeOrder")
                     .toEntity(BrigadeOrder.class).block());
             return brigadeOrder1;
         } catch (GraphQlTransportException ex) {

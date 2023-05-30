@@ -90,4 +90,26 @@ public class PlanAtm {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public PlanAtm(Integer id, Atm atm, String planMethod, String status, Integer planPeriod, User user, Set<Cassette> cassettes) {
+        this.id = id;
+        this.atm = atm;
+        this.planMethod = planMethod;
+        this.status = status;
+        this.planPeriod = planPeriod;
+        this.user = user;
+        this.cassettes = cassettes;
+    }
+
+    public PlanAtm(Atm atm, String planMethod, String status, Integer planPeriod, User user, Set<Cassette> cassettes) {
+        this.atm = atm;
+        this.planMethod = planMethod;
+        this.status = status;
+        this.planPeriod = planPeriod;
+        this.user = user;
+        this.cassettes = cassettes;
+    }
+
+    public PlanAtm() {
+    }
 }

@@ -11,6 +11,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://unpkg.com/imask"></script>
   <link rel="stylesheet" href="/css/confirmations/confirmation-exit.css">
+  <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+
 </head>
   <body>
     <div class="v1_2">
@@ -44,7 +46,7 @@ document.getElementById('rowIdEdit').value = this.getAttribute('id'); document.g
       </div>
       <div class="v0">
         <a href="/users">
-          <img src="../static/images/refresh.svg" th:src="@{images/refresh.svg}">
+          <img th:src="@{/images/refresh.svg}">
         </a>
       </div>
         <p class="v28_658">Всего пользователей в системе: <span class="v28_600" th:text="${size}"></span></p>

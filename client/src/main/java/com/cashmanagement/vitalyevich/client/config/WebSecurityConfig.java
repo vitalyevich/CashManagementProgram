@@ -1,5 +1,6 @@
 package com.cashmanagement.vitalyevich.client.config;
 
+import com.cashmanagement.vitalyevich.client.controller.users.PageAccessFilter;
 import com.cashmanagement.vitalyevich.client.model.Access;
 import com.cashmanagement.vitalyevich.client.service.UserService;
 import com.cashmanagement.vitalyevich.client.service.UserServiceImpl;
@@ -21,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -72,6 +74,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/authorization");
 
+        http.addFilterBefore(new PageAccessFilter(), BasicAuthenticationFilter.class);
+
     }
 
     @Override
@@ -94,11 +98,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
             Access access = userService.authorization(username, password);
 
-            return User.withUsername(username)
-                    .password(access.getUserPassword())
-                    .roles(access.getUser().getRoles().iterator().next().getRoleName())
-                    .accountLocked(access.getActive())
-                    .build();
+            if (access != null) {
+                return User.withUsername(username)
+                        .password(access.getUserPassword())
+                        .roles(access.getUser().getRoles().iterator().next().getRoleName())
+                        .accountLocked(access.getActive())
+                        .build();
+
+            } else {
+                return null;
+            }
 
         };
     }

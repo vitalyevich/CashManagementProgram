@@ -73,14 +73,21 @@
 
   function drawChart() {
 
+    var total5Amount = [[${total5Amount}]];
+    var total10Amount = [[${total10Amount}]];
+    var total20Amount = [[${total20Amount}]];
+    var total50Amount = [[${total50Amount}]];
+    var total100Amount = [[${total100Amount}]];
+    var total200Amount = [[${total200Amount}]];
+
     var data = google.visualization.arrayToDataTable([
       ['Banknote', 'Amount'],
-      ['5 BYN', 11000],
-      ['10 BYN', 2141],
-      ['20 BYN', 2222],
-      ['50 BYN', 242],
-      ['100 BYN', 7442],
-      ['200 BYN', 4242]
+      ['5 BYN', total5Amount],
+      ['10 BYN', total10Amount],
+      ['20 BYN', total20Amount],
+      ['50 BYN', total50Amount],
+      ['100 BYN', total100Amount],
+      ['200 BYN', total200Amount]
     ]);
 
     var options = {
@@ -99,11 +106,15 @@
 
   function drawChart() {
 
+    var normal = [[${normalCount}]];
+    var problem = [[${problemCount}]];
+    var uncertain = [[${uncertainCount}]];
+
     var data = google.visualization.arrayToDataTable([
       ['Status', 'Amount'],
-      ['Нормальный', 11000],
-      ['Проблематичный', 2141],
-      ['Неопределенный', 2222]
+      ['Нормальный', normal],
+      ['Проблематичный', problem],
+      ['Неопределенный', uncertain]
     ]);
 
     var options = {
@@ -123,7 +134,6 @@
   function drawChart() {
 
     var chartDiv = document.getElementById('chart_div');
-
     var data = new google.visualization.DataTable();
     data.addColumn('date', 'Месяц');
     data.addColumn('number', "5 BYN");
@@ -133,21 +143,10 @@
     data.addColumn('number', "100 BYN");
     data.addColumn('number', "200 BYN");
 
-    data.addRows([
-      [new Date(2021, 0),  100, 155,102,1515,215,851],
-      [new Date(2021, 1),  200, 255,202,515,215,911],
-      [new Date(2021, 2),   300, 755,55,515,615,711],
-      [new Date(2021, 3),  400, 855,12,415,315,611],
-      [new Date(2021, 4),  300, 155,12,415,315,811],
-      [new Date(2021, 5),   400, 355,102,415,215,911],
-      [new Date(2021, 6), 500, 155,302,665,215,511],
-      [new Date(2021, 7), 1000, 455,402,715,215,511],
-      [new Date(2021, 8), 400, 155,502,815,415,411],
-      [new Date(2021, 9),  300, 955,402,615,415,911],
-      [new Date(2021, 10), 200, 15,502,415,615,911],
-      [new Date(2021, 11), 800, 55,602,315,615,811],
-      [new Date(2021, 12), 500, 15,402,715,815,711]
-    ]);
+
+    var dataRows = [[${dataRowsSum}]]; // Передача значения из модели
+
+    data.addRows(dataRows);
 
     var materialOptions = {
       chart: {
@@ -193,21 +192,9 @@
     data.addColumn('number', "100 BYN");
     data.addColumn('number', "200 BYN");
 
-    data.addRows([
-      [new Date(2021, 0),  100, 155,102,1515,215,851],
-      [new Date(2021, 1),  200, 255,202,515,215,911],
-      [new Date(2021, 2),   300, 755,55,515,615,711],
-      [new Date(2021, 3),  400, 855,12,415,315,611],
-      [new Date(2021, 4),  300, 155,12,415,315,811],
-      [new Date(2021, 5),   400, 355,102,415,215,911],
-      [new Date(2021, 6), 500, 155,302,665,215,511],
-      [new Date(2021, 7), 1000, 455,402,715,215,511],
-      [new Date(2021, 8), 400, 155,502,815,415,411],
-      [new Date(2021, 9),  300, 955,402,615,415,911],
-      [new Date(2021, 10), 200, 15,502,415,615,911],
-      [new Date(2021, 11), 800, 55,602,315,615,811],
-      [new Date(2021, 12), 500, 15,402,715,815,711]
-    ]);
+    var dataRows = [[${dataRowsAmount}]]; // Передача значения из модели
+
+    data.addRows(dataRows);
 
     var materialOptions = {
       chart: {

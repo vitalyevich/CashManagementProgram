@@ -7,22 +7,21 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
-@Controller
+@RestController
 public class PlanningController {
 
     @Autowired
-    private final PlanAtmRepository planAtmRepository;
-
-    public PlanningController(PlanAtmRepository planAtmRepository) {
-        this.planAtmRepository = planAtmRepository;
-    }
+    private PlanAtmRepository planAtmRepository;
 
     @QueryMapping
     Iterable<PlanAtm> plans () {
-        return planAtmRepository.findByOrderByIdAscCassettesAsc();
+        //return planAtmRepository.findByOrderByIdAscCassettesAsc();
+        return planAtmRepository.findByOrderByIdAsc();
     }
 
     @QueryMapping
@@ -31,10 +30,19 @@ public class PlanningController {
     }
 
     @MutationMapping
-    PlanAtm updatePlan(@Argument PlanAtm plan, @Argument Atm atm, @Argument User user) {
+    PlanAtm updatePlan(@Argument PlanAtm plan, @Argument List<Cassette> cassette, @Argument Atm atm, @Argument User user) {
 
         plan.setAtm(atm);
         plan.setUser(user);
+
+        Set<Cassette> cassetteSet = cassette.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+
+        plan.setPlanMethod("Статический");
+        plan.setPlanPeriod(0);
+
+        plan.setCassettes(cassetteSet);
         return planAtmRepository.save(plan);
     }
 

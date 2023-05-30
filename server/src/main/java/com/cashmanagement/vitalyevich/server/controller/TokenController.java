@@ -44,8 +44,8 @@ public class TokenController {
         this.jwtGenerator = jwtGenerator;
     }
 
-    @PostMapping("/login")
-    public String generate(@RequestBody final JwtUser jwtUser) {
+    @PostMapping("/authorization")
+    public String authorization(@RequestBody final JwtUser jwtUser) {
 
 
         Optional<Access> access =  userController.accessByLogin(jwtUser.getUserName());
@@ -56,6 +56,15 @@ public class TokenController {
         }
 
         return null;
+
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody final JwtUser jwtUser) {
+
+        Optional<Access> access =  userController.accessByLogin(jwtUser.getUserName());
+
+        return jwtGenerator.generate(jwtUser);
 
     }
 

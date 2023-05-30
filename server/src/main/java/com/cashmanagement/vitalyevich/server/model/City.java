@@ -51,4 +51,15 @@ public class City {
     public City(Integer id) {
         this.id = id;
     }
+
+    public City(String cityName, Set<Atm> atms) {
+        this.cityName = cityName;
+        this.atms = atms;
+    }
+
+    public City(Integer id, String cityName, Set<Atm> atms) {
+        this.id = id;
+        this.cityName = cityName;
+        this.atms = atms;
+    }
 }
