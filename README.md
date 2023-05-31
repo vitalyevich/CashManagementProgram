@@ -23,6 +23,4 @@
 !["ATM Cash Management"](images/1.png)
 
 
-!["ATM Cash Management"](images/2.png)
-
 
