@@ -14,7 +14,7 @@
         </thead>
         <tbody>
         <tr th:each="lst : ${cassettes}">
-          <td th:text="${lst.cassetteNum}">№</td>
+          <td th:text="${lst.id}">№</td>
           <td th:text="${lst.banknote}">Номинал</td>
           <td contenteditable th:text="${lst.amount}">Количество</td>
           <td th:text="${lst.sumAmount}">Сумма</td>
@@ -34,7 +34,7 @@
     <span class="v22_756">План наличных</span>
     <div class="v22_800">
       <form action="planning/plan-cash-function" method="post">
-      <input name="date" required type="date" class="v22_831">
+      <input readonly name="date" required type="text" th:value="${date}" class="v22_831">
       <input type="submit" value="Рассчитать" class="v321_627">
       </form>
       <span class="v22_810">Дата инкассации</span>

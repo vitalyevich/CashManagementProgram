@@ -20,27 +20,34 @@
   </div>
   <div class="v1_532">
     <div style="left: 0px;top: 0px;position: absolute;">
-      <select class="v1_558">
-        <option value="BYN">BYN</option>
-        <option value="RUB">RUB</option>
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
+      <form id="currencyForm" th:action="@{/monitoring/filter/currency}" method="post">
+      <select name="currency" class="v1_558" onchange="submitCurrencyForm()">
+        <option value=""></option>
+        <option th:selected="${selectedOptionCurrency == 'BYN'}" value="BYN">BYN</option>
+        <option th:selected="${selectedOptionCurrency == 'RUB'}" value="RUB">RUB</option>
+        <option th:selected="${selectedOptionCurrency == 'USD'}" value="USD">USD</option>
+        <option th:selected="${selectedOptionCurrency == 'EUR'}" value="EUR">EUR</option>
       </select>
-      <select class="v1_560">
-        <option value="1">Нормальное</option>
-        <option value="2">Нижний лимит</option>
-        <option value="3">Неопределенное</option>
+      </form>
+      <form id="cashForm" th:action="@{/monitoring/filter/cash}" method="post">
+      <select name="cash" class="v1_560" onchange="submitCashForm()">
+        <option value=""></option>
+        <option th:selected="${selectedOptionCash == 'Нормальное'}" value="Нормальное">Нормальное</option>
+        <option th:selected="${selectedOptionCash == 'Нижний лимит'}" value="Нижний лимит">Нижний лимит</option>
+        <option th:selected="${selectedOptionCash == 'Неопределенное'}" value="Неопределенное">Неопределенное</option>
       </select>
-      <select class="v1_561">
-        <option value="1">Нормальный</option>
-        <option value="2">Неопределенный</option>
-        <option value="3">Проблематичный</option>
+      </form>
+      <form id="atmForm" th:action="@{/monitoring/filter/atm}" method="post">
+      <select name="atm" class="v1_561" onchange="submitAtmForm()">
+        <option value=""></option>
+        <option th:selected="${selectedOptionAtm == 'Нормальный'}" value="Нормальный">Нормальный</option>
+        <option th:selected="${selectedOptionAtm == 'Неопределенный'}" value="Неопределенный">Неопределенный</option>
+        <option th:selected="${selectedOptionAtm == 'Проблематичный'}" value="Проблематичный">Проблематичный</option>
       </select>
-      <input class="v1_564">
+      </form>
       <span class="v1_555">Валюта</span>
       <span class="v1_559">Состояние наличных</span>
       <span class="v1_563">Статус сервиса</span>
-      <span class="v1_566">До опустошения (дн.)</span>
     </div>
   </div>
   <div class="v18_235">
@@ -115,6 +122,18 @@
 </div>
 </body>
 </html>
+
+<script>
+  function submitCurrencyForm() {
+    document.getElementById("currencyForm").submit();
+  }
+  function submitCashForm() {
+    document.getElementById("cashForm").submit();
+  }
+  function submitAtmForm() {
+    document.getElementById("atmForm").submit();
+  }
+</script>
 
 <script>
   var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -345,7 +364,7 @@
     width: 170px;
     top: 16px;
     height: 28px;
-    left: 620px;
+    left: 350px;
     opacity: 1;
     position: absolute;
     border: 1px solid rgba(0,0,0,1);
@@ -359,7 +378,7 @@
     width: 145px;
     top: 16px;
     height: 28px;
-    left: 960px;
+    left: 680px;
     opacity: 1;
     position: absolute;
     border: 1px solid rgba(0,0,0,1);
@@ -426,7 +445,7 @@
     color: rgba(0,0,0,1);
     position: absolute;
     top: 20px;
-    left: 450px;
+    left: 180px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;
@@ -450,7 +469,7 @@
     color: rgba(0,0,0,1);
     position: absolute;
     top: 20px;
-    left: 830px;
+    left: 550px;
     font-family: Montserrat;
     font-weight: 400;
     font-size: 14px;

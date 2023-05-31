@@ -1,9 +1,7 @@
 package com.cashmanagement.vitalyevich.client.service;
 
 import com.cashmanagement.vitalyevich.client.graphql.GraphClient;
-import com.cashmanagement.vitalyevich.client.model.Storage;
-import com.cashmanagement.vitalyevich.client.model.StorageOperation;
-import com.cashmanagement.vitalyevich.client.model.User;
+import com.cashmanagement.vitalyevich.client.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.client.GraphQlTransportException;
 import org.springframework.stereotype.Service;
@@ -95,5 +93,32 @@ public class StorageServiceImpl implements StorageService {
             System.out.println("Ошибка соединения!"); // test
         }
         return null;
+    }
+
+    @Override
+    public void updateStorage(List<Cassette> cassette) {
+
+        String document = "mutation {\n" +
+                "    updateStorage(\n" +
+                "        cassette: [\n";
+
+        for (Cassette cassette1: cassette) {
+            document += "{\n" +
+                    "             id: "+cassette1.getId()+"," +
+                    "             banknote: "+cassette1.getBanknote()+"," +
+                    "             currency: \""+cassette1.getCurrency()+"\"," +
+                    "             amount: "+cassette1.getAmount()+"" +
+                    "             }\n";
+        }
+
+        document += "        ]\n" +
+                "    )\n" +
+                "}";
+
+           graphClient.httpGraphQlClient().document(document)
+                    .retrieve("updateStorage")
+                    .toEntity(Cassette[].class).block();
+
+        return;
     }
 }

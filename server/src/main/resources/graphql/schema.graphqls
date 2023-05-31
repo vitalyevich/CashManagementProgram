@@ -63,7 +63,20 @@ type Mutation {
     login(userName: String!, password: String!): String!
 
     createCassettes(cassette: [CreateCassetteInput!]): [Cassette!]!
+    updateCassettes(cassette: [UpdateCassetteInput!]): [Cassette!]!
+    createPlanCassettes(cassette: [CreateCassetteInput!], plan: Int!): [Cassette!]!
+    updatePlanCassettes(cassette: [UpdateCassetteInput!], plan: Int!): [Cassette!]!
+    updateStorage(cassette: [UpdateStorageInput!]): Int
 
+    editPassword(userId: Int!, confirmPassword: String!,password: String!): Access!
+
+}
+
+input UpdateStorageInput {
+    id: ID!,
+    banknote: Float,
+    currency: String!,
+    amount: Int!
 }
 
 input CreateCassetteInput {

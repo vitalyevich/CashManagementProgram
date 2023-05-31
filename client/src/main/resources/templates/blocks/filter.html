@@ -5,7 +5,12 @@
     </div>
     <div class="v14_534">
         <div style="left: 20px;top: 25px;position: absolute;;position:absolute;">
-            <select class="v14_560"></select>
+
+            <select class="v14_560" onchange="if (this.value !== '0') { location.href = this.getAttribute('data-url') + '/' + this.value }" th:data-url="${urlSelect}">
+                <option value="">
+                <option th:each="el, iterStat : ${atmListSelect}" th:value="${iterStat.index + 1}" th:text="${el.atmUid}" th:selected="${el.id == selectedOptionValue}">
+            </select>
+
             <input class="v14_564">
             <span class="v14_559">ID объекта</span>
             <span class="v14_563">Адрес</span>
@@ -14,8 +19,10 @@
 
     <div class="v14_53">
         <div class="v1_3">
-            <img  th:src="@{/images/refresh.svg}"
-                  style="position: absolute;width: 24px;height: 24px;left: 680px;top: -3px;">
+            <a th:href="${urlSelect}">
+                <img  th:src="@{/images/refresh.svg}"
+                      style="position: absolute;width: 24px;height: 24px;left: 680px;top: -3px;">
+            </a>
             <img  th:src="@{/images/angle-right-double.svg}"
                   style="position: absolute;width: 24px;height: 24px;left: 650px;top: -3px;">
             <img  th:src="@{/images/angle-right.svg}"
@@ -25,7 +32,7 @@
             <img  th:src="@{/images/angle-left-double.svg}"
                   style="position: absolute;width: 24px;height: 24px;left: 390px;top: -3px;">
 
-            <input name="active" class="v17_44" type="checkbox" checked="true">
+            <input name="active" class="v17_44" type="checkbox" onchange="if (this.checked) startRefresh(); else stopRefresh();" id="myCheckbox">
 
             <input type="text" class="v14_606">
             <select class="v14_602"></select>
@@ -35,4 +42,39 @@
             <span class="v14_607">из 1</span>
         </div>
     </div>
+
+    <script>
+        var checkbox = document.getElementById('myCheckbox');
+        checkbox.addEventListener('change', function() {
+            localStorage.setItem('checkboxState', checkbox.checked);
+            if (checkbox.checked) {
+                startRefresh();
+            } else {
+                stopRefresh();
+            }
+        });
+
+        var savedState = localStorage.getItem('checkboxState');
+        if (savedState !== null) {
+            checkbox.checked = (savedState === 'true');
+            if (checkbox.checked) {
+                startRefresh();
+            }
+        }
+
+        var refreshInterval;
+
+        function refreshPage() {
+            location.reload();
+        }
+
+        function startRefresh() {
+            stopRefresh(); // Остановить предыдущий интервал, если есть
+            refreshInterval = setInterval(refreshPage, 1800); // 180000 миллисекунд = 3 минуты
+        }
+
+        function stopRefresh() {
+            clearInterval(refreshInterval);
+        }
+    </script>
 </div>

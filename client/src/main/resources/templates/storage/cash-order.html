@@ -48,7 +48,7 @@
                 <option name="sender" th:each="el, iterStat : ${companies}" th:value="${iterStat.index + 1}" th:text="${el.companyName}">
             </select>
 
-            <input name="date" required class="v23_956" type="date">
+            <input readonly name="date" class="v23_956" type="text" th:value="${date}">
 
         </div>
 

@@ -4,6 +4,7 @@ import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.controller.atm.Sidebar;
 import com.cashmanagement.vitalyevich.client.model.*;
 import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
+import com.cashmanagement.vitalyevich.client.service.FilterService;
 import com.cashmanagement.vitalyevich.client.service.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @RequestMapping("/collection")
@@ -30,6 +33,9 @@ public class CollectionController {
     @Autowired
     private CompanyServiceImpl companyService;
 
+    @Autowired
+    private FilterService filterService;
+
     Integer orderId = 1;
 
     private List<OrderStage> orderStages = new LinkedList<>();
@@ -40,70 +46,84 @@ public class CollectionController {
     @GetMapping("")
     public String collection(Model model) {
 
-        storageOrders = new LinkedList<>();
-        storageOrders = (List<StorageOrder>) orderService.getStorageOrders();
+        try {
+            storageOrders = new LinkedList<>();
+            storageOrders = (List<StorageOrder>) orderService.getStorageOrders();
 
-        if (storageOrders == null) {
-            return "/error/500";
-        }
+            if (storageOrders == null) {
+                return "/error/500";
+            }
 
-        if (orderId != null) {
+            if (orderId != null) {
 
-            generateOrderStagesByStorageOrder();
+                generateOrderStagesByStorageOrder();
 
-            storageOrders.get(orderId-1).setMarked("marked");
-            model.addAttribute("id", orderId-1);
+                storageOrders.get(orderId - 1).setMarked("marked");
+                model.addAttribute("id", orderId - 1);
 
-            int Id = storageOrders.get(orderId-1).getId();
-            StorageOrder storageOrder = orderService.getStorageOrder(Id);
-            model.addAttribute("text", storageOrder.getOrder().getPlan().getAtm().getAtmUid()+", План. инкассация " + storageOrder.getDate());
+                int Id = storageOrders.get(orderId - 1).getId();
+                StorageOrder storageOrder = orderService.getStorageOrder(Id);
+                model.addAttribute("text", storageOrder.getOrder().getPlan().getAtm().getAtmUid() + ", План. инкассация " + storageOrder.getDate());
 
-            if (orderStages.size() >= 1 || storageOrder.getOrder().getStatus().equals("Не определен")) {
+                if (orderStages.size() >= 1 || storageOrder.getOrder().getStatus().equals("Не определен")) {
 
-                model.addAttribute("stage", orderStages.size());
+                    model.addAttribute("stage", orderStages.size());
+                    model.addAttribute("disabled", true);
+                } else {
+                    model.addAttribute("marked", "marked");
+                    model.addAttribute("disabled", false);
+                }
+                model.addAttribute("orderStages", orderStages);
+            } else {
                 model.addAttribute("disabled", true);
             }
-            else {
-                model.addAttribute("marked", "marked");
-                model.addAttribute("disabled", false);
-            }
-            model.addAttribute("orderStages", orderStages);
-        } else {
-            model.addAttribute("disabled", true);
+        } catch (ArrayIndexOutOfBoundsException e) {
+
+        } finally {
+            model.addAttribute("storageOrders", storageOrders);
+
+            model.addAttribute("headerText", "Инкассации");
+            model.addAttribute("headerPost", "Старший инкассатор " + seance.getUser().getFirstName());
+
+            Sidebar sidebar = new Sidebar();
+            sidebar.getDropDown("/collection", companyService, model);
+
+            model.addAttribute("url", "/collection/cancel-order/confirm");
+
+
+            List<Atm> atms = storageOrders.stream()
+                    .flatMap(storageOrder -> Stream.of(storageOrder.getOrder().getPlan().getAtm()))
+                    .collect(Collectors.toList());
+
+            int id = orderId - 1;
+            filterService.getValues(model, "/collection", id, atms);
+
+            return "collection";
         }
-
-
-        model.addAttribute("storageOrders", storageOrders);
-
-        model.addAttribute("headerText", "Инкассации");
-        model.addAttribute("headerPost", "Старший инкассатор " + seance.getUser().getFirstName());
-
-        Sidebar sidebar = new Sidebar();
-        sidebar.getDropDown("/collection", companyService, model);
-
-        model.addAttribute("url", "/collection/cancel-order/confirm");
-
-        return "collection";
     }
 
     private void generateOrderStagesByStorageOrder() {
-        int Id = storageOrders.get(orderId-1).getId();
-        orderStages = new LinkedList<>();
+        try {
+            int Id = storageOrders.get(orderId - 1).getId();
+            orderStages = new LinkedList<>();
 
-        orderStages = (List<OrderStage>) orderService.getOrderStage(Id);
+            orderStages = (List<OrderStage>) orderService.getOrderStage(Id);
 
-        List<String> nameStages = new ArrayList<>();
-        nameStages.add("Генерация заказа наличных денег");
-        nameStages.add("Принятие заказа наличных денег");
-        nameStages.add("Заполнение кассет");
-        nameStages.add("Передача наличных");
-        nameStages.add("Инкассация (загрузка)");
-        nameStages.add("Инкассация (разгрузка остатков)");
-        nameStages.add("Приём наличных в хранилище");
+            List<String> nameStages = new ArrayList<>();
+            nameStages.add("Генерация заказа наличных денег");
+            nameStages.add("Принятие заказа наличных денег");
+            nameStages.add("Заполнение кассет");
+            nameStages.add("Передача наличных");
+            nameStages.add("Инкассация (загрузка)");
+            nameStages.add("Инкассация (разгрузка остатков)");
+            nameStages.add("Приём наличных в хранилище");
 
 
-        for (OrderStage orderStage: orderStages) {
-            orderStage.setStageName(nameStages.get(orderStage.getId().getStageId()-1));
+            for (OrderStage orderStage : orderStages) {
+                orderStage.setStageName(nameStages.get(orderStage.getId().getStageId() - 1));
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+
         }
     }
 

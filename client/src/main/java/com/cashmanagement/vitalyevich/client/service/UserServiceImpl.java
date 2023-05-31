@@ -506,4 +506,27 @@ public class UserServiceImpl implements UserService {
 
         return null;
     }
+
+    @Override
+    public Access setPassword(Integer userId, String confirmPassword, String newPassword) {
+        String document = "mutation {\n" +
+                "                          editPassword(\n" +
+                "                                  userId: " + userId + "," +
+                "                                  confirmPassword: \"" + confirmPassword + "\"," +
+                "                                  password: \"" + newPassword + "\"" +
+                "                          ){\n" +
+                "                              id\n" +
+                "                          }\n" +
+                "                      }";
+
+        try {
+            Access access = Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("editPassword")
+                    .toEntity(Access.class).block());
+            return access;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+    }
 }

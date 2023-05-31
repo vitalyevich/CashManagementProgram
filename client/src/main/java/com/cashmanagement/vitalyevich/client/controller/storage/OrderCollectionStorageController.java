@@ -20,11 +20,10 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @RequestMapping("/storage-collection")
 @Controller
@@ -44,11 +43,15 @@ public class OrderCollectionStorageController {
     @Autowired
     private PlanningServiceImpl planningService;
 
+    @Autowired
+    private FilterService filterService;
+
     private List<Order> orders = new LinkedList<>();
 
     private Integer orderId = 1;
 
     private Boolean edit = false;
+    private Boolean add = false;
 
     @GetMapping("")
     public String collection(Model model) {
@@ -92,9 +95,18 @@ public class OrderCollectionStorageController {
             model.addAttribute("cassettes", cassettes);
 
             if (edit == true) {
-                Order order = orderService.getOrder(orders.get(orderId - 1).getId());
+                int id = orders.get(orderId - 1).getId();
+                Order order = orderService.getOrderById(id);
+                String date = order.getOrderDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                model.addAttribute("date", date);
                 model.addAttribute("cassettesList", order.getPlan().getCassettes());
                 edit = false;
+            }
+            if (add == true) {
+
+                String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                model.addAttribute("date",date);
+                add = false;
             }
 
         } else {
@@ -105,6 +117,13 @@ public class OrderCollectionStorageController {
         model.addAttribute("companies", companies);
         model.addAttribute("orders", orders);
         model.addAttribute("url", "/storage-collection/cancel/confirm");
+
+        int id = orderId - 1;
+        List<Atm> atms = orders.stream()
+                .map(order -> order.getPlan().getAtm())
+                .filter(Objects::nonNull) // Filter out null values
+                .collect(ArrayList::new, List::add, List::addAll);
+        filterService.getValues(model, "/storage-collection", id, atms);
 
         return "storage-collection";
     }
@@ -118,18 +137,43 @@ public class OrderCollectionStorageController {
 
     @GetMapping("/cash-order")
     public String cashOrder(Model model, RedirectAttributes rm) {
+
+        add = true;
         return "redirect:/storage-collection#blackout-cash";
     }
 
     @PostMapping("/edit-cash")
-    public String editCash(@RequestParam("tableData") String tableData) {
+    public String editCash(@RequestParam("data") String data) {
+
+        if (!data.equals("") || !data.isEmpty() || !data.equals("  \n")) { // createPlanCassettes
+
+            Order order = orderService.getOrderById(orders.get(orderId - 1).getId());
+
+            List<Cassette> cassetteList = getCassettesList(data);
+
+            for (Cassette cassette: order.getPlan().getCassettes())
+            {
+                for (Cassette cassette1: cassetteList) {
+                    cassette1.setId(cassette.getId());
+                    cassette1.setCassetteNum(cassette.getCassetteNum());
+                }
+            }
+
+            atmService.updateCassettes(cassetteList);
+
+            Set<Cassette> cassetteSet = new HashSet<>(cassetteList);
+
+            PlanAtm planAtm = planningService.getPlan(order.getPlan().getId());
+            planAtm.setCassettes(cassetteSet);
+            planningService.updatePlanAtm(planAtm);
+            orderService.updateOrder(order,order.getPlan().getId(),seance.getUser().getId());
+        }
+
         return "redirect:/storage-collection";
     }
 
 
-    @PostMapping("/cash")
-    public String cash(@RequestParam("tableData") String tableData, @RequestParam("date") String date) {
-
+    private List<Cassette> getCassettesList(String tableData) {
         String html = tableData;
 
         List<Cassette> cassettes = new ArrayList<>();
@@ -157,11 +201,26 @@ public class OrderCollectionStorageController {
                 cassettes.add(new Cassette(Double.parseDouble(banknote), currency, Integer.parseInt(amount)));
             }
         }
+        return  cassettes;
+    }
 
-        List<Cassette> cassetteList = (List<Cassette>) atmService.saveCassettes(cassettes);
+    @PostMapping("/cash")
+    public String cash(@RequestParam("tableData") String tableData, @RequestParam("date") String date) {
 
+        List<Cassette> cassetteList = atmService.saveCassettes(getCassettesList(tableData));
+
+        int i = 1;
+        for (Cassette cassette1: cassetteList) {
+            cassette1.setCassetteNum(i);
+            i++;
+        }
 
         PlanAtm planAtm = planningService.getPlan(12);
+
+        Set<Cassette> cassetteSet = new HashSet<>(cassetteList);
+
+        planAtm.setCassettes(cassetteSet);
+        planningService.updatePlanAtm(planAtm);
 
         Order order = new Order();
         order.setStage("Генерация заказа наличных денег");
@@ -170,8 +229,6 @@ public class OrderCollectionStorageController {
         order.setOrderDate(LocalDate.now());
 
         orderService.saveOrder(order,planAtm.getId(),seance.getUser().getId());
-
-
 
         return "redirect:/storage-collection";
     }

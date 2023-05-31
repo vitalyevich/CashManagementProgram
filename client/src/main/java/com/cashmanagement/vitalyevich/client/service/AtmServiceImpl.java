@@ -80,7 +80,7 @@ public class AtmServiceImpl implements AtmService{
     }
 
     @Override
-    public Iterable<Cassette> saveCassettes(List<Cassette> cassetteList) {
+    public List<Cassette> saveCassettes(List<Cassette> cassetteList) {
         String document = "mutation {\n" +
                 "  createCassettes(\n" +
                 "    cassette: [\n";
@@ -97,13 +97,16 @@ public class AtmServiceImpl implements AtmService{
         document +=
                 "    ],\n" +
                 "  ) {\n" +
-                "    id\n" +
+                "    id," +
+                        "banknote," +
+                        "currency," +
+                        "amount\n" +
                 "  }\n" +
                 "}";
 
 
         try {
-            Iterable<Cassette> cassettes = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+            List<Cassette> cassettes = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
                     .retrieve("createCassettes")
                     .toEntity(Cassette[].class).block()));
             return cassettes;
@@ -111,5 +114,42 @@ public class AtmServiceImpl implements AtmService{
             System.out.println("Ошибка соединения!"); // test
         }
         return null;
+    }
+
+    @Override
+    public Iterable<Cassette> updateCassettes(List<Cassette> cassetteList) {
+        String document = "mutation {\n" +
+                "  updateCassettes(\n" +
+                "    cassette: [\n";
+        for (Cassette cassette: cassetteList) {
+            document +=
+                    "      {\n" +
+                            "        id: "+cassette.getId()+",\n" +
+                            "        cassetteNum: "+cassette.getCassetteNum()+",\n" +
+                            "        banknote: "+cassette.getBanknote()+",\n" +
+                            "        currency: \""+cassette.getCurrency()+"\",\n" +
+                            "        amount: " + cassette.getAmount() + ",\n" +
+                            "      }";
+
+        }
+
+        document +=
+                "    ],\n" +
+                        "  ) {\n" +
+                        "    id\n" +
+                        "  }\n" +
+                        "}";
+
+
+        try {
+            Iterable<Cassette> cassettes = List.of(Objects.requireNonNull(graphClient.httpGraphQlClient().document(document)
+                    .retrieve("updateCassettes")
+                    .toEntity(Cassette[].class).block()));
+            return cassettes;
+        } catch (GraphQlTransportException ex) {
+            System.out.println("Ошибка соединения!"); // test
+        }
+        return null;
+
     }
 }

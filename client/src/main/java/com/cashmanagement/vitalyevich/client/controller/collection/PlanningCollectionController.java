@@ -3,10 +3,7 @@ package com.cashmanagement.vitalyevich.client.controller.collection;
 import com.cashmanagement.vitalyevich.client.config.Seance;
 import com.cashmanagement.vitalyevich.client.controller.atm.Sidebar;
 import com.cashmanagement.vitalyevich.client.model.*;
-import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
-import com.cashmanagement.vitalyevich.client.service.OrderService;
-import com.cashmanagement.vitalyevich.client.service.OrderServiceImpl;
-import com.cashmanagement.vitalyevich.client.service.UserServiceImpl;
+import com.cashmanagement.vitalyevich.client.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +14,7 @@ import javax.swing.text.DateFormatter;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RequestMapping("/planning-collection")
 @Controller
@@ -32,6 +30,9 @@ public class PlanningCollectionController {
 
     @Autowired
     private CompanyServiceImpl companyService;
+
+    @Autowired
+    private FilterService filterService;
 
     @GetMapping("")
     public String planningCollection(Model model) {
@@ -106,6 +107,12 @@ public class PlanningCollectionController {
         sidebar.getDropDown("/planning-collection", companyService, model);
 
         model.addAttribute("url", "/planning-collection/cancel-order/confirm");
+
+        List<Atm> atms = ((List<BrigadeOrder>)brigadeOrders).stream()
+                .flatMap(brigadeOrder -> Stream.of(brigadeOrder.getOrder().getPlan().getAtm()))
+                .collect(Collectors.toList());
+
+        filterService.getValues(model, "/planning-collection", 0, atms);
 
         return "planning-collection";
     }

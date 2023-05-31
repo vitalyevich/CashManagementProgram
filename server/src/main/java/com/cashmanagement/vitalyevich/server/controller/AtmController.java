@@ -43,10 +43,22 @@ public class AtmController {
 
 
     @MutationMapping
-    Iterable <Cassette> createCassettes(@Argument List<Cassette> cassette) {
+    List <Cassette> createCassettes(@Argument List<Cassette> cassette) {
+
+        int i = 1;
+        for (Cassette cassette1: cassette) {
+            cassette1.setCassetteNum(i);
+            cassetteRepository.save(cassette1);
+            i++;
+        }
+
+        return cassette;
+    }
+
+    @MutationMapping
+    Iterable <Cassette> updateCassettes(@Argument List<Cassette> cassette) {
 
         for (Cassette cassette1: cassette) {
-            cassette1.setCassetteNum(1);
             cassetteRepository.save(cassette1);
         }
 

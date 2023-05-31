@@ -8,6 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -15,6 +18,9 @@ import java.time.format.DateTimeFormatter;
 public class ProfileController {
 
     private Seance seance = Seance.getInstance();
+
+    @Autowired
+    private UserServiceImpl userService;
 
     @GetMapping("/profile-admin")
     public String profileAdmin(Model model) {
@@ -83,5 +89,13 @@ public class ProfileController {
     public String password(Model model) {
 
         return "redirect:/profile-admin#blackout-password";
+    }
+
+    @PostMapping("/profile-admin/edit-password")
+    public String editPassword(Model model, @RequestParam("confirmPassword") String confirmPassword, @RequestParam("password") String password) {
+
+        userService.setPassword(seance.getUser().getId(),confirmPassword, password);
+
+        return "redirect:/profile-admin";
     }
 }

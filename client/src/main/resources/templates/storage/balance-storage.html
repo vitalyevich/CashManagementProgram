@@ -3,10 +3,10 @@
 
         <span class="v25_1071">Номиналы</span>
         <span class="v25_1118">Количество - единственное редактируемое поле</span>
-        <form action="monitoring-storage/accept" method="post">
+        <form th:action="@{/monitoring-storage/accept}" method="post" th:object="${cassette}" onsubmit="collectTableData()">
             <div class="v25_1058">
                 <div class="v18_111">
-                <table class="table">
+                <table name="table" class="table" id="dynamicTable">
                     <thead>
                     <tr>
                         <th>Валюта</th>
@@ -15,11 +15,11 @@
                         <th>Сумма</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                     <tr th:each="lst : ${storage}">
-                        <td style="width: 7vw; text-align: center;" th:text="${lst.currency}">Валюта</td>
-                        <td style="width: 0vw; text-align: center;" th:text="${lst.banknote}">Номинал</td>
-                        <td contenteditable style="width: 0vw; text-align: center;" th:text="${lst.amount}">Количество</td>
+                        <td style="width: 7vw; text-align: center;" th:text="${lst.currency}" name="currency">Валюта</td>
+                        <td style="width: 0vw; text-align: center;" th:text="${lst.banknote}" name="banknote">Номинал</td>
+                        <td contenteditable style="width: 0vw; text-align: center;" th:text="${lst.amount}" name="amount">Количество</td>
                         <td style="width: 0vw; text-align: center;" th:text="${lst.banknote} * ${lst.amount}">Сумма</td>
                     </tr>
                     </tbody>
@@ -31,7 +31,10 @@
                 <input class="v350_827" value="Отменить">
             </a>
 
+            <input type="hidden" id="tableDataField" name="tableData" />
+
             <input type="submit" class="v350_828" value="Применить">
+
             </form>
 
         <div class="v364_442">
@@ -40,6 +43,25 @@
             </div>
         </div>
     </div>
+    <script>
+        function collectTableData() {
+            var tableData = "";
+            var tbody = document.getElementById("tbody");
+            var rows = tbody.getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var currency = row.getElementsByTagName("td")[0].innerText;
+                var banknote = row.getElementsByTagName("td")[1].innerText;
+                var amount = row.getElementsByTagName("td")[2].innerText;
+
+                tableData += currency + " " + banknote + " " + amount + "\n";
+            }
+
+            document.getElementById("tableDataField").value = tableData;
+            return true; // Позволяет отправить форму
+        }
+    </script>
 </div>
 
 <div th:fragment="blackout-balance" id="blackout-balance">

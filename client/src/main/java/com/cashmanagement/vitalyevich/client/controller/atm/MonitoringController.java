@@ -1,6 +1,7 @@
 package com.cashmanagement.vitalyevich.client.controller.atm;
 
 import com.cashmanagement.vitalyevich.client.config.Seance;
+import com.cashmanagement.vitalyevich.client.service.FilterService;
 import com.cashmanagement.vitalyevich.client.model.*;
 import com.cashmanagement.vitalyevich.client.service.AtmServiceImpl;
 import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
@@ -8,12 +9,9 @@ import com.cashmanagement.vitalyevich.client.service.WithdrawalCashServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -34,10 +32,30 @@ public class MonitoringController {
     @Autowired
     private AtmServiceImpl atmService;
 
+    @Autowired
+    private FilterService filterService;
+
+    private List<Atm> atms = new ArrayList<>();
+
     @GetMapping("")
     public String monitoring(Model model) {
 
-        List<Atm> atms = (List<Atm>) atmService.getAtms();
+
+        if (filter == false) {
+            atms = (List<Atm>) atmService.getAtms();
+            atm = "";
+            cash = "";
+            currency = "";
+        } else {
+            atmId = null;
+            atms = filteredAtmList;
+            filter = false;
+        }
+
+        model.addAttribute("selectedOptionCurrency", currency);
+        model.addAttribute("selectedOptionCash",cash);
+        model.addAttribute("selectedOptionAtm",atm);
+
         if (atms == null) {
             return "/error/500";
         }
@@ -100,6 +118,8 @@ public class MonitoringController {
         Sidebar sidebar = new Sidebar();
         sidebar.getDropDown("/monitoring", companyService, model);
 
+        filterService.getValues(model, "/monitoring", atmId, atms);
+
         return "monitoring";
     }
 
@@ -153,15 +173,73 @@ public class MonitoringController {
     }
 
     @GetMapping("/{id}")
-    public String atmMonitoring(Model model, @PathVariable Integer id) {
+    public String atmMonitoring(@PathVariable Integer id) {
 
         atmId = id;
 
         return "redirect:/monitoring";
     }
 
+
+    private Boolean filter = false;
+
+    List<Atm> filteredAtmList = new ArrayList<>();
+
+    private String currency = "";
+    private String cash = "";
+    private String atm = "";
+
+
     @GetMapping("/stats")
     public String stats(Model model) {
-        return null;
+
+        return "redirect:/monitoring";
+    }
+
+    @PostMapping("/filter/currency")
+    public String currencyFilter(@RequestParam("currency") String currency) {
+        if (currency == "") {
+            filter = false;
+        } else {
+            atms = (List<Atm>) atmService.getAtms();
+            this.currency = currency;
+            filteredAtmList = atms.stream()
+                    .filter(atm -> atm.getCurrency().equals(currency))
+                    .collect(Collectors.toList());
+
+            filter = true;
+        }
+        return "redirect:/monitoring";
+    }
+
+    @PostMapping("/filter/cash")
+    public String cashFilter(@RequestParam("cash") String cash) {
+        if (cash == "") {
+            filter = false;
+        } else {
+            atms = (List<Atm>) atmService.getAtms();
+            this.cash = cash;
+            filteredAtmList = atms.stream()
+                    .filter(atm -> atm.getCashState().equals(cash))
+                    .collect(Collectors.toList());
+
+            filter = true;
+        }
+        return "redirect:/monitoring";
+    }
+
+    @PostMapping("/filter/atm")
+    public String atmFilter(@RequestParam("atm") String atm) {
+        if (atm == "") {
+            filter = false;
+        } else {
+            atms = (List<Atm>) atmService.getAtms();
+            this.atm = atm;
+            filteredAtmList = atms.stream()
+                    .filter(a -> a.getAtmState().equals(atm))
+                    .collect(Collectors.toList());
+            filter = true;
+        }
+        return "redirect:/monitoring";
     }
 }

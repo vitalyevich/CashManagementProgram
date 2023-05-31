@@ -13,6 +13,7 @@ public interface AtmService {
 
     Atm getAtm(Integer id);
 
-    Iterable<Cassette> saveCassettes(List<Cassette> cassetteList);
+    List<Cassette> saveCassettes(List<Cassette> cassetteList);
+    Iterable<Cassette> updateCassettes(List<Cassette> cassetteList);
 
 }

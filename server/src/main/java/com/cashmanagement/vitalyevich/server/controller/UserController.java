@@ -138,4 +138,21 @@ public class UserController {
     Optional<Access> accessByLogin (@Argument String login) {
         return accessRepository.findAccessByLogin(login);
     }
+
+
+    @MutationMapping
+    Access editPassword(@Argument Integer userId, @Argument String confirmPassword, @Argument String password) {
+
+        Optional<Access> access = accessRepository.findAccessByUserId(userId);
+        //access.setUser(user);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        if (access != null && passwordEncoder.matches(confirmPassword, access.get().getUserPassword())) {
+
+            String pass = passwordEncoder.encode(password);
+            access.get().setUserPassword(pass);
+        }
+
+        return accessRepository.save(access.get());
+    }
 }

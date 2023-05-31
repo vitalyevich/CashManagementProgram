@@ -38,10 +38,21 @@ public class PlanningController {
     @Autowired
     private WithdrawalCashServiceImpl withdrawalCashService;
 
+    @Autowired
+    private FilterService filterService;
+
     @GetMapping("")
     public String planning(Model model) {
 
         List<PlanAtm> planAtms = (List<PlanAtm>) planningService.getPlans();
+
+        if (planAtms == null) {
+            return "/error/500";
+        }
+
+        List<Atm> atms = planAtms.stream()
+                .map(PlanAtm::getAtm)
+                .collect(Collectors.toList());
 
 
         for (PlanAtm planAtm : planAtms) {
@@ -80,6 +91,7 @@ public class PlanningController {
             model.addAttribute("text", planAtm.getAtm().getAtmUid()+", План. инкассация " + planAtm.getDate());
             model.addAttribute("disabled", false);
             model.addAttribute("marked", "marked");
+            model.addAttribute("date", LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
 
             if (forecast == false) {
                 if (atmId != null) {
@@ -89,7 +101,11 @@ public class PlanningController {
                         sum += cassette.getSumAmount();
                     }
 
-                    model.addAttribute("cassettes", planAtm.getAtm().getCassettes());
+                    Set<Cassette> cassetteSet = planAtm.getAtm().getCassettes();
+                    cassetteList = new ArrayList<>(cassetteSet);
+                    Collections.sort(cassetteList, Comparator.comparing(Cassette::getId));
+
+                    model.addAttribute("cassettes", cassetteList);
                     model.addAttribute("sum", sum);
                 }
             } else {
@@ -98,6 +114,9 @@ public class PlanningController {
                     cassette.setSumAmount(cassette.getAmount() * Integer.parseInt(cassette.getBanknote()));
                     sum += cassette.getSumAmount();
                 }
+
+                Collections.sort(cassetteList1, Comparator.comparing(Cassette::getId));
+
                 model.addAttribute("cassettes", cassetteList1);
                 model.addAttribute("sum", sum);
                 forecast = false;
@@ -118,6 +137,8 @@ public class PlanningController {
 
         model.addAttribute("url", "/planning/create-order/confirm");
 
+        filterService.getValues(model, "/planning", atmId, atms);
+
         return "planning";
     }
 
@@ -134,25 +155,36 @@ public class PlanningController {
     private List<Cassette> cassetteList1 = new LinkedList<>();
     private boolean forecast = false;
 
-    @PostMapping("/plan-cash-funct")
-    public String funct(@RequestParam Integer period, @RequestParam String date, @RequestParam Integer type, Model model, RedirectAttributes rm) {
-        cassetteList.clear();
-
-        return "redirect:/planning#blackout-plan";
-    }
 
     @GetMapping("/plan-cash/accept")
     public String accept() {
 
         PlanAtm planAtm = planningService.getPlan(atmId);
         Set<Cassette> cassettes = new LinkedHashSet<>();
-        for (Cassette cassette: cassetteList1) {
+        for (Cassette cassette : cassetteList1) {
             cassettes.add(cassette);
         }
 
         planAtm.setCassettes(cassettes);
 
         planAtm.setStatus("Рассчитан");
+        planningService.updatePlanAtm(planAtm);
+
+        return "redirect:/planning";
+    }
+
+
+    @GetMapping("/edit-plan-cash/accept")
+    public String edit(Model model, RedirectAttributes rm) {
+
+        PlanAtm planAtm = planningService.getPlan(atmId);
+        Set<Cassette> cassettes = new LinkedHashSet<>();
+        for (Cassette cassette: cassetteList) {
+            cassettes.add(cassette);
+        }
+        planAtm.setCassettes(cassettes);
+
+        planAtm.setStatus("Изменен");
         planningService.updatePlanAtm(planAtm);
 
         return "redirect:/planning";
@@ -316,25 +348,8 @@ public class PlanningController {
     @GetMapping("/edit-plan-cash")
     public String editPlanCash(@RequestParam Integer rowId, Model model, RedirectAttributes rm) {
 
-        //PlanAtm planAtm = planningService.getPlan(rowId);
-
+        atmId = rowId + 1;
         return "redirect:/planning#blackout-edit";
-    }
-
-    @GetMapping("/edit-plan-cash/accept")
-    public String edit(Model model, RedirectAttributes rm) {
-
-        PlanAtm planAtm = planningService.getPlan(atmId);
-        Set<Cassette> cassettes = new LinkedHashSet<>();
-        for (Cassette cassette: cassetteList) {
-            cassettes.add(cassette);
-        }
-        planAtm.setCassettes(cassettes);
-
-        planAtm.setStatus("Изменен");
-        planningService.updatePlanAtm(planAtm);
-
-        return "redirect:/planning";
     }
 
     @PostMapping("/create-order")

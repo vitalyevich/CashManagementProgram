@@ -28,22 +28,4 @@ public class PlanningController {
     Optional<PlanAtm> plan (@Argument Integer id) {
         return planAtmRepository.findById(id);
     }
-
-    @MutationMapping
-    PlanAtm updatePlan(@Argument PlanAtm plan, @Argument List<Cassette> cassette, @Argument Atm atm, @Argument User user) {
-
-        plan.setAtm(atm);
-        plan.setUser(user);
-
-        Set<Cassette> cassetteSet = cassette.stream()
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
-
-        plan.setPlanMethod("Статический");
-        plan.setPlanPeriod(0);
-
-        plan.setCassettes(cassetteSet);
-        return planAtmRepository.save(plan);
-    }
-
 }

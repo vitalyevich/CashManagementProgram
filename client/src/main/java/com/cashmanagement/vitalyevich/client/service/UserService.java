@@ -38,4 +38,6 @@ public interface UserService {
     Access authorization(String login, String password);
 
     Access authorization(String login);
+
+    Access setPassword(Integer userId, String confirmPassword, String newPassword);
 }

@@ -6,6 +6,7 @@ import com.cashmanagement.vitalyevich.client.model.Atm;
 import com.cashmanagement.vitalyevich.client.model.WithdrawalCash;
 import com.cashmanagement.vitalyevich.client.service.AtmServiceImpl;
 import com.cashmanagement.vitalyevich.client.service.CompanyServiceImpl;
+import com.cashmanagement.vitalyevich.client.service.FilterService;
 import com.cashmanagement.vitalyevich.client.service.WithdrawalCashServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class AnalyticController {
 
     @Autowired
     private AtmServiceImpl atmService;
+
+    @Autowired
+    private FilterService filterService;
 
     @Autowired
     private WithdrawalCashServiceImpl withdrawalCashService;
@@ -194,6 +198,8 @@ public class AnalyticController {
 
         Sidebar sidebar = new Sidebar();
         sidebar.getDropDown("/analytics", companyService, model);
+
+        filterService.getValues(model, "/analytics", atmId, atmList);
 
         return "analytics";
     }

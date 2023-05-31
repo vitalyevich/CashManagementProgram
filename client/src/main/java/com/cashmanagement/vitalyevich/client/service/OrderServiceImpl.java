@@ -110,6 +110,7 @@ public class OrderServiceImpl implements OrderService{
                 "        id,\n" +
                 "        cassettes {\n" +
                 "        id,\n" +
+                "        cassetteNum,\n" +
                 "        banknote,\n" +
                 "        currency,\n" +
                 "        amount,\n" +

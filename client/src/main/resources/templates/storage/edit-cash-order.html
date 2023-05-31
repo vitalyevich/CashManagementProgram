@@ -1,6 +1,6 @@
 <div th:fragment="edit-cash-order" class="edit">
     <div class="v23_948">
-        <form th:action="@{/storage-collection/cash}" method="post" th:object="${cassette}" onsubmit="collectTableData()">
+        <form th:action="@{/storage-collection/edit-cash}" method="post" th:object="${cassette}" onsubmit="collectTableData()">
             <div class="v363_433">
                 <div class="v363_432">
                     <div class="v23_1028"></div>
@@ -9,7 +9,7 @@
 
                 <div class="v363_401">
                     <div class="v18_18">
-                        <table name="table" id="dynamicTable" class="table" style="top:25px;">
+                        <table name="table" id="table" class="table" style="top:25px;">
                             <thead>
                             <tr>
                                 <th>Валюта</th>
@@ -18,7 +18,7 @@
                                 <th>Сумма</th>
                             </tr>
                             </thead>
-                            <tbody id="tbody">
+                            <tbody id="body">
                             <tr th:each="lst : ${cassettesList}">
                                 <td style="width: 1vw;" name="currency" th:text="${lst.currency}"></td>
                                 <td contenteditable="true" style="width: 1vw;" name="banknote" th:text="${lst.banknote}"></td>
@@ -48,19 +48,19 @@
                     <option name="sender" th:each="el, iterStat : ${companies}" th:value="${iterStat.index + 1}" th:text="${el.companyName}">
                 </select>
 
-                <input name="date" required class="v23_956" type="date">
+                <input readonly name="date" class="v23_956" type="text" th:value="${date}">
 
             </div>
 
             <div class="v363_436">
                 <div class="v23_949">
-                    <span class="v23_950">Заказ наличных</span>
+                    <span class="v23_950">Редактирование заказа наличных</span>
                 </div>
             </div>
 
 
             <span class="v23_961">А0100089, Заказ, План. инкассация 07.08.2022</span>
-            <select id="currencySelect" onchange="addRowToTable()" class="v363_434">
+            <select class="v363_434">
                 <option value="">ТУТ</option>
                 <option value="BYN">BYN</option>
                 <option value="RUB">RUB</option>
@@ -71,8 +71,7 @@
                 <input type="button" class="v363_427" value="Отменить">
             </a>
 
-
-            <input type="hidden" id="tableDataField" name="tableData" />
+            <input type="hidden" id="dataField" name="data" />
 
             <input type="submit" class="v363_428" value="Применить">
 
@@ -81,8 +80,8 @@
 
     <script>
         function collectTableData() {
-            var tableData = "";
-            var tbody = document.getElementById("tbody");
+            var data = "";
+            var tbody = document.getElementById("body");
             var rows = tbody.getElementsByTagName("tr");
 
             for (var i = 0; i < rows.length; i++) {
@@ -91,87 +90,12 @@
                 var banknote = row.getElementsByTagName("td")[1].innerText;
                 var amount = row.getElementsByTagName("td")[2].innerText;
 
-                tableData += currency + " " + banknote + " " + amount + "\n";
+                data += currency + " " + banknote + " " + amount + "\n";
             }
 
-            document.getElementById("tableDataField").value = tableData;
+            document.getElementById("dataField").value = data;
             return true; // Позволяет отправить форму
         }
-    </script>
-    <script>
-        function addRowToTable() {
-
-            var currencySelect = document.getElementById("currencySelect");
-            var selectedCurrency = currencySelect.value;
-
-            currencySelect.selectedIndex = 0;
-
-            var table = document.getElementById("dynamicTable");
-
-            var newRow = table.insertRow(-1);
-
-            var currencyCell = newRow.insertCell(0);
-            currencyCell.textContent = selectedCurrency;
-
-            var nominalCell = newRow.insertCell(1);
-            nominalCell.contentEditable = true;
-
-            var quantityCell = newRow.insertCell(2);
-            quantityCell.contentEditable = true;
-
-            var sumCell = newRow.insertCell(3);
-
-            // Можно добавить логику для вычисления суммы в зависимости от значений других полей
-
-            // Пример вычисления суммы
-            sumCell.textContent = "";
-
-            // Можно также добавить обработку событий изменения значений в других ячейках для автоматического вычисления суммы
-
-            // Пример обработки изменения значения в ячейке
-            nominalCell.addEventListener("input", calculateSum);
-            quantityCell.addEventListener("input", calculateSum);
-
-            // Вызов функции для обновления данных таблицы
-            updateTableData();
-
-            function calculateSum() {
-                var nominalValue = parseInt(nominalCell.textContent);
-                var quantityValue = parseInt(quantityCell.textContent);
-                var sumValue = nominalValue * quantityValue;
-                sumCell.textContent = isNaN(sumValue) ? "" : sumValue.toFixed(0);
-            }
-
-            function updateTableData() {
-                var table = document.getElementById("dynamicTable");
-                var tableData = [];
-
-                // Перебрать строки таблицы и извлечь данные
-                for (var i = 1; i < table.rows.length; i++) {
-                    var row = table.rows[i];
-                    var currency = row.cells[0].textContent;
-                    var banknote = row.cells[1].textContent;
-                    var amount = row.cells[2].textContent;
-
-                    // Создать объект с данными строки таблицы
-                    var rowData = {
-                        currency: currency,
-                        banknote: banknote,
-                        amount: amount
-                    };
-
-                    // Добавить данные строки в массив
-                    tableData.push(rowData);
-                }
-
-                // Преобразовать массив данных в JSON-строку
-                var jsonData = JSON.stringify(tableData);
-
-                // Обновить значение скрытого поля
-                document.getElementById("tableData").value = jsonData;
-            }
-        }
-
     </script>
 
 </div>

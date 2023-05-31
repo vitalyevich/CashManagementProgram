@@ -1,9 +1,7 @@
 package com.cashmanagement.vitalyevich.client.controller.storage;
 
 import com.cashmanagement.vitalyevich.client.config.Seance;
-import com.cashmanagement.vitalyevich.client.model.Atm;
-import com.cashmanagement.vitalyevich.client.model.Storage;
-import com.cashmanagement.vitalyevich.client.model.StorageOperation;
+import com.cashmanagement.vitalyevich.client.model.*;
 import com.cashmanagement.vitalyevich.client.service.StorageService;
 import com.cashmanagement.vitalyevich.client.service.StorageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -228,9 +226,54 @@ public class MonitoringStorageController {
     }
 
     @PostMapping("/monitoring-storage/accept")
-    public String accept(RedirectAttributes rm) {
+    public String accept(@RequestParam("tableData") String tableData) {
 
+        if (!tableData.equals("") || !tableData.isEmpty()) {
+
+            //storageService.updateCassettes
+            List<Cassette> cassetteList =  getCassettesList(tableData);
+
+            for (Storage storage: storageArrayList) {
+                for (Cassette cassette: cassetteList) {
+                    if (Integer.parseInt(cassette.getBanknote()) == Integer.parseInt(storage.getBanknote())) {
+                        cassette.setId(storage.getId());
+                    }
+                }
+            }
+            storageService.updateStorage(cassetteList);
+        }
         return "redirect:/monitoring-storage";
+    }
+
+    private List<Cassette> getCassettesList(String tableData) {
+        String html = tableData;
+
+        List<Cassette> cassettes = new ArrayList<>();
+
+        String[] rows = tableData.split("\n");
+
+        for (int i = 0; i < rows.length; i++) {
+            String rowData = rows[i];
+
+            // Пропускаем первую пустую строку
+            if (i == 0 && rowData.trim().isEmpty()) {
+                continue;
+            }
+
+            // Удаляем символы перевода строки \r
+            rowData = rowData.replaceAll("\r", "");
+
+            String[] values = rowData.split(" ");
+
+            if (values.length == 3) {
+                String currency = values[0];
+                String banknote = values[1];
+                String amount = values[2];
+
+                cassettes.add(new Cassette(Double.parseDouble(banknote), currency, Integer.parseInt(amount)));
+            }
+        }
+        return  cassettes;
     }
 
     private List<Storage> storageArrayList = new LinkedList<>();
